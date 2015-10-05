@@ -22,6 +22,7 @@ public class RootManager {
 		if (currentScreen.getNextScreen() != null) {
 			currentScreen = currentScreen.getNextScreen();
 			stage.setScene(currentScreen.getScene());
+			stage.setTitle(currentScreen.getTitle());
 			stage.show();
 		}
 	}

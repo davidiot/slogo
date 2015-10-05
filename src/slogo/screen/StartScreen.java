@@ -25,6 +25,7 @@ public class StartScreen extends AbstractScreen {
 		root.add(initButtons(), 0, 2);
 		setAlignment(root);
 		root.setVgap(Integer.parseInt(myResources.getString("vgap")));
+		this.title = "SLogo";
 	}
 
 	private GridPane initTitle() {

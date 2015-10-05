@@ -11,13 +11,18 @@ public class slogoScreen extends AbstractScreen {
 
 	public slogoScreen(String language) {
 		this.language = language;
-		myResources = myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
+		myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 		WIDTH = Integer.parseInt(myResources.getString("width"));
 		HEIGHT = Integer.parseInt(myResources.getString("height"));
 		root = new GridPane();
 		scene = new Scene(root, WIDTH, HEIGHT);
 		root.add(makeBackButton(), 0, 0);
 		setAlignment(root);
+		try {
+			title = myResources.getString((language));
+		} catch (java.util.MissingResourceException e) {
+			title = "SLogo";
+		}
 	}
 
 	@Override
@@ -25,5 +30,4 @@ public class slogoScreen extends AbstractScreen {
 		// TODO Auto-generated method stub
 
 	}
-
 }

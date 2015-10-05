@@ -21,7 +21,7 @@ public abstract class AbstractScreen {
 	protected Scene scene;
 	protected int WIDTH;
 	protected int HEIGHT;
-	protected String titleName = "";
+	protected String title = "";
 	protected AbstractScreen nextScreen = null;
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
@@ -36,6 +36,10 @@ public abstract class AbstractScreen {
 
 	public AbstractScreen getNextScreen() {
 		return nextScreen;
+	}
+	
+	public String getTitle() {
+		return title;
 	}
 
 	protected void setAlignment(GridPane r) {
