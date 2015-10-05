@@ -35,7 +35,7 @@ public abstract class AbstractScreen {
 	public AbstractScreen getNextScreen() {
 		return nextScreen;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
@@ -71,9 +71,21 @@ public abstract class AbstractScreen {
 	}
 
 	protected Button makeBackButton() {
-		Button button = new Button("MENU");
+		Button button = new Button(myResources.getString("menu"));
 		button.setFont(font);
 		button.setOnMouseClicked(e -> returnToMenu());
+		return button;
+	}
+
+	protected Button makeSettingsButton() {
+		Button button = new Button(myResources.getString("settings"));
+		button.setFont(font);
+		return button;
+	}
+
+	protected Button makeHelpButton() {
+		Button button = new Button(myResources.getString("help"));
+		button.setFont(font);
 		return button;
 	}
 

@@ -50,10 +50,8 @@ public class StartScreen extends AbstractScreen {
 	private GridPane initButtons() {
 
 		GridPane list = new GridPane();
-		helpButton = new Button(myResources.getString("help"));
-		settingsButton = new Button(myResources.getString("settings"));
-		helpButton.setFont(font);
-		settingsButton.setFont(font);
+		helpButton = makeHelpButton();
+		settingsButton = makeSettingsButton();
 		list.add(helpButton, 0, 0);
 		list.add(settingsButton, 1, 0);
 		list.setHgap(Integer.parseInt(myResources.getString("hgap")));

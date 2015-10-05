@@ -12,19 +12,19 @@ public class Console extends AbstractElement {
 
 	public Console(GridPane pane) {
 		super(pane);
-		makePane();
 	}
 
 	protected void makePane() {
 		text = new TextArea();
-		text.setPromptText(myResources.getString("prompt"));
+		text.setPrefWidth(Integer.parseInt(slogoResources.getString("consoleWidth")));
+		text.setPromptText(slogoResources.getString("prompt"));
 		text.setMaxHeight(Double.MAX_VALUE);
-		text.setPrefHeight(Integer.parseInt(myResources.getString("consoleHeight")));
+		text.setPrefHeight(Integer.parseInt(slogoResources.getString("consoleHeight")));
 		text.setFont(font);
 		pane.add(text, 0, 0);
 		GridPane.setRowSpan(text, 2);
-		enterButton = makeButton(myResources.getString("enterButton"));
-		clearButton = makeButton(myResources.getString("clearButton"));
+		enterButton = makeButton(slogoResources.getString("enterButton"));
+		clearButton = makeButton(slogoResources.getString("clearButton"));
 		enterButton.setOnMouseClicked(e -> submit());
 		clearButton.setOnMouseClicked(e -> clear());
 		pane.add(enterButton, 1, 0);
@@ -34,7 +34,7 @@ public class Console extends AbstractElement {
 	public Button makeButton(String label) {
 		Button button = new Button(label);
 		button.setFont(font);
-		button.setPrefHeight(Integer.parseInt(myResources.getString("consoleHeight")) / 2);
+		button.setPrefHeight(Integer.parseInt(slogoResources.getString("consoleHeight")) / 2);
 		button.setMaxHeight(Double.MAX_VALUE);
 		return button;
 	}
@@ -55,6 +55,10 @@ public class Console extends AbstractElement {
 		String output = input;
 		input = null;
 		return output;
+	}
+
+	public void write(String s) {
+		text.setText(s);
 	}
 
 }
