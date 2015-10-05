@@ -25,7 +25,7 @@ public class StartScreen extends AbstractScreen {
 		root.add(initButtons(), 0, 2);
 		setAlignment(root);
 		root.setVgap(Integer.parseInt(myResources.getString("vgap")));
-		this.title = "SLogo";
+		this.title = myResources.getString("defaultTitle");
 	}
 
 	private GridPane initTitle() {
@@ -37,7 +37,7 @@ public class StartScreen extends AbstractScreen {
 
 	private GridPane initLoader() {
 		GridPane list = new GridPane();
-		goButton = new Button("Go");
+		goButton = new Button(myResources.getString("go"));
 		goButton.setFont(font);
 		goButton.setOnMouseClicked(e -> start());
 		loader = makeLanguageBox();
@@ -50,8 +50,8 @@ public class StartScreen extends AbstractScreen {
 	private GridPane initButtons() {
 
 		GridPane list = new GridPane();
-		helpButton = new Button("help");
-		settingsButton = new Button("settings");
+		helpButton = new Button(myResources.getString("help"));
+		settingsButton = new Button(myResources.getString("settings"));
 		helpButton.setFont(font);
 		settingsButton.setFont(font);
 		list.add(helpButton, 0, 0);
@@ -69,12 +69,12 @@ public class StartScreen extends AbstractScreen {
 
 	private void start() {
 		if (loader.getValue() != null) {
-			slogoScreen newScreen = new slogoScreen(loader.getValue());
+			SlogoScreen newScreen = new SlogoScreen(loader.getValue());
 			nextScreen = newScreen;
 		} else {
 			Alert uhoh = new Alert(AlertType.ERROR);
-			uhoh.setTitle("whoops");
-			uhoh.setContentText("please select a language");
+			uhoh.setTitle(myResources.getString("error"));
+			uhoh.setContentText(myResources.getString("prompt"));
 			uhoh.showAndWait();
 		}
 	}
