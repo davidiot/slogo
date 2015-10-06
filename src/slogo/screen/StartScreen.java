@@ -14,6 +14,7 @@ public class StartScreen extends AbstractScreen {
 	private Button goButton;
 	private Button helpButton;
 	private Button settingsButton;
+	private Button creditsButton;
 
 	public StartScreen() {
 		WIDTH = Integer.parseInt(myResources.getString("width"));
@@ -52,8 +53,10 @@ public class StartScreen extends AbstractScreen {
 		GridPane list = new GridPane();
 		helpButton = makeHelpButton();
 		settingsButton = makeSettingsButton();
+		creditsButton = makeCreditsButton();
 		list.add(helpButton, 0, 0);
 		list.add(settingsButton, 1, 0);
+		list.add(creditsButton, 2, 0);
 		list.setHgap(Integer.parseInt(myResources.getString("hgap")));
 		return list;
 	}

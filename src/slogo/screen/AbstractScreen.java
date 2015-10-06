@@ -29,10 +29,17 @@ public abstract class AbstractScreen {
 			Integer.parseInt(myResources.getString("buttons")));
 	private HelpScreen help;
 	private SettingsScreen settings;
+	private CreditsScreen credits;
+
+	// the window screens are static because we want them to be preserved across
+	// all screens
+
 	private static boolean showingHelp = false;
 	private static boolean showingSettings = false;
+	private static boolean showingCredits = false;
 	private static Stage settingsStage;
 	private static Stage helpStage;
+	private static Stage creditsStage;
 
 	abstract public void run();
 
@@ -99,6 +106,13 @@ public abstract class AbstractScreen {
 		return button;
 	}
 
+	protected Button makeCreditsButton() {
+		Button button = new Button(myResources.getString("credits"));
+		button.setFont(font);
+		button.setOnMouseClicked(e -> showCredits());
+		return button;
+	}
+
 	private void returnToMenu() {
 		StartScreen newScreen = new StartScreen();
 		nextScreen = newScreen;
@@ -108,9 +122,7 @@ public abstract class AbstractScreen {
 		if (!showingHelp) {
 			helpStage = new Stage();
 			help = new HelpScreen();
-			helpStage.setScene(help.getScene());
-			helpStage.setTitle(help.getTitle());
-			helpStage.show();
+			makeWindow(helpStage, help);
 			showingHelp = true;
 			helpStage.setOnCloseRequest(e -> closeHelp());
 		}
@@ -121,13 +133,29 @@ public abstract class AbstractScreen {
 		if (!showingSettings) {
 			settingsStage = new Stage();
 			settings = new SettingsScreen();
-			settingsStage.setScene(settings.getScene());
-			settingsStage.setTitle(settings.getTitle());
-			settingsStage.show();
+			makeWindow(settingsStage, settings);
 			showingSettings = true;
 			settingsStage.setOnCloseRequest(e -> closeSettings());
 		}
 		settingsStage.toFront();
+	}
+
+	private void showCredits() {
+		if (!showingCredits) {
+			creditsStage = new Stage();
+			credits = new CreditsScreen();
+			makeWindow(creditsStage, credits);
+			showingCredits = true;
+			creditsStage.setOnCloseRequest(e -> closeCredits());
+		}
+		creditsStage.toFront();
+	}
+
+	public void makeWindow(Stage stage, AbstractWindowScreen screen) {
+		stage.setScene(screen.getScene());
+		stage.setTitle(screen.getTitle());
+		stage.show();
+		stage.setResizable(false);
 	}
 
 	private void closeHelp() {
@@ -136,6 +164,10 @@ public abstract class AbstractScreen {
 
 	private void closeSettings() {
 		showingSettings = false;
+	}
+
+	private void closeCredits() {
+		showingCredits = false;
 	}
 
 	protected Text createText(String s, int size) {

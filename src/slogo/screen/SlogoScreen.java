@@ -11,6 +11,7 @@ import slogo.element.Commands;
 import slogo.element.Console;
 import slogo.element.History;
 import slogo.element.Variables;
+import slogo.interpreter.Interpreter;
 
 public class SlogoScreen extends AbstractScreen {
 
@@ -20,6 +21,7 @@ public class SlogoScreen extends AbstractScreen {
 	private Commands commands;
 	private Variables variables;
 	private Canvas map;
+	private Interpreter parser;
 	private ResourceBundle slogoResources;
 
 	public SlogoScreen(String language) {
@@ -35,12 +37,14 @@ public class SlogoScreen extends AbstractScreen {
 			title = "SLogo";
 		}
 		makeScene();
+		parser = new Interpreter(this.language, this);
 	}
 
 	@Override
 	public void run() {
 		if (console.hasInput()) {
 			String command = console.getInput();
+			parser.interpret(command);
 			history.add(command);
 		}
 	}
