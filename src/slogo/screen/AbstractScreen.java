@@ -29,10 +29,10 @@ public abstract class AbstractScreen {
 			Integer.parseInt(myResources.getString("buttons")));
 	private HelpScreen help;
 	private SettingsScreen settings;
-	private boolean showingHelp = false;
-	private boolean showingSettings = false;
-	private Stage settingsStage;
-	private Stage helpStage;
+	private static boolean showingHelp = false;
+	private static boolean showingSettings = false;
+	private static Stage settingsStage;
+	private static Stage helpStage;
 
 	abstract public void run();
 
