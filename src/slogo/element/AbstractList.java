@@ -37,7 +37,7 @@ public abstract class AbstractList extends AbstractElement {
 			list.setItems(null);
 			list.setMaxHeight(0);
 		} else {
-			text.setText(title);
+			text.setText("*" + title);
 			list.setItems(data);
 			list.setMaxHeight(Double.MAX_VALUE);
 		}

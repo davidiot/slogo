@@ -13,6 +13,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 public abstract class AbstractScreen {
 	protected GridPane root;
@@ -25,6 +27,12 @@ public abstract class AbstractScreen {
 	protected ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
 	protected Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"),
 			Integer.parseInt(myResources.getString("buttons")));
+	private HelpScreen help;
+	private SettingsScreen settings;
+	private boolean showingHelp = false;
+	private boolean showingSettings = false;
+	private Stage settingsStage;
+	private Stage helpStage;
 
 	abstract public void run();
 
@@ -80,18 +88,61 @@ public abstract class AbstractScreen {
 	protected Button makeSettingsButton() {
 		Button button = new Button(myResources.getString("settings"));
 		button.setFont(font);
+		button.setOnMouseClicked(e -> showSettings());
 		return button;
 	}
 
 	protected Button makeHelpButton() {
 		Button button = new Button(myResources.getString("help"));
 		button.setFont(font);
+		button.setOnMouseClicked(e -> showHelp());
 		return button;
 	}
 
 	private void returnToMenu() {
 		StartScreen newScreen = new StartScreen();
 		nextScreen = newScreen;
+	}
+
+	private void showHelp() {
+		if (!showingHelp) {
+			helpStage = new Stage();
+			help = new HelpScreen();
+			helpStage.setScene(help.getScene());
+			helpStage.setTitle(help.getTitle());
+			helpStage.show();
+			showingHelp = true;
+			helpStage.setOnCloseRequest(e -> closeHelp());
+		}
+		helpStage.toFront();
+	}
+
+	private void showSettings() {
+		if (!showingSettings) {
+			settingsStage = new Stage();
+			settings = new SettingsScreen();
+			settingsStage.setScene(settings.getScene());
+			settingsStage.setTitle(settings.getTitle());
+			settingsStage.show();
+			showingSettings = true;
+			settingsStage.setOnCloseRequest(e -> closeSettings());
+		}
+		settingsStage.toFront();
+	}
+
+	private void closeHelp() {
+		showingHelp = false;
+	}
+
+	private void closeSettings() {
+		showingSettings = false;
+	}
+
+	protected Text createText(String s, int size) {
+		Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"), size);
+		Text t = new Text(s);
+		t.setFont(font);
+		return t;
 	}
 
 }

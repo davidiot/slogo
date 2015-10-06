@@ -5,6 +5,7 @@ import java.util.ResourceBundle;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import javafx.scene.text.Text;
 import slogo.element.Canvas;
 import slogo.element.Commands;
 import slogo.element.Console;
@@ -45,19 +46,29 @@ public class SlogoScreen extends AbstractScreen {
 	}
 
 	private void makeScene() {
+		GridPane title = makeTitle();
+		GridPane.setColumnSpan(title, 2);
+		root.add(title, 0, 0);
 		GridPane mapPane = new GridPane();
 		map = new Canvas(mapPane);
-		root.add(mapPane, 0, 0);
+		root.add(mapPane, 0, 1);
 
 		GridPane consolePane = new GridPane();
 		console = new Console(consolePane);
 		GridPane.setColumnSpan(consolePane, 2);
 
-		root.add(consolePane, 0, 1);
+		root.add(consolePane, 0, 2);
 
 		makeLists();
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		setAlignment(root);
+	}
+
+	public GridPane makeTitle() {
+		GridPane title = new GridPane();
+		Text temp = createText("SLogo", Integer.parseInt(myResources.getString("smallTitle")));
+		title.add(temp, 0, 0);
+		return title;
 	}
 
 	public void makeLists() {
@@ -82,6 +93,6 @@ public class SlogoScreen extends AbstractScreen {
 		buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
 		listPane.add(buttonPane, 0, 3);
 
-		root.add(listPane, 1, 0);
+		root.add(listPane, 1, 1);
 	}
 }
