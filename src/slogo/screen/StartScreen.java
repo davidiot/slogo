@@ -20,22 +20,22 @@ public class StartScreen extends AbstractScreen {
 		HEIGHT = Integer.parseInt(myResources.getString("height"));
 		root = new GridPane();
 		scene = new Scene(root, WIDTH, HEIGHT);
-		root.add(initTitle(), 0, 0);
-		root.add(initLoader(), 0, 1);
-		root.add(initButtons(), 0, 2);
+		root.add(makeTitle(), 0, 0);
+		root.add(makeLoader(), 0, 1);
+		root.add(makeButtons(), 0, 2);
 		setAlignment(root);
 		root.setVgap(Integer.parseInt(myResources.getString("vgap")));
 		this.title = myResources.getString("defaultTitle");
 	}
 
-	private GridPane initTitle() {
+	private GridPane makeTitle() {
 		GridPane title = new GridPane();
 		Text temp = createText("SLogo", Integer.parseInt(myResources.getString("title")));
 		title.add(temp, 0, 0);
 		return title;
 	}
 
-	private GridPane initLoader() {
+	private GridPane makeLoader() {
 		GridPane list = new GridPane();
 		goButton = new Button(myResources.getString("go"));
 		goButton.setFont(font);
@@ -47,7 +47,7 @@ public class StartScreen extends AbstractScreen {
 		return list;
 	}
 
-	private GridPane initButtons() {
+	private GridPane makeButtons() {
 
 		GridPane list = new GridPane();
 		helpButton = makeHelpButton();
@@ -56,13 +56,6 @@ public class StartScreen extends AbstractScreen {
 		list.add(settingsButton, 1, 0);
 		list.setHgap(Integer.parseInt(myResources.getString("hgap")));
 		return list;
-	}
-
-	private Text createText(String s, int size) {
-		Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"), size);
-		Text t = new Text(s);
-		t.setFont(font);
-		return t;
 	}
 
 	private void start() {
