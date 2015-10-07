@@ -15,8 +15,13 @@ public class Canvas extends AbstractElement {
 	@Override
 	protected void makePane() {
 		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
-				Integer.parseInt(slogoResources.getString("mapHeight")), Paint.valueOf(slogoResources.getString("mapColor")));
+				Integer.parseInt(slogoResources.getString("mapHeight")),
+				Paint.valueOf(slogoResources.getString("mapColor")));
 		pane.add(map, 0, 0);
+	}
+
+	public void changeColor(String input) {
+		map.setFill(Paint.valueOf(input));
 	}
 
 }
