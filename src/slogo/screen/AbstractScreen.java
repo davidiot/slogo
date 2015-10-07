@@ -15,6 +15,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import slogo.parameters.Parameters;
 
 public abstract class AbstractScreen {
 	protected GridPane root;
@@ -31,8 +32,8 @@ public abstract class AbstractScreen {
 	private SettingsScreen settings;
 	private CreditsScreen credits;
 
-	// the window screens are static because we want them to be preserved across
-	// all screens
+	// the window screens and parameters are static because we want them to be
+	// preserved across all screens
 
 	private static boolean showingHelp = false;
 	private static boolean showingSettings = false;
@@ -40,6 +41,7 @@ public abstract class AbstractScreen {
 	private static Stage settingsStage;
 	private static Stage helpStage;
 	private static Stage creditsStage;
+	protected static Parameters parameters;
 
 	abstract public void run();
 
