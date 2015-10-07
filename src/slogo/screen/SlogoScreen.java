@@ -2,6 +2,8 @@ package slogo.screen;
 
 import java.util.ResourceBundle;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
@@ -10,6 +12,7 @@ import slogo.element.Canvas;
 import slogo.element.Commands;
 import slogo.element.Console;
 import slogo.element.History;
+import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
 
 public class SlogoScreen extends AbstractScreen {
@@ -17,6 +20,7 @@ public class SlogoScreen extends AbstractScreen {
 	private String language;
 	private Console console;
 	private History history;
+	private ObservableList<String> historyList = FXCollections.observableArrayList();
 	private Commands commands;
 	private Variables variables;
 	private Canvas map;
@@ -39,9 +43,11 @@ public class SlogoScreen extends AbstractScreen {
 
 	@Override
 	public void run() {
+		ObservableArrayList h = new ObservableArrayList();
+		h.addObserver(history);
 		if (console.hasInput()) {
 			String command = console.getInput();
-			history.add(command);
+			h.add(command);
 		}
 	}
 
