@@ -30,7 +30,8 @@ public class StartScreen extends AbstractScreen {
 
 	private GridPane makeTitle() {
 		GridPane title = new GridPane();
-		Text temp = createText("SLogo", Integer.parseInt(myResources.getString("title")));
+		Text temp = createText("SLogo",
+				Integer.parseInt(myResources.getString("title")));
 		title.add(temp, 0, 0);
 		return title;
 	}

@@ -25,9 +25,11 @@ public abstract class AbstractScreen {
 	protected String title = "";
 	protected AbstractScreen nextScreen = null;
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	protected ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
-	protected Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"),
-			Integer.parseInt(myResources.getString("buttons")));
+	protected ResourceBundle myResources = ResourceBundle
+			.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
+	protected Font font = Font.loadFont(getClass().getClassLoader()
+			.getResourceAsStream("unispace.ttf"), Integer.parseInt(myResources
+			.getString("buttons")));
 	private HelpScreen help;
 	private SettingsScreen settings;
 	private CreditsScreen credits;
@@ -173,7 +175,8 @@ public abstract class AbstractScreen {
 	}
 
 	protected Text createText(String s, int size) {
-		Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"), size);
+		Font font = Font.loadFont(getClass().getClassLoader()
+				.getResourceAsStream("unispace.ttf"), size);
 		Text t = new Text(s);
 		t.setFont(font);
 		return t;
