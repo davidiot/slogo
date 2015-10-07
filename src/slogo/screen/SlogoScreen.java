@@ -42,7 +42,7 @@ public class SlogoScreen extends AbstractScreen {
 
 	@Override
 	public void run() {
-		if (parameters.getBackgroundColor() != null) {
+		if (parameters != null && parameters.getBackgroundColor() != null) {
 			map.changeColor(parameters.getBackgroundColor());
 		}
 		if (console.hasInput()) {
