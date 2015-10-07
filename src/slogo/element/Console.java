@@ -16,10 +16,12 @@ public class Console extends AbstractElement {
 
 	protected void makePane() {
 		text = new TextArea();
-		text.setPrefWidth(Integer.parseInt(slogoResources.getString("consoleWidth")));
+		text.setPrefWidth(Integer.parseInt(slogoResources
+				.getString("consoleWidth")));
 		text.setPromptText(slogoResources.getString("prompt"));
 		text.setMaxHeight(Double.MAX_VALUE);
-		text.setPrefHeight(Integer.parseInt(slogoResources.getString("consoleHeight")));
+		text.setPrefHeight(Integer.parseInt(slogoResources
+				.getString("consoleHeight")));
 		text.setFont(font);
 		pane.add(text, 0, 0);
 		GridPane.setRowSpan(text, 2);
@@ -34,7 +36,8 @@ public class Console extends AbstractElement {
 	public Button makeButton(String label) {
 		Button button = new Button(label);
 		button.setFont(font);
-		button.setPrefHeight(Integer.parseInt(slogoResources.getString("consoleHeight")) / 2);
+		button.setPrefHeight(Integer.parseInt(slogoResources
+				.getString("consoleHeight")) / 2);
 		button.setMaxHeight(Double.MAX_VALUE);
 		return button;
 	}
@@ -48,7 +51,7 @@ public class Console extends AbstractElement {
 	}
 
 	public boolean hasInput() {
-		if (input != null && input.equals("")){
+		if (input != null && input.equals("")) {
 			input = null;
 		}
 		return input != null;
