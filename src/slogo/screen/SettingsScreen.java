@@ -2,11 +2,13 @@ package slogo.screen;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -62,10 +64,56 @@ public class SettingsScreen extends AbstractWindowScreen {
 				Toggle toggle = new Toggle(next, x, y, z);
 				add(toggle);
 			}
-		} catch (FileNotFoundException e) {
+			ArrayList<String> list = new ArrayList<String>();
+			while (s.hasNext()) {
+				list.add(s.next());
+			}
+			s.close();
+			ComboBox<String> box1 = new ComboBox<String>();
+			box1.setPromptText("Choose Color");
+			box1.setVisibleRowCount(5);
+			ComboBox<String> box2 = new ComboBox<String>();
+			box2.setPromptText("Choose Color");
+			box2.setVisibleRowCount(5);
+			box1.getItems().addAll(list);
+			box2.getItems().addAll(list);
+			if (parameters.getBackgroundColor() != null) {
+				box1.setValue(parameters.getBackgroundColor());
+			}
+			if (parameters.getPenColor() != null) {
+				box2.setValue(parameters.getPenColor());
+			}
+			box1.setOnAction(e -> setBackground(box1.getValue()));
+			box2.setOnAction(e -> setPen(box2.getValue()));
+			Text t1 = new Text("Background: ");
+			t1.setFont(font);
+			Text t2 = new Text("Pen: ");
+			t2.setFont(font);
+			GridPane pane1 = new GridPane();
+			pane1.add(t1, 0, 0);
+			pane1.add(box1, 1, 0);
+			GridPane pane2 = new GridPane();
+			pane2.add(t2, 0, 0);
+			pane2.add(box2, 1, 0);
+			add(pane1);
+			add(pane2);
+		} catch (
+
+		FileNotFoundException e)
+
+		{
 			e.printStackTrace();
 		}
+
 		setAlignment(root);
+	}
+
+	private void setBackground(String input) {
+		parameters.setBackgroundColor(input);
+	}
+
+	private void setPen(String input) {
+		parameters.setPenColor(input);
 	}
 
 	private GridPane makeTitle() {

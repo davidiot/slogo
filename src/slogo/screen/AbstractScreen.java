@@ -32,7 +32,7 @@ public abstract class AbstractScreen {
 	private SettingsScreen settings;
 	private CreditsScreen credits;
 
-	// the window screens and parameters are static because we want them to be
+	// the window scenes and parameters are static because we want them to be
 	// preserved across all screens
 
 	private static boolean showingHelp = false;

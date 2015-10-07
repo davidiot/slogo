@@ -5,6 +5,8 @@ import java.util.HashMap;
 public class Parameters {
 	private HashMap<String, Double> values;
 	private HashMap<String, Boolean> bools;
+	private String backgroundColor;
+	private String penColor;
 
 	public Parameters() {
 		values = new HashMap<String, Double>();
@@ -25,6 +27,22 @@ public class Parameters {
 
 	public void setBoolean(String input, boolean bool) {
 		bools.put(input, bool);
+	}
+
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+
+	public void setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+
+	public String getPenColor() {
+		return penColor;
+	}
+
+	public void setPenColor(String penColor) {
+		this.penColor = penColor;
 	}
 
 }

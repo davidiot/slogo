@@ -3,3 +3,12 @@ Speed
 Line Thickness
 5 1 10
 0
+Black
+White
+Red
+Orange
+Yellow
+Green
+Blue
+Purple
+Pink
