@@ -48,6 +48,9 @@ public class Console extends AbstractElement {
 	}
 
 	public boolean hasInput() {
+		if (input != null && input.equals("")){
+			input = null;
+		}
 		return input != null;
 	}
 
