@@ -14,6 +14,7 @@ import slogo.element.Console;
 import slogo.element.History;
 import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
+import slogo.interpreter.Interpreter;
 
 public class SlogoScreen extends AbstractScreen {
 
@@ -24,6 +25,7 @@ public class SlogoScreen extends AbstractScreen {
 	private Commands commands;
 	private Variables variables;
 	private Canvas map;
+	private Interpreter parser;
 	private ResourceBundle slogoResources;
 
 	public SlogoScreen(String language) {
@@ -39,14 +41,19 @@ public class SlogoScreen extends AbstractScreen {
 			title = "SLogo";
 		}
 		makeScene();
+		parser = new Interpreter(this.language, this);
 	}
 
 	@Override
 	public void run() {
 		ObservableArrayList h = new ObservableArrayList();
 		h.addObserver(history);
+		if (parameters != null && parameters.getBackgroundColor() != null) {
+			map.changeColor(parameters.getBackgroundColor());
+		}
 		if (console.hasInput()) {
 			String command = console.getInput();
+			parser.interpret(command);
 			h.add(command);
 		}
 	}
