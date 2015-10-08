@@ -10,7 +10,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 
-public abstract class AbstractList extends AbstractElement implements Observer{
+public abstract class AbstractList extends AbstractElement implements Observer {
 	protected String title;
 	protected Text text;
 	protected boolean open;
@@ -35,7 +35,7 @@ public abstract class AbstractList extends AbstractElement implements Observer{
 		pane.add(list, 0, 1);
 		toggle();
 	}
-	
+
 	@Override
 	public void update(Observable o, Object arg) {
 		data.add((String) arg);

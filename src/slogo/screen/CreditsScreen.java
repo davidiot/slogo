@@ -29,10 +29,14 @@ public class CreditsScreen extends AbstractWindowScreen {
 		GridPane credits = new GridPane();
 		Text row1 = createText("Created for CS308 in Fall 2015 by:",
 				Integer.parseInt(myResources.getString("subText")));
-		Text row2 = createText("David Zhou", Integer.parseInt(myResources.getString("subText")));
-		Text row3 = createText("Michael Daou", Integer.parseInt(myResources.getString("subText")));
-		Text row4 = createText("Daniel McKee", Integer.parseInt(myResources.getString("subText")));
-		Text row5 = createText("Daniel Pak", Integer.parseInt(myResources.getString("subText")));
+		Text row2 = createText("David Zhou",
+				Integer.parseInt(myResources.getString("subText")));
+		Text row3 = createText("Michael Daou",
+				Integer.parseInt(myResources.getString("subText")));
+		Text row4 = createText("Daniel McKee",
+				Integer.parseInt(myResources.getString("subText")));
+		Text row5 = createText("Daniel Pak",
+				Integer.parseInt(myResources.getString("subText")));
 		credits.add(row1, 0, 0);
 		credits.add(row2, 0, 1);
 		credits.add(row3, 0, 2);

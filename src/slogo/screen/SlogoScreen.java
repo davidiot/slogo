@@ -8,7 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import slogo.element.Canvas;
+import slogo.element.Display;
 import slogo.element.Commands;
 import slogo.element.Console;
 import slogo.element.History;
@@ -21,16 +21,18 @@ public class SlogoScreen extends AbstractScreen {
 	private String language;
 	private Console console;
 	private History history;
-	private ObservableList<String> historyList = FXCollections.observableArrayList();
+	private ObservableList<String> historyList = FXCollections
+			.observableArrayList();
 	private Commands commands;
 	private Variables variables;
-	private Canvas map;
+	private Display map;
 	private Interpreter parser;
 	private ResourceBundle slogoResources;
 
 	public SlogoScreen(String language) {
 		this.language = language;
-		slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
+		slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE
+				+ "slogo");
 		WIDTH = Integer.parseInt(slogoResources.getString("width"));
 		HEIGHT = Integer.parseInt(slogoResources.getString("height"));
 		root = new GridPane();
@@ -63,7 +65,7 @@ public class SlogoScreen extends AbstractScreen {
 		GridPane.setColumnSpan(title, 2);
 		root.add(title, 0, 0);
 		GridPane mapPane = new GridPane();
-		map = new Canvas(mapPane);
+		map = new Display(mapPane);
 		root.add(mapPane, 0, 1);
 
 		GridPane consolePane = new GridPane();
@@ -79,7 +81,8 @@ public class SlogoScreen extends AbstractScreen {
 
 	public GridPane makeTitle() {
 		GridPane title = new GridPane();
-		Text temp = createText("SLogo", Integer.parseInt(myResources.getString("smallTitle")));
+		Text temp = createText("SLogo",
+				Integer.parseInt(myResources.getString("smallTitle")));
 		title.add(temp, 0, 0);
 		return title;
 	}
@@ -95,7 +98,8 @@ public class SlogoScreen extends AbstractScreen {
 		GridPane varPane = new GridPane();
 		variables = new Variables(varPane);
 		listPane.add(varPane, 0, 2);
-		listPane.setMaxHeight(Integer.parseInt(slogoResources.getString("mapHeight")));
+		listPane.setMaxHeight(Integer.parseInt(slogoResources
+				.getString("mapHeight")));
 		listPane.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		listPane.setAlignment(Pos.BASELINE_LEFT);
 
