@@ -6,6 +6,7 @@ import java.util.List;
 import slogo.action.Action;
 
 public class Node {
+	private Node myParent;
 	private List<Node> myChildren;
 	private Action myAction;
 	

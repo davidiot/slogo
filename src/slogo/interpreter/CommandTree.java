@@ -1,7 +1,5 @@
 package slogo.interpreter;
 
-import java.util.LinkedList;
-import java.util.List;
 
 public class CommandTree {
 	Node root;
@@ -9,15 +7,18 @@ public class CommandTree {
 	public CommandTree() {
 		root = new Node(null);	// root has no action
 	}
-	
+
+	public void build(String input) {
+		
+		
+	}
+
 	private boolean treeComplete() {
 		return root.hasCompleteChildren();
 	}
 
 	public void run() {
-		for (Node node: root) {
-			node.execute();
-		}
+		root.execute();
 	}
 
 }
