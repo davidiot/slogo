@@ -1,6 +1,6 @@
-package slogo.action;
+package slogo.commands;
 
-public class Action {
+public class Command {
 
 	public int numParameters() {
 		// TODO Auto-generated method stub

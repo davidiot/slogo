@@ -16,7 +16,21 @@ public class Parser {
 	
 	public Parser(String language){
 		myCommandResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+		//System.out.println(myCommandResources.getString("Forward"));
 		makeCommandMap(myCommandResources);
+	}
+	
+	public String[] parseCommands(String input) {
+		String[] splitArray = input.split("\\s+");
+		for (int i = 0; i<splitArray.length; i++){
+			splitArray[i] = splitArray[i].toLowerCase();
+		}
+		
+		if (checkForInvalidCommands(splitArray)!=null){
+			//throw checkForInvalidCommands(splitArray);
+		}
+		
+		return splitArray;
 	}
 	
 	private void makeCommandMap(ResourceBundle commandResources){
@@ -25,20 +39,13 @@ public class Parser {
 		while (commandNames.hasMoreElements()){
 			String commandName = commandNames.nextElement();
 			String commandCodes = commandResources.getString(commandName);
-			String[] commandCodeArray = commandCodes.split("|");
+			//System.out.println(commandCodes);
+			String[] commandCodeArray = commandCodes.split("\\|");
 			for (String s: commandCodeArray){
 				myCommandMap.put(s, commandName);
+				System.out.println(s + " " + commandName);
 			}
 		}
-	}
-
-	public String[] parseCommands(String input) throws Exception {
-		String[] splitArray = input.split("\\s+");
-		if (checkForInvalidCommands(splitArray)!=null){
-			throw checkForInvalidCommands(splitArray);
-		}
-		return splitArray;
-		
 	}
 
 	private Exception checkForInvalidCommands(String[] splitArray) {
