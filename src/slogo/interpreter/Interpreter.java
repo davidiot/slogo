@@ -3,12 +3,13 @@ package slogo.interpreter;
 import slogo.screen.SlogoScreen;
 
 public class Interpreter {
-	private String language;
-	private SlogoScreen view;
+	private String myLanguage;
+	private SlogoScreen myView;
+	private CommandTree myTree;
 
 	public Interpreter(String language, SlogoScreen view) {
-		this.language = language;
-		this.view = view;
+		myLanguage = language;
+		myView = view;
 	}
 
 	public void interpret(String input) {
