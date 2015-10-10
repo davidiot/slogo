@@ -6,14 +6,17 @@ public class Interpreter {
 	private String myLanguage;
 	private SlogoScreen myView;
 	private CommandTree myTree;
+	private ActionLibrary actions;
+	private VariableLibrary variables;
 
 	public Interpreter(String language, SlogoScreen view) {
 		myLanguage = language;
 		myView = view;
+		
 	}
 
 	public void interpret(String input) {
-		CommandTree tree = new CommandTree(myLanguage);
+		CommandTree tree = new CommandTree(myLanguage, actions, variables);
 		tree.build(input);
 		tree.run();
 		

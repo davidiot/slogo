@@ -12,19 +12,22 @@ import java.util.regex.Pattern;
 public class CommandTree {
 	private Node root;
 	private String myLanguage;
+	private ActionLibrary myActions;
+	private VariableLibrary myVariables;
 	
 
-	public CommandTree(String language) {
+	public CommandTree(String language, ActionLibrary actions, VariableLibrary variables) {
 		root = new Node(null);	// root has no action
 		myLanguage = language;
-		
+		myActions = actions;
+		myVariables = variables;	
 	}
 
 	public void build(String input) {
         List<Entry<String, Pattern>> patterns = new ArrayList<>();
         String location = String.format("resources/languages/%s", myLanguage);
         //String location = "resources/languages/English";
-        patterns.addAll(makePatterns(location));		
+        patterns.addAll(makePatterns(location));
 	}
 
 // Probably don't need this
