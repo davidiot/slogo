@@ -1,6 +1,7 @@
 package slogo.interpreter;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,14 +12,24 @@ public class Parser {
 	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
     private ResourceBundle myCommandResources;
 
-	private HashMap<String, String[]> myCommandMap;
+	private HashMap<String, String> myCommandMap;
 	
 	public Parser(String language){
 		myCommandResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+		makeCommandMap(myCommandResources);
 	}
 	
-	private Map<String,String[]> makeCommandMap(ResourceBundle commandResources){
-		
+	private void makeCommandMap(ResourceBundle commandResources){
+		myCommandMap = new HashMap<String, String>();
+		Enumeration<String> commandNames = commandResources.getKeys();
+		while (commandNames.hasMoreElements()){
+			String commandName = commandNames.nextElement();
+			String commandCodes = commandResources.getString(commandName);
+			String[] commandCodeArray = commandCodes.split("|");
+			for (String s: commandCodeArray){
+				myCommandMap.put(s, commandName);
+			}
+		}
 	}
 
 	public String[] parseCommands(String input) throws Exception {
