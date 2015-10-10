@@ -13,10 +13,18 @@ public class Interpreter {
 	}
 
 	public void interpret(String input) {
-		CommandTree tree = new CommandTree();
+		CommandTree tree = new CommandTree(myLanguage);
 		tree.build(input);
 		tree.run();
 		
+	}
+	
+	/**
+	 * FOR TESTING
+	 */
+	public static void main (String[] args) {
+		Interpreter i = new Interpreter("English", null);
+		i.interpret("fd 90");
 	}
 
 }
