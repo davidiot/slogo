@@ -14,7 +14,7 @@ public class CommandTree {
 	private String myLanguage;
 	private ActionLibrary myActions;
 	private VariableLibrary myVariables;
-	
+
 
 	public CommandTree(String language, ActionLibrary actions, VariableLibrary variables) {
 		root = new Node(null);	// root has no action
@@ -28,7 +28,7 @@ public class CommandTree {
         String location = String.format("resources/languages/%s", myLanguage);
         //String location = "resources/languages/English";
         patterns.addAll(makePatterns(location));
-	}
+}
 
 // Probably don't need this
 //	private boolean treeComplete() {
