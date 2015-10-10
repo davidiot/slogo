@@ -20,7 +20,8 @@ public class Node {
 		myChildren.add(child);
 	}
 
-	public void execute() {
+	public double traverseAndExecute() {
+		return 0;
 		// TODO Auto-generated method stub
 		
 	}
@@ -28,7 +29,7 @@ public class Node {
 	public boolean hasCompleteChildren() {
 		// first check this node
 		if (myAction != null) {
-			if (myAction.numParameters() != myChildren.size()) return false;
+			if (myAction.getNumChildrenRequired() != myChildren.size()) return false;
 		}
 		// recursively check children
 		boolean complete = true;

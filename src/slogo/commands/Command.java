@@ -1,10 +1,19 @@
 package slogo.commands;
 
-public class Command {
+import java.util.List;
 
-	public int numParameters() {
-		// TODO Auto-generated method stub
-		return 0;
+import slogo.character.MainCharacter;
+
+public abstract class Command {
+	
+	protected MainCharacter myCharacter;
+	
+	public Command(MainCharacter character) {
+		myCharacter = character;
 	}
 
+	public abstract double doCommand(List<Double> params);
+	
+	public abstract int getNumChildrenRequired();
+	
 }

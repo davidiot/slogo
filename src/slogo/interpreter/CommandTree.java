@@ -19,7 +19,7 @@ public class CommandTree {
 	}
 
 	public void run() {
-		root.execute();
+		root.traverseAndExecute();
 	}
 
 }
