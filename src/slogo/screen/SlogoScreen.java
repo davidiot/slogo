@@ -51,8 +51,13 @@ public class SlogoScreen extends AbstractScreen {
 	public void run() {
 		ObservableArrayList h = new ObservableArrayList();
 		h.addObserver(history);
-		if (parameters != null && parameters.getBackgroundColor() != null) {
-			map.changeColor(parameters.getBackgroundColor());
+		if (parameters != null) {
+			if(parameters.getBackgroundColor() != null){
+				map.changeColor(parameters.getBackgroundColor());
+			}
+			if(parameters.getPenColor() != null){
+				map.changePenColor(parameters.getPenColor());
+			}
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
