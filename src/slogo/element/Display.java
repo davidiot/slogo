@@ -4,7 +4,9 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -16,6 +18,7 @@ public class Display extends AbstractElement {
 	private Rectangle map;
 	private Canvas test;
 	private GraphicsContext gc;
+	private Pane display;
 
 	public Display(GridPane pane) {
 		super(pane);
@@ -23,26 +26,25 @@ public class Display extends AbstractElement {
 
 	@Override
 	protected void makePane() {
-		MainCharacter turtle = new MainCharacter(100,100);
-		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
-				Integer.parseInt(slogoResources.getString("mapHeight")), Color.WHITE);
-		pane.add(map, 0, 0);
-		pane.getChildren().add(turtle.getImageView());
-		/**test = new Canvas(
+		display = new Pane();
+		MainCharacter mc = new MainCharacter(100,100);
+		test = new Canvas(
 				Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")));
 		gc = test.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
-		gc.fillRect(0, 0, test.getWidth(), test.getHeight());
-		gc.drawImage(turtle.getImage(), 100, 100);
-		gc.r
-		this.pane.getChildren().add(test);
-		//this.pane.getChildren().add(turtle.getImageView());
-		//this.pane.getChildren().add(turtle.getImageView());**/
+		gc.fillRect(0, 0, test.getWidth(), test.getHeight());		
+		display.getChildren().add(test);
+		display.getChildren().add(mc.getImageView());
+		this.pane.getChildren().add(display);
 	}
 
 	public void changeColor(String input) {
 		gc.setFill(Paint.valueOf(input));
 		gc.fillRect(0, 0, test.getWidth(), test.getHeight());
+	}
+	
+	public void addCharacter(MainCharacter mc){
+		display.getChildren().add(mc.getImageView());
 	}
 }

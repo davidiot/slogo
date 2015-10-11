@@ -5,12 +5,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 public class MainCharacter {
-	private boolean penDown;
-	private int preX;
-	private int preY;
-	private int curX;
-	private int curY;
-	private int direction;
+	private boolean penDown = true;
+	private boolean hidden = false;
+	private double preX;
+	private double preY;
+	private double curX;
+	private double curY;
+	private double direction;
 	private Image image;
 	private ImageView imageView;
 
@@ -20,20 +21,42 @@ public class MainCharacter {
 		curY = y;
 		preY = 0;
 		direction = 0;
-		penDown = true;
-		image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle.png"));
+		if(!hidden){
+			image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle.png"));
+		}
+		else{
+			image = new Image("Images/blank.png");
+		}
 		imageView = new ImageView();
 		imageView.setImage(image);
-		imageView.setLayoutX(curX);
-		imageView.setLayoutY(curY);
+		imageView.setX(curX);
+		imageView.setY(curY);
 	}
 
 	public ImageView getImageView() {
-		return imageView;
+		return imageView;  
 	}
 	
 	public Image getImage(){
 		return image;
 	}
 	
+	public void move(int distance){
+		preX = curX;
+		preY = curY;
+		curX += distance * Math.sin(90.0 - direction);
+		curY += distance * Math.cos(90.0 - direction);
+	}
+	
+	public void showCharacter(){
+		hidden = false;
+	}
+	
+	public void hideCharacter(){
+		hidden = true;
+	}
+	
+	public void rotateCharacter(int degree){
+		imageView.setRotate(degree);
+	}
 }

@@ -1,11 +1,15 @@
 package slogo.interpreter;
 
-import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.ResourceBundle;
+
+/**
+ * This class acts acts as both a way to translate commands
+ * in different languages into their default form and to 
+ * check that all inputs match some correct syntax form. 
+ * 
+ */
 
 public class Parser {
 
