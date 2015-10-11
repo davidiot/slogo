@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import slogo.character.MainCharacter;
 import slogo.element.Display;
 import slogo.element.Commands;
 import slogo.element.Console;

@@ -11,7 +11,8 @@ public class MainCharacter {
 	private int curX;
 	private int curY;
 	private int direction;
-	private ImageView image;
+	private Image image;
+	private ImageView imageView;
 
 	public MainCharacter(int x, int y) {
 		curX = x;
@@ -20,13 +21,18 @@ public class MainCharacter {
 		preY = 0;
 		direction = 0;
 		penDown = true;
-		Image im = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle.png"));
-		image = new ImageView(im);
-		image.setX(curX);
-		image.setY(curY);
+		image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle.png"));
+		imageView = new ImageView();
+		imageView.setImage(image);
+		imageView.setLayoutX(curX);
+		imageView.setLayoutY(curY);
 	}
 
 	public ImageView getImageView() {
+		return imageView;
+	}
+	
+	public Image getImage(){
 		return image;
 	}
 	
