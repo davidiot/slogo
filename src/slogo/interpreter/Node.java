@@ -39,4 +39,23 @@ public class Node {
 		return complete;
 	}
 
+	public boolean canAdd() {
+		if (myAction == null) return true;
+		if (myChildren.size() >= myAction.getNumChildrenRequired()) return false;
+		return true;
+	}
+
+	public void setParent(Node parent) {
+		myParent = parent;
+		
+	}
+
+	public List<Node> getAllChildren() {
+		return myChildren;
+	}
+
+	public String getAction() {
+		return myAction.toString();
+	}
+
 }
