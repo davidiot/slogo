@@ -39,6 +39,9 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		data.add((String) arg);
+		if (!open) {
+			toggle();
+		}
 	}
 
 	private void toggle() {
