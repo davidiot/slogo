@@ -46,11 +46,11 @@ public class Interpreter {
 		i.interpret("fd 90");
 	}
 	
-	public void print(CommandNode root) {
-		for (CommandNode node: root.getAllChildren()) {
+	public void print(Node root) {
+		for (Node node: root.getAllChildren()) {
 			print(node);
 		}
-		System.out.println(root.getAction());
+		//System.out.println(root.getAction());
 	}
 
 }

@@ -5,24 +5,21 @@ import java.util.List;
 
 import slogo.commands.Command;
 
-public class CommandNode {
-	
-	private CommandNode myParent;
-	private List<CommandNode> myChildren;
+public class CommandNode extends Node{
 	private Command myAction;
 	
 	public CommandNode(Command action) {
-		myChildren = new LinkedList<CommandNode>();
 		myAction = action;
 	}
 	
-	public void addChild(CommandNode child) {
+	public void addChild(Node child) {
 		myChildren.add(child);
 	}
 
 	public double traverseAndExecute() {
-		
-		return myAction.doCommand(params);
+		// TODO
+		//return myAction.doCommand(params);
+		return 0;
 		
 	}
 
@@ -33,7 +30,7 @@ public class CommandNode {
 		}
 		// recursively check children
 		boolean complete = true;
-		for (CommandNode child: myChildren) {
+		for (Node child: myChildren) {
 			complete = complete && child.hasCompleteChildren();
 		}
 		return complete;
@@ -48,10 +45,6 @@ public class CommandNode {
 	public void setParent(CommandNode parent) {
 		myParent = parent;
 		
-	}
-
-	public List<CommandNode> getAllChildren() {
-		return myChildren;
 	}
 
 	public String getAction() {
