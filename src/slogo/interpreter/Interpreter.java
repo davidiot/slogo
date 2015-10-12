@@ -5,11 +5,19 @@ import slogo.screen.SlogoScreen;
 public class Interpreter {
 	private String myLanguage;
 	private SlogoScreen myView;
-	private CommandTree myTree;
+	//private CommandTree myTree;
 	private CommandLibrary actions;
 	private VariableLibrary variables;
 	private Parser myParser;
 
+	public Interpreter(SlogoScreen view) {
+		myView = view;
+		actions = new CommandLibrary();
+		variables = new VariableLibrary();
+		
+	}
+	
+	
 	public void interpret(String input) {
 		//String[] translated = myParser.parseCommands(input);
 		CommandTree tree = new CommandTree(myLanguage, actions, variables);
@@ -38,8 +46,8 @@ public class Interpreter {
 		i.interpret("fd 90");
 	}
 	
-	public void print(Node root) {
-		for (Node node: root.getAllChildren()) {
+	public void print(CommandNode root) {
+		for (CommandNode node: root.getAllChildren()) {
 			print(node);
 		}
 		System.out.println(root.getAction());

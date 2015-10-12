@@ -7,7 +7,7 @@ import slogo.commands.Command;
 
 
 public class CommandTree {
-	private Node root;
+	private CommandNode root;
 	private String myLanguage;
 	private CommandLibrary myActions;
 	private VariableLibrary myVariables;
@@ -16,7 +16,7 @@ public class CommandTree {
 
 	public CommandTree(String language, CommandLibrary actions, VariableLibrary variables) {
 		myTranslator = new SyntaxTranslator(language);
-		root = new Node(null);	// root has no action
+		root = new CommandNode(null);	// root has no action
 		myLanguage = language;
 		myActions = actions;
 		myVariables = variables;	
@@ -24,13 +24,13 @@ public class CommandTree {
 
 	public void build(String input) {
 		List<String> translated = myTranslator.parse(input);
-		Node current = root;
+		CommandNode current = root;
 		Iterator<String> iter = translated.iterator();
 		while(iter.hasNext()){
 			if(current.canAdd()) {
 				// TODO throw exception if action doesn't exist
 				Command command = CommandLibrary.getAction(iter.next());
-				Node node = new Node(command);
+				CommandNode node = new CommandNode(command);
 				current.addChild(node);
 				node.setParent(current);
 				current = node;
@@ -39,8 +39,7 @@ public class CommandTree {
 		if (! current.hasCompleteChildren()) {
 			// TODO throw incorrect formatting exception
 			// functions do not have enough parameters
-		}
-		
+		}	
 	}
 
 	// Probably don't need this
@@ -50,8 +49,6 @@ public class CommandTree {
 	
 	public void run() {
 		root.traverseAndExecute();
-	}
-
-	
+	}	
 
 }
