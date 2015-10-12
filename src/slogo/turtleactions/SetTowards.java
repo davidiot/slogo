@@ -5,9 +5,9 @@ import java.util.List;
 import slogo.character.MainCharacter;
 import slogo.commands.Command;
 
-public class setTowards extends Command {
+public class SetTowards extends Command {
 
-	public setTowards(MainCharacter character) {
+	public SetTowards(MainCharacter character) {
 		super(character);
 		// TODO Auto-generated constructor stub
 	}
