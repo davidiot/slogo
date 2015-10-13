@@ -11,12 +11,19 @@ public abstract class Node {
 		myChildren = new LinkedList<Node>();
 	}
 	
-	
-	abstract boolean hasCompleteChildren();
-	
+	public abstract boolean hasCompleteChildren();
 	
 	public List<Node> getAllChildren() {
 		return myChildren;
 	}
+
+
+	public abstract void addChild(Node node);
+	
+	public abstract void setParent(Node current);
+
+	public abstract boolean canAdd();
+
+	public abstract double traverseAndExecute();
 
 }

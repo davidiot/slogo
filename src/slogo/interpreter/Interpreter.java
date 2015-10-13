@@ -10,13 +10,13 @@ public class Interpreter {
 	private VariableLibrary variables;
 	private Parser myParser;
 
-	public Interpreter(SlogoScreen view) {
+	public Interpreter(String language, SlogoScreen view) {
+		myLanguage = language;
 		myView = view;
 		actions = new CommandLibrary();
 		variables = new VariableLibrary();
-		
+		//myParser = new Parser(language);
 	}
-	
 	
 	public void interpret(String input) {
 		//String[] translated = myParser.parseCommands(input);
@@ -25,11 +25,7 @@ public class Interpreter {
 		
 	}
 	
-	public Interpreter(String language, SlogoScreen view) {
-		myLanguage = language;
-		myView = view;
-		//myParser = new Parser(language);
-	}
+
 
 //	public void interpret(String input) {
 //		String[] parsedInput = myParser.parseCommands(input);
@@ -37,6 +33,7 @@ public class Interpreter {
 //		tree.build(parsedInput);
 //		tree.run();	
 //	}
+	
 	
 	/**
 	 * FOR TESTING

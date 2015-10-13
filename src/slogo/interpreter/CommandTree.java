@@ -7,16 +7,19 @@ import slogo.commands.Command;
 
 
 public class CommandTree {
-	private CommandNode root;
+	private Node root;
 	private String myLanguage;
 	private CommandLibrary myActions;
 	private VariableLibrary myVariables;
 	private SyntaxTranslator myTranslator;
+	private NodeFactory	myFactory;
 
 
 	public CommandTree(String language, CommandLibrary actions, VariableLibrary variables) {
 		myTranslator = new SyntaxTranslator(language);
-		root = new CommandNode(null);	// root has no action
+		myFactory = new NodeFactory();
+		// Change to something besides command node
+		root = new CommandNode(null);
 		myLanguage = language;
 		myActions = actions;
 		myVariables = variables;	
@@ -24,13 +27,12 @@ public class CommandTree {
 
 	public void build(String input) {
 		List<String> translated = myTranslator.parse(input);
-		CommandNode current = root;
+		Node current = root;
 		Iterator<String> iter = translated.iterator();
 		while(iter.hasNext()){
 			if(current.canAdd()) {
 				// TODO throw exception if action doesn't exist
-				Command command = CommandLibrary.getAction(iter.next());
-				CommandNode node = new CommandNode(command);
+				Node node = myFactory.create(iter);
 				current.addChild(node);
 				node.setParent(current);
 				current = node;

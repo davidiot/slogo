@@ -51,4 +51,10 @@ public class CommandNode extends Node{
 		return myAction.toString();
 	}
 
+	@Override
+	public void setParent(Node current) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

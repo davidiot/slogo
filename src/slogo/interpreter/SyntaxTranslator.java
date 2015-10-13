@@ -26,13 +26,12 @@ public class SyntaxTranslator {
 		defaults.addAll(makePatterns(location));
 		patterns.addAll(makePatterns("resources/languages/syntax"));
 		String[] splitInput = input.split("\\s+");
-		List<String> converted = convert(splitInput, defaults, patterns);
+		List<String> converted = convert(splitInput);
 		return converted;
 	}
 	
 	
-    private List<String> convert (String[] input, List<Entry<String, Pattern>> defaults,
-    		List<Entry<String, Pattern>> patterns) {
+    private List<String> convert (String[] input) {
     	ArrayList<String> checked = new ArrayList<String>();
         for (String s : input) {
             boolean matched = false;
@@ -72,6 +71,9 @@ public class SyntaxTranslator {
 		return s;
 	}
 	
+	/**
+	 * From example_regex in class repository
+	 */
     public static List<Entry<String, Pattern>> makePatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         List<Entry<String, Pattern>> patterns = new ArrayList<>();
