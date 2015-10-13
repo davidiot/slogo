@@ -14,8 +14,14 @@ public class ClearScreen extends Command {
 
 	@Override
 	public double doCommand(List<Double> params) {
-		// TODO Auto-generated method stub
-		return 0;
+		double currentX = myCharacter.getImageView().getX();
+		double currentY = myCharacter.getImageView().getY();
+		double destinationX = 0;
+		double destinationY = 0;
+		double distance = Math.sqrt((destinationX - currentX)*(destinationX - currentX)
+				+ (destinationY - currentY)*(destinationY - currentY));
+		System.out.println("Cleared screen. Distance moved: " + distance);
+		return distance;
 	}
 
 	@Override

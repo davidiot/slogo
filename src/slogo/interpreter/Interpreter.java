@@ -5,11 +5,19 @@ import slogo.screen.SlogoScreen;
 public class Interpreter {
 	private String myLanguage;
 	private SlogoScreen myView;
-	private CommandTree myTree;
+	//private CommandTree myTree;
 	private CommandLibrary actions;
 	private VariableLibrary variables;
-	private Parser myParser;
+	private ParserOld myParser;
 
+	public Interpreter(String language, SlogoScreen view) {
+		myLanguage = language;
+		myView = view;
+		actions = new CommandLibrary();
+		variables = new VariableLibrary();
+		//myParser = new Parser(language);
+	}
+	
 	public void interpret(String input) {
 		//String[] translated = myParser.parseCommands(input);
 		CommandTree tree = new CommandTree(myLanguage, actions, variables);
@@ -17,11 +25,7 @@ public class Interpreter {
 		
 	}
 	
-	public Interpreter(String language, SlogoScreen view) {
-		myLanguage = language;
-		myView = view;
-		//myParser = new Parser(language);
-	}
+
 
 //	public void interpret(String input) {
 //		String[] parsedInput = myParser.parseCommands(input);
@@ -29,6 +33,7 @@ public class Interpreter {
 //		tree.build(parsedInput);
 //		tree.run();	
 //	}
+	
 	
 	/**
 	 * FOR TESTING
@@ -42,7 +47,7 @@ public class Interpreter {
 		for (Node node: root.getAllChildren()) {
 			print(node);
 		}
-		System.out.println(root.getAction());
+		//System.out.println(root.getAction());
 	}
 
 }

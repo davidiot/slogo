@@ -14,8 +14,8 @@ public class ShowTurtle extends Command {
 
 	@Override
 	public double doCommand(List<Double> params) {
-		// TODO Auto-generated method stub
-		return 0;
+		System.out.println("Showing turtle.");
+		return 1;
 	}
 
 	@Override

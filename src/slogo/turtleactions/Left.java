@@ -14,14 +14,15 @@ public class Left extends Command {
 
 	@Override
 	public double doCommand(List<Double> params) {
-		// TODO Auto-generated method stub
-		return 0;
+		double degreesTurned = params.get(0);
+		System.out.println("Turned " + params.get(0) + " left.");
+		return degreesTurned;
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 }
