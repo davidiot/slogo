@@ -14,7 +14,7 @@ public class PenUp extends Command {
 
 	@Override
 	public double doCommand(List<Double> params) {
-		// TODO Auto-generated method stub
+		System.out.println("Pen is up.");
 		return 0;
 	}
 

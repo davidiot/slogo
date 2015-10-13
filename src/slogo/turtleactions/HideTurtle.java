@@ -14,8 +14,9 @@ public class HideTurtle extends Command {
 
 	@Override
 	public double doCommand(List<Double> params) {
-		// TODO Auto-generated method stub
-		return 0;
+		double distanceMoved = params.get(0);
+		System.out.println("Turtle hidden.");
+		return distanceMoved;
 	}
 
 	@Override
