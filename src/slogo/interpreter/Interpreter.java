@@ -8,7 +8,7 @@ public class Interpreter {
 	//private CommandTree myTree;
 	private CommandLibrary actions;
 	private VariableLibrary variables;
-	private Parser myParser;
+	private ParserOld myParser;
 
 	public Interpreter(String language, SlogoScreen view) {
 		myLanguage = language;

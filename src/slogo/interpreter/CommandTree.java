@@ -11,12 +11,12 @@ public class CommandTree {
 	private String myLanguage;
 	private CommandLibrary myActions;
 	private VariableLibrary myVariables;
-	private SyntaxTranslator myTranslator;
+	private Parser myTranslator;
 	private NodeFactory	myFactory;
 
 
 	public CommandTree(String language, CommandLibrary actions, VariableLibrary variables) {
-		myTranslator = new SyntaxTranslator(language);
+		myTranslator = new Parser(language);
 		myFactory = new NodeFactory();
 		// Change to something besides command node
 		root = new CommandNode(null, null);

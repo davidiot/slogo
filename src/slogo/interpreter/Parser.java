@@ -1,68 +1,100 @@
 package slogo.interpreter;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.HashMap;
+import java.util.List;
 import java.util.ResourceBundle;
-
-/**
- * This class acts acts as both a way to translate commands
- * in different languages into their default form and to 
- * check that all inputs match some correct syntax form. 
- * 
- */
+import java.util.AbstractMap.SimpleEntry;
+import java.util.Map.Entry;
+import java.util.regex.Pattern;
 
 public class Parser {
-
-	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/";
-    private ResourceBundle myCommandResources;
-
-	private HashMap<String, String> myCommandMap;
+	private List<Entry<String, Pattern>> defaults;
+	private List<Entry<String, Pattern>> patterns;
+	private String myLanguage;
+	private static final String COMMAND = "Command";
 	
-	public Parser(String language){
-		myCommandResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-		//System.out.println(myCommandResources.getString("Forward"));
-		makeCommandMap(myCommandResources);
+	public Parser(String language) {
+		myLanguage = language;
 	}
 	
-	public String[] parseCommands(String input) {
-		String[] splitArray = input.split("\\s+");
-		for (int i = 0; i<splitArray.length; i++){
-			splitArray[i] = splitArray[i].toLowerCase();
-		}
-		
-		if (checkForInvalidCommands(splitArray)!=null){
-			//throw checkForInvalidCommands(splitArray);
-		}
-		
-		return splitArray;
+	public List<String> parse(String input) {
+		defaults = new ArrayList<>();
+		patterns = new ArrayList<>();
+		String location = String.format("resources/languages/%s", myLanguage);
+		//String location = "resources/languages/English";
+		defaults.addAll(makePatterns(location));
+		patterns.addAll(makePatterns("resources/languages/syntax"));
+		String[] splitInput = input.split("\\s+");
+		List<String> converted = convert(splitInput);
+		return converted;
 	}
 	
-	private void makeCommandMap(ResourceBundle commandResources){
-		myCommandMap = new HashMap<String, String>();
-		Enumeration<String> commandNames = commandResources.getKeys();
-		while (commandNames.hasMoreElements()){
-			String commandName = commandNames.nextElement();
-			String commandCodes = commandResources.getString(commandName);
-			//System.out.println(commandCodes);
-			String[] commandCodeArray = commandCodes.split("\\|");
-			for (String s: commandCodeArray){
-				myCommandMap.put(s, commandName);
-				System.out.println(s + " " + commandName);
-			}
-		}
-	}
+	
+    private List<String> convert (String[] input) {
+    	ArrayList<String> checked = new ArrayList<String>();
+        for (String s : input) {
+            boolean matched = false;
+            if (s.trim().length() > 0) {
+                for (Entry<String, Pattern> p : patterns) {
+                    if (match(s, p.getValue())) {
+//                        System.out.println(String.format("%s matches %s", s, p.getKey()));
+                        if (p.getKey().equals(COMMAND)){
+                        	// translate any default commands in different langauge into
+                        	// their default form (e.g. "avanzar" becomes "Forward")
+                        	// if a command is not default it stays the same form
+                        	checked.add(translate(s));
+                        } else {
+                        	checked.add(s);
+                        }
+                        matched = true;
+                        break;
+                    }
+                }
+                if (! matched) {
+                	// TODO throw syntax error
+//                    System.out.println(String.format("%s not matched", s));
+                }
+            }
+        }
+        System.out.println(checked);
+		return checked;
+    }
 
-	private Exception checkForInvalidCommands(String[] splitArray) {
-		for (String s : splitArray) {
-			if (!(myCommandMap.containsKey(s))) {
-				try {
-					Double.parseDouble(s);
-				} catch (NumberFormatException e) {
-					return e;
-				}
-			}
+	private String translate(String s) {
+		for (Entry<String, Pattern> p : defaults) {
+            if (match(s, p.getValue())) {
+//                System.out.println(String.format("%s matches %s", s, p.getKey()));
+                return p.getKey();
+            }
 		}
-		return null;
+		return s;
 	}
+	
+	/**
+	 * From example_regex in class repository
+	 */
+    public List<Entry<String, Pattern>> makePatterns (String syntax) {
+        ResourceBundle resources = ResourceBundle.getBundle(syntax);
+        List<Entry<String, Pattern>> patterns = new ArrayList<>();
+        Enumeration<String> iter = resources.getKeys();
+        while (iter.hasMoreElements()) {
+            String key = iter.nextElement();
+            String regex = resources.getString(key);
+            patterns.add(new SimpleEntry<String, Pattern>(key,
+                         // THIS IS THE KEY LINE
+                         Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
+        }
+        System.out.println(patterns);
+        return patterns;
+    }
+    
+	/**
+	 * From example_regex in class repository
+	 */
+	
+	public boolean match (String input, Pattern regex) {
+        return regex.matcher(input).matches();
+    }
 
 }
