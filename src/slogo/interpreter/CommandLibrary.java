@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import slogo.commands.Command;
-import slogo.commands.Forward;
+import slogo.turtleactions.Forward;
+
 
 public class CommandLibrary {
 	Map<String, Command> commandMap; 
@@ -15,11 +16,11 @@ public class CommandLibrary {
 		commandMap = new HashMap<>();
 		// TODO add all default command objects to command map using 
 		// reflection with names in properties doc
-		Command forward = new Forward();
+		Command forward = new Forward(null);
 		commandMap.put("Forward", forward);
 	}
 
-	public static Command getAction(String next) {
+	public Command getAction(String next) {
 		// TODO Auto-generated method stub
 		return null;
 	}

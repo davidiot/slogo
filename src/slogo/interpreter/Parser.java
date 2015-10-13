@@ -26,26 +26,30 @@ public class Parser {
 		defaults.addAll(makePatterns(location));
 		patterns.addAll(makePatterns("resources/languages/syntax"));
 		String[] splitInput = input.split("\\s+");
-		List<String> converted = convert(splitInput);
-		return converted;
+		//List<String> parr = convert(splitInput);
+		List<String> parsed = convert(splitInput);
+		return parsed;
 	}
 	
 	
     private List<String> convert (String[] input) {
-    	ArrayList<String> checked = new ArrayList<String>();
+    	ArrayList<String> converted = new ArrayList<String>();
         for (String s : input) {
             boolean matched = false;
+            String type = "";
+            String name = "";
             if (s.trim().length() > 0) {
                 for (Entry<String, Pattern> p : patterns) {
                     if (match(s, p.getValue())) {
 //                        System.out.println(String.format("%s matches %s", s, p.getKey()));
+                    	type = p.getKey();
                         if (p.getKey().equals(COMMAND)){
                         	// translate any default commands in different langauge into
                         	// their default form (e.g. "avanzar" becomes "Forward")
                         	// if a command is not default it stays the same form
-                        	checked.add(translate(s));
+                        	name = translate(s);
                         } else {
-                        	checked.add(s);
+                        	name = s;
                         }
                         matched = true;
                         break;
@@ -56,9 +60,9 @@ public class Parser {
 //                    System.out.println(String.format("%s not matched", s));
                 }
             }
+            converted.add(String.join(" ", type, name));
         }
-        System.out.println(checked);
-		return checked;
+		return converted;
     }
 
 	private String translate(String s) {
@@ -85,7 +89,7 @@ public class Parser {
                          // THIS IS THE KEY LINE
                          Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
-        System.out.println(patterns);
+//        System.out.println(patterns);
         return patterns;
     }
     
