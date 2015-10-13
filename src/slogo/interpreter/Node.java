@@ -7,8 +7,9 @@ public abstract class Node {
 	protected Node myParent;
 	protected List<Node> myChildren;
 	
-	public Node() {
+	public Node(Node parent) {
 		myChildren = new LinkedList<Node>();
+		myParent = parent;
 	}
 	
 	public abstract boolean hasCompleteChildren();
@@ -19,8 +20,6 @@ public abstract class Node {
 
 
 	public abstract void addChild(Node node);
-	
-	public abstract void setParent(Node current);
 
 	public abstract boolean canAdd();
 

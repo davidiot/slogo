@@ -19,7 +19,7 @@ public class CommandTree {
 		myTranslator = new SyntaxTranslator(language);
 		myFactory = new NodeFactory();
 		// Change to something besides command node
-		root = new CommandNode(null);
+		root = new CommandNode(null, null);
 		myLanguage = language;
 		myActions = actions;
 		myVariables = variables;	
@@ -28,26 +28,21 @@ public class CommandTree {
 	public void build(String input) {
 		List<String> translated = myTranslator.parse(input);
 		Node current = root;
-		Iterator<String> iter = translated.iterator();
-		while(iter.hasNext()){
+		while(translated.size() > 0){
 			if(current.canAdd()) {
 				// TODO throw exception if action doesn't exist
-				Node node = myFactory.create(iter);
+				Node node = myFactory.create(translated, current);
 				current.addChild(node);
-				node.setParent(current);
 				current = node;
 			}
 		}
+		// need to modify this so that it checks that nodes above
+		// have complete children as well
 		if (! current.hasCompleteChildren()) {
 			// TODO throw incorrect formatting exception
 			// functions do not have enough parameters
 		}	
 	}
-
-	// Probably don't need this
-	//	private boolean treeComplete() {
-	//		return root.hasCompleteChildren();
-	//	}
 	
 	public void run() {
 		root.traverseAndExecute();

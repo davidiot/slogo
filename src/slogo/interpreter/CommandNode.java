@@ -8,7 +8,8 @@ import slogo.commands.Command;
 public class CommandNode extends Node{
 	private Command myAction;
 	
-	public CommandNode(Command action) {
+	public CommandNode(Command action, Node parent) {
+		super(parent);
 		myAction = action;
 	}
 	
@@ -49,12 +50,6 @@ public class CommandNode extends Node{
 
 	public String getAction() {
 		return myAction.toString();
-	}
-
-	@Override
-	public void setParent(Node current) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

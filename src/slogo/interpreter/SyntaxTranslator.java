@@ -74,7 +74,7 @@ public class SyntaxTranslator {
 	/**
 	 * From example_regex in class repository
 	 */
-    public static List<Entry<String, Pattern>> makePatterns (String syntax) {
+    public List<Entry<String, Pattern>> makePatterns (String syntax) {
         ResourceBundle resources = ResourceBundle.getBundle(syntax);
         List<Entry<String, Pattern>> patterns = new ArrayList<>();
         Enumeration<String> iter = resources.getKeys();
@@ -93,7 +93,7 @@ public class SyntaxTranslator {
 	 * From example_regex in class repository
 	 */
 	
-	public static boolean match (String input, Pattern regex) {
+	public boolean match (String input, Pattern regex) {
         return regex.matcher(input).matches();
     }
 
