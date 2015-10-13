@@ -12,13 +12,18 @@ public class NodeFactory{
 		myVariables = variables;
 	}
 
-	public Node create(List<String> translated, List<String> types, Node parent) {
+	public Node create(List<String> parsed, Node parent) {
 		Node new_node = null;
-		String start = translated.remove(0);
-		switch(translated.remove(0)){
+		String start = parsed.get(0).split("\\s+")[0];
+		switch(start){
 		case "Command": new_node = makeCommandNode(start, parent);
+		case "Constant": new_node = makeConstantNode(start, parent);
 		}
 		return new_node;
+	}
+
+	private Node makeConstantNode(String start, Node parent) {
+		return null;
 	}
 
 	private Node makeCommandNode(String name, Node parent) {

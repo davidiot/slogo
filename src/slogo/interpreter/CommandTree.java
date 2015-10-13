@@ -24,24 +24,33 @@ public class CommandTree {
 
 	public void build(String input) {
 		List<String> parsed = myTranslator.parse(input);
-		System.out.println(parsed);
+		//System.out.println(parsed);
 		Node current = root;
 		while(parsed.size() > 0){
 			if(current.canAdd()) {
 				// TODO throw exception if action doesn't exist
-//				Node node = myFactory.create(parsed, current);
-//				current.addChild(node);
-//				current = node;
+				Node node = myFactory.create(parsed, current);
+				current.addChild(node);
+				current = node;
 			}
 		}
-		// need to modify this so that it checks that nodes above
-		// have complete children as well
-		if (! current.hasCompleteChildren()) {
-			// TODO throw incorrect formatting exception
-			// functions do not have enough parameters
-		}	
+		// now check whether each function has enough parameters
+		if(! treeComplete(current)) {
+			// TODO throw an exception
+		}
 	}
 	
+	private boolean treeComplete(Node current) {
+		// move up the tree from the current node checking whether each parent
+		// has enough parameters
+		while (current != null) {
+			if (! current.hasCompleteChildren()) return false;
+			current = current.getParent();
+		}
+		return true;
+
+	}
+
 	public void run() {
 		root.traverseAndExecute();
 	}	

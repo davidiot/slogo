@@ -1,10 +1,11 @@
 package slogo.interpreter;
 
 public class VariableNode extends Node {
+	private double myName;
 
-	public VariableNode(Node parent) {
+	public VariableNode(Node parent, double name) {
 		super(parent);
-		// TODO Auto-generated constructor stub
+		myName = name;
 	}
 
 	@Override
