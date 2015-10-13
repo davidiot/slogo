@@ -2,6 +2,11 @@ package slogo.interpreter;
 
 public class VariableNode extends Node {
 
+	public VariableNode(Node parent) {
+		super(parent);
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public boolean hasCompleteChildren() {
 		// TODO Auto-generated method stub
@@ -10,12 +15,6 @@ public class VariableNode extends Node {
 
 	@Override
 	public void addChild(Node node) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setParent(Node current) {
 		// TODO Auto-generated method stub
 		
 	}
