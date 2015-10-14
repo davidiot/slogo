@@ -2,6 +2,11 @@ package slogo.interpreter;
 
 import java.util.List;
 
+import slogo.nodes.CommandNode;
+import slogo.nodes.Node;
+import slogo.nodes.NodeFactory;
+import slogo.nodes.RootNode;
+
 
 public class CommandTree {
 	private Node root;
@@ -14,12 +19,12 @@ public class CommandTree {
 
 	public CommandTree(String language, CommandLibrary actions, VariableLibrary variables) {
 		myTranslator = new Parser(language);
-		myFactory = new NodeFactory(myActions, myVariables);
 		// Change to something besides command node
-		root = new CommandNode(null, null);
+		myFactory = new NodeFactory(actions, variables);
+		root = new RootNode(null);
 		myLanguage = language;
 		myActions = actions;
-		myVariables = variables;	
+		myVariables = variables;
 	}
 
 	public void build(String input) {
@@ -32,6 +37,8 @@ public class CommandTree {
 				Node node = myFactory.create(parsed, current);
 				current.addChild(node);
 				current = node;
+			} else {
+				current = current.getParent();
 			}
 		}
 		// now check whether each function has enough parameters

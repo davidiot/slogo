@@ -1,4 +1,4 @@
-package slogo.interpreter;
+package slogo.nodes;
 
 import java.util.LinkedList;
 import java.util.List;

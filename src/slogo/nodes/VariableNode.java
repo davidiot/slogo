@@ -1,4 +1,5 @@
-package slogo.interpreter;
+package slogo.nodes;
+
 
 public class VariableNode extends Node {
 	private double myName;
