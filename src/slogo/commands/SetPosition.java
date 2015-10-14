@@ -6,13 +6,8 @@ import slogo.character.MainCharacter;
 
 public class SetPosition extends Command {
 
-	public SetPosition(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
-	public double doCommand(List<Double> params) {
+	public double doCommand(MainCharacter character, List<Double> params) {
 		// this still doesn't do the command on the front end, 
 		// only gives the correct return value.
 		if (getNumChildrenRequired() != params.size()){

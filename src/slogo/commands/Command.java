@@ -8,11 +8,7 @@ public abstract class Command {
 	
 	protected MainCharacter myCharacter;
 	
-	public Command(MainCharacter character) {
-		myCharacter = character;
-	}
-
-	public abstract double doCommand(List<Double> params);
+	public abstract double doCommand(MainCharacter character, List<Double> params);
 	
 	public abstract int getNumChildrenRequired();
 	

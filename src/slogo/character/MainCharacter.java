@@ -40,7 +40,7 @@ public class MainCharacter {
 		imageView.setY(curY);
 		penColor = Color.BLACK;
 	}
-
+	
 	public ImageView getImageView() {
 		return imageView;  
 	}

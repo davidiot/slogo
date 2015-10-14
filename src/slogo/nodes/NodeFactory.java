@@ -37,7 +37,7 @@ public class NodeFactory{
 	}
 
 	private Node makeCommandNode(String name, Node parent) {
-		return new CommandNode(myActions.getAction(name), parent);
+		return new CommandNode(myActions.getCommand(name), parent);
 	}
 
 }

@@ -6,13 +6,8 @@ import slogo.character.MainCharacter;
 
 public class ShowTurtle extends Command {
 
-	public ShowTurtle(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
-	public double doCommand(List<Double> params) {
+	public double doCommand(MainCharacter character, List<Double> params) {
 		System.out.println("Showing turtle.");
 		return 1;
 	}

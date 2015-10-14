@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import slogo.commands.Command;
+import slogo.element.Display;
 
 public class CommandNode extends Node{
 	private Command myAction;
@@ -25,7 +26,7 @@ public class CommandNode extends Node{
 			System.out.println(myChildren);
 			myParameters.add(child.traverseAndExecute());
 		}
-		return myAction.doCommand(myParameters);
+		return myAction.doCommand(Display.characters.get(0), myParameters);
 		
 	}
 

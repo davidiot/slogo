@@ -6,13 +6,8 @@ import slogo.character.MainCharacter;
 
 public class Right extends Command {
 
-	public Right(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
-
 	@Override
-	public double doCommand(List<Double> params) {
+	public double doCommand(MainCharacter character, List<Double> params) {
 		double degreesTurned = params.get(0);
 		System.out.println("Turned right " + params.get(0) + " degrees.");
 		return degreesTurned;

@@ -24,7 +24,8 @@ public class Display extends AbstractElement {
 	private GraphicsContext gc;
 	private Pane display;
 	private Pane characterDisplay;
-	private List<MainCharacter> characters;
+	// changed just for now
+	public static List<MainCharacter> characters;
 
 	public Display(GridPane pane) {
 		super(pane);
