@@ -20,9 +20,8 @@ public class CommandLibrary {
 		commandMap.put("Forward", forward);
 	}
 
-	public Command getAction(String next) {
-		// TODO Auto-generated method stub
-		return null;
+	public Command getAction(String name) {
+		return commandMap.get(name);
 	}
 
 }

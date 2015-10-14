@@ -1,4 +1,5 @@
-package slogo.interpreter;
+package slogo.nodes;
+
 
 public class ConditionalNode extends Node {
 
