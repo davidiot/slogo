@@ -1,28 +1,22 @@
-package slogo.turtleactions;
+package slogo.commands;
 
 import java.util.List;
 
 import slogo.character.MainCharacter;
-import slogo.commands.Command;
 
-public class HideTurtle extends Command {
-
-	public HideTurtle(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
+public class Forward extends Command {
 
 	@Override
 	public double doCommand(List<Double> params) {
 		double distanceMoved = params.get(0);
-		System.out.println("Turtle hidden.");
+		System.out.println("Moved forward " + distanceMoved);
 		return distanceMoved;
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 }

@@ -26,7 +26,6 @@ public class Parser {
 		defaults.addAll(makePatterns(location));
 		patterns.addAll(makePatterns("resources/languages/syntax"));
 		String[] splitInput = input.split("\\s+");
-		//List<String> parr = convert(splitInput);
 		List<String> parsed = convert(splitInput);
 		return parsed;
 	}

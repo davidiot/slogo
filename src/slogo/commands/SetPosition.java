@@ -1,16 +1,10 @@
-package slogo.turtleactions;
+package slogo.commands;
 
 import java.util.List;
 
 import slogo.character.MainCharacter;
-import slogo.commands.Command;
 
 public class SetPosition extends Command {
-
-	public SetPosition(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
 
 	@Override
 	public double doCommand(List<Double> params) {
@@ -20,14 +14,14 @@ public class SetPosition extends Command {
 			// something has gone wrong
 		}
 		
-		double currentX = myCharacter.getImageView().getX();
-		double currentY = myCharacter.getImageView().getY();
+		/*double currentX = character.getImageView().getX();
+		double currentY = character.getImageView().getY();
 		double destinationX = params.get(0);
 		double destinationY = params.get(1);
 		double distance = Math.sqrt((destinationX - currentX)*(destinationX - currentX)
-				+ (destinationY - currentY)*(destinationY - currentY));
-		System.out.println("Setting new position: moved " + distance);
-		return distance;
+				+ (destinationY - currentY)*(destinationY - currentY));*/
+		System.out.println("Setting new position: moved ");
+		return 0;
 	}
 
 	@Override

@@ -1,21 +1,15 @@
-package slogo.turtleactions;
+package slogo.commands;
 
 import java.util.List;
 
 import slogo.character.MainCharacter;
-import slogo.commands.Command;
 
-public class Right extends Command {
-
-	public Right(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
-
+public class Left extends Command {
+	
 	@Override
 	public double doCommand(List<Double> params) {
 		double degreesTurned = params.get(0);
-		System.out.println("Turned right " + params.get(0) + " degrees.");
+		System.out.println("Turned " + params.get(0) + " left.");
 		return degreesTurned;
 	}
 

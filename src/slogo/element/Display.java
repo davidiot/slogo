@@ -68,4 +68,9 @@ public class Display extends AbstractElement {
 		characters.add(mc);
 		display.getChildren().add(mc.getImageView());
 	}
+	
+	// temporary method for testing
+	public MainCharacter getMainCharacter(){
+		return characters.get(0);
+	}
 }

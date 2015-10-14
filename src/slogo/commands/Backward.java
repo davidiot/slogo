@@ -1,17 +1,11 @@
-package slogo.turtleactions;
+package slogo.commands;
 
 import java.util.List;
 
 import slogo.character.MainCharacter;
-import slogo.commands.Command;
 
 public class Backward extends Command {
-
-	public Backward(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	@Override
 	public double doCommand(List<Double> params) {
 		double distanceMoved = params.get(0);

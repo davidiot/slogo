@@ -13,12 +13,12 @@ public class CommandTree {
 	private String myLanguage;
 	private CommandLibrary myActions;
 	private VariableLibrary myVariables;
-	private Parser myTranslator;
+	//private Parser myTranslator;
 	private NodeFactory	myFactory;
 
 
 	public CommandTree(String language, CommandLibrary actions, VariableLibrary variables) {
-		myTranslator = new Parser(language);
+		//myTranslator = new Parser(language);
 		// Change to something besides command node
 		myFactory = new NodeFactory(actions, variables);
 		root = new RootNode(null);
@@ -27,14 +27,14 @@ public class CommandTree {
 		myVariables = variables;
 	}
 
-	public void build(String input) {
-		List<String> parsed = myTranslator.parse(input);
+	public void build(List<String> input) {
+		//List<String> parsed = myTranslator.parse(input);
 		//System.out.println(parsed);
 		Node current = root;
-		while(parsed.size() > 0){
+		while(input.size() > 0){
 			if(current.canAdd()) {
 				// TODO throw exception if action doesn't exist
-				Node node = myFactory.create(parsed, current);
+				Node node = myFactory.create(input, current);
 				current.addChild(node);
 				current = node;
 			} else {

@@ -1,5 +1,7 @@
 package slogo.interpreter;
 
+import java.util.List;
+
 import slogo.nodes.Node;
 import slogo.screen.SlogoScreen;
 
@@ -9,23 +11,28 @@ public class Interpreter {
 	//private CommandTree myTree;
 	private CommandLibrary actions;
 	private VariableLibrary variables;
-	private ParserOld myParser;
+	private Parser myParser;
+	private CommandLibrary myCommandLibrary;
 
 	public Interpreter(String language, SlogoScreen view) {
 		myLanguage = language;
 		myView = view;
 		actions = new CommandLibrary();
 		variables = new VariableLibrary();
-		//myParser = new Parser(language);
+		myParser = new Parser(language);
+		myCommandLibrary = new CommandLibrary();
 	}
 	
 	public void interpret(String input) {
 		//String[] translated = myParser.parseCommands(input);
 		CommandTree tree = new CommandTree(myLanguage, actions, variables);
-		tree.build(input);
+		List<String> parsedInput = myParser.parse(input);
+		tree.build(parsedInput);
 		tree.run();
 		
 	}
+	
+	
 	
 
 
@@ -40,6 +47,8 @@ public class Interpreter {
 	/**
 	 * FOR TESTING
 	 */
+	
+	/*
 	public static void main (String[] args) {
 		Interpreter i = new Interpreter("English", null);
 		i.interpret("fd fd 90 fd 6");
@@ -51,5 +60,6 @@ public class Interpreter {
 		}
 		//System.out.println(root.getAction());
 	}
+	*/
 
 }

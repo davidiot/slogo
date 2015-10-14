@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import slogo.character.MainCharacter;
 import slogo.commands.Command;
+import slogo.element.Display;
 
 public class CommandNode extends Node{
 	private Command myAction;

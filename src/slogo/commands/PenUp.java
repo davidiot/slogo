@@ -1,17 +1,11 @@
-package slogo.turtleactions;
+package slogo.commands;
 
 import java.util.List;
 
 import slogo.character.MainCharacter;
-import slogo.commands.Command;
 
 public class PenUp extends Command {
-
-	public PenUp(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	@Override
 	public double doCommand(List<Double> params) {
 		System.out.println("Pen is up.");
