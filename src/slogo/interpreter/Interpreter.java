@@ -47,6 +47,8 @@ public class Interpreter {
 	/**
 	 * FOR TESTING
 	 */
+	
+	/*
 	public static void main (String[] args) {
 		Interpreter i = new Interpreter("English", null);
 		i.interpret("fd fd 90 fd 6");
@@ -58,5 +60,6 @@ public class Interpreter {
 		}
 		//System.out.println(root.getAction());
 	}
+	*/
 
 }

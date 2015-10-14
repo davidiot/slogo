@@ -7,11 +7,11 @@ import slogo.character.MainCharacter;
 public class SetHeading extends Command {
 	
 	@Override
-	public double doCommand(MainCharacter character, List<Double> params) {
-		double currentHeading = character.getImageView().getRotate();
-		double destinationHeading = params.get(0);
+	public double doCommand(List<Double> params) {
+	//	double currentHeading = character.getImageView().getRotate();
+	//	double destinationHeading = params.get(0);
 		System.out.println("Set the heading to " + params.get(0));
-		return destinationHeading - currentHeading;
+		return 0;//destinationHeading - currentHeading;
 	}
 
 	@Override

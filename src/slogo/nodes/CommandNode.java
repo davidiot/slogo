@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import slogo.character.MainCharacter;
 import slogo.commands.Command;
 import slogo.element.Display;
 
@@ -26,7 +27,7 @@ public class CommandNode extends Node{
 			System.out.println(myChildren);
 			myParameters.add(child.traverseAndExecute());
 		}
-		return myAction.doCommand(Display.characters.get(0), myParameters);
+		return myAction.doCommand(myParameters);
 		
 	}
 

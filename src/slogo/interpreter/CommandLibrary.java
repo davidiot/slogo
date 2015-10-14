@@ -10,7 +10,7 @@ import slogo.commands.Forward;
 
 public class CommandLibrary {
 
-	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/English";
+	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/English2";
 	private Map<String, Command> myCommandMap;
 	private ResourceBundle myCommandResources;
 

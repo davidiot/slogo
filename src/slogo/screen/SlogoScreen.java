@@ -27,7 +27,7 @@ public class SlogoScreen extends AbstractScreen {
 	private Commands commands;
 	private Variables variables;
 	private Display map;
-	private Interpreter parser;
+	private Interpreter interpreter;
 	private ResourceBundle slogoResources;
 
 	public SlogoScreen(String language) {
@@ -44,7 +44,7 @@ public class SlogoScreen extends AbstractScreen {
 			title = "SLogo";
 		}
 		makeScene();
-		parser = new Interpreter(this.language, this);
+		interpreter = new Interpreter(this.language, this);
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class SlogoScreen extends AbstractScreen {
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			parser.interpret(command);
+			interpreter.interpret(command);
 			h.add(command);
 		}
 	}
@@ -117,5 +117,10 @@ public class SlogoScreen extends AbstractScreen {
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 1);
+	}
+	
+	// temporary method for testing
+	public Display getDisplay(){
+		return map;
 	}
 }

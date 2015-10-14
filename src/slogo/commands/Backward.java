@@ -7,7 +7,7 @@ import slogo.character.MainCharacter;
 public class Backward extends Command {
 	
 	@Override
-	public double doCommand(MainCharacter character, List<Double> params) {
+	public double doCommand(List<Double> params) {
 		double distanceMoved = params.get(0);
 		System.out.println("Moved backward " + distanceMoved);
 		return distanceMoved;

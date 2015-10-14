@@ -24,8 +24,7 @@ public class Display extends AbstractElement {
 	private GraphicsContext gc;
 	private Pane display;
 	private Pane characterDisplay;
-	// changed just for now
-	public static List<MainCharacter> characters;
+	private List<MainCharacter> characters;
 
 	public Display(GridPane pane) {
 		super(pane);
@@ -68,5 +67,10 @@ public class Display extends AbstractElement {
 	public void addCharacter(MainCharacter mc){
 		characters.add(mc);
 		display.getChildren().add(mc.getImageView());
+	}
+	
+	// temporary method for testing
+	public MainCharacter getMainCharacter(){
+		return characters.get(0);
 	}
 }

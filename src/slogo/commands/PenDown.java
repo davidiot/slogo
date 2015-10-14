@@ -7,7 +7,7 @@ import slogo.character.MainCharacter;
 public class PenDown extends Command {
 
 	@Override
-	public double doCommand(MainCharacter character, List<Double> params) {
+	public double doCommand(List<Double> params) {
 		System.out.println("Pen is down");
 		return 1;
 	}
