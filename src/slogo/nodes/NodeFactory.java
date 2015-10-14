@@ -23,6 +23,17 @@ public class NodeFactory{
 		String value = entry[1];
 		switch(type){
 		case "Command": 
+			switch(value) {
+			case "MakeVariable":
+				// TODO
+				break;
+			case "If":
+				// TODO
+				break;
+			case "IfElse":
+				// TODO
+			break;
+			}
 			new_node = makeCommandNode(value, parent);
 			break;
 		case "Constant": 
