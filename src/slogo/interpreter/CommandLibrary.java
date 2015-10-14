@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import slogo.commands.Command;
-import slogo.turtleactions.Forward;
+import slogo.commands.Forward;
 
 
 public class CommandLibrary {

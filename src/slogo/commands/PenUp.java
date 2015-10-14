@@ -1,28 +1,26 @@
-package slogo.turtleactions;
+package slogo.commands;
 
 import java.util.List;
 
 import slogo.character.MainCharacter;
-import slogo.commands.Command;
 
-public class Right extends Command {
+public class PenUp extends Command {
 
-	public Right(MainCharacter character) {
+	public PenUp(MainCharacter character) {
 		super(character);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double doCommand(List<Double> params) {
-		double degreesTurned = params.get(0);
-		System.out.println("Turned right " + params.get(0) + " degrees.");
-		return degreesTurned;
+		System.out.println("Pen is up.");
+		return 0;
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
 		// TODO Auto-generated method stub
-		return 1;
+		return 0;
 	}
 
 }

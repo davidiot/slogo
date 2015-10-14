@@ -1,20 +1,19 @@
-package slogo.turtleactions;
+package slogo.commands;
 
 import java.util.List;
 
 import slogo.character.MainCharacter;
-import slogo.commands.Command;
 
-public class PenDown extends Command {
+public class ShowTurtle extends Command {
 
-	public PenDown(MainCharacter character) {
+	public ShowTurtle(MainCharacter character) {
 		super(character);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public double doCommand(List<Double> params) {
-		System.out.println("Pen is down");
+		System.out.println("Showing turtle.");
 		return 1;
 	}
 

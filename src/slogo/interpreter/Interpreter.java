@@ -9,14 +9,14 @@ public class Interpreter {
 	//private CommandTree myTree;
 	private CommandLibrary actions;
 	private VariableLibrary variables;
-	private ParserOld myParser;
+	private Parser myParser;
 
 	public Interpreter(String language, SlogoScreen view) {
 		myLanguage = language;
 		myView = view;
 		actions = new CommandLibrary();
 		variables = new VariableLibrary();
-		//myParser = new Parser(language);
+		myParser = new Parser(language);
 	}
 	
 	public void interpret(String input) {
