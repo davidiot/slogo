@@ -6,9 +6,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
+import java.util.ResourceBundle;
+
 public class MainCharacter {
+	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	protected ResourceBundle slogoResources = ResourceBundle
+			.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private static final double XADJUST = 18;
 	private static final double YADJUST = 19;
+	private double xCenter = Integer.parseInt(slogoResources.getString("mapWidth"))/2;
+	private double yCenter = Integer.parseInt(slogoResources.getString("mapHeight"))/2;
 	private boolean penDown = true;
 	private boolean hidden = false;
 	private double preX;
@@ -89,4 +96,20 @@ public class MainCharacter {
 		System.out.println(penColor);
 		penColor = Color.valueOf(input);
 	}
+	
+	public void returnHome(){
+		preX = curX;
+		preY = curY;
+		curX = xCenter;
+		curY = yCenter;
+		imageView.setX(curX);
+		imageView.setY(curY);
+		refreshImage();
+	}
+	
+	public double getDistanceMoved(){
+		return Math.sqrt(Math.pow(curX - preX, 2) + (Math.pow(curY - preY, 2)));
+	}
+	
+	
 }
