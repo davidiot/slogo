@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import slogo.character.MainCharacter;
 import slogo.element.Display;
 import slogo.element.Commands;
 import slogo.element.Console;
@@ -26,7 +27,7 @@ public class SlogoScreen extends AbstractScreen {
 	private Commands commands;
 	private Variables variables;
 	private Display map;
-	private Interpreter parser;
+	private Interpreter interpreter;
 	private ResourceBundle slogoResources;
 
 	public SlogoScreen(String language) {
@@ -43,19 +44,24 @@ public class SlogoScreen extends AbstractScreen {
 			title = "SLogo";
 		}
 		makeScene();
-		parser = new Interpreter(this.language, this);
+		interpreter = new Interpreter(this.language, this);
 	}
 
 	@Override
 	public void run() {
 		ObservableArrayList h = new ObservableArrayList();
 		h.addObserver(history);
-		if (parameters != null && parameters.getBackgroundColor() != null) {
-			map.changeColor(parameters.getBackgroundColor());
+		if (parameters != null) {
+			if(parameters.getBackgroundColor() != null){
+				map.changeColor(parameters.getBackgroundColor());
+			}
+			if(parameters.getPenColor() != null){
+				map.changePenColor(parameters.getPenColor());
+			}
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			parser.interpret(command);
+			interpreter.interpret(command);
 			h.add(command);
 		}
 	}
@@ -111,5 +117,10 @@ public class SlogoScreen extends AbstractScreen {
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 1);
+	}
+	
+	// temporary method for testing
+	public Display getDisplay(){
+		return map;
 	}
 }
