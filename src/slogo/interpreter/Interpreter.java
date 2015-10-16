@@ -25,7 +25,7 @@ public class Interpreter {
 	
 	public void interpret(String input) {
 		//String[] translated = myParser.parseCommands(input);
-		CommandTree tree = new CommandTree(myLanguage, actions, variables);
+		TreeBuilder tree = new TreeBuilder(myLanguage, actions, variables);
 		List<String> parsedInput = myParser.parse(input);
 		tree.build(parsedInput);
 		tree.run();
@@ -49,10 +49,10 @@ public class Interpreter {
 	 */
 	
 	
-	public static void main (String[] args) {
-		Interpreter i = new Interpreter("English", null);
-		i.interpret("fd fd 90 fd 6 make :var 4 fd :var");
-	}
+//	public static void main (String[] args) {
+//		Interpreter i = new Interpreter("English", null);
+//		i.interpret("fd fd 90 fd 6 make :var fd 9 fd :var");
+//	}
 	
 	/*
 	public void print(Node root) {

@@ -8,7 +8,7 @@ import slogo.nodes.NodeFactory;
 import slogo.nodes.RootNode;
 
 
-public class CommandTree {
+public class TreeBuilder {
 	private Node myRoot;
 	private String myLanguage;
 	private CommandLibrary myActions;
@@ -17,7 +17,7 @@ public class CommandTree {
 	private List<String> myInput;
 
 
-	public CommandTree(String language, CommandLibrary actions, VariableLibrary variables) {
+	public TreeBuilder(String language, CommandLibrary actions, VariableLibrary variables) {
 		//myTranslator = new Parser(language);
 		// Change to something besides command node
 		myFactory = new NodeFactory(actions, variables);
