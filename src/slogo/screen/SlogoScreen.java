@@ -55,6 +55,7 @@ public class SlogoScreen extends AbstractScreen {
 			if (parameters.getPenColor() != null) {
 				map.changePenColor(parameters.getPenColor());
 			}
+			map.changePenWidth(parameters.getValue("Line Thickness"));
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();

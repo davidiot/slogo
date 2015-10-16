@@ -59,6 +59,12 @@ public class Display extends AbstractElement {
 		}
 	}
 
+	public void changePenWidth(Double input) {
+		for (MainCharacter mc : characters) {
+			mc.changePenWidth(input);
+		}
+	}
+
 	public void addCharacter(MainCharacter mc) {
 		characters.add(mc);
 		display.getChildren().add(mc.getImageView());
