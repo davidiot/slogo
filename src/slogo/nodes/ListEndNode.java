@@ -1,24 +1,23 @@
 package slogo.nodes;
 
+public class ListEndNode extends Node {
 
-public class VariableNode extends Node {
-	private String myName;
-
-	public VariableNode(Node parent, String name) {
+	public ListEndNode(Node parent) {
 		super(parent);
-		myName = name;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public boolean hasCompleteChildren() {
 		// TODO Auto-generated method stub
-		return false;
+		// has no children
+		return true;
 	}
 
 	@Override
 	public void addChild(Node node) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -31,10 +30,6 @@ public class VariableNode extends Node {
 	public double traverseAndExecute() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-	
-	public String getName() {
-		return myName;
 	}
 
 }
