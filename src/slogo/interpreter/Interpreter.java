@@ -14,7 +14,6 @@ public class Interpreter {
 
 	public Interpreter(String language, CommandLibrary commandLibrary, VariableLibrary variableLibrary) {
 		myLanguage = language;
-		//myView = view;
 		myVariables = variableLibrary;
 		myCommandLibrary = commandLibrary;
 		myParser = new Parser(language);

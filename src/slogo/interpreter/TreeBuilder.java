@@ -17,8 +17,6 @@ public class TreeBuilder {
 
 
 	public TreeBuilder(CommandLibrary commandLibrary, VariableLibrary variables) {
-		//myTranslator = new Parser(language);
-		// Change to something besides command node
 		myFactory = new NodeFactory(commandLibrary, variables);
 		myRootNode = new RootNode(null);
 		myCommands = commandLibrary;
@@ -59,16 +57,10 @@ public class TreeBuilder {
 		// move up the tree from the current node checking whether each parent
 		// has enough parameters
 		while (current != null) {
-			if (! current.hasCompleteChildren()) return false;
+			if (! current.hasCompleteChildren()) 
+				return false;
 			current = current.getParent();
 		}
 		return true;
 	}
-
-/*
-	public void run() {
-		myRootNode.traverseAndExecute();
-	}	
-*/
-
 }
