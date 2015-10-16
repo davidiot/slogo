@@ -1,27 +1,23 @@
-package slogo.turtleactions;
+package slogo.commands;
 
 import java.util.List;
 
 import slogo.character.MainCharacter;
-import slogo.commands.Command;
 
 public class SetHeading extends Command {
-
-	public SetHeading(MainCharacter character) {
-		super(character);
-		// TODO Auto-generated constructor stub
-	}
-
+	
 	@Override
 	public double doCommand(List<Double> params) {
-		// TODO Auto-generated method stub
-		return 0;
+	//	double currentHeading = character.getImageView().getRotate();
+	//	double destinationHeading = params.get(0);
+		System.out.println("Set the heading to " + params.get(0));
+		return 0;//destinationHeading - currentHeading;
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 }

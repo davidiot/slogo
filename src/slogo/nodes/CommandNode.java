@@ -1,19 +1,21 @@
-package slogo.interpreter;
+package slogo.nodes;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import slogo.character.MainCharacter;
 import slogo.commands.Command;
+import slogo.element.Display;
 
-public class Node {
-	
-	private Node myParent;
-	private List<Node> myChildren;
+public class CommandNode extends Node{
 	private Command myAction;
+	private List<Double> myParameters;
 	
-	public Node(Command action) {
-		myChildren = new LinkedList<Node>();
+	public CommandNode(Command action, Node parent) {
+		super(parent);
 		myAction = action;
+		myParameters = new ArrayList<>();
 	}
 	
 	public void addChild(Node child) {
@@ -21,8 +23,11 @@ public class Node {
 	}
 
 	public double traverseAndExecute() {
-		return 0;
-		// TODO Auto-generated method stub
+		for (Node child: myChildren){
+			System.out.println(myChildren);
+			myParameters.add(child.traverseAndExecute());
+		}
+		return myAction.doCommand(myParameters);
 		
 	}
 
@@ -45,13 +50,9 @@ public class Node {
 		return true;
 	}
 
-	public void setParent(Node parent) {
+	public void setParent(CommandNode parent) {
 		myParent = parent;
 		
-	}
-
-	public List<Node> getAllChildren() {
-		return myChildren;
 	}
 
 	public String getAction() {

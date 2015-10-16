@@ -1,9 +1,11 @@
 package slogo.interpreter;
 
-import java.util.Iterator;
 import java.util.List;
 
-import slogo.commands.Command;
+import slogo.nodes.CommandNode;
+import slogo.nodes.Node;
+import slogo.nodes.NodeFactory;
+import slogo.nodes.RootNode;
 
 
 public class CommandTree {
@@ -11,47 +13,53 @@ public class CommandTree {
 	private String myLanguage;
 	private CommandLibrary myActions;
 	private VariableLibrary myVariables;
-	private SyntaxTranslator myTranslator;
+	//private Parser myTranslator;
+	private NodeFactory	myFactory;
 
 
 	public CommandTree(String language, CommandLibrary actions, VariableLibrary variables) {
-		myTranslator = new SyntaxTranslator(language);
-		root = new Node(null);	// root has no action
+		//myTranslator = new Parser(language);
+		// Change to something besides command node
+		myFactory = new NodeFactory(actions, variables);
+		root = new RootNode(null);
 		myLanguage = language;
 		myActions = actions;
-		myVariables = variables;	
+		myVariables = variables;
 	}
 
-	public void build(String input) {
-		List<String> translated = myTranslator.parse(input);
+	public void build(List<String> input) {
+		//List<String> parsed = myTranslator.parse(input);
+		//System.out.println(parsed);
 		Node current = root;
-		Iterator<String> iter = translated.iterator();
-		while(iter.hasNext()){
+		while(input.size() > 0){
 			if(current.canAdd()) {
 				// TODO throw exception if action doesn't exist
-				Command command = CommandLibrary.getAction(iter.next());
-				Node node = new Node(command);
+				Node node = myFactory.create(input, current);
 				current.addChild(node);
-				node.setParent(current);
 				current = node;
+			} else {
+				current = current.getParent();
 			}
 		}
-		if (! current.hasCompleteChildren()) {
-			// TODO throw incorrect formatting exception
-			// functions do not have enough parameters
+		// now check whether each function has enough parameters
+		if(! treeComplete(current)) {
+			// TODO throw an exception
 		}
-		
+	}
+	
+	private boolean treeComplete(Node current) {
+		// move up the tree from the current node checking whether each parent
+		// has enough parameters
+		while (current != null) {
+			if (! current.hasCompleteChildren()) return false;
+			current = current.getParent();
+		}
+		return true;
+
 	}
 
-	// Probably don't need this
-	//	private boolean treeComplete() {
-	//		return root.hasCompleteChildren();
-	//	}
-	
 	public void run() {
 		root.traverseAndExecute();
-	}
-
-	
+	}	
 
 }

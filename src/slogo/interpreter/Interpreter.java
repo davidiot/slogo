@@ -1,27 +1,40 @@
 package slogo.interpreter;
 
+import java.util.List;
+
+import slogo.nodes.Node;
 import slogo.screen.SlogoScreen;
 
 public class Interpreter {
 	private String myLanguage;
 	private SlogoScreen myView;
-	private CommandTree myTree;
+	//private CommandTree myTree;
 	private CommandLibrary actions;
 	private VariableLibrary variables;
 	private Parser myParser;
+	private CommandLibrary myCommandLibrary;
 
-	public void interpret(String input) {
-		//String[] translated = myParser.parseCommands(input);
-		CommandTree tree = new CommandTree(myLanguage, actions, variables);
-		tree.build(input);
-		
-	}
-	
 	public Interpreter(String language, SlogoScreen view) {
 		myLanguage = language;
 		myView = view;
-		//myParser = new Parser(language);
+		actions = new CommandLibrary();
+		variables = new VariableLibrary();
+		myParser = new Parser(language);
+		myCommandLibrary = new CommandLibrary();
 	}
+	
+	public void interpret(String input) {
+		//String[] translated = myParser.parseCommands(input);
+		CommandTree tree = new CommandTree(myLanguage, actions, variables);
+		List<String> parsedInput = myParser.parse(input);
+		tree.build(parsedInput);
+		tree.run();
+		
+	}
+	
+	
+	
+
 
 //	public void interpret(String input) {
 //		String[] parsedInput = myParser.parseCommands(input);
@@ -30,19 +43,23 @@ public class Interpreter {
 //		tree.run();	
 //	}
 	
+	
 	/**
 	 * FOR TESTING
 	 */
+	
+	/*
 	public static void main (String[] args) {
 		Interpreter i = new Interpreter("English", null);
-		i.interpret("fd 90");
+		i.interpret("fd fd 90 fd 6");
 	}
 	
 	public void print(Node root) {
 		for (Node node: root.getAllChildren()) {
 			print(node);
 		}
-		System.out.println(root.getAction());
+		//System.out.println(root.getAction());
 	}
+	*/
 
 }
