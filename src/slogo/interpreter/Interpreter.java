@@ -17,10 +17,10 @@ public class Interpreter {
 	public Interpreter(String language, SlogoScreen view) {
 		myLanguage = language;
 		myView = view;
-		actions = new CommandLibrary();
 		variables = new VariableLibrary();
+		actions = new CommandLibrary(variables);
 		myParser = new Parser(language);
-		myCommandLibrary = new CommandLibrary();
+		//myCommandLibrary = new CommandLibrary();
 	}
 	
 	public void interpret(String input) {
@@ -48,12 +48,13 @@ public class Interpreter {
 	 * FOR TESTING
 	 */
 	
-	/*
+	
 	public static void main (String[] args) {
 		Interpreter i = new Interpreter("English", null);
-		i.interpret("fd fd 90 fd 6");
+		i.interpret("fd fd 90 fd 6 make :var 4 fd :var");
 	}
 	
+	/*
 	public void print(Node root) {
 		for (Node node: root.getAllChildren()) {
 			print(node);
