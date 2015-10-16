@@ -7,6 +7,7 @@ public class Parameters {
 	private HashMap<String, Boolean> bools;
 	private String backgroundColor;
 	private String penColor;
+	private double penWidth;
 
 	public Parameters() {
 		values = new HashMap<String, Double>();
@@ -43,6 +44,14 @@ public class Parameters {
 
 	public void setPenColor(String penColor) {
 		this.penColor = penColor;
+	}
+	
+	public double getPenWidth() {
+		return penWidth;
+	}
+	
+	public void setPenWidth(Double penWidth) {
+		this.penWidth = penWidth;
 	}
 
 }

@@ -8,7 +8,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import slogo.character.MainCharacter;
 import slogo.element.Display;
 import slogo.element.Commands;
 import slogo.element.Console;
@@ -22,18 +21,18 @@ public class SlogoScreen extends AbstractScreen {
 	private String language;
 	private Console console;
 	private History history;
-	private ObservableList<String> historyList = FXCollections
-			.observableArrayList();
 	private Commands commands;
 	private Variables variables;
 	private Display map;
 	private Interpreter interpreter;
 	private ResourceBundle slogoResources;
+	private ObservableArrayList h;
+	private ObservableArrayList c;
+	private ObservableArrayList v;
 
 	public SlogoScreen(String language) {
 		this.language = language;
-		slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE
-				+ "slogo");
+		slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 		WIDTH = Integer.parseInt(slogoResources.getString("width"));
 		HEIGHT = Integer.parseInt(slogoResources.getString("height"));
 		root = new GridPane();
@@ -44,24 +43,24 @@ public class SlogoScreen extends AbstractScreen {
 			title = "SLogo";
 		}
 		makeScene();
-		interpreter = new Interpreter(this.language, this);
+		// interpreter = new Interpreter(this.language, this);
 	}
 
 	@Override
 	public void run() {
-		ObservableArrayList h = new ObservableArrayList();
-		h.addObserver(history);
 		if (parameters != null) {
-			if(parameters.getBackgroundColor() != null){
+			if (parameters.getBackgroundColor() != null) {
 				map.changeColor(parameters.getBackgroundColor());
 			}
-			if(parameters.getPenColor() != null){
+			if (parameters.getPenColor() != null) {
 				map.changePenColor(parameters.getPenColor());
 			}
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			interpreter.interpret(command);
+			// interpreter.interpret(command);
+			map.getCharacter(0).move(100);
+			map.getCharacter(0).rotateCharacter(Integer.parseInt(command));
 			h.add(command);
 		}
 	}
@@ -87,28 +86,28 @@ public class SlogoScreen extends AbstractScreen {
 
 	public GridPane makeTitle() {
 		GridPane title = new GridPane();
-		Text temp = createText("SLogo",
-				Integer.parseInt(myResources.getString("smallTitle")));
+		Text temp = createText("SLogo", Integer.parseInt(myResources.getString("smallTitle")));
 		title.add(temp, 0, 0);
 		return title;
 	}
 
 	public void makeLists() {
+		h = new ObservableArrayList();
+		c = new ObservableArrayList();
+		v = new ObservableArrayList();
 		GridPane listPane = new GridPane();
 		GridPane historyPane = new GridPane();
-		history = new History(historyPane);
+		history = new History(historyPane, h);
 		listPane.add(historyPane, 0, 0);
 		GridPane commandPane = new GridPane();
-		commands = new Commands(commandPane);
+		commands = new Commands(commandPane, c);
 		listPane.add(commandPane, 0, 1);
 		GridPane varPane = new GridPane();
-		variables = new Variables(varPane);
+		variables = new Variables(varPane, v);
 		listPane.add(varPane, 0, 2);
-		listPane.setMaxHeight(Integer.parseInt(slogoResources
-				.getString("mapHeight")));
+		listPane.setMaxHeight(Integer.parseInt(slogoResources.getString("mapHeight")));
 		listPane.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		listPane.setAlignment(Pos.BASELINE_LEFT);
-
 		GridPane buttonPane = new GridPane();
 		buttonPane.add(makeBackButton(), 0, 0);
 		buttonPane.add(makeHelpButton(), 1, 0);
@@ -117,10 +116,5 @@ public class SlogoScreen extends AbstractScreen {
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 1);
-	}
-	
-	// temporary method for testing
-	public Display getDisplay(){
-		return map;
 	}
 }

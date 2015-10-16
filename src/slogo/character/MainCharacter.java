@@ -12,10 +12,11 @@ public class MainCharacter {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle
 			.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
-	private static final double XADJUST = 18;
-	private static final double YADJUST = 19;
+	private final double XADJUST = Double.parseDouble(slogoResources.getString("characterCenterX"));
+	private final double YADJUST = Double.parseDouble(slogoResources.getString("characterCenterY"));
 	private double xCenter = Integer.parseInt(slogoResources.getString("mapWidth"))/2;
 	private double yCenter = Integer.parseInt(slogoResources.getString("mapHeight"))/2;
+	private static final double ANGLE = 90.0;
 	private boolean penDown = true;
 	private boolean hidden = false;
 	private double preX;
@@ -26,13 +27,14 @@ public class MainCharacter {
 	private Image image;
 	private ImageView imageView;
 	private Color penColor;
+	private double penWidth;
 	private Pane myPane;
-
-	public MainCharacter(int x, int y, Pane pane) {
+	
+	public MainCharacter(Pane pane) {
 		myPane = pane;
-		curX = x;
+		curX = xCenter;
 		preX = 0;
-		curY = y;
+		curY = yCenter;
 		preY = 0;
 		direction = 0;
 		if(!hidden){
@@ -46,6 +48,7 @@ public class MainCharacter {
 		imageView.setX(curX);
 		imageView.setY(curY);
 		penColor = Color.BLACK;
+		penWidth = 10.0;
 	}
 	
 	public ImageView getImageView() {
@@ -59,15 +62,16 @@ public class MainCharacter {
 	public void move(int distance){
 		preX = curX;
 		preY = curY;
-		curX += distance * Math.cos(Math.toRadians(90.0-direction));
-		curY -= distance * Math.sin(Math.toRadians(90.0-direction));
+		curX += distance * Math.cos(Math.toRadians(ANGLE-direction));
+		curY -= distance * Math.sin(Math.toRadians(ANGLE-direction));
 		imageView.setX(curX);
 		imageView.setY(curY);
 		if(penDown){
 			Line line = new Line(preX+XADJUST, preY+YADJUST, curX+XADJUST, curY+YADJUST);
-			System.out.println(penColor);
 			line.setStroke(penColor);
+			line.setStrokeWidth(penWidth);
 			myPane.getChildren().add(line);
+		
 		}
 		refreshImage();
 	}
@@ -82,7 +86,7 @@ public class MainCharacter {
 	
 	public void rotateCharacter(int degree){
 		direction += degree;
-		imageView.setRotate(degree);
+		imageView.setRotate(direction);
 		refreshImage();
 	}
 	
@@ -92,9 +96,11 @@ public class MainCharacter {
 	}
 	
 	public void changePenColor(String input){
-		System.out.print("Changing pen color to: ");
-		System.out.println(penColor);
 		penColor = Color.valueOf(input);
+	}
+	
+	public void changePenWidth(Double input){
+		penWidth = input;
 	}
 	
 	public void returnHome(){
