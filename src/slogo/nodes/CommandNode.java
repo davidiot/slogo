@@ -28,7 +28,6 @@ public class CommandNode extends Node{
 //			myParameters.add(child.traverseAndExecute());
 //		}
 //		return myAction.doCommand(myParameters);
-		
 		return myAction.doCommand(myChildren);
 		
 	}
