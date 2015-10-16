@@ -8,7 +8,6 @@ import slogo.screen.SlogoScreen;
 
 public class Interpreter {
 	private String myLanguage;
-	//private SlogoScreen myView;
 	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariables;
 	private Parser myParser;
