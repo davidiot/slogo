@@ -12,6 +12,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import java.awt.color.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -34,7 +35,7 @@ public class Display extends AbstractElement {
 	protected void makePane() {
 		display = new StackPane();
 		characterDisplay = new Pane();
-		MainCharacter mc = new MainCharacter(100, 100, characterDisplay);
+		MainCharacter mc = new MainCharacter(characterDisplay);
 		characters = new ArrayList<MainCharacter>();
 		characters.add(mc);
 		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
@@ -42,8 +43,6 @@ public class Display extends AbstractElement {
 		test = new Canvas(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")));
 		gc = test.getGraphicsContext2D();
-		// gc.setFill(Color.WHITE);
-		// gc.fillRect(0, 0, test.getWidth(), test.getHeight());
 		characterDisplay.getChildren().add(test);
 		characterDisplay.getChildren().add(mc.getImageView());
 		display.getChildren().addAll(map, characterDisplay);
