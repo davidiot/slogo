@@ -58,6 +58,12 @@ public class Display extends AbstractElement {
 			mc.changePenColor(input);
 		}
 	}
+	
+	public void changePenWidth(Double input){
+		for (MainCharacter mc : characters) {
+			mc.changePenWidth(input);
+		}
+	}
 
 	public void addCharacter(MainCharacter mc) {
 		characters.add(mc);
