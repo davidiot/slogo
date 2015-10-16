@@ -7,60 +7,26 @@ import slogo.screen.SlogoScreen;
 
 public class Interpreter {
 	private String myLanguage;
-	private SlogoScreen myView;
-	//private CommandTree myTree;
-	private CommandLibrary actions;
-	private VariableLibrary variables;
-	private Parser myParser;
+	//private SlogoScreen myView;
 	private CommandLibrary myCommandLibrary;
+	private VariableLibrary myVariables;
+	private Parser myParser;
 
-	public Interpreter(String language, SlogoScreen view) {
+	public Interpreter(String language, CommandLibrary commandLibrary, VariableLibrary variableLibrary) {
 		myLanguage = language;
-		myView = view;
-		variables = new VariableLibrary();
-		actions = new CommandLibrary(variables);
+		//myView = view;
+		myVariables = variableLibrary;
+		myCommandLibrary = commandLibrary;
 		myParser = new Parser(language);
-		//myCommandLibrary = new CommandLibrary();
 	}
 	
 	public void interpret(String input) {
 		//String[] translated = myParser.parseCommands(input);
-		TreeBuilder tree = new TreeBuilder(myLanguage, actions, variables);
+		TreeBuilder tree = new TreeBuilder(myLanguage, myCommandLibrary, myVariables);
 		List<String> parsedInput = myParser.parse(input);
 		tree.build(parsedInput);
 		tree.run();
 		
 	}
-	
-	
-	
-
-
-//	public void interpret(String input) {
-//		String[] parsedInput = myParser.parseCommands(input);
-//		CommandTree tree = new CommandTree();
-//		tree.build(parsedInput);
-//		tree.run();	
-//	}
-	
-	
-	/**
-	 * FOR TESTING
-	 */
-	
-	
-//	public static void main (String[] args) {
-//		Interpreter i = new Interpreter("English", null);
-//		i.interpret("fd fd 90 fd 6 make :var fd 9 fd :var");
-//	}
-	
-	/*
-	public void print(Node root) {
-		for (Node node: root.getAllChildren()) {
-			print(node);
-		}
-		//System.out.println(root.getAction());
-	}
-	*/
 
 }
