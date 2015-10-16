@@ -65,8 +65,6 @@ public class MainCharacter {
 		imageView.setY(curY);
 		if(penDown){
 			Line line = new Line(preX+XADJUST, preY+YADJUST, curX+XADJUST, curY+YADJUST);
-			System.out.println(penColor);
-			line.setStroke(penColor);
 			myPane.getChildren().add(line);
 		}
 		refreshImage();
@@ -92,8 +90,6 @@ public class MainCharacter {
 	}
 	
 	public void changePenColor(String input){
-		System.out.print("Changing pen color to: ");
-		System.out.println(penColor);
 		penColor = Color.valueOf(input);
 	}
 	

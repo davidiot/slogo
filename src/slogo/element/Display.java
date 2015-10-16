@@ -34,43 +34,38 @@ public class Display extends AbstractElement {
 	protected void makePane() {
 		display = new StackPane();
 		characterDisplay = new Pane();
-		MainCharacter mc = new MainCharacter(100,100, characterDisplay);
+		MainCharacter mc = new MainCharacter(100, 100, characterDisplay);
 		characters = new ArrayList<MainCharacter>();
 		characters.add(mc);
 		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")), Color.WHITE);
-		test = new Canvas(
-				Integer.parseInt(slogoResources.getString("mapWidth")),
+		test = new Canvas(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")));
 		gc = test.getGraphicsContext2D();
-		//gc.setFill(Color.WHITE);
-		//gc.fillRect(0, 0, test.getWidth(), test.getHeight());		
+		// gc.setFill(Color.WHITE);
+		// gc.fillRect(0, 0, test.getWidth(), test.getHeight());
 		characterDisplay.getChildren().add(test);
 		characterDisplay.getChildren().add(mc.getImageView());
 		display.getChildren().addAll(map, characterDisplay);
 		this.pane.getChildren().add(display);
-		mc.move(100);
-		mc.rotateCharacter(135);
-		mc.move(100);
 	}
 
 	public void changeColor(String input) {
 		map.setFill(Paint.valueOf(input));
 	}
-	
-	public void changePenColor(String input){
-		for(MainCharacter mc: characters){
+
+	public void changePenColor(String input) {
+		for (MainCharacter mc : characters) {
 			mc.changePenColor(input);
 		}
 	}
-	
-	public void addCharacter(MainCharacter mc){
+
+	public void addCharacter(MainCharacter mc) {
 		characters.add(mc);
 		display.getChildren().add(mc.getImageView());
 	}
-	
-	// temporary method for testing
-	public MainCharacter getMainCharacter(){
-		return characters.get(0);
+
+	public MainCharacter getCharacter(int input) {
+		return characters.get(input);
 	}
 }

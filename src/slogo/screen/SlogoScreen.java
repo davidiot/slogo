@@ -49,16 +49,18 @@ public class SlogoScreen extends AbstractScreen {
 	@Override
 	public void run() {
 		if (parameters != null) {
-			if(parameters.getBackgroundColor() != null){
+			if (parameters.getBackgroundColor() != null) {
 				map.changeColor(parameters.getBackgroundColor());
 			}
-			if(parameters.getPenColor() != null){
+			if (parameters.getPenColor() != null) {
 				map.changePenColor(parameters.getPenColor());
 			}
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
 			// interpreter.interpret(command);
+			map.getCharacter(0).move(100);
+			map.getCharacter(0).rotateCharacter(Integer.parseInt(command));
 			h.add(command);
 		}
 	}
@@ -114,10 +116,5 @@ public class SlogoScreen extends AbstractScreen {
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 1);
-	}
-	
-	// temporary method for testing
-	public Display getDisplay(){
-		return map;
 	}
 }
