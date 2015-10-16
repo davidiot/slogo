@@ -48,10 +48,10 @@ public class Interpreter {
 	 * FOR TESTING
 	 */
 	
-//	
+	
 //	public static void main (String[] args) {
 //		Interpreter i = new Interpreter("English", null);
-//		i.interpret("repeat fd  [ fd 9 ]");
+//		i.interpret("if fd 8 [ fd 9 ]");
 //	}
 	
 	/*
