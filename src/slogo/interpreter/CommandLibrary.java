@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import slogo.commands.Command;
 import slogo.commands.Forward;
+import slogo.commands.MakeVariable;
 
 public class CommandLibrary {
 
@@ -16,9 +17,12 @@ public class CommandLibrary {
 
 	// need to add MainCharacter as a parameter to constructor
 	// once interface is up and running
-	public CommandLibrary() {
+	public CommandLibrary(VariableLibrary variables) {
 		myCommandResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 		makeCommandMap(myCommandResources);
+		// TODO fix following code (sorry for marring the beautiful code in this class)
+		myCommandMap.put("Forward", new Forward(variables));
+		myCommandMap.put("MakeVariable", new MakeVariable(variables));
 	}
 
 	public Command getCommand(String name) {
