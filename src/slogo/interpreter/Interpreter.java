@@ -28,5 +28,24 @@ public class Interpreter {
 		commandTree.traverseAndExecute();
 		
 	}
+	
+	/**
+	 * FOR TESTING
+	 */
+	
+	
+//	public static void main (String[] args) {
+//		Interpreter i = new Interpreter("English", null);
+//		i.interpret("if fd 8 [ fd 9 ]");
+//	}
+	
+	/*
+	public void print(Node root) {
+		for (Node node: root.getAllChildren()) {
+			print(node);
+		}
+		//System.out.println(root.getAction());
+	}
+	*/
 
 }

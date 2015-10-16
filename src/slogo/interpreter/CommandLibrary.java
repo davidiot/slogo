@@ -47,5 +47,9 @@ public class CommandLibrary {
 
 		}
 	}
+	
+	public void addCommand(String name, Command command) {
+		myCommandMap.put(name, command);
+	}
 
 }
