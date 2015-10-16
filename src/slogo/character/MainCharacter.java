@@ -48,7 +48,7 @@ public class MainCharacter {
 		imageView.setX(curX);
 		imageView.setY(curY);
 		penColor = Color.BLACK;
-		penWidth = 10.0;
+		penWidth = 1.0;
 	}
 	
 	public ImageView getImageView() {
