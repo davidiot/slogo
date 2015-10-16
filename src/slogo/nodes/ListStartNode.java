@@ -15,20 +15,24 @@ public class ListStartNode extends Node {
 
 	@Override
 	public void addChild(Node node) {
-		// TODO Auto-generated method stub
-
+		myChildren.add(node);
 	}
 
 	@Override
 	public boolean canAdd() {
 		// TODO Auto-generated method stub
-		return false;
+		if (myChildren.size() < 1) return true;
+		return !(myChildren.get(myChildren.size()-1) instanceof ListEndNode);
 	}
 
 	@Override
 	public double traverseAndExecute() {
 		// TODO Auto-generated method stub
-		return 0;
+		double returnVal = 0;
+		for (Node child: myChildren) {
+			returnVal = child.traverseAndExecute();
+		}
+		return returnVal;
 	}
 
 }

@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import slogo.commands.Command;
 import slogo.commands.Forward;
 import slogo.commands.MakeVariable;
+import slogo.commands.Repeat;
 
 public class CommandLibrary {
 
@@ -23,6 +24,7 @@ public class CommandLibrary {
 		// TODO fix following code (sorry for marring the beautiful code in this class)
 		myCommandMap.put("Forward", new Forward(variables));
 		myCommandMap.put("MakeVariable", new MakeVariable(variables));
+		myCommandMap.put("Repeat", new Repeat());
 	}
 
 	public Command getCommand(String name) {
