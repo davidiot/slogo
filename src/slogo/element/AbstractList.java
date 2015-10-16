@@ -14,12 +14,12 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 	protected String title;
 	protected Text text;
 	protected boolean open;
-	private int i = 1;
 	ListView<String> list;
 	ObservableList<String> data;
 
-	public AbstractList(GridPane pane) {
+	public AbstractList(GridPane pane, ObservableArrayList list) {
 		super(pane);
+		list.addObserver(this);
 	}
 
 	@Override
