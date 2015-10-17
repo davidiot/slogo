@@ -3,35 +3,36 @@ package slogo.interpreter;
 import java.util.ArrayList;
 import java.util.List;
 
-import slogo.nodes.NodeObject;
+import slogo.commands.UserInstruction;
 import slogo.nodes.NodeFactory;
+import slogo.nodes.NodeObject;
 import slogo.nodes.RootNode;
 
 
 public class TreeBuilder {
 	private NodeObject myRootNode;
 	private CommandLibrary myCommands;
+	private TemporaryCommandLibrary tempCommands;
 	private VariableLibrary myVariables;
 	private NodeFactory	myFactory;
-	private List<String> myInput;
+	private List<InputObject> myInput;
 
 
-	public TreeBuilder(CommandLibrary commandLibrary, VariableLibrary variables) {
-		myFactory = new NodeFactory(commandLibrary, variables);
-		myRootNode = new RootNode(null);
+	public TreeBuilder(CommandLibrary commandLibrary, VariableLibrary variables, TemporaryCommandLibrary temp, List<InputObject> parsedInput) {
 		myCommands = commandLibrary;
 		myVariables = variables;
-		myInput = new ArrayList<>();
+		myInput = parsedInput;
+		tempCommands = temp;
+		myFactory = new NodeFactory(commandLibrary, variables, temp);
+		myRootNode = new RootNode(null);
 	}
 
-	public NodeObject buildTreeFromInput(List<String> input) {
-		//List<String> parsed = myTranslator.parse(input);
-		//System.out.println(parsed);
-		myInput = input;
+	public NodeObject buildTreeFromInput() {
+		System.out.println(myInput);
 		buildTreeNodes(0, myRootNode);
 		return myRootNode;
 	}
-	
+
 	private void buildTreeNodes(int index, NodeObject root) {
 		NodeObject current = root;
 		if (index >= myInput.size()){
@@ -53,14 +54,29 @@ public class TreeBuilder {
 		// now check whether each function has enough parameters
 	}
 	
-	private boolean treeComplete(NodeObject current) {
-		// move up the tree from the current node checking whether each parent
-		// has enough parameters
-		while (current != null) {
-			if (! current.hasCompleteChildren()) 
-				return false;
-			current = current.getParent();
-		}
-		return true;
-	}
+//	private void findCustomCommands() {
+//		int currentIndex = 0;
+//		InputObject toNode = new InputObject("Command", "MakeUserInstruction"); 
+//		for (InputObject in: myInput) {
+//			if (in.equals(toNode)) addCustomCommand(currentIndex);
+//		}	
+//	}
+//
+//	private void addCustomCommand(int index) {
+//		int currentIndex = index + 1;
+//		int paramCount = 0;
+//		String name = myInput.get(currentIndex).getValue();
+//		currentIndex += 1;
+//		if (! myInput.get(currentIndex).getType().equals("ListStart")) {
+//			// TODO maybe throw error
+//			System.out.println("missing open bracket");
+//		}
+//		currentIndex += 1;
+//		// TODO check for out of bounds
+//		while (! myInput.get(currentIndex).getType().equals("ListEnd")) {
+//			paramCount += 1;
+//			currentIndex += 1;
+//		}
+//		tempCommands.addCommand(name, new UserInstruction(paramCount));
+//	}
 }

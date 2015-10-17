@@ -1,24 +1,26 @@
 package slogo.interpreter;
 
+import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
-import java.util.ResourceBundle;
-import java.util.AbstractMap.SimpleEntry;
 import java.util.Map.Entry;
+import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 
 public class Parser {
 	private List<Entry<String, Pattern>> defaults;
 	private List<Entry<String, Pattern>> patterns;
 	private String myLanguage;
+	private List<InputObject> parsedList;
+	private TemporaryCommandLibrary myUserCommands;
 	private static final String COMMAND = "Command";
 	
 	public Parser(String language) {
 		myLanguage = language;
 	}
 	
-	public List<String> parse(String input) {
+	public List<InputObject> parse(String input) {
 		defaults = new ArrayList<>();
 		patterns = new ArrayList<>();
 		String location = String.format("resources/languages/%s", myLanguage);
@@ -26,13 +28,13 @@ public class Parser {
 		defaults.addAll(makePatterns(location));
 		patterns.addAll(makePatterns("resources/languages/syntax"));
 		String[] splitInput = input.split("\\s+");
-		List<String> parsed = convert(splitInput);
+		List<InputObject> parsed = convert(splitInput);
 		return parsed;
 	}
 	
 	
-    private List<String> convert (String[] input) {
-    	ArrayList<String> converted = new ArrayList<String>();
+    private List<InputObject> convert (String[] input) {
+    	List<InputObject> converted = new ArrayList<>();
         for (String s : input) {
             boolean matched = false;
             String type = "";
@@ -59,7 +61,7 @@ public class Parser {
 //                    System.out.println(String.format("%s not matched", s));
                 }
             }
-            converted.add(String.join(" ", type, name));
+            converted.add(new InputObject(type, name));
         }
 		return converted;
     }

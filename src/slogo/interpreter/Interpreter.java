@@ -3,8 +3,6 @@ package slogo.interpreter;
 import java.util.List;
 
 import slogo.nodes.NodeObject;
-import slogo.nodes.RootNode;
-import slogo.screen.SlogoScreen;
 
 public class Interpreter {
 	private String myLanguage;
@@ -20,9 +18,11 @@ public class Interpreter {
 	}
 	
 	public NodeObject interpret(String input) {
-		TreeBuilder treeBuilder = new TreeBuilder(myCommandLibrary, myVariables);
-		List<String> parsedInput = myParser.parse(input);
-		NodeObject commandTree = treeBuilder.buildTreeFromInput(parsedInput);
+		List<InputObject> parsedInput = myParser.parse(input);
+		NewCommandFinder newCommands = new NewCommandFinder(parsedInput);
+		TemporaryCommandLibrary temp = newCommands.findCustomCommands();
+		TreeBuilder treeBuilder = new TreeBuilder(myCommandLibrary, myVariables, temp, parsedInput);
+		NodeObject commandTree = treeBuilder.buildTreeFromInput();
 		return commandTree;		
 	}
 

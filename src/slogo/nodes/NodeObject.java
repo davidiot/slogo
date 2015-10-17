@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import slogo.character.MainCharacter;
 
@@ -32,6 +33,10 @@ public abstract class NodeObject {
 
 	public NodeObject getParent() {
 		return myParent;
+	}
+	
+	public void setLocalVariables(Map<String, Double> variables) {
+		localVariables.putAll(variables);
 	}
 
 }

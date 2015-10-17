@@ -40,6 +40,7 @@ public class VariableNode extends NodeObject {
 	}
 	
 	private double getLocalVariable() {
+		System.out.println("looking for local variables... ");
 		// TODO add variable search through parents
 		// TODO add exception if variable not found
 		return 0;

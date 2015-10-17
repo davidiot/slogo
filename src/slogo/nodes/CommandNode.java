@@ -1,18 +1,14 @@
 package slogo.nodes;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import slogo.character.MainCharacter;
 import slogo.commands.Command;
 
 public class CommandNode extends NodeObject{
 	private Command myCommand;
-	private List<Double> myParameters;
 	
 	public CommandNode(Command command, NodeObject parent) {
 		super(parent);
 		myCommand = command;
-		myParameters = new ArrayList<>();
 	}
 	
 	public void addChild(NodeObject child) {
@@ -20,11 +16,6 @@ public class CommandNode extends NodeObject{
 	}
 
 	public double traverseAndExecute(MainCharacter character) {
-//		for (Node child: myChildren){
-//			System.out.println(myChildren);
-//			myParameters.add(child.traverseAndExecute());
-//		}
-//		return myAction.doCommand(myParameters);
 		return myCommand.doCommand(myChildren, character);
 		
 	}

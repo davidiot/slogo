@@ -1,56 +1,39 @@
 package slogo.nodes;
 
 import slogo.interpreter.CommandLibrary;
+import slogo.interpreter.InputObject;
+import slogo.interpreter.TemporaryCommandLibrary;
 import slogo.interpreter.VariableLibrary;
 
 public class NodeFactory{
 
 	private CommandLibrary myActions;
 	private VariableLibrary myVariables;
+	private TemporaryCommandLibrary tempActions;
 
-	public NodeFactory(CommandLibrary actions, VariableLibrary variables) {
+	public NodeFactory(CommandLibrary actions, VariableLibrary variables, TemporaryCommandLibrary temps) {
 		myActions = actions;
 		myVariables = variables;
+		tempActions = temps;
 	}
-
-//	public Node create(List<String> parsed, Node parent) {
-//		System.out.println(parsed);
-//		Node new_node = null;
-//		String[] entry = parsed.remove(0).split("\\s+");
-//		String type = entry[0];
-//		String value = entry[1];
-//		switch(type){
-//		case "Command": 
-//			switch(value) {
-//			case "MakeVariable":
-//				// TODO
-//				break;
-//			case "If":
-//				// TODO
-//				break;
-//			case "IfElse":
-//				// TODO
-//			break;
-//			}
-//			new_node = makeCommandNode(value, parent);
-//			break;
-//		case "Constant": 
-//			new_node = makeConstantNode(value, parent);
-//			break;
-//		}
-//		return new_node;
-//	}
 	
-	
-	public NodeObject create(String parse, NodeObject parent) {
-		System.out.println(parse);
+	public NodeObject create(InputObject input, NodeObject parent) {
 		NodeObject new_node = null;
-		String[] entry = parse.split("\\s+");
-		String type = entry[0];
-		String value = entry[1];
+		String type = input.getType();
+		String value = input.getValue();
 		switch(type){
-		case "Command": 
+		case "Command":
+			if (myActions.getCommand(value) != null) {
 			new_node = new CommandNode(myActions.getCommand(value), parent);
+			} else {
+//				System.out.println("making user command node " + value);
+//				System.out.println("params " +  tempActions.getNumParameters(value));
+				new_node = new UserCommandNode(parent, tempActions.getNumParameters(value));
+			}
+			break;
+		case "CommandDeclaration":
+//			System.out.println("making dec node " + value);
+			new_node = new CommandDeclarationNode(value, parent);
 			break;
 		case "Constant": 
 			new_node = new ConstantNode(Integer.parseInt(value), parent);
