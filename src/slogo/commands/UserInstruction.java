@@ -26,6 +26,7 @@ public class UserInstruction extends Command {
 		int currentIdx = 0;
 		for (String param: myParameters) {
 			parameters.put(param, params.get(currentIdx).traverseAndExecute(character));
+			currentIdx += 1;
 		}
 		myRoot.setLocalVariables(parameters);
 		return myRoot.traverseAndExecute(character);

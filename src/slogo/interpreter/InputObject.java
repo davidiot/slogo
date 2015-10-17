@@ -27,5 +27,10 @@ public class InputObject {
 		myType = type;
 		
 	}
+	
+	@Override
+	public String toString() {
+		return myType + " " + myValue;
+	}
 
 }

@@ -27,7 +27,7 @@ public class MakeUserInstruction extends Command {
 		NodeObject tree = params.get(2);
 		UserInstruction newCommand = new UserInstruction(name, parameters, tree); 
 		System.out.println("made " + name + " with params " + parameters);
-		
+		myCommands.addCommand(name, newCommand);
 		return 0;
 	}
 
