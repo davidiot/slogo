@@ -58,6 +58,9 @@ public class SlogoScreen extends AbstractScreen {
 			if (parameters.getValue("Line Thickness") != 0) {
 				map.changePenWidth(parameters.getValue("Line Thickness"));
 			}
+			if (parameters.getValue("Speed") != 0) {
+				map.changeSpeed(parameters.getValue("Speed"));
+			}
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
@@ -66,6 +69,7 @@ public class SlogoScreen extends AbstractScreen {
 			//map.getCharacter(0).rotateCharacter(Integer.parseInt(command));
 			h.add(command);
 		}
+		map.updateCharacters();
 	}
 
 	private void makeScene() {
@@ -100,13 +104,13 @@ public class SlogoScreen extends AbstractScreen {
 		v = new ObservableArrayList();
 		GridPane listPane = new GridPane();
 		GridPane historyPane = new GridPane();
-		history = new History(historyPane, h);
+		history = new History(historyPane, h, console);
 		listPane.add(historyPane, 0, 0);
 		GridPane commandPane = new GridPane();
-		commands = new Commands(commandPane, c);
+		commands = new Commands(commandPane, c, console);
 		listPane.add(commandPane, 0, 1);
 		GridPane varPane = new GridPane();
-		variables = new Variables(varPane, v);
+		variables = new Variables(varPane, v, console);
 		listPane.add(varPane, 0, 2);
 		listPane.setMaxHeight(Integer.parseInt(slogoResources.getString("mapHeight")));
 		listPane.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
