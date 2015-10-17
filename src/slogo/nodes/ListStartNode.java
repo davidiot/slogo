@@ -1,12 +1,10 @@
 package slogo.nodes;
 
+public class ListStartNode extends Node {
 
-public class VariableNode extends Node {
-	private String myName;
-
-	public VariableNode(Node parent, String name) {
+	public ListStartNode(Node parent) {
 		super(parent);
-		myName = name;
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -18,7 +16,7 @@ public class VariableNode extends Node {
 	@Override
 	public void addChild(Node node) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -31,10 +29,6 @@ public class VariableNode extends Node {
 	public double traverseAndExecute() {
 		// TODO Auto-generated method stub
 		return 0;
-	}
-	
-	public String getName() {
-		return myName;
 	}
 
 }

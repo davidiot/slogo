@@ -55,7 +55,12 @@ public class SlogoScreen extends AbstractScreen {
 			if (parameters.getPenColor() != null) {
 				map.changePenColor(parameters.getPenColor());
 			}
-			map.changePenWidth(parameters.getValue("Line Thickness"));
+			if (parameters.getValue("Line Thickness") != 0) {
+				map.changePenWidth(parameters.getValue("Line Thickness"));
+			}
+			if (parameters.getValue("Speed") != 0) {
+				map.changeSpeed(parameters.getValue("Speed"));
+			}
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
@@ -64,6 +69,7 @@ public class SlogoScreen extends AbstractScreen {
 			map.getCharacter(0).rotateCharacter(Integer.parseInt(command));
 			h.add(command);
 		}
+		map.updateCharacters();
 	}
 
 	private void makeScene() {

@@ -14,9 +14,9 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 	protected String title;
 	protected Text text;
 	protected boolean open;
-	ListView<String> list;
-	ObservableList<String> data;
-	Console console;
+	protected ListView<String> list;
+	protected ObservableList<String> data;
+	protected Console console;
 
 	public AbstractList(GridPane pane, ObservableArrayList list, Console console) {
 		super(pane);

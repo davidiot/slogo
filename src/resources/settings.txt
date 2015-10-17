@@ -1,5 +1,5 @@
 Speed
-5 1 10
+5 1 20
 Line Thickness
 3 1 10
 0

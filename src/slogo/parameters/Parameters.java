@@ -45,13 +45,5 @@ public class Parameters {
 	public void setPenColor(String penColor) {
 		this.penColor = penColor;
 	}
-	
-	public double getPenWidth() {
-		return penWidth;
-	}
-	
-	public void setPenWidth(Double penWidth) {
-		this.penWidth = penWidth;
-	}
 
 }
