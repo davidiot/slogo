@@ -64,18 +64,10 @@ public class NodeFactory{
 			new_node = new ListEndNode(parent);
 			break;
 		case "Variable":
-			new_node = new VariableNode(parent, value);
+			new_node = new VariableNode(myVariables, parent, value);
 			break;
 		}
 		return new_node;		
-	}
-
-	private Node makeConstantNode(String value, Node parent) {
-		return new ConstantNode(Integer.parseInt(value), parent);
-	}
-
-	private Node makeCommandNode(String name, Node parent) {
-		return new CommandNode(myActions.getCommand(name), parent);
 	}
 
 }

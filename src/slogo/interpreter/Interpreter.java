@@ -3,56 +3,40 @@ package slogo.interpreter;
 import java.util.List;
 
 import slogo.nodes.Node;
+import slogo.nodes.RootNode;
 import slogo.screen.SlogoScreen;
 
 public class Interpreter {
 	private String myLanguage;
-	private SlogoScreen myView;
-	//private CommandTree myTree;
-	private CommandLibrary actions;
-	private VariableLibrary variables;
-	private Parser myParser;
 	private CommandLibrary myCommandLibrary;
+	private VariableLibrary myVariables;
+	private Parser myParser;
 
-	public Interpreter(String language, SlogoScreen view) {
+	public Interpreter(String language, CommandLibrary commandLibrary, VariableLibrary variableLibrary) {
 		myLanguage = language;
-		myView = view;
-		variables = new VariableLibrary();
-		actions = new CommandLibrary(variables);
+		myVariables = variableLibrary;
+		myCommandLibrary = commandLibrary;
 		myParser = new Parser(language);
-		//myCommandLibrary = new CommandLibrary();
 	}
 	
 	public void interpret(String input) {
 		//String[] translated = myParser.parseCommands(input);
-		CommandTree tree = new CommandTree(myLanguage, actions, variables);
+		TreeBuilder treeBuilder = new TreeBuilder(myCommandLibrary, myVariables);
 		List<String> parsedInput = myParser.parse(input);
-		tree.build(parsedInput);
-		tree.run();
+		Node commandTree = treeBuilder.buildTreeFromInput(parsedInput);
+		commandTree.traverseAndExecute();
 		
 	}
-	
-	
-	
-
-
-//	public void interpret(String input) {
-//		String[] parsedInput = myParser.parseCommands(input);
-//		CommandTree tree = new CommandTree();
-//		tree.build(parsedInput);
-//		tree.run();	
-//	}
-	
 	
 	/**
 	 * FOR TESTING
 	 */
 	
 	
-	public static void main (String[] args) {
-		Interpreter i = new Interpreter("English", null);
-		i.interpret("fd fd 90 fd 6 make :var 4 fd :var");
-	}
+//	public static void main (String[] args) {
+//		Interpreter i = new Interpreter("English", null);
+//		i.interpret("if fd 8 [ fd 9 ]");
+//	}
 	
 	/*
 	public void print(Node root) {

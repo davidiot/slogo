@@ -1,13 +1,14 @@
 package slogo.commands;
 
 import java.util.List;
+import slogo.nodes.*;
 
 import slogo.character.MainCharacter;
 
 public class ShowTurtle extends Command {
 
 	@Override
-	public double doCommand(List<Double> params) {
+	public double doCommand(List<Node> params) {
 		System.out.println("Showing turtle.");
 		return 1;
 	}

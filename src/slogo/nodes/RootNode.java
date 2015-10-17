@@ -23,7 +23,6 @@ public class RootNode extends Node {
 
 	@Override
 	public double traverseAndExecute() {
-		System.out.println(myChildren);
 		for (Node child: myChildren){
 			child.traverseAndExecute();
 		}
