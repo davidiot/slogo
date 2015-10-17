@@ -14,12 +14,14 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 	protected String title;
 	protected Text text;
 	protected boolean open;
-	ListView<String> list;
-	ObservableList<String> data;
+	protected ListView<String> list;
+	protected ObservableList<String> data;
+	protected Console console;
 
-	public AbstractList(GridPane pane, ObservableArrayList list) {
+	public AbstractList(GridPane pane, ObservableArrayList list, Console console) {
 		super(pane);
 		list.addObserver(this);
+		this.console = console;
 	}
 
 	@Override
@@ -32,6 +34,7 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 		pane.add(text, 0, 0);
 		data = FXCollections.observableArrayList();
 		list = new ListView<String>(data);
+		list.setOnMouseClicked(e -> click());
 		pane.add(list, 0, 1);
 		toggle();
 	}
@@ -56,6 +59,8 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 		}
 		open = !open;
 	}
+
+	protected abstract void click();
 
 	public void add(String s) {
 		data.add(s);

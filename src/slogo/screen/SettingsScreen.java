@@ -41,10 +41,6 @@ public class SettingsScreen extends AbstractWindowScreen {
 
 	protected void makeControls() {
 		Scanner s;
-		boolean isNew = (parameters == null);
-		if (isNew) {
-			parameters = new Parameters();
-		}
 		try {
 			s = new Scanner(new File("src/resources/settings.txt"));
 			while (s.hasNext()) {
@@ -53,12 +49,7 @@ public class SettingsScreen extends AbstractWindowScreen {
 					break;
 				}
 				String[] vals = s.nextLine().split(" ");
-				double x;
-				if (isNew) {
-					x = Double.parseDouble(vals[0]);
-				} else {
-					x = parameters.getValue(next);
-				}
+				double x = parameters.getValue(next);
 				double y = Double.parseDouble(vals[1]);
 				double z = Double.parseDouble(vals[2]);
 				Toggle toggle = new Toggle(next, x, y, z);
@@ -144,11 +135,9 @@ public class SettingsScreen extends AbstractWindowScreen {
 			valueField = new TextField(String.format("%.2f", slider.getValue()));
 			valueField.setPrefColumnCount(valueField.getText().length());
 			valueField.setAlignment(Pos.CENTER);
-			valueField.textProperty().addListener(
-					(ObservableValue<? extends String> ob, String oldVal,
-							String newVal) -> {
-						valueField.setPrefColumnCount(valueField.getText()
-								.length());
+			valueField.textProperty()
+					.addListener((ObservableValue<? extends String> ob, String oldVal, String newVal) -> {
+						valueField.setPrefColumnCount(valueField.getText().length());
 					});
 			valueField.setOnAction(e -> setValue());
 			valueField.setFont(font);
@@ -156,12 +145,10 @@ public class SettingsScreen extends AbstractWindowScreen {
 			lowerBox.getChildren().addAll(slider, valueField);
 			this.add(nameLabel, 0, 0);
 			this.add(lowerBox, 0, 1);
-			slider.valueProperty().addListener(
-					(ObservableValue<? extends Number> ov, Number oldVal,
-							Number newVal) -> {
-						parameters.setValue(name, (Double) newVal);
-						valueField.setText(String.format("%.2f", newVal));
-					});
+			slider.valueProperty().addListener((ObservableValue<? extends Number> ov, Number oldVal, Number newVal) -> {
+				parameters.setValue(name, (Double) newVal);
+				valueField.setText(String.format("%.2f", newVal));
+			});
 			parameters.setValue(name, slider.getValue());
 		}
 
@@ -174,12 +161,10 @@ public class SettingsScreen extends AbstractWindowScreen {
 						this.slider.setValue(val);
 						parameters.setValue(name, val);
 					} else {
-						valueField.setText(String.format("%.2f",
-								this.slider.getValue()));
+						valueField.setText(String.format("%.2f", this.slider.getValue()));
 					}
 				} catch (NumberFormatException d) {
-					valueField.setText(String.format("%.2f",
-							this.slider.getValue()));
+					valueField.setText(String.format("%.2f", this.slider.getValue()));
 				}
 			}
 		}
