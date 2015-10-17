@@ -14,7 +14,7 @@ import slogo.element.Console;
 import slogo.element.History;
 import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
-import slogo.interpreter.Interpreter;
+import slogo.interpreter.EngineController;
 
 public class SlogoScreen extends AbstractScreen {
 
@@ -24,7 +24,7 @@ public class SlogoScreen extends AbstractScreen {
 	private Commands commands;
 	private Variables variables;
 	private Display map;
-	private Interpreter interpreter;
+	private EngineController myEngineController;
 	private ResourceBundle slogoResources;
 	private ObservableArrayList h;
 	private ObservableArrayList c;
@@ -43,7 +43,7 @@ public class SlogoScreen extends AbstractScreen {
 			title = "SLogo";
 		}
 		makeScene();
-		// interpreter = new Interpreter(this.language, this);
+		myEngineController = new EngineController(this.language, this);
 	}
 
 	@Override
@@ -64,9 +64,9 @@ public class SlogoScreen extends AbstractScreen {
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			// interpreter.interpret(command);
-			map.getCharacter(0).move(100);
-			map.getCharacter(0).rotateCharacter(Integer.parseInt(command));
+			myEngineController.sendToInterpreter(command);
+			//map.getCharacter(0).move(100);
+			//map.getCharacter(0).rotateCharacter(Integer.parseInt(command));
 			h.add(command);
 		}
 		map.updateCharacters();
