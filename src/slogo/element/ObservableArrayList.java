@@ -12,6 +12,12 @@ public class ObservableArrayList extends Observable {
 		this.setChanged();
 		notifyObservers(s);
 	}
+	
+	public void clear(){
+		list.clear();
+		this.setChanged();
+		notifyObservers();
+	}
 
 	public String get(int i) {
 		return list.get(i);
