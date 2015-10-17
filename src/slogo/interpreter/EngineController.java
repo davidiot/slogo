@@ -29,16 +29,17 @@ public class EngineController {
 		updateVariablesListInGUI();
 	}
 	
-	public void updateVariablesListInGUI(){
+	private void updateVariablesListInGUI(){
 		HashMap<String, Double> variableMap = (HashMap<String, Double>) myVariableLibrary.getVariableMap();
 		myView.getVariablesObject().clear();
 		for (String s: variableMap.keySet()){
-			System.out.println("variable is" + s);
 			String variableMapping = s.substring(1) + " = " + variableMap.get(s);
 			myView.getVariablesObject().add(variableMapping);
 		}
-		//String newestVariableName = myVariableLibrary.getNewestVariableString();
-		//myView.getVariableList().add(myVariableLibrary.getNewestVariableString());
+	}
+	
+	private void modifyIndividualVariable(){
+		
 	}
 	
 	
