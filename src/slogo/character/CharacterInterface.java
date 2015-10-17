@@ -12,13 +12,13 @@ public interface CharacterInterface {
 		
 		public Image getImage();
 		
-		public void move(int distance);
+		public void move(double distance);
 		
 		public void showCharacter();
 		
 		public void hideCharacter();
 		
-		public void rotateCharacter(int degree);
+		public void rotateCharacter(double degree);
 		
 		public void refreshImage();
 		

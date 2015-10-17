@@ -59,7 +59,7 @@ public class MainCharacter implements CharacterInterface {
 		return image;
 	}
 	
-	public void move(int distance){
+	public void move(double distance){
 		preX = curX;
 		preY = curY;
 		curX += distance * Math.cos(Math.toRadians(ANGLE-direction));
@@ -84,7 +84,7 @@ public class MainCharacter implements CharacterInterface {
 		hidden = true;
 	}
 	
-	public void rotateCharacter(int degree){
+	public void rotateCharacter(double degree){
 		direction += degree;
 		imageView.setRotate(direction);
 		refreshImage();

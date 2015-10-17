@@ -11,37 +11,21 @@ import slogo.nodes.NodeObject;
 public class Forward extends Command {
 	
 	private VariableLibrary myVariables;
-	
-//	@Override
-//	public double doCommand(List<Double> params) {
-//		double distanceMoved = params.get(0);
-//		System.out.println("Moved forward " + distanceMoved);
-//		return distanceMoved;
-//	}
-	
-	public Forward() {
-		
-	}
+	private final int CHILDREN_REQUIRED = 1;
 
-	public Forward(VariableLibrary variables) {
-		myVariables = variables;
-	}
 
 	@Override
 	public double doCommand(List<NodeObject> params, CharacterInterface character) {
-		List<Double> parameters = new ArrayList<Double>();
-		for(NodeObject child: params) {
-			parameters.add(child.traverseAndExecute(character));
-		}
-		double distanceMoved = parameters.get(0);
-		System.out.println("Moved forward " + distanceMoved);
-		return distanceMoved;
+		List<Double> parameters = recurseToGetParameters(params, character);
+		double distance = parameters.get(0);
+		character.move(distance);
+		return distance;
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
 		// TODO Auto-generated method stub
-		return 1;
+		return CHILDREN_REQUIRED;
 	}
 
 
