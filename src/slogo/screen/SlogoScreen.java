@@ -121,16 +121,16 @@ public class SlogoScreen extends AbstractScreen {
 		root.add(listPane, 1, 1);
 	}
 	
-	public ObservableArrayList getHistoryList(){
-		return h;
+	public History getHistoryObject(){
+		return history;
 	}
 	
-	public ObservableArrayList getVariableList(){
-		return v;
+	public Variables getVariablesObject(){
+		return variables;
 	}
 	
-	public ObservableArrayList getCommandsList(){
-		return c;
+	public Commands getCommandsObject(){
+		return commands;
 	}
 	
 	public Display getDisplay(){

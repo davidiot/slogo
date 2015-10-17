@@ -14,8 +14,8 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 	protected String title;
 	protected Text text;
 	protected boolean open;
-	ListView<String> list;
-	ObservableList<String> data;
+	protected ListView<String> list;
+	protected ObservableList<String> data;
 
 	public AbstractList(GridPane pane, ObservableArrayList list) {
 		super(pane);
@@ -62,5 +62,11 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 		if (!open) {
 			toggle();
 		}
+	}
+	
+	public void clear(){
+		data.clear();
+		super.pane = null;
+		super.pane = new GridPane();
 	}
 }
