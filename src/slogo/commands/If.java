@@ -2,13 +2,14 @@ package slogo.commands;
 
 import java.util.List;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.nodes.NodeObject;
 
 public class If extends Command {
 
 	@Override
-	public double doCommand(List<NodeObject> params, MainCharacter character) {
+	public double doCommand(List<NodeObject> params, CharacterInterface character) {
 		// TODO Auto-generated method stub
 		double expression = params.get(0).traverseAndExecute(character);
 		if (expression != 0) {

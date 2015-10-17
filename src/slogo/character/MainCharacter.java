@@ -8,7 +8,7 @@ import javafx.scene.shape.Line;
 
 import java.util.ResourceBundle;
 
-public class MainCharacter {
+public class MainCharacter implements CharacterInterface {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle
 			.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
@@ -16,7 +16,7 @@ public class MainCharacter {
 	private final double YADJUST = Double.parseDouble(slogoResources.getString("characterCenterY"));
 	private double xCenter = Integer.parseInt(slogoResources.getString("mapWidth"))/2;
 	private double yCenter = Integer.parseInt(slogoResources.getString("mapHeight"))/2;
-	private static final double ANGLE = 90.0;
+	private double ANGLE = 90.0;
 	private boolean penDown = true;
 	private boolean hidden = false;
 	private double preX;

@@ -1,5 +1,6 @@
 package slogo.nodes;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 
 public class CommandDeclarationNode extends NodeObject {
@@ -28,7 +29,7 @@ public class CommandDeclarationNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(MainCharacter character) {
+	public double traverseAndExecute(CharacterInterface character) {
 		return 0;
 	}
 	

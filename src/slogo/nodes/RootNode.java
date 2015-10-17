@@ -1,5 +1,6 @@
 package slogo.nodes;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 
 public class RootNode extends NodeObject {
@@ -24,7 +25,7 @@ public class RootNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(MainCharacter character) {
+	public double traverseAndExecute(CharacterInterface character) {
 		for (NodeObject child: myChildren){
 			child.traverseAndExecute(character);
 		}
