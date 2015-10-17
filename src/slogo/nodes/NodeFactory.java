@@ -1,7 +1,5 @@
 package slogo.nodes;
 
-import java.util.List;
-
 import slogo.interpreter.CommandLibrary;
 import slogo.interpreter.VariableLibrary;
 
