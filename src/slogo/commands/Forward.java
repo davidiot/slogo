@@ -5,7 +5,7 @@ import java.util.List;
 
 import slogo.character.MainCharacter;
 import slogo.interpreter.VariableLibrary;
-import slogo.nodes.Node;
+import slogo.nodes.NodeObject;
 
 public class Forward extends Command {
 	
@@ -27,10 +27,10 @@ public class Forward extends Command {
 	}
 
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 		List<Double> parameters = new ArrayList<Double>();
-		for(Node child: params) {
-			parameters.add(child.traverseAndExecute());
+		for(NodeObject child: params) {
+			parameters.add(child.traverseAndExecute(character));
 		}
 		double distanceMoved = parameters.get(0);
 		System.out.println("Moved forward " + distanceMoved);

@@ -8,7 +8,7 @@ import slogo.nodes.*;
 public class SetHeading extends Command {
 	
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 	//	double currentHeading = character.getImageView().getRotate();
 	//	double destinationHeading = params.get(0);
 		System.out.println("Set the heading to " + params.get(0));

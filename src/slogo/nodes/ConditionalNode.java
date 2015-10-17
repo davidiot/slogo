@@ -1,9 +1,10 @@
 package slogo.nodes;
 
+import slogo.character.MainCharacter;
 
-public class ConditionalNode extends Node {
+public class ConditionalNode extends NodeObject {
 
-	public ConditionalNode(Node parent) {
+	public ConditionalNode(NodeObject parent) {
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}
@@ -15,7 +16,7 @@ public class ConditionalNode extends Node {
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -27,7 +28,7 @@ public class ConditionalNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
+	public double traverseAndExecute(MainCharacter character) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

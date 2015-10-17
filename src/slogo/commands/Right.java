@@ -8,7 +8,7 @@ import slogo.nodes.*;
 public class Right extends Command {
 
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 		return 0;
 		//double degreesTurned = params.get(0);
 		//System.out.println("Turned right " + params.get(0) + " degrees.");

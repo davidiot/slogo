@@ -7,7 +7,7 @@ import slogo.nodes.*;
 
 public class ClearScreen extends Command {
 
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 		/*double currentX = character.getImageView().getX();
 		double currentY = character.getImageView().getY();
 		double destinationX = 0;

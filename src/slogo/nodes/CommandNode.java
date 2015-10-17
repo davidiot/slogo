@@ -5,46 +5,46 @@ import java.util.List;
 
 import slogo.commands.Command;
 
-public class CommandNode extends Node{
-	private Command myAction;
+public class CommandNode extends NodeObject{
+	private Command myCommand;
 	private List<Double> myParameters;
 	
-	public CommandNode(Command action, Node parent) {
+	public CommandNode(Command command, NodeObject parent) {
 		super(parent);
-		myAction = action;
+		myCommand = command;
 		myParameters = new ArrayList<>();
 	}
 	
-	public void addChild(Node child) {
+	public void addChild(NodeObject child) {
 		myChildren.add(child);
 	}
 
-	public double traverseAndExecute() {
+	public double traverseAndExecute(MainCharacter character) {
 //		for (Node child: myChildren){
 //			System.out.println(myChildren);
 //			myParameters.add(child.traverseAndExecute());
 //		}
 //		return myAction.doCommand(myParameters);
-		return myAction.doCommand(myChildren);
+		return myCommand.doCommand(myChildren, character);
 		
 	}
 
 	public boolean hasCompleteChildren() {
 		// first check this node
-		if (myAction != null) {
-			if (myAction.getNumChildrenRequired() != myChildren.size()) return false;
+		if (myCommand != null) {
+			if (myCommand.getNumChildrenRequired() != myChildren.size()) return false;
 		}
 		// recursively check children
 		boolean complete = true;
-		for (Node child: myChildren) {
+		for (NodeObject child: myChildren) {
 			complete = complete && child.hasCompleteChildren();
 		}
 		return complete;
 	}
 
 	public boolean canAdd() {
-		if (myAction == null) return true;
-		if (myChildren.size() >= myAction.getNumChildrenRequired()) return false;
+		if (myCommand == null) return true;
+		if (myChildren.size() >= myCommand.getNumChildrenRequired()) return false;
 		return true;
 	}
 
@@ -54,7 +54,7 @@ public class CommandNode extends Node{
 	}
 
 	public String getAction() {
-		return myAction.toString();
+		return myCommand.toString();
 	}
 
 }

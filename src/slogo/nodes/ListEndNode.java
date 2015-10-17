@@ -1,8 +1,10 @@
 package slogo.nodes;
 
-public class ListEndNode extends Node {
+import slogo.character.MainCharacter;
 
-	public ListEndNode(Node parent) {
+public class ListEndNode extends NodeObject {
+
+	public ListEndNode(NodeObject parent) {
 		super(parent);
 		// TODO Auto-generated constructor stub
 	}
@@ -15,7 +17,7 @@ public class ListEndNode extends Node {
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
 
 	}
@@ -27,7 +29,7 @@ public class ListEndNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
+	public double traverseAndExecute(MainCharacter character) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

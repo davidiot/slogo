@@ -1,13 +1,14 @@
 package slogo.nodes;
 
+import slogo.character.MainCharacter;
 import slogo.interpreter.VariableLibrary;
 
 
-public class VariableNode extends Node {
+public class VariableNode extends NodeObject {
 	private String myName;
 	private VariableLibrary myVariables;
 
-	public VariableNode(VariableLibrary variables, Node parent, String name) {
+	public VariableNode(VariableLibrary variables, NodeObject parent, String name) {
 		super(parent);
 		myName = name;
 		myVariables = variables;
@@ -20,7 +21,7 @@ public class VariableNode extends Node {
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -31,7 +32,7 @@ public class VariableNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
+	public double traverseAndExecute(MainCharacter character) {
 		if (myVariables.getVariable(myName) != null ) {
 			return myVariables.getVariable(myName);
 		}

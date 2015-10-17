@@ -61,7 +61,7 @@ public class SlogoScreen extends AbstractScreen {
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			myEngineController.sendToInterpreter(command);
+			myEngineController.runCommands(command);
 			//map.getCharacter(0).move(100);
 			//map.getCharacter(0).rotateCharacter(Integer.parseInt(command));
 			h.add(command);
@@ -119,5 +119,21 @@ public class SlogoScreen extends AbstractScreen {
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 1);
+	}
+	
+	public ObservableArrayList getHistoryList(){
+		return h;
+	}
+	
+	public ObservableArrayList getVariableList(){
+		return v;
+	}
+	
+	public ObservableArrayList getCommandsList(){
+		return c;
+	}
+	
+	public Display getDisplay(){
+		return map;
 	}
 }

@@ -1,10 +1,11 @@
 package slogo.nodes;
 
+import slogo.character.MainCharacter;
 
-public class ConstantNode extends Node {
+public class ConstantNode extends NodeObject {
 	private double myValue;
 
-	public ConstantNode(double value, Node parent) {
+	public ConstantNode(double value, NodeObject parent) {
 		super(parent);
 		myValue = value;
 	}
@@ -15,7 +16,7 @@ public class ConstantNode extends Node {
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
 
 	}
@@ -26,7 +27,7 @@ public class ConstantNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
+	public double traverseAndExecute(MainCharacter character) {
 		return myValue;
 	}
 
