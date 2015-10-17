@@ -1,13 +1,13 @@
 package slogo.element;
 
-import java.util.Observable;
-
 import javafx.scene.layout.GridPane;
 
 public class History extends AbstractList {
 
-	public History(GridPane pane) {
-		super(pane);
+	public History(GridPane pane, ObservableArrayList list) {
+		super(pane, list);
+		// TODO Auto-generated constructor stub
 	}
+
 
 }

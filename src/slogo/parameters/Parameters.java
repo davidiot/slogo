@@ -7,6 +7,7 @@ public class Parameters {
 	private HashMap<String, Boolean> bools;
 	private String backgroundColor;
 	private String penColor;
+	private double penWidth;
 
 	public Parameters() {
 		values = new HashMap<String, Double>();

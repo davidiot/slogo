@@ -1,18 +1,22 @@
 package slogo.nodes;
 
+import slogo.interpreter.VariableLibrary;
+
 
 public class VariableNode extends Node {
-	private double myName;
+	private String myName;
+	private VariableLibrary myVariables;
 
-	public VariableNode(Node parent, double name) {
+	public VariableNode(VariableLibrary variables, Node parent, String name) {
 		super(parent);
 		myName = name;
+		myVariables = variables;
 	}
 
 	@Override
 	public boolean hasCompleteChildren() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -23,14 +27,25 @@ public class VariableNode extends Node {
 
 	@Override
 	public boolean canAdd() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public double traverseAndExecute() {
-		// TODO Auto-generated method stub
+		if (myVariables.getVariable(myName) != null ) {
+			return myVariables.getVariable(myName);
+		}
+		return getLocalVariable();
+	}
+	
+	private double getLocalVariable() {
+		// TODO add variable search through parents
+		// TODO add exception if variable not found
 		return 0;
+	}
+
+	public String getName() {
+		return myName;
 	}
 
 }
