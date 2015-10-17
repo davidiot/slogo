@@ -8,7 +8,7 @@ import slogo.character.MainCharacter;
 public class ShowTurtle extends Command {
 
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 		System.out.println("Showing turtle.");
 		return 1;
 	}

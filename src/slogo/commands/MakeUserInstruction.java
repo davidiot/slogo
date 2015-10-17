@@ -2,9 +2,10 @@ package slogo.commands;
 
 import java.util.List;
 
+import slogo.character.MainCharacter;
 import slogo.interpreter.CommandLibrary;
 import slogo.interpreter.VariableLibrary;
-import slogo.nodes.Node;
+import slogo.nodes.NodeObject;
 
 public class MakeUserInstruction extends Command {
 
@@ -15,7 +16,7 @@ public class MakeUserInstruction extends Command {
 	}
 	
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 		// TODO Auto-generated method stub
 		
 		return 0;

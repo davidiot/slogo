@@ -7,7 +7,7 @@ import slogo.nodes.*;
 public class PenDown extends Command {
 
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 		System.out.println("Pen is down");
 		return 1;
 	}

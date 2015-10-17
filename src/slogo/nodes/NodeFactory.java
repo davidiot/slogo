@@ -44,9 +44,9 @@ public class NodeFactory{
 //	}
 	
 	
-	public Node create(String parse, Node parent) {
+	public NodeObject create(String parse, NodeObject parent) {
 		System.out.println(parse);
-		Node new_node = null;
+		NodeObject new_node = null;
 		String[] entry = parse.split("\\s+");
 		String type = entry[0];
 		String value = entry[1];

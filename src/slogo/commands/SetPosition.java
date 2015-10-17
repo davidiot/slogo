@@ -8,7 +8,7 @@ import slogo.nodes.*;
 public class SetPosition extends Command {
 
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 		// this still doesn't do the command on the front end, 
 		// only gives the correct return value.
 		if (getNumChildrenRequired() != params.size()){

@@ -1,8 +1,10 @@
 package slogo.nodes;
 
-public class RootNode extends Node {
+import slogo.character.MainCharacter;
 
-	public RootNode(Node parent) {
+public class RootNode extends NodeObject {
+
+	public RootNode(NodeObject parent) {
 		super(parent);
 	}
 
@@ -12,7 +14,7 @@ public class RootNode extends Node {
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		myChildren.add(node);
 	}
 
@@ -22,9 +24,9 @@ public class RootNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
-		for (Node child: myChildren){
-			child.traverseAndExecute();
+	public double traverseAndExecute(MainCharacter character) {
+		for (NodeObject child: myChildren){
+			child.traverseAndExecute(character);
 		}
 		return 0;
 	}

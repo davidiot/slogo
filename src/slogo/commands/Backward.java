@@ -7,7 +7,7 @@ import slogo.nodes.*;
 public class Backward extends Command {
 	
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, MainCharacter character) {
 		return 0;
 		//double distanceMoved = params.get(0);
 		//System.out.println("Moved backward " + distanceMoved);
