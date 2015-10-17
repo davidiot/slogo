@@ -38,5 +38,9 @@ public abstract class NodeObject {
 	public void setLocalVariables(Map<String, Double> variables) {
 		localVariables.putAll(variables);
 	}
+	
+	public Double getLocalVariable(String name) {
+		return localVariables.get(name);
+	}
 
 }

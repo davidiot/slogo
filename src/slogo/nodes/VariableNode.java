@@ -41,8 +41,14 @@ public class VariableNode extends NodeObject {
 	
 	private double getLocalVariable() {
 		System.out.println("looking for local variables... ");
-		// TODO add variable search through parents
-		// TODO add exception if variable not found
+		NodeObject currentNode = this.getParent();
+		while (currentNode != null) {
+			if (currentNode.getLocalVariable(myName) != null) {
+				return currentNode.getLocalVariable(myName);
+			}
+			currentNode = currentNode.getParent();
+		}
+		// TODO throw exception variable does not exist;
 		return 0;
 	}
 

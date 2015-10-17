@@ -21,6 +21,7 @@ public class NodeFactory{
 		NodeObject new_node = null;
 		String type = input.getType();
 		String value = input.getValue();
+		System.out.println("adding node  " + type + " " + value);
 		switch(type){
 		case "Command":
 			if (myActions.getCommand(value) != null) {
@@ -28,7 +29,7 @@ public class NodeFactory{
 			} else {
 //				System.out.println("making user command node " + value);
 //				System.out.println("params " +  tempActions.getNumParameters(value));
-				new_node = new UserCommandNode(parent, tempActions.getNumParameters(value));
+				new_node = new UserCommandNode(parent, value, tempActions.getNumParameters(value), myActions);
 			}
 			break;
 		case "CommandDeclaration":
