@@ -2,6 +2,7 @@ package slogo.commands;
 
 import java.util.List;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.interpreter.VariableLibrary;
 import slogo.nodes.NodeObject;
@@ -15,7 +16,7 @@ public class MakeVariable extends Command {
 	}
 	
 	@Override
-	public double doCommand(List<NodeObject> params, MainCharacter character) {
+	public double doCommand(List<NodeObject> params, CharacterInterface character) {
 		// first param is variable
 		// second is expression
 		// TODO if parameter types are wrong throw exception

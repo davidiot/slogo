@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.nodes.NodeObject;
 import slogo.nodes.RootNode;
@@ -20,7 +21,7 @@ public class UserInstruction extends Command {
 	}
 
 	@Override
-	public double doCommand(List<NodeObject> params, MainCharacter character) {
+	public double doCommand(List<NodeObject> params, CharacterInterface character) {
 		Map<String, Double> parameters = new HashMap<String,Double>();
 		int currentIdx = 0;
 		for (String param: myParameters) {

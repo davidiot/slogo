@@ -1,5 +1,6 @@
 package slogo.nodes;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 
 public class ConditionalNode extends NodeObject {
@@ -28,7 +29,7 @@ public class ConditionalNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(MainCharacter character) {
+	public double traverseAndExecute(CharacterInterface character) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

@@ -3,6 +3,7 @@ package slogo.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.interpreter.VariableLibrary;
 import slogo.nodes.NodeObject;
@@ -27,7 +28,7 @@ public class Forward extends Command {
 	}
 
 	@Override
-	public double doCommand(List<NodeObject> params, MainCharacter character) {
+	public double doCommand(List<NodeObject> params, CharacterInterface character) {
 		List<Double> parameters = new ArrayList<Double>();
 		for(NodeObject child: params) {
 			parameters.add(child.traverseAndExecute(character));

@@ -2,13 +2,14 @@ package slogo.commands;
 
 import java.util.List;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.nodes.NodeObject;
 
 public class Repeat extends Command {
 
 	@Override
-	public double doCommand(List<NodeObject> params, MainCharacter character) {
+	public double doCommand(List<NodeObject> params, CharacterInterface character) {
 		double returnVal = 0; 
 		// TODO add wrong node type checking
 		int numRepeats = (int)params.get(0).traverseAndExecute(character);

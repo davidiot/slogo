@@ -1,6 +1,7 @@
 
 package slogo.nodes;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.commands.Command;
 
@@ -16,7 +17,7 @@ public class CommandNode extends NodeObject{
 		myChildren.add(child);
 	}
 
-	public double traverseAndExecute(MainCharacter character) {
+	public double traverseAndExecute(CharacterInterface character) {
 		return myCommand.doCommand(myChildren, character);
 		
 	}

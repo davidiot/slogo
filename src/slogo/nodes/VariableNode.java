@@ -1,5 +1,6 @@
 package slogo.nodes;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.interpreter.VariableLibrary;
 
@@ -32,7 +33,7 @@ public class VariableNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(MainCharacter character) {
+	public double traverseAndExecute(CharacterInterface character) {
 		if (myVariables.getVariable(myName) != null ) {
 			return myVariables.getVariable(myName);
 		}

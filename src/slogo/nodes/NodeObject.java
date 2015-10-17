@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 
 public abstract class NodeObject {
@@ -29,7 +30,7 @@ public abstract class NodeObject {
 
 	public abstract boolean canAdd();
 
-	public abstract double traverseAndExecute(MainCharacter character);
+	public abstract double traverseAndExecute(CharacterInterface character);
 
 	public NodeObject getParent() {
 		return myParent;

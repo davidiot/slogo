@@ -3,6 +3,7 @@ package slogo.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.interpreter.CommandLibrary;
 import slogo.interpreter.VariableLibrary;
@@ -19,7 +20,7 @@ public class MakeUserInstruction extends Command {
 	}
 	
 	@Override
-	public double doCommand(List<NodeObject> params, MainCharacter character) {
+	public double doCommand(List<NodeObject> params, CharacterInterface character) {
 		// TODO throw exceptions
 		String name = ((CommandDeclarationNode) params.get(0)).getName();
 		List<String> parameters = getParameterList(params.get(1));

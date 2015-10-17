@@ -1,5 +1,6 @@
 package slogo.nodes;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.commands.Command;
 import slogo.interpreter.CommandLibrary;
@@ -33,10 +34,11 @@ public class UserCommandNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(MainCharacter character) {
+	public double traverseAndExecute(CharacterInterface character) {
 		Command action = commandLibrary.getCommand(myName);
 		System.out.println(action);
 		return action.doCommand(myChildren, character);
+
 	}
 
 }

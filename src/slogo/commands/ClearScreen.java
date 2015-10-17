@@ -1,13 +1,15 @@
 package slogo.commands;
 
 import java.util.List;
+
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.nodes.*;
 
 
 public class ClearScreen extends Command {
 
-	public double doCommand(List<NodeObject> params, MainCharacter character) {
+	public double doCommand(List<NodeObject> params, CharacterInterface character) {
 		/*double currentX = character.getImageView().getX();
 		double currentY = character.getImageView().getY();
 		double destinationX = 0;
