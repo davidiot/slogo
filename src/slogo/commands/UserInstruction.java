@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 import slogo.nodes.NodeObject;
-import slogo.nodes.RootNode;
 
 public class UserInstruction extends Command {
 	private String myName; 

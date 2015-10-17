@@ -2,8 +2,6 @@ package slogo.interpreter;
 
 import java.util.HashMap;
 
-import com.sun.javafx.collections.MappingChange.Map;
-
 import slogo.nodes.NodeObject;
 import slogo.screen.SlogoScreen;
 
