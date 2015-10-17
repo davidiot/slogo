@@ -1,13 +1,14 @@
 package slogo.commands;
 
 import java.util.List;
-
 import slogo.character.MainCharacter;
+import slogo.nodes.*;
+
 
 public class SetPosition extends Command {
 
 	@Override
-	public double doCommand(List<Double> params) {
+	public double doCommand(List<Node> params) {
 		// this still doesn't do the command on the front end, 
 		// only gives the correct return value.
 		if (getNumChildrenRequired() != params.size()){

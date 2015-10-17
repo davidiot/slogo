@@ -23,11 +23,12 @@ public class CommandNode extends Node{
 	}
 
 	public double traverseAndExecute() {
-		for (Node child: myChildren){
-			System.out.println(myChildren);
-			myParameters.add(child.traverseAndExecute());
-		}
-		return myAction.doCommand(myParameters);
+//		for (Node child: myChildren){
+//			System.out.println(myChildren);
+//			myParameters.add(child.traverseAndExecute());
+//		}
+//		return myAction.doCommand(myParameters);
+		return myAction.doCommand(myChildren);
 		
 	}
 
