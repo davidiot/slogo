@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;

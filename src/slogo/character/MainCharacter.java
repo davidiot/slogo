@@ -1,14 +1,14 @@
 package slogo.character;
 
+import java.util.LinkedList;
+import java.util.ResourceBundle;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-import java.util.LinkedList;
-import java.util.PriorityQueue;
-import java.util.ResourceBundle;
 
 public class MainCharacter implements CharacterInterface {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";

@@ -3,20 +3,16 @@ package slogo.element;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import java.awt.color.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import slogo.character.*;
+import slogo.character.CharacterInterface;
+import slogo.character.MainCharacter;
 
 public class Display extends AbstractElement {
 
