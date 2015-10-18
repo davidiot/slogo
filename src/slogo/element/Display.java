@@ -22,6 +22,7 @@ import slogo.character.*;
 public class Display extends AbstractElement {
 
 	private Rectangle map;
+	private Rectangle background;
 	private Canvas test;
 	private GraphicsContext gc;
 	private Pane display;
@@ -39,6 +40,12 @@ public class Display extends AbstractElement {
 		MainCharacter mc = new MainCharacter(characterDisplay);
 		characters = new ArrayList<MainCharacter>();
 		characters.add(mc);
+		background = new Rectangle(
+				Double.parseDouble(slogoResources.getString("mapWidth"))
+						+ 2 * Double.parseDouble(slogoResources.getString("characterCenterX")),
+				Double.parseDouble(slogoResources.getString("mapHeight"))
+						+ 2 * Double.parseDouble(slogoResources.getString("characterCenterY")),
+				Color.RED);
 		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")), Color.WHITE);
 		test = new Canvas(Integer.parseInt(slogoResources.getString("mapWidth")),
@@ -46,7 +53,7 @@ public class Display extends AbstractElement {
 		gc = test.getGraphicsContext2D();
 		characterDisplay.getChildren().add(test);
 		characterDisplay.getChildren().add(mc.getImageView());
-		display.getChildren().addAll(map, characterDisplay);
+		display.getChildren().addAll(background, map, characterDisplay);
 		this.pane.getChildren().add(display);
 	}
 

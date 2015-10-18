@@ -98,12 +98,12 @@ public class MainCharacter {
 		}
 	}
 
-	private double wrap(double input, double value) {
-		while (input >= value) {
-			input -= value;
+	private double wrap(double input, double max, double min) {
+		while (input >= max) {
+			input -= (max - min);
 		}
-		while (input < 0) {
-			input += value;
+		while (input < min) {
+			input += (max - min);
 		}
 		return input;
 	}
@@ -125,7 +125,7 @@ public class MainCharacter {
 				}
 				imageView.setRotate(direction);
 				if (direction == angle) {
-					direction = wrap(direction, 360);
+					direction = wrap(direction, 360, 0);
 					myQueue.poll();
 				}
 			} else {
@@ -135,26 +135,30 @@ public class MainCharacter {
 				double y = nextMove.getValue()[1];
 				double newX = 0;
 				double newY = 0;
-				if (nextMove.getType().equals("fline")) {
-					newX = curX + speed * Math.cos(Math.toRadians(ANGLE - direction));
-					newY = curY - speed * Math.sin(Math.toRadians(ANGLE - direction));
-				} else if (nextMove.getType().equals("bline")) {
-					newX = curX - speed * Math.cos(Math.toRadians(ANGLE - direction));
-					newY = curY + speed * Math.sin(Math.toRadians(ANGLE - direction));
+				double adjustedDirection = direction;
+				if (nextMove.getType().equals("bline")) {
+					adjustedDirection = wrap(direction + 180, 360, 0);
 				}
+				newX = curX + speed * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
+				newY = curY - speed * Math.sin(Math.toRadians(ANGLE - adjustedDirection));
+
 				if (speed == Double.MAX_VALUE || ((Math.pow((newX - curX), 2)
 						+ Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2) + Math.pow((y - curY), 2)))) {
-					curX = wrap(x, WIDTH);
-					curY = wrap(y, HEIGHT);
+					curX = wrap(x, WIDTH + 2 * XADJUST, 2 * XADJUST);
+					curY = wrap(y, HEIGHT + 2 * YADJUST, 2 * YADJUST);
 					myQueue.poll();
 				} else {
 					curX = newX;
 					curY = newY;
 				}
-				imageView.setX(wrap(curX, WIDTH));
-				imageView.setY(wrap(curY, HEIGHT));
+
+				imageView.setX(wrap(curX, WIDTH + 2 * XADJUST, 2 * XADJUST));
+				imageView.setY(wrap(curY, HEIGHT + 2 * YADJUST, 2 * YADJUST));
 				if (nextMove.isCurrentPenDown()) {
-					Line line = new Line(preX + XADJUST, preY + YADJUST, curX + XADJUST, curY + YADJUST);
+					Line line = new Line(wrap(preX, WIDTH + 2 * XADJUST, 2 * XADJUST) + XADJUST,
+							wrap(preY, HEIGHT + 2 * YADJUST, 2 * YADJUST) + YADJUST,
+							wrap(curX, WIDTH + 2 * XADJUST, 2 * XADJUST) + XADJUST,
+							wrap(curY, HEIGHT + 2 * YADJUST, 2 * YADJUST) + YADJUST);
 					line.setStroke(nextMove.getCurrentPenColor());
 					line.setStrokeWidth(nextMove.getCurrentPenWidth());
 					myPane.getChildren().add(line);
@@ -175,7 +179,7 @@ public class MainCharacter {
 	public void move(double distance, boolean forward) {
 		double correctedDirection = finalDirection;
 		if (!forward) {
-			correctedDirection = wrap(finalDirection + 180, 360);
+			correctedDirection = wrap(finalDirection + 180, 360, 0);
 		}
 		finalX += distance * Math.cos(Math.toRadians(ANGLE - correctedDirection));
 		finalY -= distance * Math.sin(Math.toRadians(ANGLE - correctedDirection));
@@ -184,8 +188,8 @@ public class MainCharacter {
 		} else {
 			myQueue.add(new Movement("bline", new double[] { finalX, finalY }));
 		}
-		finalX = wrap(finalX, WIDTH);
-		finalY = wrap(finalY, HEIGHT);
+		finalX = wrap(finalX, WIDTH + 2 * XADJUST, 2 * XADJUST) + 2 * XADJUST;
+		finalY = wrap(finalY, HEIGHT + 2 * YADJUST, 2 * YADJUST) + 2 * YADJUST;
 	}
 
 	public void changeSpeed(Double value) {
@@ -207,12 +211,12 @@ public class MainCharacter {
 	public void rotateCharacter(double degree) {
 		finalDirection += degree;
 		myQueue.add(new Movement("angle", new double[] { finalDirection }));
-		finalDirection = wrap(finalDirection, 360);
+		finalDirection = wrap(finalDirection, 360, 0);
 	}
 
 	public double setHeading(double degree) {
 		double output = degree - finalDirection;
-		finalDirection = wrap(degree, 360);
+		finalDirection = wrap(degree, 360, 0);
 		myQueue.add(new Movement("angle", new double[] { degree }));
 		return output;
 	}

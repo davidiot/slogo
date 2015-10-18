@@ -72,8 +72,8 @@ public class SlogoScreen extends AbstractScreen {
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			showError("ERROR!", command);
-			myEngineController.sendToInterpreter(command);
+			//myEngineController.sendToInterpreter(command);
+			map.getCharacter(0).goTo(Double.parseDouble(command.split(" ")[0]), Double.parseDouble(command.split(" ")[1]));
 			h.add(command);
 		}
 		map.updateCharacters();
@@ -94,6 +94,7 @@ public class SlogoScreen extends AbstractScreen {
 		root.add(consolePane, 0, 2);
 
 		makeLists();
+		
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		setAlignment(root);
 	}
