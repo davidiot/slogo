@@ -111,7 +111,9 @@ public class MainCharacter implements CharacterInterface {
 
 	private void refreshImage() {
 		myPane.getChildren().remove(imageView);
-		myPane.getChildren().add(imageView);
+		if (hidden) {
+			myPane.getChildren().add(imageView);
+		}
 	}
 
 	public void update() {
@@ -207,6 +209,7 @@ public class MainCharacter implements CharacterInterface {
 		hidden = input;
 		if (input)
 			returnVal = 1;
+		refreshImage();
 		return returnVal;
 	}
 
