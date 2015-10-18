@@ -9,9 +9,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-import java.util.LinkedList;
-import java.util.ResourceBundle;
-
 public class MainCharacter implements CharacterInterface {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
@@ -137,68 +134,91 @@ public class MainCharacter implements CharacterInterface {
 				double y = nextMove.getValue()[1];
 				double newX = 0;
 				double newY = 0;
+				boolean teleport = false;
 				double adjustedDirection = direction;
 				if (nextMove.getType().equals("bline")) {
 					adjustedDirection = wrap(direction + 180, 360);
 				}
 				newX = curX + speed * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
 				newY = curY - speed * Math.sin(Math.toRadians(ANGLE - adjustedDirection));
-
+				System.out.println(curX + " " + curY);
 				if (speed == Double.MAX_VALUE || ((Math.pow((newX - curX), 2)
 						+ Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2) + Math.pow((y - curY), 2)))) {
 					curX = wrap(x, WIDTH);
 					curY = wrap(y, HEIGHT);
 					myQueue.poll();
 				} else {
+					double error = 0.00000001;
+					if (newX - curX < wrap(newX, WIDTH) - wrap(curX, WIDTH) - error) {
+						newX = findX(curX, newX, false) - error;
+						newY = curY - (newX - curX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+						drawLine(nextMove, preX, preY, curX + error, curY);
+						teleport = true;
+					} else if (newX - curX > wrap(newX, WIDTH) - wrap(curX, WIDTH) + error) {
+						newX = findX(curX, newX, true);
+						newY = curY - (newX - curX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+						drawLine(nextMove, preX, preY, curX - error, curY);
+						teleport = true;
+					}
+
+					if (newY - curY < wrap(newY, HEIGHT) - wrap(curY, HEIGHT) - error) {
+						newY = findY(curY, newY, false) - error;
+						newX = curX + (newY - curY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+						drawLine(nextMove, preX, preY, curX, curY + error);
+						teleport = true;
+					} else if (newY - curY > wrap(newY, HEIGHT) - wrap(curY, HEIGHT) + error) {
+						newY = findY(curY, newY, true);
+						newX = curX + (newY - curY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+						drawLine(nextMove, preX, preY, curX, curY - error);
+						teleport = true;
+					}
 					curX = newX;
 					curY = newY;
 				}
 
-				boolean teleport = false;
-
-				if (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
-					//curX = 0;
-					//curY = preY - (WIDTH - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
-					teleport = true;
-				} else if (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
-					//curX = WIDTH;
-					//curY = preY - (0 - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
-					teleport = true;
-				}
-
-				if (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT)) {
-					System.out.println("hi");
-					//curY = 0;
-					//curX = preX + (HEIGHT - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
-					teleport = true;
-				} else if (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT)) {
-					//curY = HEIGHT;
-					//curX = preX + (0 - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
-					teleport = true;
-				}
-
 				imageView.setX(wrap(curX, WIDTH));
 				imageView.setY(wrap(curY, HEIGHT));
-				if (nextMove.isCurrentPenDown() & !teleport) {
-					Line line;
-					line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST,
-							wrap(curX, WIDTH) + XADJUST, wrap(curY, HEIGHT) + YADJUST);
-					line.setStroke(nextMove.getCurrentPenColor());
-					line.setStrokeWidth(nextMove.getCurrentPenWidth());
-					myPane.getChildren().add(line);
+				if (!teleport) {
+					drawLine(nextMove, preX, preY, curX, curY);
 				}
 			}
 			refreshImage();
 		}
 	}
-	
-	private void findX(double preX, double curX, boolean positive){
-		double x = 0;
-		
-		
+
+	public void drawLine(Movement nextMove, double preX, double preY, double curX, double curY) {
+		if (nextMove.isCurrentPenDown()) {
+			Line line;
+			line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST, wrap(curX, WIDTH) + XADJUST,
+					wrap(curY, HEIGHT) + YADJUST);
+			line.setStroke(nextMove.getCurrentPenColor());
+			line.setStrokeWidth(nextMove.getCurrentPenWidth());
+			myPane.getChildren().add(line);
+		}
 	}
-	private void findY(double preY, double curY, boolean positive){
-		
+
+	private double findX(double curX, double newX, boolean positive) {
+		double x = 0;
+		while ((newX - x) / (curX - x) > 0) {
+			if (positive) {
+				x += WIDTH;
+			} else {
+				x -= WIDTH;
+			}
+		}
+		return x;
+	}
+
+	private double findY(double curY, double newY, boolean positive) {
+		double y = 0;
+		while ((newY - y) / (curY - y) > 0) {
+			if (positive) {
+				y += HEIGHT;
+			} else {
+				y -= HEIGHT;
+			}
+		}
+		return y;
 	}
 
 	public ImageView getImageView() {

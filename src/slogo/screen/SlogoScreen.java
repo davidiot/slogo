@@ -71,15 +71,16 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			//myEngineController.sendToInterpreter(command);
-			//map.getCharacter(0).goTo(Double.parseDouble(command.split(" ")[0]), Double.parseDouble(command.split(" ")[1]));
-			//showError("ERROR!", command);
+			// myEngineController.sendToInterpreter(command);
+			// map.getCharacter(0).goTo(Double.parseDouble(command.split("
+			// ")[0]), Double.parseDouble(command.split(" ")[1]));
+			// showError("ERROR!", command);
 			try {
-			myEngineController.runCommands(command);
+				myEngineController.runCommands(command);
+				h.add(command);
 			} catch (InterpreterException e) {
 				showError("ERROR!", e.getMessage());
 			}
-			h.add(command);
 		}
 		map.updateCharacters();
 	}
@@ -99,7 +100,7 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		root.add(consolePane, 0, 2);
 
 		makeLists();
-		
+
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		setAlignment(root);
 	}
@@ -137,24 +138,24 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 
 		root.add(listPane, 1, 1);
 	}
-	
-	public double clearMap(){
+
+	public double clearMap() {
 		return map.clear();
 	}
-	
-	public History getHistoryObject(){
+
+	public History getHistoryObject() {
 		return history;
 	}
-	
-	public Variables getVariablesObject(){
+
+	public Variables getVariablesObject() {
 		return variables;
 	}
-	
-	public Commands getCommandsObject(){
+
+	public Commands getCommandsObject() {
 		return commands;
 	}
-	
-	public Display getDisplay(){
+
+	public Display getDisplay() {
 		return map;
 	}
 }
