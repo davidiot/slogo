@@ -249,4 +249,24 @@ public class MainCharacter {
 	public void changePenWidth(Double input) {
 		penWidth = input;
 	}
+
+	public double getX() {
+		return finalX - xCenter;
+	}
+
+	public double getY() {
+		return yCenter - finalY;
+	}
+
+	public double getDirection() {
+		return finalDirection;
+	}
+
+	public boolean isPenDown() {
+		return penDown;
+	}
+
+	public boolean isHidden() {
+		return hidden;
+	}
 }
