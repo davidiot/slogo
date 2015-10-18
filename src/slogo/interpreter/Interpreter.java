@@ -2,9 +2,7 @@ package slogo.interpreter;
 
 import java.util.List;
 
-import slogo.nodes.Node;
-import slogo.nodes.RootNode;
-import slogo.screen.SlogoScreen;
+import slogo.nodes.NodeObject;
 
 public class Interpreter {
 	private String myLanguage;
@@ -19,32 +17,13 @@ public class Interpreter {
 		myParser = new Parser(language);
 	}
 	
-	public void interpret(String input) {
-		//String[] translated = myParser.parseCommands(input);
-		TreeBuilder treeBuilder = new TreeBuilder(myCommandLibrary, myVariables);
-		List<String> parsedInput = myParser.parse(input);
-		Node commandTree = treeBuilder.buildTreeFromInput(parsedInput);
-		commandTree.traverseAndExecute();
-		
+	public NodeObject interpret(String input) {
+		List<InputObject> parsedInput = myParser.parse(input);
+		NewCommandFinder newCommands = new NewCommandFinder(parsedInput);
+		TemporaryCommandLibrary temp = newCommands.findCustomCommands();
+		TreeBuilder treeBuilder = new TreeBuilder(myCommandLibrary, myVariables, temp, parsedInput);
+		NodeObject commandTree = treeBuilder.buildTreeFromInput();
+		return commandTree;		
 	}
-	
-	/**
-	 * FOR TESTING
-	 */
-	
-	
-//	public static void main (String[] args) {
-//		Interpreter i = new Interpreter("English", null);
-//		i.interpret("if fd 8 [ fd 9 ]");
-//	}
-	
-	/*
-	public void print(Node root) {
-		for (Node node: root.getAllChildren()) {
-			print(node);
-		}
-		//System.out.println(root.getAction());
-	}
-	*/
 
 }

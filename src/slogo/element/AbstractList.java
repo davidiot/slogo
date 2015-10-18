@@ -4,7 +4,6 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
@@ -67,5 +66,11 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 		if (!open) {
 			toggle();
 		}
+	}
+	
+	public void clear(){
+		data.clear();
+		super.pane = null;
+		super.pane = new GridPane();
 	}
 }

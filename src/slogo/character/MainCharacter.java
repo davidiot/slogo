@@ -1,5 +1,8 @@
 package slogo.character;
 
+import java.util.LinkedList;
+import java.util.ResourceBundle;
+
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -9,7 +12,7 @@ import javafx.scene.shape.Line;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
-public class MainCharacter {
+public class MainCharacter implements CharacterInterface {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private final double XADJUST = Double.parseDouble(slogoResources.getString("characterCenterX"));
@@ -196,7 +199,7 @@ public class MainCharacter {
 		return image;
 	}
 
-	public void move(double distance, boolean forward) {
+	public double move(double distance, boolean forward) {
 		double correctedDirection = finalDirection;
 		if (!forward) {
 			correctedDirection = wrap(finalDirection + 180, 360);
@@ -210,6 +213,7 @@ public class MainCharacter {
 		}
 		finalX = wrap(finalX, WIDTH);
 		finalY = wrap(finalY, HEIGHT);
+		return distance;
 	}
 
 	public void changeSpeed(Double value) {
@@ -220,18 +224,27 @@ public class MainCharacter {
 		}
 	}
 
-	public void setVisible(boolean input) {
+	public double setVisible(boolean input) {
+		double returnVal = 0;
 		hidden = input;
+		if (input)
+			returnVal = 1;
+		return returnVal;
 	}
 
-	public void setPenDown(boolean input) {
+	public double setPenDown(boolean input) {
+		double returnVal = 0;
 		penDown = input;
+		if (input)
+			returnVal = 1;
+		return returnVal;
 	}
 
-	public void rotateCharacter(double degree) {
+	public double rotateCharacter(double degree) {
 		finalDirection += degree;
 		myQueue.add(new Movement("angle", new double[] { finalDirection }));
 		finalDirection = wrap(finalDirection, 360);
+		return degree;
 	}
 
 	public double setHeading(double degree) {
@@ -260,8 +273,8 @@ public class MainCharacter {
 	}
 
 	public double goHome() {
-		towards(xCenter, yCenter);
-		double distance = goTo(xCenter, yCenter);
+		towards(0, 0);
+		double distance = goTo(0, 0);
 		setHeading(0);
 		return distance;
 	}

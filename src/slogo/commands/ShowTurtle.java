@@ -1,22 +1,23 @@
 package slogo.commands;
 
 import java.util.List;
-import slogo.nodes.*;
 
-import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 public class ShowTurtle extends Command {
 
+	private final int CHILDREN_REQUIRED = 0;
+
+	
 	@Override
-	public double doCommand(List<Node> params) {
-		System.out.println("Showing turtle.");
-		return 1;
+	public double doCommand(List<NodeObject> params, EngineController controller) {
+		return controller.getMainCharacter().setVisible(true);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
-		return 0;
+		return CHILDREN_REQUIRED;
 	}
 
 }
