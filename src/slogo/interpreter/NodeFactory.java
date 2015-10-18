@@ -25,27 +25,25 @@ public class NodeFactory{
 		NodeObject new_node = null;
 		String type = input.getType();
 		String value = input.getValue();
-//		System.out.println("adding node  " + type + " " + value);
 		switch(type){
 		case "Command":
 			if (myCommandLibrary.getCommand(value) != null) {
-			new_node = new CommandNode(myCommandLibrary.getCommand(value), parent);
+			new_node = new CommandNode(value, myCommandLibrary.getCommand(value), parent);
 			} else {
 				new_node = new UserCommandNode(parent, value, tempActions.getNumParameters(value));
 			}
 			break;
 		case "CommandDeclaration":
-//			System.out.println("making dec node " + value);
 			new_node = new CommandDeclarationNode(value, parent);
 			break;
 		case "Constant": 
-			new_node = new ConstantNode(Integer.parseInt(value), parent);
+			new_node = new ConstantNode(value, parent);
 			break;
 		case "ListStart":
-			new_node = new ListStartNode(parent);
+			new_node = new ListStartNode(value, parent);
 			break;
 		case "ListEnd":
-			new_node = new ListEndNode(parent);
+			new_node = new ListEndNode(value, parent);
 			break;
 		case "Variable":
 			new_node = new VariableNode(parent, value);

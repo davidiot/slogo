@@ -1,17 +1,12 @@
 package slogo.commands;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 import slogo.interpreter.EngineController;
-import slogo.interpreter.VariableLibrary;
 import slogo.nodes.NodeObject;
 
 public class Forward extends Command {
 	
-	private VariableLibrary myVariables;
 	private final int CHILDREN_REQUIRED = 1;
 
 

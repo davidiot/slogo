@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import slogo.character.CharacterInterface;
 import slogo.nodes.NodeObject;
-import slogo.screen.SlogoScreen;
 import slogo.screen.SlogoScreenInterface;
 
 public class EngineController {

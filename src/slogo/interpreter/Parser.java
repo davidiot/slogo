@@ -2,6 +2,7 @@ package slogo.interpreter;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map.Entry;
@@ -22,25 +23,34 @@ public class Parser {
 		defaults = new ArrayList<>();
 		patterns = new ArrayList<>();
 		String location = String.format("resources/languages/%s", myLanguage);
-		//String location = "resources/languages/English";
 		defaults.addAll(makePatterns(location));
 		patterns.addAll(makePatterns("resources/languages/syntax"));
-		String[] splitInput = input.split("\\s+");
-		List<InputObject> parsed = convert(splitInput);
+		List<InputObject> parsed = convert(removeComments(input));
 		return parsed;
 	}
 	
 	
-    private List<InputObject> convert (String[] input) {
+    private List<String> removeComments(String input) {
+    	String[] lines = input.split("\n");
+    	List<String> indInputs = new ArrayList<>();
+    	for (String line: lines) {
+    		if (! line.startsWith("#")) {
+    			indInputs.addAll(Arrays.asList(line.split("\\s+")));
+    		}
+    	}
+    	System.out.println("removed " + indInputs);
+		return indInputs;
+	}
+
+	private List<InputObject> convert (List<String> list) {
     	List<InputObject> converted = new ArrayList<>();
-        for (String s : input) {
+        for (String s : list) {
             boolean matched = false;
             String type = "";
             String name = "";
             if (s.trim().length() > 0) {
                 for (Entry<String, Pattern> p : patterns) {
                     if (match(s, p.getValue())) {
-//                        System.out.println(String.format("%s matches %s", s, p.getKey()));
                     	type = p.getKey();
                         if (p.getKey().equals(COMMAND)){
                         	// translate any default commands in different langauge into
@@ -55,8 +65,7 @@ public class Parser {
                     }
                 }
                 if (! matched) {
-                	// TODO throw syntax error
-//                    System.out.println(String.format("%s not matched", s));
+                	throw new SyntaxException("%s not matched to input type", s);
                 }
             }
             converted.add(new InputObject(type, name));
@@ -67,7 +76,6 @@ public class Parser {
 	private String translate(String s) {
 		for (Entry<String, Pattern> p : defaults) {
             if (match(s, p.getValue())) {
-//                System.out.println(String.format("%s matches %s", s, p.getKey()));
                 return p.getKey();
             }
 		}
@@ -88,7 +96,6 @@ public class Parser {
                          // THIS IS THE KEY LINE
                          Pattern.compile(regex, Pattern.CASE_INSENSITIVE)));
         }
-//        System.out.println(patterns);
         return patterns;
     }
     
@@ -99,5 +106,6 @@ public class Parser {
 	public boolean match (String input, Pattern regex) {
         return regex.matcher(input).matches();
     }
+
 
 }

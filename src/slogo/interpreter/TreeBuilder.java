@@ -33,7 +33,7 @@ public class TreeBuilder {
 	private void buildTreeNodes(int index, NodeObject root) {
 		NodeObject current = root;
 		if (index >= myInput.size()){
-			// TODO check complete?
+			isComplete(root);
 			return;
 		}
 		if(current.canAdd()) {
@@ -50,30 +50,10 @@ public class TreeBuilder {
 		}
 		// now check whether each function has enough parameters
 	}
-	
-//	private void findCustomCommands() {
-//		int currentIndex = 0;
-//		InputObject toNode = new InputObject("Command", "MakeUserInstruction"); 
-//		for (InputObject in: myInput) {
-//			if (in.equals(toNode)) addCustomCommand(currentIndex);
-//		}	
-//	}
-//
-//	private void addCustomCommand(int index) {
-//		int currentIndex = index + 1;
-//		int paramCount = 0;
-//		String name = myInput.get(currentIndex).getValue();
-//		currentIndex += 1;
-//		if (! myInput.get(currentIndex).getType().equals("ListStart")) {
-//			// TODO maybe throw error
-//			System.out.println("missing open bracket");
-//		}
-//		currentIndex += 1;
-//		// TODO check for out of bounds
-//		while (! myInput.get(currentIndex).getType().equals("ListEnd")) {
-//			paramCount += 1;
-//			currentIndex += 1;
-//		}
-//		tempCommands.addCommand(name, new UserInstruction(paramCount));
-//	}
+
+	private void isComplete(NodeObject root) {
+		if (! root.hasCompleteChildren()) {
+			throw new RunCommandException("Command %s does not have proper number of parameters", root.getName());
+		}
+	}
 }

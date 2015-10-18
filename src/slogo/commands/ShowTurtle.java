@@ -1,10 +1,9 @@
 package slogo.commands;
 
 import java.util.List;
-import slogo.nodes.*;
-import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
+
 import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 public class ShowTurtle extends Command {
 

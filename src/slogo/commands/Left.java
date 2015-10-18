@@ -2,10 +2,8 @@ package slogo.commands;
 
 import java.util.List;
 
-import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 import slogo.interpreter.EngineController;
-import slogo.nodes.*;
+import slogo.nodes.NodeObject;
 
 
 public class Left extends Command {
