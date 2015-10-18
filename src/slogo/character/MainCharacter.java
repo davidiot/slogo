@@ -172,7 +172,7 @@ public class MainCharacter implements CharacterInterface {
 		return image;
 	}
 
-	public void move(double distance, boolean forward) {
+	public double move(double distance, boolean forward) {
 		double correctedDirection = finalDirection;
 		if (!forward) {
 			correctedDirection = wrap(finalDirection + 180, 360);
@@ -186,6 +186,7 @@ public class MainCharacter implements CharacterInterface {
 		}
 		finalX = wrap(finalX, WIDTH);
 		finalY = wrap(finalY, HEIGHT);
+		return distance;
 	}
 
 	public void changeSpeed(Double value) {

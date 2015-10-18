@@ -64,8 +64,8 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			showError("ERROR!", command);
-			myEngineController.sendToInterpreter(command);
+			//showError("ERROR!", command);
+			myEngineController.runCommands(command);
 			h.add(command);
 		}
 		map.updateCharacters();

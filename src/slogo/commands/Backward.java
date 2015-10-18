@@ -13,7 +13,7 @@ public class Backward extends Command {
 	public double doCommand(List<NodeObject> params, EngineController controller) {
 		List<Double> parameters = recurseToGetParameters(params, controller);
 		Double distance = parameters.get(0);
-		controller.getMainCharacter().move(distance*(-1));
+		controller.getMainCharacter().move(distance, false);
 		return distance;
 	}
 

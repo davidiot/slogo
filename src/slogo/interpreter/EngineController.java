@@ -36,10 +36,6 @@ public class EngineController {
 			myView.getVariablesObject().add(variableMapping);
 		}
 	}
-	
-	private void modifyIndividualVariable(){
-		
-	}
 
 	public SlogoScreenInterface getScreen(){
 		return myView;

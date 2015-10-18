@@ -14,8 +14,7 @@ public class Forward extends Command {
 	public double doCommand(List<NodeObject> params, EngineController controller) {
 		List<Double> parameters = recurseToGetParameters(params, controller);
 		double distance = parameters.get(0);
-		controller.getMainCharacter().move(distance);
-		return distance;
+		return controller.getMainCharacter().move(distance, true);
 	}
 
 	@Override

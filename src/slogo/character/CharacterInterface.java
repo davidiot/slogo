@@ -1,34 +1,39 @@
 package slogo.character;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import java.util.ResourceBundle;
 
 public interface CharacterInterface {
-		
-		public ImageView getImageView();
-		
-		public Image getImage();
-		
-		public void move(double distance);
-		
-		public void showCharacter();
-		
-		public void hideCharacter();
-		
-		public void rotateCharacter(double degree);
-		
-		public void refreshImage();
-		
-		public void changePenColor(String input);
-		
-		public void changePenWidth(Double input);
-		
-		public void returnHome();
-		
-		public double getDistanceMoved();
-		
+
+	public void update();
+	
+	public double move(double distance, boolean forward);
+	
+	public void changeSpeed(Double value);
+
+	public void setVisible(boolean input);
+	
+	public void setPenDown(boolean input);
+
+	public void rotateCharacter(double degree);
+
+	public double setHeading(double degree);
+
+	public double towards(double x, double y);
+
+	public double goTo(double x, double y);
+	
+	public double goHome();
+	
+	public void changePenColor(String input);
+	
+	public void changePenWidth(Double input);
+	
+	public double getX();
+	
+	public double getY();
+
+	public double getDirection();
+
+	public boolean isPenDown();
+
+	public boolean isHidden();
 		
 	}
