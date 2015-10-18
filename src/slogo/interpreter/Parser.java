@@ -42,7 +42,7 @@ public class Parser {
 		return indInputs;
 	}
 
-	private List<InputObject> convert (List<String> list) {
+	private List<InputObject> convert (List<String> list)  {
     	List<InputObject> converted = new ArrayList<>();
         for (String s : list) {
             boolean matched = false;
@@ -65,7 +65,7 @@ public class Parser {
                     }
                 }
                 if (! matched) {
-                	throw new SyntaxException("%s not matched to input type", s);
+                	throw new InterpreterException("%s not matched to input type", s);
                 }
             }
             converted.add(new InputObject(type, name));

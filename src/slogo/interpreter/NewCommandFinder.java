@@ -21,22 +21,23 @@ public class NewCommandFinder {
 		return myUserCommands;
 	}
 	
-	
-	
 	private void addCustomCommand(int index) {
 		System.out.print("found...  ");
 		int currentIndex = index + 1;
 		int paramCount = 0;
 		String name = parsedList.get(currentIndex).getValue();
 		System.out.println("name: " + name);
+		if (! parsedList.get(currentIndex).getType().equals("Command")) {
+			throw new InterpreterException("Expected commmand name in make command declaration, got %s", 
+					parsedList.get(currentIndex).getType());
+		}
 		parsedList.get(currentIndex).changeType("CommandDeclaration");
 		currentIndex += 1;
 		if (! parsedList.get(currentIndex).getType().equals("ListStart")) {
-			// TODO maybe throw error
-			System.out.println("missing open bracket");
+			throw new InterpreterException("Missing [ before parameter list in function declaration, got %s", 
+					parsedList.get(currentIndex).getType());
 		}
 		currentIndex += 1;
-		// TODO check for out of bounds
 		while (! parsedList.get(currentIndex).getType().equals("ListEnd")) {
 			paramCount += 1;
 			currentIndex += 1;
