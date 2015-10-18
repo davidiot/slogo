@@ -85,4 +85,13 @@ public class Display extends AbstractElement {
 			mc.changeSpeed(value);
 		}
 	}
+
+	public double clear() {
+		double distance = 0;
+		for (MainCharacter mc : characters) {
+			distance += mc.goHome();
+		}
+		makePane();
+		return distance;
+	}
 }
