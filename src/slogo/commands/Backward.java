@@ -19,7 +19,6 @@ public class Backward extends Command {
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
 		return CHILDREN_REQUIRED;
 	}
 

@@ -9,6 +9,8 @@ import slogo.nodes.NodeObject;
 
 public class Repeat extends Command {
 
+	private final int CHILDREN_REQUIRED = 0;
+	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
 		double returnVal = 0; 
@@ -29,7 +31,7 @@ public class Repeat extends Command {
 
 	@Override
 	public int getNumChildrenRequired() {
-		return 2;
+		return CHILDREN_REQUIRED;
 	}
 
 }

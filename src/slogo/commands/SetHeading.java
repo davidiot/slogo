@@ -8,18 +8,18 @@ import slogo.nodes.NodeObject;
 
 public class SetHeading extends Command {
 	
+	private final int CHILDREN_REQUIRED = 1;
+
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-	//	double currentHeading = character.getImageView().getRotate();
-	//	double destinationHeading = params.get(0);
-		System.out.println("Set the heading to " + params.get(0));
-		return 0;//destinationHeading - currentHeading;
+		List<Double> parameters = recurseToGetParameters(params, controller);
+		double degrees = parameters.get(0);
+		return controller.getMainCharacter().setHeading(degrees);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
-		return 1;
+		return CHILDREN_REQUIRED;
 	}
 
 }

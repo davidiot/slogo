@@ -124,8 +124,8 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		root.add(listPane, 1, 1);
 	}
 	
-	public void clearMap(){
-		map.clearMap();
+	public double clearMap(){
+		return map.clear();
 	}
 	
 	public History getHistoryObject(){

@@ -8,17 +8,16 @@ import slogo.nodes.NodeObject;
 import slogo.nodes.VariableNode;
 
 public class MakeVariable extends Command {
-	private VariableLibrary myVariables;
 	
-	public MakeVariable(VariableLibrary variables) {
-		myVariables = variables;
-	}
+	private VariableLibrary myVariables;
+	private final int CHILDREN_REQUIRED = 2;
 	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
 		// first param is variable
 		// second is expression
 		// TODO if parameter types are wrong throw exception
+		myVariables = controller.getVariableLibrary();
 		double value = params.get(1).traverseAndExecute(controller);
 		String name = ((VariableNode)params.get(0)).getName();
 		System.out.println("making " + name + " " + value);
@@ -28,8 +27,7 @@ public class MakeVariable extends Command {
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
-		return 2;
+		return CHILDREN_REQUIRED;
 	}
 
 }

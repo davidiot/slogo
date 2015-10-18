@@ -8,11 +8,11 @@ public interface CharacterInterface {
 	
 	public void changeSpeed(Double value);
 
-	public void setVisible(boolean input);
+	public double setVisible(boolean input);
 	
-	public void setPenDown(boolean input);
+	public double setPenDown(boolean input);
 
-	public void rotateCharacter(double degree);
+	public double rotateCharacter(double degree);
 
 	public double setHeading(double degree);
 

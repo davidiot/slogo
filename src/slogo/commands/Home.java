@@ -10,14 +10,7 @@ public class Home extends Command {
 	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		/*double currentX = character.getImageView().getX();
-		double currentY = character.getImageView().getY();
-		double destinationX = 0;
-		double destinationY = 0;
-		double distance = Math.sqrt((destinationX - currentX)*(destinationX - currentX)
-				+ (destinationY - currentY)*(destinationY - currentY));*/
-		System.out.println("Went home. Distance moved: ");
-		return 0;
+		return controller.getMainCharacter().goHome();
 	}
 
 	@Override

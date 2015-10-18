@@ -8,18 +8,19 @@ import slogo.nodes.NodeObject;
 
 public class Right extends Command {
 
+	private final int CHILDREN_REQUIRED = 1;
+
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		return 0;
-		//double degreesTurned = params.get(0);
-		//System.out.println("Turned right " + params.get(0) + " degrees.");
-		//return degreesTurned;
+		List<Double> parameters = this.recurseToGetParameters(params, controller);
+		double degrees = parameters.get(0);
+		return controller.getMainCharacter().rotateCharacter(degrees);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
 		// TODO Auto-generated method stub
-		return 1;
+		return CHILDREN_REQUIRED;
 	}
 
 }

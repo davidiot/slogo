@@ -7,16 +7,16 @@ import slogo.nodes.NodeObject;
 
 public class PenDown extends Command {
 
+	private final int CHILDREN_REQUIRED = 0;
+	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		System.out.println("Pen is down");
-		return 1;
+		return controller.getMainCharacter().setPenDown(true);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
-		return 0;
+		return CHILDREN_REQUIRED;
 	}
 
 }

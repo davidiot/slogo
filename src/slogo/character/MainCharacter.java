@@ -197,18 +197,27 @@ public class MainCharacter implements CharacterInterface {
 		}
 	}
 
-	public void setVisible(boolean input) {
+	public double setVisible(boolean input) {
+		double returnVal = 0;
 		hidden = input;
+		if (input)
+			returnVal = 1;
+		return returnVal;
 	}
 
-	public void setPenDown(boolean input) {
+	public double setPenDown(boolean input) {
+		double returnVal = 0;
 		penDown = input;
+		if (input)
+			returnVal = 1;
+		return returnVal;
 	}
 
-	public void rotateCharacter(double degree) {
+	public double rotateCharacter(double degree) {
 		finalDirection += degree;
 		myQueue.add(new Movement("angle", new double[] { finalDirection }));
 		finalDirection = wrap(finalDirection, 360);
+		return degree;
 	}
 
 	public double setHeading(double degree) {
@@ -237,8 +246,8 @@ public class MainCharacter implements CharacterInterface {
 	}
 
 	public double goHome() {
-		towards(xCenter, yCenter);
-		double distance = goTo(xCenter, yCenter);
+		towards(0, 0);
+		double distance = goTo(0, 0);
 		setHeading(0);
 		return distance;
 	}
