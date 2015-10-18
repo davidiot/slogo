@@ -1,16 +1,17 @@
 package slogo.nodes;
 
+import slogo.interpreter.EngineController;
+import slogo.interpreter.InterpreterException;
 import slogo.interpreter.VariableLibrary;
 
 
-public class VariableNode extends Node {
-	private String myName;
+public class VariableNode extends NodeObject {
+//	private String myName;
 	private VariableLibrary myVariables;
 
-	public VariableNode(VariableLibrary variables, Node parent, String name) {
-		super(parent);
-		myName = name;
-		myVariables = variables;
+	// NOW CAN CHANGE CONSTRUCTOR TO MATCH EVERYTHING ELSE?
+	public VariableNode(String name, NodeObject parent) {
+		super(name, parent);
 	}
 
 	@Override
@@ -20,7 +21,7 @@ public class VariableNode extends Node {
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
 		
 	}
@@ -31,7 +32,8 @@ public class VariableNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
+	public double traverseAndExecute(EngineController controller) {
+		myVariables = controller.getVariableLibrary();
 		if (myVariables.getVariable(myName) != null ) {
 			return myVariables.getVariable(myName);
 		}
@@ -39,13 +41,19 @@ public class VariableNode extends Node {
 	}
 	
 	private double getLocalVariable() {
-		// TODO add variable search through parents
-		// TODO add exception if variable not found
-		return 0;
+		System.out.println("looking for local variables... ");
+		NodeObject currentNode = this.getParent();
+		while (currentNode != null) {
+			if (currentNode.getLocalVariable(myName) != null) {
+				return currentNode.getLocalVariable(myName);
+			}
+			currentNode = currentNode.getParent();
+		}
+		throw new InterpreterException("Variable %s not found", myName);
 	}
 
-	public String getName() {
-		return myName;
-	}
+//	public String getName() {
+//		return myName;
+//	}
 
 }

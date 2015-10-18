@@ -1,8 +1,8 @@
 package slogo.managers;
 
+import javafx.stage.Stage;
 import slogo.screen.AbstractScreen;
 import slogo.screen.StartScreen;
-import javafx.stage.Stage;
 
 public class RootManager {
 

@@ -1,24 +1,25 @@
 package slogo.commands;
 
 import java.util.List;
-import slogo.character.MainCharacter;
-import slogo.nodes.*;
+
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 
 public class Left extends Command {
 	
+	private final int CHILDREN_REQUIRED = 1;
+	
 	@Override
-	public double doCommand(List<Node> params) {
-		return 0;
-		//double degreesTurned = params.get(0);
-		//System.out.println("Turned " + params.get(0) + " left.");
-		//return degreesTurned;
+	public double doCommand(List<NodeObject> params, EngineController controller) {
+		List<Double> parameters = recurseToGetParameters(params, controller);
+		double degrees = parameters.get(0)*(-1);
+		return controller.getMainCharacter().rotateCharacter(degrees);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
-		return 1;
+		return CHILDREN_REQUIRED;
 	}
 
 }

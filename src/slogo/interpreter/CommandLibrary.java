@@ -6,13 +6,12 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import slogo.commands.Command;
-import slogo.commands.Forward;
+import slogo.commands.MakeUserInstruction;
 import slogo.commands.MakeVariable;
-import slogo.commands.Repeat;
 
 public class CommandLibrary {
 
-	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/English2";
+	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/English3";
 	private Map<String, Command> myCommandMap;
 	private ResourceBundle myCommandResources;
 
@@ -22,9 +21,8 @@ public class CommandLibrary {
 		myCommandResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 		makeCommandMap(myCommandResources);
 		// TODO fix following code (sorry for marring the beautiful code in this class)
-		myCommandMap.put("Forward", new Forward(variables));
-		myCommandMap.put("MakeVariable", new MakeVariable(variables));
-		myCommandMap.put("Repeat", new Repeat());
+		//myCommandMap.put("MakeVariable", new MakeVariable(variables));
+		//myCommandMap.put("MakeUserInstruction", new MakeUserInstruction());
 	}
 
 	public Command getCommand(String name) {

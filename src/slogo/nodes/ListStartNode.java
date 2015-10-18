@@ -1,9 +1,11 @@
 package slogo.nodes;
 
-public class ListStartNode extends Node {
+import slogo.interpreter.EngineController;
 
-	public ListStartNode(Node parent) {
-		super(parent);
+public class ListStartNode extends NodeObject {
+
+	public ListStartNode(String value, NodeObject parent) {
+		super(value, parent);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -14,7 +16,7 @@ public class ListStartNode extends Node {
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		myChildren.add(node);
 	}
 
@@ -26,11 +28,11 @@ public class ListStartNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
+	public double traverseAndExecute(EngineController controller) {
 		// TODO Auto-generated method stub
 		double returnVal = 0;
-		for (Node child: myChildren) {
-			returnVal = child.traverseAndExecute();
+		for (NodeObject child: myChildren) {
+			returnVal = child.traverseAndExecute(controller);
 		}
 		return returnVal;
 	}

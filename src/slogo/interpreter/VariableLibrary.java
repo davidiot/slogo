@@ -3,20 +3,38 @@ package slogo.interpreter;
 import java.util.HashMap;
 import java.util.Map;
 
+import slogo.element.ObservableArrayList;
+
 public class VariableLibrary {
-	Map<String, Double> variableMap;
+	private Map<String, Double> myVariableMap;
+	private String myNewestVariable;
 	
 	public VariableLibrary(){
-		variableMap = new HashMap<>();
+		myVariableMap = new HashMap<>();
 	}
 	
 	public Double getVariable(String name) {
-		return variableMap.get(name);
+		return myVariableMap.get(name);
 	}
 	
 	public void addVariable(String name, double value) {
-		variableMap.put(name, value);
+		String newVariableMapping = name.substring(1) + " = " + value;
+		myNewestVariable = newVariableMapping;
+		myVariableMap.put(name, value);
+		
 		System.out.println(name + " is " + new Double(value));
+	}
+	
+	public void updateVariablesFromGUI(ObservableArrayList variables){
+		
+	}
+	
+	public String getNewestVariableString(){
+		return myNewestVariable;
+	}
+	
+	public Map<String, Double> getVariableMap(){
+		return myVariableMap;
 	}
 
 }
