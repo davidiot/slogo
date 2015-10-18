@@ -46,7 +46,7 @@ public class NodeFactory{
 			new_node = new ListEndNode(value, parent);
 			break;
 		case "Variable":
-			new_node = new VariableNode(parent, value);
+			new_node = new VariableNode(value, parent);
 			break;
 		}
 		return new_node;		

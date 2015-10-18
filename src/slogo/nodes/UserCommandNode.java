@@ -10,7 +10,7 @@ public class UserCommandNode extends NodeObject {
 	private int numChildren;
 	private CommandLibrary commandLibrary;
 
-	public UserCommandNode(NodeObject parent, String name, int numParams, CommandLibrary commands) {
+	public UserCommandNode(NodeObject parent, String name, int numParams) {
 		super(name, parent);
 		myName = name;
 		numChildren = numParams;
