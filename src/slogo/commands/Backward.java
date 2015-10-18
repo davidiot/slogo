@@ -2,19 +2,18 @@ package slogo.commands;
 
 import java.util.List;
 
-
-import slogo.character.CharacterInterface;
-import slogo.nodes.*;
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 public class Backward extends Command {
 	
 	private final int CHILDREN_REQUIRED = 1;
 	
 	@Override
-	public double doCommand(List<NodeObject> params, CharacterInterface character) {
-		List<Double> parameters = recurseToGetParameters(params, character);
+	public double doCommand(List<NodeObject> params, EngineController controller) {
+		List<Double> parameters = recurseToGetParameters(params, controller);
 		Double distance = parameters.get(0);
-		character.move(distance*(-1));
+		controller.getMainCharacter().move(distance*(-1));
 		return distance;
 	}
 

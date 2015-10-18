@@ -2,15 +2,14 @@ package slogo.commands;
 
 import java.util.List;
 
-import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
-import slogo.nodes.*;
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 
 public class PenUp extends Command {
 	
 	@Override
-	public double doCommand(List<NodeObject> params, CharacterInterface character) {
+	public double doCommand(List<NodeObject> params, EngineController controller) {
 		System.out.println("Pen is up.");
 		return 0;
 	}

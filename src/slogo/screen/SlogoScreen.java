@@ -16,7 +16,7 @@ import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
 import slogo.interpreter.EngineController;
 
-public class SlogoScreen extends AbstractScreen {
+public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface {
 
 	private String language;
 	private Console console;
@@ -119,6 +119,10 @@ public class SlogoScreen extends AbstractScreen {
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 1);
+	}
+	
+	public void clearMap(){
+		map.clearMap();
 	}
 	
 	public History getHistoryObject(){

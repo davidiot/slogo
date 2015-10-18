@@ -1,6 +1,6 @@
 package slogo.nodes;
 
-import slogo.character.CharacterInterface;
+import slogo.interpreter.EngineController;
 
 public class ListEndNode extends NodeObject {
 
@@ -26,7 +26,7 @@ public class ListEndNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(CharacterInterface character) {
+	public double traverseAndExecute(EngineController controller) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

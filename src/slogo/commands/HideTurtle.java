@@ -2,15 +2,14 @@ package slogo.commands;
 
 import java.util.List;
 
-import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
-import slogo.nodes.*;
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 
 public class HideTurtle extends Command {
 
 	@Override
-	public double doCommand(List<NodeObject> params, CharacterInterface character) {
+	public double doCommand(List<NodeObject> params, EngineController controller) {
 		return 0;
 		//double distanceMoved = params.get(0);
 		//System.out.println("Turtle hidden.");

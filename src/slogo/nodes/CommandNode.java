@@ -3,6 +3,7 @@ package slogo.nodes;
 
 import slogo.character.CharacterInterface;
 import slogo.commands.Command;
+import slogo.interpreter.EngineController;
 
 public class CommandNode extends NodeObject{
 	private Command myCommand;
@@ -16,8 +17,8 @@ public class CommandNode extends NodeObject{
 		myChildren.add(child);
 	}
 
-	public double traverseAndExecute(CharacterInterface character) {
-		return myCommand.doCommand(myChildren, character);
+	public double traverseAndExecute(EngineController controller) {
+		return myCommand.doCommand(myChildren, controller);
 		
 	}
 

@@ -12,7 +12,7 @@ import slogo.commands.Repeat;
 
 public class CommandLibrary {
 
-	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/English2";
+	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/English3";
 	private Map<String, Command> myCommandMap;
 	private ResourceBundle myCommandResources;
 
@@ -23,8 +23,7 @@ public class CommandLibrary {
 		makeCommandMap(myCommandResources);
 		// TODO fix following code (sorry for marring the beautiful code in this class)
 		myCommandMap.put("MakeVariable", new MakeVariable(variables));
-		myCommandMap.put("MakeUserInstruction", new MakeUserInstruction(this));
-		myCommandMap.put("Repeat", new Repeat());
+		myCommandMap.put("MakeUserInstruction", new MakeUserInstruction());
 	}
 
 	public Command getCommand(String name) {
