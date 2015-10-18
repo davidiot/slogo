@@ -37,7 +37,6 @@ public class MainCharacter implements CharacterInterface {
 	private Color penColor;
 	private double penWidth = 1;
 	private double speed = 1;
-	private double maxSpeed = Double.parseDouble(slogoResources.getString("maxSpeed"));
 	private Pane myPane;
 	private LinkedList<Movement> myQueue;
 
@@ -144,8 +143,8 @@ public class MainCharacter implements CharacterInterface {
 				newX = curX + speed * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
 				newY = curY - speed * Math.sin(Math.toRadians(ANGLE - adjustedDirection));
 
-				if (speed == Double.MAX_VALUE || ((Math.pow((newX - curX), 2)
-						+ Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2) + Math.pow((y - curY), 2)))) {
+				if ((Math.pow((newX - curX), 2) + Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2)
+						+ Math.pow((y - curY), 2))) {
 					curX = wrap(x, WIDTH);
 					curY = wrap(y, HEIGHT);
 					myQueue.poll();
@@ -153,29 +152,11 @@ public class MainCharacter implements CharacterInterface {
 					curX = newX;
 					curY = newY;
 				}
-
-				boolean teleport = false;
-
-				if (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
-					//curX = 0;
-					//curY = preY - (WIDTH - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
-					teleport = true;
-				} else if (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
-					//curX = WIDTH;
-					//curY = preY - (0 - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
-					teleport = true;
-				}
-
-				if (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT)) {
-					System.out.println("hi");
-					//curY = 0;
-					//curX = preX + (HEIGHT - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
-					teleport = true;
-				} else if (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT)) {
-					//curY = HEIGHT;
-					//curX = preX + (0 - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
-					teleport = true;
-				}
+				double error = 0.00000001;
+				boolean teleport = (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH) + error)
+						|| (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH) - error)
+						|| (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT) - error)
+						|| (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT) + error);
 
 				imageView.setX(wrap(curX, WIDTH));
 				imageView.setY(wrap(curY, HEIGHT));
@@ -190,15 +171,6 @@ public class MainCharacter implements CharacterInterface {
 			}
 			refreshImage();
 		}
-	}
-	
-	private void findX(double preX, double curX, boolean positive){
-		double x = 0;
-		
-		
-	}
-	private void findY(double preY, double curY, boolean positive){
-		
 	}
 
 	public ImageView getImageView() {
@@ -227,11 +199,7 @@ public class MainCharacter implements CharacterInterface {
 	}
 
 	public void changeSpeed(Double value) {
-		if (value >= maxSpeed) {
-			speed = Double.MAX_VALUE;
-		} else {
-			speed = value;
-		}
+		speed = value;
 	}
 
 	public double setVisible(boolean input) {
