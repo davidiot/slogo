@@ -30,15 +30,21 @@ public class Parser {
 	}
 	
 	
-    private List<String> removeComments(String input) {
-    	String[] lines = input.split("\n");
-    	List<String> indInputs = new ArrayList<>();
-    	for (String line: lines) {
-    		if (! line.startsWith("#")) {
-    			indInputs.addAll(Arrays.asList(line.split("\\s+")));
-    		}
-    	}
-    	System.out.println("removed " + indInputs);
+	private List<String> removeComments(String input) {
+		String[] lines = input.split("\n");
+		List<String> indInputs = new ArrayList<>();
+		for (String line: lines) {
+			if (! line.startsWith("#")) {
+				List<String> split = Arrays.asList(line.split("\\s+"));
+				for (String entry: split) {
+					if (entry.trim().length() > 0) {
+						indInputs.add(entry.trim());
+					}
+				}
+				
+			}
+		}
+		System.out.println("removed " + indInputs);
 		return indInputs;
 	}
 

@@ -30,6 +30,9 @@ public class NodeFactory{
 			if (myCommandLibrary.getCommand(value) != null) {
 			new_node = new CommandNode(value, myCommandLibrary.getCommand(value), parent);
 			} else {
+				if (tempActions.getNumParameters(value) == null) {
+					throw new InterpreterException("User command %s does not exist", value);
+				}
 				new_node = new UserCommandNode(parent, value, tempActions.getNumParameters(value));
 			}
 			break;
