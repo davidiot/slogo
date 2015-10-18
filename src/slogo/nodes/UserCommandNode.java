@@ -1,6 +1,5 @@
 package slogo.nodes;
 
-import slogo.character.CharacterInterface;
 import slogo.commands.Command;
 import slogo.interpreter.CommandLibrary;
 import slogo.interpreter.EngineController;

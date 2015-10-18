@@ -1,10 +1,6 @@
 package slogo.character;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
-import java.util.ResourceBundle;
 
 public interface CharacterInterface {
 		

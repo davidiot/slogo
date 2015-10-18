@@ -8,7 +8,6 @@ import java.util.ResourceBundle;
 import slogo.commands.Command;
 import slogo.commands.MakeUserInstruction;
 import slogo.commands.MakeVariable;
-import slogo.commands.Repeat;
 
 public class CommandLibrary {
 
