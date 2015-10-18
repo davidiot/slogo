@@ -62,80 +62,55 @@ public class MainCharacter {
 		myQueue = new LinkedList<Movement>();
 	}
 
-	public ImageView getImageView() {
-		return imageView;
-	}
+	private class Movement {
+		private String type;
+		private double[] value;
+		private boolean currentPenDown;
+		private double currentPenWidth;
+		private Color currentPenColor;
 
-	public Image getImage() {
-		return image;
-	}
-
-	public void move(double distance, boolean forward) {
-		double correctedDirection = finalDirection;
-		if (!forward) {
-			correctedDirection = wrap(finalDirection + 180, 360);
+		public Movement(String type, double[] value) {
+			this.type = type;
+			this.value = value;
+			currentPenDown = penDown;
+			currentPenColor = penColor;
+			currentPenWidth = penWidth;
 		}
-		finalX += distance * Math.cos(Math.toRadians(ANGLE - correctedDirection));
-		finalY -= distance * Math.sin(Math.toRadians(ANGLE - correctedDirection));
-		if (forward) {
-			myQueue.add(new Movement("fline", new double[] { finalX, finalY }));
-		} else {
-			myQueue.add(new Movement("bline", new double[] { finalX, finalY }));
+
+		public String getType() {
+			return type;
 		}
-		finalX = wrap(finalX, WIDTH);
-		finalY = wrap(finalY, HEIGHT);
-	}
 
-	public void setVisible(boolean input) {
-		hidden = input;
-	}
+		public double[] getValue() {
+			return value;
+		}
 
-	public void setPenDown(boolean input) {
-		penDown = input;
-	}
+		public boolean isCurrentPenDown() {
+			return currentPenDown;
+		}
 
-	public void rotateCharacter(double degree) {
-		finalDirection += degree;
-		myQueue.add(new Movement("angle", new double[] { finalDirection }));
-		finalDirection = wrap(finalDirection, 360);
-	}
+		public Double getCurrentPenWidth() {
+			return currentPenWidth;
+		}
 
-	public double setHeading(double degree) {
-		double output = wrap(degree, 360) - finalDirection;
-		finalDirection = wrap(degree, 360);
-		myQueue.add(new Movement("angle", new double[] { finalDirection }));
-		return output;
-	}
-
-	public double towards(double x, double y) {
-		x = x + xCenter;
-		y = -(y + yCenter);
-		if (x == finalX && y == finalY) {
-			return 0;
-		} else {
-			double degree = Math.atan2((x - finalX), (y - finalY)) * 180 / Math.PI;
-			return setHeading(degree);
+		public Color getCurrentPenColor() {
+			return currentPenColor;
 		}
 	}
 
-	public double goTo(double x, double y) {
-		towards(x, y);
-		double distance = Math.sqrt(Math.pow(x + xCenter - finalX, 2) + (Math.pow(y + yCenter - finalY, 2)));
-		move(distance, true);
-		return distance;
+	private double wrap(double input, double value) {
+		while (input >= value) {
+			input -= value;
+		}
+		while (input < 0) {
+			input += value;
+		}
+		return input;
 	}
 
-	public void refreshImage() {
+	private void refreshImage() {
 		myPane.getChildren().remove(imageView);
 		myPane.getChildren().add(imageView);
-	}
-
-	public void changePenColor(String input) {
-		penColor = Color.valueOf(input);
-	}
-
-	public void changePenWidth(Double input) {
-		penWidth = input;
 	}
 
 	public void update() {
@@ -189,40 +164,28 @@ public class MainCharacter {
 		}
 	}
 
-	private class Movement {
-		private String type;
-		private double[] value;
-		private boolean currentPenDown;
-		private double currentPenWidth;
-		private Color currentPenColor;
+	public ImageView getImageView() {
+		return imageView;
+	}
 
-		public Movement(String type, double[] value) {
-			this.type = type;
-			this.value = value;
-			currentPenDown = penDown;
-			currentPenColor = penColor;
-			currentPenWidth = penWidth;
-		}
+	public Image getImage() {
+		return image;
+	}
 
-		public String getType() {
-			return type;
+	public void move(double distance, boolean forward) {
+		double correctedDirection = finalDirection;
+		if (!forward) {
+			correctedDirection = wrap(finalDirection + 180, 360);
 		}
-
-		public double[] getValue() {
-			return value;
+		finalX += distance * Math.cos(Math.toRadians(ANGLE - correctedDirection));
+		finalY -= distance * Math.sin(Math.toRadians(ANGLE - correctedDirection));
+		if (forward) {
+			myQueue.add(new Movement("fline", new double[] { finalX, finalY }));
+		} else {
+			myQueue.add(new Movement("bline", new double[] { finalX, finalY }));
 		}
-
-		public boolean isCurrentPenDown() {
-			return currentPenDown;
-		}
-
-		public Double getCurrentPenWidth() {
-			return currentPenWidth;
-		}
-
-		public Color getCurrentPenColor() {
-			return currentPenColor;
-		}
+		finalX = wrap(finalX, WIDTH);
+		finalY = wrap(finalY, HEIGHT);
 	}
 
 	public void changeSpeed(Double value) {
@@ -233,13 +196,57 @@ public class MainCharacter {
 		}
 	}
 
-	public double wrap(double input, double value) {
-		while (input >= value) {
-			input -= value;
+	public void setVisible(boolean input) {
+		hidden = input;
+	}
+
+	public void setPenDown(boolean input) {
+		penDown = input;
+	}
+
+	public void rotateCharacter(double degree) {
+		finalDirection += degree;
+		myQueue.add(new Movement("angle", new double[] { finalDirection }));
+		finalDirection = wrap(finalDirection, 360);
+	}
+
+	public double setHeading(double degree) {
+		double output = degree - finalDirection;
+		finalDirection = wrap(degree, 360);
+		myQueue.add(new Movement("angle", new double[] { degree }));
+		return output;
+	}
+
+	public double towards(double x, double y) {
+		x = x + xCenter;
+		y = yCenter - y;
+		if (x == finalX && y == finalY) {
+			return 0;
+		} else {
+			double degree = 180 - Math.atan2((x - finalX), (y - finalY)) * 180 / Math.PI;
+			return setHeading(degree);
 		}
-		while (input < 0) {
-			input += value;
-		}
-		return input;
+	}
+
+	public double goTo(double x, double y) {
+		towards(x, y);
+		double distance = Math.sqrt(Math.pow(x + xCenter - finalX, 2) + (Math.pow(yCenter - y - finalY, 2)));
+		move(distance, true);
+		return distance;
+	}
+
+	public double goHome() {
+		towards(xCenter, yCenter);
+		double distance = goTo(xCenter, yCenter);
+		setHeading(0);
+		return distance;
+	}
+
+	public void changePenColor(String input) {
+		penColor = Color.valueOf(input);
+	}
+
+	public void changePenWidth(Double input) {
+		penWidth = input;
 	}
 }
