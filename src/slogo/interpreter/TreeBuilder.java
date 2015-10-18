@@ -1,10 +1,7 @@
 package slogo.interpreter;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import slogo.commands.UserInstruction;
-import slogo.nodes.NodeFactory;
 import slogo.nodes.NodeObject;
 import slogo.nodes.RootNode;
 

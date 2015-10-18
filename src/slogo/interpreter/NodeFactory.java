@@ -1,9 +1,13 @@
-package slogo.nodes;
+package slogo.interpreter;
 
-import slogo.interpreter.CommandLibrary;
-import slogo.interpreter.InputObject;
-import slogo.interpreter.TemporaryCommandLibrary;
-import slogo.interpreter.VariableLibrary;
+import slogo.nodes.CommandDeclarationNode;
+import slogo.nodes.CommandNode;
+import slogo.nodes.ConstantNode;
+import slogo.nodes.ListEndNode;
+import slogo.nodes.ListStartNode;
+import slogo.nodes.NodeObject;
+import slogo.nodes.UserCommandNode;
+import slogo.nodes.VariableNode;
 
 public class NodeFactory{
 
@@ -21,7 +25,7 @@ public class NodeFactory{
 		NodeObject new_node = null;
 		String type = input.getType();
 		String value = input.getValue();
-		System.out.println("adding node  " + type + " " + value);
+//		System.out.println("adding node  " + type + " " + value);
 		switch(type){
 		case "Command":
 			if (myCommandLibrary.getCommand(value) != null) {

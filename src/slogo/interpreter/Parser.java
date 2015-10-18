@@ -12,8 +12,6 @@ public class Parser {
 	private List<Entry<String, Pattern>> defaults;
 	private List<Entry<String, Pattern>> patterns;
 	private String myLanguage;
-	private List<InputObject> parsedList;
-	private TemporaryCommandLibrary myUserCommands;
 	private static final String COMMAND = "Command";
 	
 	public Parser(String language) {

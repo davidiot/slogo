@@ -6,10 +6,8 @@ import java.util.Map;
 import java.util.ResourceBundle;
 
 import slogo.commands.Command;
-import slogo.commands.Forward;
 import slogo.commands.MakeUserInstruction;
 import slogo.commands.MakeVariable;
-import slogo.commands.Repeat;
 
 public class CommandLibrary {
 
