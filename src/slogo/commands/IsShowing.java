@@ -5,7 +5,7 @@ import java.util.List;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class isShowing extends Command {
+public class IsShowing extends Command {
 
 	private final int CHILDREN_REQUIRED = 0;
 
