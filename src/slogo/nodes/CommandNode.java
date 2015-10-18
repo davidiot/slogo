@@ -1,53 +1,43 @@
+
 package slogo.nodes;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import slogo.character.MainCharacter;
+import slogo.character.CharacterInterface;
 import slogo.commands.Command;
-import slogo.element.Display;
+import slogo.interpreter.EngineController;
 
-public class CommandNode extends Node{
-	private Command myAction;
-	private List<Double> myParameters;
+public class CommandNode extends NodeObject{
+	private Command myCommand;
 	
-	public CommandNode(Command action, Node parent) {
-		super(parent);
-		myAction = action;
-		myParameters = new ArrayList<>();
+	public CommandNode(String value, Command command, NodeObject parent) {
+		super(value, parent);
+		myCommand = command;
 	}
 	
-	public void addChild(Node child) {
+	public void addChild(NodeObject child) {
 		myChildren.add(child);
 	}
 
-	public double traverseAndExecute() {
-//		for (Node child: myChildren){
-//			System.out.println(myChildren);
-//			myParameters.add(child.traverseAndExecute());
-//		}
-//		return myAction.doCommand(myParameters);
-		return myAction.doCommand(myChildren);
+	public double traverseAndExecute(EngineController controller) {
+		return myCommand.doCommand(myChildren, controller);
 		
 	}
 
 	public boolean hasCompleteChildren() {
 		// first check this node
-		if (myAction != null) {
-			if (myAction.getNumChildrenRequired() != myChildren.size()) return false;
+		if (myCommand != null) {
+			if (myCommand.getNumChildrenRequired() != myChildren.size()) return false;
 		}
 		// recursively check children
 		boolean complete = true;
-		for (Node child: myChildren) {
+		for (NodeObject child: myChildren) {
 			complete = complete && child.hasCompleteChildren();
 		}
 		return complete;
 	}
 
 	public boolean canAdd() {
-		if (myAction == null) return true;
-		if (myChildren.size() >= myAction.getNumChildrenRequired()) return false;
+		if (myCommand == null) return true;
+		if (myChildren.size() >= myCommand.getNumChildrenRequired()) return false;
 		return true;
 	}
 
@@ -57,7 +47,7 @@ public class CommandNode extends Node{
 	}
 
 	public String getAction() {
-		return myAction.toString();
+		return myCommand.toString();
 	}
 
 }

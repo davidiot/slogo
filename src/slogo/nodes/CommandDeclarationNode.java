@@ -2,9 +2,10 @@ package slogo.nodes;
 
 import slogo.interpreter.EngineController;
 
-public class ListEndNode extends NodeObject {
-
-	public ListEndNode(String value, NodeObject parent) {
+public class CommandDeclarationNode extends NodeObject {
+//	private String commandName; 
+	
+	public CommandDeclarationNode(String value, NodeObject parent) {
 		super(value, parent);
 	}
 
@@ -16,19 +17,23 @@ public class ListEndNode extends NodeObject {
 	@Override
 	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
+		// does not add children
 
 	}
 
 	@Override
 	public boolean canAdd() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public double traverseAndExecute(EngineController controller) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+//	public String getName() {
+//		return commandName;
+//		
+//	}
 
 }

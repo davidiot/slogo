@@ -2,8 +2,9 @@ package slogo.commands;
 
 import java.util.List;
 
+import slogo.interpreter.EngineController;
 import slogo.interpreter.VariableLibrary;
-import slogo.nodes.Node;
+import slogo.nodes.NodeObject;
 import slogo.nodes.VariableNode;
 
 public class MakeVariable extends Command {
@@ -14,11 +15,11 @@ public class MakeVariable extends Command {
 	}
 	
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, EngineController controller) {
 		// first param is variable
 		// second is expression
 		// TODO if parameter types are wrong throw exception
-		double value = params.get(1).traverseAndExecute();
+		double value = params.get(1).traverseAndExecute(controller);
 		String name = ((VariableNode)params.get(0)).getName();
 		System.out.println("making " + name + " " + value);
 		myVariables.addVariable(name, value);

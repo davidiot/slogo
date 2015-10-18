@@ -1,13 +1,14 @@
 package slogo.commands;
 
 import java.util.List;
-import slogo.character.MainCharacter;
-import slogo.nodes.*;
+
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 public class PenDown extends Command {
 
 	@Override
-	public double doCommand(List<Node> params) {
+	public double doCommand(List<NodeObject> params, EngineController controller) {
 		System.out.println("Pen is down");
 		return 1;
 	}

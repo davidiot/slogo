@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 
-public class MainCharacter {
+public class MainCharacter implements CharacterInterface {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private final double XADJUST = Double.parseDouble(slogoResources.getString("characterCenterX"));
@@ -112,6 +112,13 @@ public class MainCharacter {
 		myPane.getChildren().remove(imageView);
 		myPane.getChildren().add(imageView);
 	}
+	
+	public void drawLines(double preX, double preY, double finX, double finY){
+		double pointerX = preX;
+		double pointerY = preY;
+		
+		
+	}
 
 	public void update() {
 		if (!myQueue.isEmpty()) {
@@ -176,7 +183,7 @@ public class MainCharacter {
 		return image;
 	}
 
-	public void move(double distance, boolean forward) {
+	public double move(double distance, boolean forward) {
 		double correctedDirection = finalDirection;
 		if (!forward) {
 			correctedDirection = wrap(finalDirection + 180, 360, 0);
@@ -188,8 +195,14 @@ public class MainCharacter {
 		} else {
 			myQueue.add(new Movement("bline", new double[] { finalX, finalY }));
 		}
+<<<<<<< HEAD
 		finalX = wrap(finalX, WIDTH + 2 * XADJUST, 2 * XADJUST) + 2 * XADJUST;
 		finalY = wrap(finalY, HEIGHT + 2 * YADJUST, 2 * YADJUST) + 2 * YADJUST;
+=======
+		finalX = wrap(finalX, WIDTH);
+		finalY = wrap(finalY, HEIGHT);
+		return distance;
+>>>>>>> 377125323ce961bf6d01a0816464014c9ca2a3ab
 	}
 
 	public void changeSpeed(Double value) {
