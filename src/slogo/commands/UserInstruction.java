@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import slogo.character.CharacterInterface;
+import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
 public class UserInstruction extends Command {
@@ -19,15 +20,15 @@ public class UserInstruction extends Command {
 	}
 
 	@Override
-	public double doCommand(List<NodeObject> params, CharacterInterface character) {
+	public double doCommand(List<NodeObject> params, EngineController controller) {
 		Map<String, Double> parameters = new HashMap<String,Double>();
 		int currentIdx = 0;
 		for (String param: myParameters) {
-			parameters.put(param, params.get(currentIdx).traverseAndExecute(character));
+			parameters.put(param, params.get(currentIdx).traverseAndExecute(controller));
 			currentIdx += 1;
 		}
 		myRoot.setLocalVariables(parameters);
-		return myRoot.traverseAndExecute(character);
+		return myRoot.traverseAndExecute(controller);
 	}
 
 	@Override

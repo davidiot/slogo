@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 
 public abstract class NodeObject {
 	protected NodeObject myParent;
@@ -30,7 +31,7 @@ public abstract class NodeObject {
 
 	public abstract boolean canAdd();
 
-	public abstract double traverseAndExecute(CharacterInterface character);
+	public abstract double traverseAndExecute(EngineController controller);
 
 	public NodeObject getParent() {
 		return myParent;

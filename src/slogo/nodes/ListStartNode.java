@@ -2,6 +2,7 @@ package slogo.nodes;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 
 public class ListStartNode extends NodeObject {
 
@@ -29,11 +30,11 @@ public class ListStartNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(CharacterInterface character) {
+	public double traverseAndExecute(EngineController controller) {
 		// TODO Auto-generated method stub
 		double returnVal = 0;
 		for (NodeObject child: myChildren) {
-			returnVal = child.traverseAndExecute(character);
+			returnVal = child.traverseAndExecute(controller);
 		}
 		return returnVal;
 	}

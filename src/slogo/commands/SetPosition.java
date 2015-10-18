@@ -4,13 +4,14 @@ import java.util.List;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 import slogo.nodes.*;
 
 
 public class SetPosition extends Command {
 
 	@Override
-	public double doCommand(List<NodeObject> params, CharacterInterface character) {
+	public double doCommand(List<NodeObject> params, EngineController controller) {
 		// this still doesn't do the command on the front end, 
 		// only gives the correct return value.
 		if (getNumChildrenRequired() != params.size()){

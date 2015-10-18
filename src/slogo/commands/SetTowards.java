@@ -4,12 +4,13 @@ import java.util.List;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 import slogo.nodes.*;
 
 public class SetTowards extends Command {
 	
 	@Override
-	public double doCommand(List<NodeObject> params, CharacterInterface character) {
+	public double doCommand(List<NodeObject> params, EngineController controller) {
 		// needs to return the number of degrees that the turtle has turned.
 		// therefore needs front end to have done that part of their project.
 		System.out.println("Setting towards " + params.get(0) + " " + params.get(1));

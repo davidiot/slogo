@@ -2,6 +2,7 @@ package slogo.nodes;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 
 public class CommandDeclarationNode extends NodeObject {
 	private String commandName; 
@@ -29,7 +30,7 @@ public class CommandDeclarationNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(CharacterInterface character) {
+	public double traverseAndExecute(EngineController controller) {
 		return 0;
 	}
 	

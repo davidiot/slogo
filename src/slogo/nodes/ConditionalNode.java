@@ -2,6 +2,7 @@ package slogo.nodes;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 
 public class ConditionalNode extends NodeObject {
 
@@ -29,7 +30,7 @@ public class ConditionalNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(CharacterInterface character) {
+	public double traverseAndExecute(EngineController controller) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

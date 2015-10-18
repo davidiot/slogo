@@ -4,16 +4,17 @@ import java.util.List;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
 public class If extends Command {
 
 	@Override
-	public double doCommand(List<NodeObject> params, CharacterInterface character) {
+	public double doCommand(List<NodeObject> params, EngineController controller) {
 		// TODO Auto-generated method stub
-		double expression = params.get(0).traverseAndExecute(character);
+		double expression = params.get(0).traverseAndExecute(controller);
 		if (expression != 0) {
-			params.get(1).traverseAndExecute(character);
+			params.get(1).traverseAndExecute(controller);
 		}
 		return 0;
 	}

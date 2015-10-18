@@ -64,13 +64,18 @@ public class Display extends AbstractElement {
 			mc.changePenWidth(input);
 		}
 	}
+	
+	public void clearMap(){
+		//display = null;
+		//display = new GridPane();
+	}
 
 	public void addCharacter(MainCharacter mc) {
 		characters.add(mc);
 		display.getChildren().add(mc.getImageView());
 	}
 
-	public MainCharacter getCharacter(int input) {
-		return characters.get(input);
+	public CharacterInterface getCharacter() {
+		return characters.get(0);
 	}
 }

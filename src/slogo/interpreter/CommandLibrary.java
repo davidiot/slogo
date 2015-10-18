@@ -22,7 +22,7 @@ public class CommandLibrary {
 		makeCommandMap(myCommandResources);
 		// TODO fix following code (sorry for marring the beautiful code in this class)
 		myCommandMap.put("MakeVariable", new MakeVariable(variables));
-		myCommandMap.put("MakeUserInstruction", new MakeUserInstruction(this));
+		myCommandMap.put("MakeUserInstruction", new MakeUserInstruction());
 	}
 
 	public Command getCommand(String name) {

@@ -4,6 +4,7 @@ import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.commands.Command;
 import slogo.interpreter.CommandLibrary;
+import slogo.interpreter.EngineController;
 
 public class UserCommandNode extends NodeObject {
 	private String myName;
@@ -34,10 +35,10 @@ public class UserCommandNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(CharacterInterface character) {
+	public double traverseAndExecute(EngineController controller) {
 		Command action = commandLibrary.getCommand(myName);
 		System.out.println(action);
-		return action.doCommand(myChildren, character);
+		return action.doCommand(myChildren, controller);
 
 	}
 

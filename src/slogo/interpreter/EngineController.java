@@ -2,6 +2,7 @@ package slogo.interpreter;
 
 import java.util.HashMap;
 
+import slogo.character.CharacterInterface;
 import slogo.nodes.NodeObject;
 import slogo.screen.SlogoScreen;
 import slogo.screen.SlogoScreenInterface;
@@ -24,7 +25,7 @@ public class EngineController {
 
 	public void runCommands(String input){
 		NodeObject compiledCommandsTree = myInterpreter.interpret(input);
-		compiledCommandsTree.traverseAndExecute(myView.getDisplay().getCharacter(DEFAULT_CHARACTER));
+		compiledCommandsTree.traverseAndExecute(this);
 		updateVariablesListInGUI();
 	}
 	
@@ -40,6 +41,21 @@ public class EngineController {
 	private void modifyIndividualVariable(){
 		
 	}
+
+	public SlogoScreenInterface getScreen(){
+		return myView;
+	}
 	
+	public CommandLibrary getCommandLibrary(){
+		return myCommandLibrary;
+	}
+	
+	public VariableLibrary getVariableLibrary(){
+		return myVariableLibrary;
+	}
+	
+	public CharacterInterface getMainCharacter(){
+		return myView.getDisplay().getCharacter();
+	}
 	
 }

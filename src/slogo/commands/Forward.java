@@ -5,6 +5,7 @@ import java.util.List;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 import slogo.interpreter.VariableLibrary;
 import slogo.nodes.NodeObject;
 
@@ -15,10 +16,10 @@ public class Forward extends Command {
 
 
 	@Override
-	public double doCommand(List<NodeObject> params, CharacterInterface character) {
-		List<Double> parameters = recurseToGetParameters(params, character);
+	public double doCommand(List<NodeObject> params, EngineController controller) {
+		List<Double> parameters = recurseToGetParameters(params, controller);
 		double distance = parameters.get(0);
-		character.move(distance);
+		controller.getMainCharacter().move(distance);
 		return distance;
 	}
 

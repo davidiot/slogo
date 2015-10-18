@@ -2,6 +2,7 @@ package slogo.nodes;
 
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.interpreter.EngineController;
 import slogo.interpreter.VariableLibrary;
 
 
@@ -9,6 +10,7 @@ public class VariableNode extends NodeObject {
 	private String myName;
 	private VariableLibrary myVariables;
 
+	// NOW CAN CHANGE CONSTRUCTOR TO MATCH EVERYTHING ELSE?
 	public VariableNode(VariableLibrary variables, NodeObject parent, String name) {
 		super(parent);
 		myName = name;
@@ -33,7 +35,7 @@ public class VariableNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(CharacterInterface character) {
+	public double traverseAndExecute(EngineController controller) {
 		if (myVariables.getVariable(myName) != null ) {
 			return myVariables.getVariable(myName);
 		}

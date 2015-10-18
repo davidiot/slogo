@@ -32,4 +32,7 @@ public interface SlogoScreenInterface extends AbstractScreenInterface {
 	
 	public Display getDisplay();
 	
+	public void clearMap();
+	
+	
 }
