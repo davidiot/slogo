@@ -1,11 +1,11 @@
 package slogo.main;
 
-import slogo.managers.RootManager;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import slogo.managers.RootManager;
 
 public class Main extends Application {
 

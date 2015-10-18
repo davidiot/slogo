@@ -9,15 +9,18 @@ import java.util.Scanner;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import slogo.parameters.Parameters;
+import slogo.screen.SettingsScreen.Toggle;
 
-public abstract class AbstractScreen {
+public abstract class AbstractScreen implements AbstractScreenInterface {
 	protected GridPane root;
 	protected Scene scene;
 	protected int WIDTH;
@@ -25,11 +28,9 @@ public abstract class AbstractScreen {
 	protected String title = "";
 	protected AbstractScreen nextScreen = null;
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
-	protected ResourceBundle myResources = ResourceBundle
-			.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
-	protected Font font = Font.loadFont(getClass().getClassLoader()
-			.getResourceAsStream("unispace.ttf"), Integer.parseInt(myResources
-			.getString("buttons")));
+	protected ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
+	protected Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"),
+			Integer.parseInt(myResources.getString("buttons")));
 	private HelpScreen help;
 	private SettingsScreen settings;
 	private CreditsScreen credits;
@@ -175,11 +176,37 @@ public abstract class AbstractScreen {
 	}
 
 	protected Text createText(String s, int size) {
-		Font font = Font.loadFont(getClass().getClassLoader()
-				.getResourceAsStream("unispace.ttf"), size);
+		Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"), size);
 		Text t = new Text(s);
 		t.setFont(font);
 		return t;
 	}
 
+	protected void makeParameters() {
+		parameters = new Parameters();
+		try {
+			Scanner s = new Scanner(new File("src/resources/settings.txt"));
+			while (s.hasNext()) {
+				String next = s.nextLine();
+				if (next.equals("0")) {
+					break;
+				}
+				String[] vals = s.nextLine().split(" ");
+				parameters.setValue(next, Double.parseDouble(vals[0]));
+			}
+		} catch (
+
+		FileNotFoundException e)
+
+		{
+			e.printStackTrace();
+		}
+	}
+
+	protected void showError(String title, String message) {
+		Alert uhoh = new Alert(AlertType.ERROR);
+		uhoh.setTitle(title);
+		uhoh.setContentText(message);
+		uhoh.show();
+	}
 }

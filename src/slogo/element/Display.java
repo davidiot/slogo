@@ -3,20 +3,16 @@ package slogo.element;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import java.awt.color.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import slogo.character.*;
+import slogo.character.CharacterInterface;
+import slogo.character.MainCharacter;
 
 public class Display extends AbstractElement {
 
@@ -58,8 +54,8 @@ public class Display extends AbstractElement {
 			mc.changePenColor(input);
 		}
 	}
-	
-	public void changePenWidth(Double input){
+
+	public void changePenWidth(Double input) {
 		for (MainCharacter mc : characters) {
 			mc.changePenWidth(input);
 		}
@@ -70,7 +66,28 @@ public class Display extends AbstractElement {
 		display.getChildren().add(mc.getImageView());
 	}
 
-	public MainCharacter getCharacter(int input) {
-		return characters.get(input);
+	public CharacterInterface getCharacter() {
+		return characters.get(0);
+	}
+
+	public void updateCharacters() {
+		for (MainCharacter mc : characters) {
+			mc.update();
+		}
+	}
+
+	public void changeSpeed(Double value) {
+		for (MainCharacter mc : characters) {
+			mc.changeSpeed(value);
+		}
+	}
+
+	public double clear() {
+		double distance = 0;
+		for (MainCharacter mc : characters) {
+			distance += mc.goHome();
+		}
+		makePane();
+		return distance;
 	}
 }

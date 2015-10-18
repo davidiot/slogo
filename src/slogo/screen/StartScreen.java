@@ -2,11 +2,12 @@ package slogo.screen;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import slogo.parameters.Parameters;
 
 public class StartScreen extends AbstractScreen {
 	private ComboBox<String> loader;
@@ -18,6 +19,7 @@ public class StartScreen extends AbstractScreen {
 	public StartScreen() {
 		WIDTH = Integer.parseInt(myResources.getString("width"));
 		HEIGHT = Integer.parseInt(myResources.getString("height"));
+		makeParameters();
 		root = new GridPane();
 		scene = new Scene(root, WIDTH, HEIGHT);
 		root.add(makeTitle(), 0, 0);
@@ -30,8 +32,7 @@ public class StartScreen extends AbstractScreen {
 
 	private GridPane makeTitle() {
 		GridPane title = new GridPane();
-		Text temp = createText("SLogo",
-				Integer.parseInt(myResources.getString("title")));
+		Text temp = createText("SLogo", Integer.parseInt(myResources.getString("title")));
 		title.add(temp, 0, 0);
 		return title;
 	}

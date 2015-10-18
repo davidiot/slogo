@@ -1,24 +1,21 @@
 package slogo.commands;
 
 import java.util.List;
-import slogo.character.MainCharacter;
-import slogo.nodes.*;
 
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 public class HideTurtle extends Command {
-
+	
+private final int CHILDREN_REQUIRED = 0;
 	@Override
-	public double doCommand(List<Node> params) {
-		return 0;
-		//double distanceMoved = params.get(0);
-		//System.out.println("Turtle hidden.");
-		//return distanceMoved;
+	public double doCommand(List<NodeObject> params, EngineController controller) {
+		return controller.getMainCharacter().setVisible(false);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
-		return 0;
+		return CHILDREN_REQUIRED;
 	}
 
 }
