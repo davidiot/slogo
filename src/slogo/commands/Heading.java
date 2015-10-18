@@ -16,7 +16,7 @@ public class Heading extends Command {
 
 	@Override
 	public int getNumChildrenRequired() {
-		return this.CHILDREN_REQUIRED;
+		return CHILDREN_REQUIRED;
 	}
 
 }
