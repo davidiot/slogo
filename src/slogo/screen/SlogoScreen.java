@@ -4,7 +4,9 @@ import java.util.ResourceBundle;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import slogo.element.Commands;
 import slogo.element.Console;
@@ -48,11 +50,17 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 	@Override
 	public void run() {
 		if (parameters != null) {
-			if (parameters.getBackgroundColor() != null) {
-				map.changeColor(parameters.getBackgroundColor());
+			String BackgroundColor = parameters.getBackgroundColor();
+			String PenColor = parameters.getPenColor();
+			Image image = parameters.getImage();
+			if (BackgroundColor != null) {
+				map.changeColor(BackgroundColor);
 			}
-			if (parameters.getPenColor() != null) {
-				map.changePenColor(parameters.getPenColor());
+			if (PenColor != null) {
+				map.changePenColor(PenColor);
+			}
+			if (image != null) {
+				map.setImage(image);
 			}
 			if (parameters.getValue("Line Thickness") != 0) {
 				map.changePenWidth(parameters.getValue("Line Thickness"));
@@ -63,6 +71,8 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
+			//myEngineController.sendToInterpreter(command);
+			//map.getCharacter(0).goTo(Double.parseDouble(command.split(" ")[0]), Double.parseDouble(command.split(" ")[1]));
 			//showError("ERROR!", command);
 			try {
 			myEngineController.runCommands(command);
@@ -89,6 +99,7 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		root.add(consolePane, 0, 2);
 
 		makeLists();
+		
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		setAlignment(root);
 	}

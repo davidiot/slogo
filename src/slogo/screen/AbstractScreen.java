@@ -18,7 +18,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import slogo.parameters.Parameters;
-import slogo.screen.SettingsScreen.Toggle;
 
 public abstract class AbstractScreen implements AbstractScreenInterface {
 	protected GridPane root;

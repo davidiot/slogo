@@ -8,13 +8,18 @@ import java.util.Scanner;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 import slogo.parameters.Parameters;
 
 public class SettingsScreen extends AbstractWindowScreen {
@@ -86,8 +91,11 @@ public class SettingsScreen extends AbstractWindowScreen {
 			GridPane pane2 = new GridPane();
 			pane2.add(t2, 0, 0);
 			pane2.add(box2, 1, 0);
+			GridPane pane3 = new GridPane();
+			pane3.add(makeSelectorButton(), 0, 0);
 			add(pane1);
 			add(pane2);
+			add(pane3);
 		} catch (
 
 		FileNotFoundException e)
@@ -97,6 +105,24 @@ public class SettingsScreen extends AbstractWindowScreen {
 		}
 
 		setAlignment(root);
+	}
+
+	private Button makeSelectorButton() {
+		Button button = new Button(myResources.getString("selector"));
+		button.setFont(font);
+		button.setOnMouseClicked(e -> showSelector());
+		return button;
+	}
+
+	private void showSelector() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle(myResources.getString("selectorTitle"));
+		fileChooser.getExtensionFilters()
+				.addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+		File selectedFile = fileChooser.showOpenDialog(new Stage());
+		if (selectedFile != null) {
+			parameters.setImage(new Image(selectedFile.toURI().toString()));
+		}
 	}
 
 	private void setBackground(String input) {
