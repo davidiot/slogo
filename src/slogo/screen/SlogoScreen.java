@@ -64,6 +64,7 @@ public class SlogoScreen extends AbstractScreen {
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
+			showError("ERROR!", command);
 			myEngineController.sendToInterpreter(command);
 			h.add(command);
 		}
