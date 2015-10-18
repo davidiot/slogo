@@ -15,6 +15,7 @@ import slogo.element.History;
 import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
 import slogo.interpreter.EngineController;
+import slogo.interpreter.InterpreterException;
 
 public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface {
 
@@ -65,7 +66,11 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		if (console.hasInput()) {
 			String command = console.getInput();
 			//showError("ERROR!", command);
+			try {
 			myEngineController.runCommands(command);
+			} catch (InterpreterException e) {
+				showError("ERROR!", e.getMessage());
+			}
 			h.add(command);
 		}
 		map.updateCharacters();

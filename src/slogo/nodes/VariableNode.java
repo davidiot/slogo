@@ -1,6 +1,7 @@
 package slogo.nodes;
 
 import slogo.interpreter.EngineController;
+import slogo.interpreter.InterpreterException;
 import slogo.interpreter.VariableLibrary;
 
 
@@ -48,8 +49,7 @@ public class VariableNode extends NodeObject {
 			}
 			currentNode = currentNode.getParent();
 		}
-		// TODO throw exception variable does not exist;
-		return 0;
+		throw new InterpreterException("Variable %s not found", myName);
 	}
 
 //	public String getName() {
