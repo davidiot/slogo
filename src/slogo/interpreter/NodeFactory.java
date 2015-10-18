@@ -30,9 +30,7 @@ public class NodeFactory{
 			if (myCommandLibrary.getCommand(value) != null) {
 			new_node = new CommandNode(value, myCommandLibrary.getCommand(value), parent);
 			} else {
-//				System.out.println("making user command node " + value);
-//				System.out.println("params " +  tempActions.getNumParameters(value));
-				new_node = new UserCommandNode(parent, value, tempActions.getNumParameters(value), myCommandLibrary);
+				new_node = new UserCommandNode(parent, value, tempActions.getNumParameters(value));
 			}
 			break;
 		case "CommandDeclaration":
@@ -48,7 +46,7 @@ public class NodeFactory{
 			new_node = new ListEndNode(value, parent);
 			break;
 		case "Variable":
-			new_node = new VariableNode(value, parent, myVariables);
+			new_node = new VariableNode(value, parent);
 			break;
 		}
 		return new_node;		

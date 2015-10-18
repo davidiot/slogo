@@ -1,7 +1,7 @@
 Speed
-5 1 10
+5 1 20
 Line Thickness
-5 1 10
+3 1 10
 0
 Black
 White
