@@ -70,26 +70,59 @@ public class MainCharacter {
 		return image;
 	}
 
-	public void move(int distance) {
-		finalX += distance * Math.cos(Math.toRadians(ANGLE - finalDirection));
-		finalY -= distance * Math.sin(Math.toRadians(ANGLE - finalDirection));
-		myQueue.add(new Movement("line", new double[] { finalX, finalY }));
+	public void move(double distance, boolean forward) {
+		double correctedDirection = finalDirection;
+		if (!forward) {
+			correctedDirection = wrap(finalDirection + 180, 360);
+		}
+		finalX += distance * Math.cos(Math.toRadians(ANGLE - correctedDirection));
+		finalY -= distance * Math.sin(Math.toRadians(ANGLE - correctedDirection));
+		if (forward) {
+			myQueue.add(new Movement("fline", new double[] { finalX, finalY }));
+		} else {
+			myQueue.add(new Movement("bline", new double[] { finalX, finalY }));
+		}
 		finalX = wrap(finalX, WIDTH);
 		finalY = wrap(finalY, HEIGHT);
 	}
 
-	public void showCharacter() {
-		hidden = false;
+	public void setVisible(boolean input) {
+		hidden = input;
 	}
 
-	public void hideCharacter() {
-		hidden = true;
+	public void setPenDown(boolean input) {
+		penDown = input;
 	}
 
-	public void rotateCharacter(int degree) {
+	public void rotateCharacter(double degree) {
 		finalDirection += degree;
 		myQueue.add(new Movement("angle", new double[] { finalDirection }));
 		finalDirection = wrap(finalDirection, 360);
+	}
+
+	public double setHeading(double degree) {
+		double output = wrap(degree, 360) - finalDirection;
+		finalDirection = wrap(degree, 360);
+		myQueue.add(new Movement("angle", new double[] { finalDirection }));
+		return output;
+	}
+
+	public double towards(double x, double y) {
+		x = x + xCenter;
+		y = -(y + yCenter);
+		if (x == finalX && y == finalY) {
+			return 0;
+		} else {
+			double degree = Math.atan2((x - finalX), (y - finalY)) * 180 / Math.PI;
+			return setHeading(degree);
+		}
+	}
+
+	public double goTo(double x, double y) {
+		towards(x, y);
+		double distance = Math.sqrt(Math.pow(x + xCenter - finalX, 2) + (Math.pow(y + yCenter - finalY, 2)));
+		move(distance, true);
+		return distance;
 	}
 
 	public void refreshImage() {
@@ -103,20 +136,6 @@ public class MainCharacter {
 
 	public void changePenWidth(Double input) {
 		penWidth = input;
-	}
-
-	public void returnHome() {
-		preX = curX;
-		preY = curY;
-		curX = xCenter;
-		curY = yCenter;
-		imageView.setX(curX);
-		imageView.setY(curY);
-		refreshImage();
-	}
-
-	public double getDistanceMoved() {
-		return Math.sqrt(Math.pow(curX - preX, 2) + (Math.pow(curY - preY, 2)));
 	}
 
 	public void update() {
@@ -134,13 +153,20 @@ public class MainCharacter {
 					direction = wrap(direction, 360);
 					myQueue.poll();
 				}
-			} else if (nextMove.getType().equals("line")) {
+			} else {
 				preX = curX;
 				preY = curY;
 				double x = nextMove.getValue()[0];
 				double y = nextMove.getValue()[1];
-				double newX = curX + speed * Math.cos(Math.toRadians(ANGLE - direction));
-				double newY = curY - speed * Math.sin(Math.toRadians(ANGLE - direction));
+				double newX = 0;
+				double newY = 0;
+				if (nextMove.getType().equals("fline")) {
+					newX = curX + speed * Math.cos(Math.toRadians(ANGLE - direction));
+					newY = curY - speed * Math.sin(Math.toRadians(ANGLE - direction));
+				} else if (nextMove.getType().equals("bline")) {
+					newX = curX - speed * Math.cos(Math.toRadians(ANGLE - direction));
+					newY = curY + speed * Math.sin(Math.toRadians(ANGLE - direction));
+				}
 				if (speed == Double.MAX_VALUE || ((Math.pow((newX - curX), 2)
 						+ Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2) + Math.pow((y - curY), 2)))) {
 					curX = wrap(x, WIDTH);

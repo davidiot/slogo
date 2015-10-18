@@ -64,9 +64,9 @@ public class SlogoScreen extends AbstractScreen {
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			myEngineController.sendToInterpreter(command);
-			map.getCharacter(0).move(1000);
-			map.getCharacter(0).rotateCharacter(Integer.parseInt(command));
+			// myEngineController.sendToInterpreter(command);
+			System.out.println(map.getCharacter(0).goTo(Integer.parseInt(command.split(",")[0]),
+					Integer.parseInt(command.split(",")[1])));
 			h.add(command);
 		}
 		map.updateCharacters();
