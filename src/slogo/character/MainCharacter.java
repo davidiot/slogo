@@ -153,29 +153,29 @@ public class MainCharacter {
 
 				boolean teleport = false;
 
-				if (curX > WIDTH) {
-					curX = 0;
-					curY = preY - (WIDTH - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+				if (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
+					//curX = 0;
+					//curY = preY - (WIDTH - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
 					teleport = true;
-				} else if (curX < 0) {
-					curX = WIDTH;
-					curY = preY - (0 - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+				} else if (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
+					//curX = WIDTH;
+					//curY = preY - (0 - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
 					teleport = true;
 				}
 
-				if (curY > HEIGHT) {
-					curY = 0;
-					curX = preX + (HEIGHT - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+				if (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT)) {
+					//curY = 0;
+					//curX = preX + (HEIGHT - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
 					teleport = true;
-				} else if (curY < 0) {
-					curY = HEIGHT;
-					curX = preX + (0 - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+				} else if (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT)) {
+					//curY = HEIGHT;
+					//curX = preX + (0 - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
 					teleport = true;
 				}
 
 				imageView.setX(wrap(curX, WIDTH));
 				imageView.setY(wrap(curY, HEIGHT));
-				if (nextMove.isCurrentPenDown()) {
+				if (nextMove.isCurrentPenDown() & !teleport) {
 					Line line;
 					line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST,
 							wrap(curX, WIDTH) + XADJUST, wrap(curY, HEIGHT) + YADJUST);
