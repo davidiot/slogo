@@ -112,6 +112,13 @@ public class MainCharacter {
 		myPane.getChildren().remove(imageView);
 		myPane.getChildren().add(imageView);
 	}
+	
+	public void drawLines(double preX, double preY, double finX, double finY){
+		double pointerX = preX;
+		double pointerY = preY;
+		
+		
+	}
 
 	public void update() {
 		if (!myQueue.isEmpty()) {
