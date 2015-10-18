@@ -16,7 +16,7 @@ import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
 import slogo.interpreter.EngineController;
 
-public class SlogoScreen extends AbstractScreen {
+public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface {
 
 	private String language;
 	private Console console;
@@ -64,8 +64,8 @@ public class SlogoScreen extends AbstractScreen {
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			showError("ERROR!", command);
-			myEngineController.sendToInterpreter(command);
+			//showError("ERROR!", command);
+			myEngineController.runCommands(command);
 			h.add(command);
 		}
 		map.updateCharacters();
@@ -122,5 +122,25 @@ public class SlogoScreen extends AbstractScreen {
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 1);
+	}
+	
+	public void clearMap(){
+		map.clearMap();
+	}
+	
+	public History getHistoryObject(){
+		return history;
+	}
+	
+	public Variables getVariablesObject(){
+		return variables;
+	}
+	
+	public Commands getCommandsObject(){
+		return commands;
+	}
+	
+	public Display getDisplay(){
+		return map;
 	}
 }

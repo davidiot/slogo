@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 
-public class MainCharacter {
+public class MainCharacter implements CharacterInterface {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private final double XADJUST = Double.parseDouble(slogoResources.getString("characterCenterX"));
@@ -179,7 +179,7 @@ public class MainCharacter {
 		return image;
 	}
 
-	public void move(double distance, boolean forward) {
+	public double move(double distance, boolean forward) {
 		double correctedDirection = finalDirection;
 		if (!forward) {
 			correctedDirection = wrap(finalDirection + 180, 360);
@@ -193,6 +193,7 @@ public class MainCharacter {
 		}
 		finalX = wrap(finalX, WIDTH);
 		finalY = wrap(finalY, HEIGHT);
+		return distance;
 	}
 
 	public void changeSpeed(Double value) {

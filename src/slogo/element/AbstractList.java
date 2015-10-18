@@ -68,4 +68,10 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 			toggle();
 		}
 	}
+	
+	public void clear(){
+		data.clear();
+		super.pane = null;
+		super.pane = new GridPane();
+	}
 }

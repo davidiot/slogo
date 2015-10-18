@@ -1,21 +1,24 @@
 package slogo.commands;
 
 import java.util.List;
-import slogo.character.MainCharacter;
-import slogo.nodes.*;
+
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 
 public class ClearScreen extends Command {
+	
 
-	public double doCommand(List<Node> params) {
-		/*double currentX = character.getImageView().getX();
-		double currentY = character.getImageView().getY();
+	public double doCommand(List<NodeObject> params, EngineController engine) {
+		/*double currentX = engine.getMainCharacter().getX();
+		double currentY = engine.getMainCharacter().getY();
 		double destinationX = 0;
 		double destinationY = 0;
 		double distance = Math.sqrt((destinationX - currentX)*(destinationX - currentX)
-				+ (destinationY - currentY)*(destinationY - currentY));*/
+				+ (destinationY - currentY)*(destinationY - currentY)); */
 		System.out.println("Cleared screen. Distance moved: ");
-		return 0;
+		engine.getScreen().clearMap();
+		return engine.getMainCharacter().goHome();
 	}
 
 	@Override

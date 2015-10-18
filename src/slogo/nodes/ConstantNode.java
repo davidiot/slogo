@@ -1,12 +1,14 @@
 package slogo.nodes;
 
+import slogo.interpreter.EngineController;
 
-public class ConstantNode extends Node {
+public class ConstantNode extends NodeObject {
 	private double myValue;
+	
 
-	public ConstantNode(double value, Node parent) {
-		super(parent);
-		myValue = value;
+	public ConstantNode(String value, NodeObject parent) {
+		super(value, parent);
+		myValue = Double.parseDouble(value);
 	}
 
 	@Override
@@ -15,7 +17,7 @@ public class ConstantNode extends Node {
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
 
 	}
@@ -26,7 +28,7 @@ public class ConstantNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
+	public double traverseAndExecute(EngineController controller) {
 		return myValue;
 	}
 
