@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.ResourceBundle;
 
 public class MainCharacter {
@@ -98,12 +97,12 @@ public class MainCharacter {
 		}
 	}
 
-	private double wrap(double input, double max, double min) {
-		while (input >= max) {
-			input -= (max - min);
+	private double wrap(double input, double value) {
+		while (input >= value) {
+			input -= value;
 		}
-		while (input < min) {
-			input += (max - min);
+		while (input < 0) {
+			input += value;
 		}
 		return input;
 	}
@@ -125,7 +124,7 @@ public class MainCharacter {
 				}
 				imageView.setRotate(direction);
 				if (direction == angle) {
-					direction = wrap(direction, 360, 0);
+					direction = wrap(direction, 360);
 					myQueue.poll();
 				}
 			} else {
@@ -137,28 +136,49 @@ public class MainCharacter {
 				double newY = 0;
 				double adjustedDirection = direction;
 				if (nextMove.getType().equals("bline")) {
-					adjustedDirection = wrap(direction + 180, 360, 0);
+					adjustedDirection = wrap(direction + 180, 360);
 				}
 				newX = curX + speed * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
 				newY = curY - speed * Math.sin(Math.toRadians(ANGLE - adjustedDirection));
 
 				if (speed == Double.MAX_VALUE || ((Math.pow((newX - curX), 2)
 						+ Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2) + Math.pow((y - curY), 2)))) {
-					curX = wrap(x, WIDTH + 2 * XADJUST, 2 * XADJUST);
-					curY = wrap(y, HEIGHT + 2 * YADJUST, 2 * YADJUST);
+					curX = wrap(x, WIDTH);
+					curY = wrap(y, HEIGHT);
 					myQueue.poll();
 				} else {
 					curX = newX;
 					curY = newY;
 				}
 
-				imageView.setX(wrap(curX, WIDTH + 2 * XADJUST, 2 * XADJUST));
-				imageView.setY(wrap(curY, HEIGHT + 2 * YADJUST, 2 * YADJUST));
+				boolean teleport = false;
+
+				if (curX > WIDTH) {
+					curX = 0;
+					curY = preY - (WIDTH - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+					teleport = true;
+				} else if (curX < 0) {
+					curX = WIDTH;
+					curY = preY - (0 - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+					teleport = true;
+				}
+
+				if (curY > HEIGHT) {
+					curY = 0;
+					curX = preX + (HEIGHT - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+					teleport = true;
+				} else if (curY < 0) {
+					curY = HEIGHT;
+					curX = preX + (0 - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
+					teleport = true;
+				}
+
+				imageView.setX(wrap(curX, WIDTH));
+				imageView.setY(wrap(curY, HEIGHT));
 				if (nextMove.isCurrentPenDown()) {
-					Line line = new Line(wrap(preX, WIDTH + 2 * XADJUST, 2 * XADJUST) + XADJUST,
-							wrap(preY, HEIGHT + 2 * YADJUST, 2 * YADJUST) + YADJUST,
-							wrap(curX, WIDTH + 2 * XADJUST, 2 * XADJUST) + XADJUST,
-							wrap(curY, HEIGHT + 2 * YADJUST, 2 * YADJUST) + YADJUST);
+					Line line;
+					line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST,
+							wrap(curX, WIDTH) + XADJUST, wrap(curY, HEIGHT) + YADJUST);
 					line.setStroke(nextMove.getCurrentPenColor());
 					line.setStrokeWidth(nextMove.getCurrentPenWidth());
 					myPane.getChildren().add(line);
@@ -179,7 +199,7 @@ public class MainCharacter {
 	public void move(double distance, boolean forward) {
 		double correctedDirection = finalDirection;
 		if (!forward) {
-			correctedDirection = wrap(finalDirection + 180, 360, 0);
+			correctedDirection = wrap(finalDirection + 180, 360);
 		}
 		finalX += distance * Math.cos(Math.toRadians(ANGLE - correctedDirection));
 		finalY -= distance * Math.sin(Math.toRadians(ANGLE - correctedDirection));
@@ -188,8 +208,8 @@ public class MainCharacter {
 		} else {
 			myQueue.add(new Movement("bline", new double[] { finalX, finalY }));
 		}
-		finalX = wrap(finalX, WIDTH + 2 * XADJUST, 2 * XADJUST) + 2 * XADJUST;
-		finalY = wrap(finalY, HEIGHT + 2 * YADJUST, 2 * YADJUST) + 2 * YADJUST;
+		finalX = wrap(finalX, WIDTH);
+		finalY = wrap(finalY, HEIGHT);
 	}
 
 	public void changeSpeed(Double value) {
@@ -211,12 +231,12 @@ public class MainCharacter {
 	public void rotateCharacter(double degree) {
 		finalDirection += degree;
 		myQueue.add(new Movement("angle", new double[] { finalDirection }));
-		finalDirection = wrap(finalDirection, 360, 0);
+		finalDirection = wrap(finalDirection, 360);
 	}
 
 	public double setHeading(double degree) {
 		double output = degree - finalDirection;
-		finalDirection = wrap(degree, 360, 0);
+		finalDirection = wrap(degree, 360);
 		myQueue.add(new Movement("angle", new double[] { degree }));
 		return output;
 	}
