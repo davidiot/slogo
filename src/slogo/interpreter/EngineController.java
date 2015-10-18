@@ -4,17 +4,18 @@ import java.util.HashMap;
 
 import slogo.nodes.NodeObject;
 import slogo.screen.SlogoScreen;
+import slogo.screen.SlogoScreenInterface;
 
 public class EngineController {
 
 	private Interpreter myInterpreter;
-	private SlogoScreen myView;
+	private SlogoScreenInterface myView;
 	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariableLibrary;
 	
 	private final int DEFAULT_CHARACTER = 0;
 	
-	public EngineController(String language, SlogoScreen view) {
+	public EngineController(String language, SlogoScreenInterface view) {
 		myView = view;
 		myVariableLibrary = new VariableLibrary();
 		myCommandLibrary = new CommandLibrary(myVariableLibrary);

@@ -16,7 +16,7 @@ import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
 import slogo.interpreter.EngineController;
 
-public class SlogoScreen extends AbstractScreen {
+public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface {
 
 	private String language;
 	private Console console;

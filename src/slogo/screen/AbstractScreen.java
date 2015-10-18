@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import slogo.parameters.Parameters;
 
-public abstract class AbstractScreen {
+public abstract class AbstractScreen implements AbstractScreenInterface {
 	protected GridPane root;
 	protected Scene scene;
 	protected int WIDTH;
