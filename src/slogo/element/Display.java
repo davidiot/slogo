@@ -42,7 +42,7 @@ public class Display extends AbstractElement {
 						+ 2 * Double.parseDouble(slogoResources.getString("characterCenterX")),
 				Double.parseDouble(slogoResources.getString("mapHeight"))
 						+ 2 * Double.parseDouble(slogoResources.getString("characterCenterY")),
-				Color.RED);
+				Color.TRANSPARENT);
 		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")), Color.WHITE);
 		test = new Canvas(Integer.parseInt(slogoResources.getString("mapWidth")),
