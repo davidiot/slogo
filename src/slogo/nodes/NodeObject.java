@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 
 public abstract class NodeObject {
 	protected NodeObject myParent;
 	protected List<NodeObject> myChildren;
 	protected Map<String, Double> localVariables;
+	protected String myName;
 	
-	public NodeObject(NodeObject parent) {
+	public NodeObject(String name, NodeObject parent) {
 		myChildren = new LinkedList<NodeObject>();
 		myParent = parent;
 		localVariables = new HashMap<>();
+		myName = name;
 	}
 	
 	public abstract boolean hasCompleteChildren();
@@ -42,6 +42,10 @@ public abstract class NodeObject {
 	
 	public Double getLocalVariable(String name) {
 		return localVariables.get(name);
+	}
+
+	public String getName() {
+		return myName;
 	}
 
 }

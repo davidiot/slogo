@@ -1,7 +1,6 @@
 package slogo.nodes;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 import slogo.commands.Command;
 import slogo.interpreter.CommandLibrary;
 
@@ -11,7 +10,7 @@ public class UserCommandNode extends NodeObject {
 	private CommandLibrary commandLibrary;
 
 	public UserCommandNode(NodeObject parent, String name, int numParams, CommandLibrary commands) {
-		super(parent);
+		super(name, parent);
 		myName = name;
 		numChildren = numParams;
 		commandLibrary = commands;

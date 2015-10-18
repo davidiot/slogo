@@ -1,12 +1,11 @@
 package slogo.nodes;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 
 public class RootNode extends NodeObject {
 
 	public RootNode(NodeObject parent) {
-		super(parent);
+		super(null, parent);
 	}
 
 	@Override

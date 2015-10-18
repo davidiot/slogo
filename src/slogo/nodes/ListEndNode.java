@@ -1,19 +1,15 @@
 package slogo.nodes;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 
 public class ListEndNode extends NodeObject {
 
-	public ListEndNode(NodeObject parent) {
-		super(parent);
-		// TODO Auto-generated constructor stub
+	public ListEndNode(String value, NodeObject parent) {
+		super(value, parent);
 	}
 
 	@Override
 	public boolean hasCompleteChildren() {
-		// TODO Auto-generated method stub
-		// has no children
 		return true;
 	}
 

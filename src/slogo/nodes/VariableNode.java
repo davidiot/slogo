@@ -1,17 +1,15 @@
 package slogo.nodes;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 import slogo.interpreter.VariableLibrary;
 
 
 public class VariableNode extends NodeObject {
-	private String myName;
+//	private String myName;
 	private VariableLibrary myVariables;
 
-	public VariableNode(VariableLibrary variables, NodeObject parent, String name) {
-		super(parent);
-		myName = name;
+	public VariableNode(String name, NodeObject parent, VariableLibrary variables) {
+		super(name, parent);
 		myVariables = variables;
 	}
 
@@ -53,8 +51,8 @@ public class VariableNode extends NodeObject {
 		return 0;
 	}
 
-	public String getName() {
-		return myName;
-	}
+//	public String getName() {
+//		return myName;
+//	}
 
 }

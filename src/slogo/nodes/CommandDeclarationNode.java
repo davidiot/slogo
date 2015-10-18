@@ -1,14 +1,12 @@
 package slogo.nodes;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 
 public class CommandDeclarationNode extends NodeObject {
-	private String commandName; 
+//	private String commandName; 
 	
 	public CommandDeclarationNode(String value, NodeObject parent) {
-		super(parent);
-		commandName = value;
+		super(value, parent);
 	}
 
 	@Override
@@ -33,9 +31,9 @@ public class CommandDeclarationNode extends NodeObject {
 		return 0;
 	}
 	
-	public String getName() {
-		return commandName;
-		
-	}
+//	public String getName() {
+//		return commandName;
+//		
+//	}
 
 }

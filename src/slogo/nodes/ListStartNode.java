@@ -1,12 +1,11 @@
 package slogo.nodes;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 
 public class ListStartNode extends NodeObject {
 
-	public ListStartNode(NodeObject parent) {
-		super(parent);
+	public ListStartNode(String value, NodeObject parent) {
+		super(value, parent);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -1,14 +1,14 @@
 package slogo.nodes;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 
 public class ConstantNode extends NodeObject {
 	private double myValue;
+	
 
-	public ConstantNode(double value, NodeObject parent) {
-		super(parent);
-		myValue = value;
+	public ConstantNode(String value, NodeObject parent) {
+		super(value, parent);
+		myValue = Double.parseDouble(value);
 	}
 
 	@Override

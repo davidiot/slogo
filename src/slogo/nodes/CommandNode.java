@@ -2,14 +2,13 @@
 package slogo.nodes;
 
 import slogo.character.CharacterInterface;
-import slogo.character.MainCharacter;
 import slogo.commands.Command;
 
 public class CommandNode extends NodeObject{
 	private Command myCommand;
 	
-	public CommandNode(Command command, NodeObject parent) {
-		super(parent);
+	public CommandNode(String value, Command command, NodeObject parent) {
+		super(value, parent);
 		myCommand = command;
 	}
 	

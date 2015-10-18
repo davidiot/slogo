@@ -22,7 +22,7 @@ public class MakeUserInstruction extends Command {
 	@Override
 	public double doCommand(List<NodeObject> params, CharacterInterface character) {
 		// TODO throw exceptions
-		String name = ((CommandDeclarationNode) params.get(0)).getName();
+		String name = params.get(0).getName();
 		List<String> parameters = getParameterList(params.get(1));
 		NodeObject tree = params.get(2);
 		UserInstruction newCommand = new UserInstruction(name, parameters, tree); 
