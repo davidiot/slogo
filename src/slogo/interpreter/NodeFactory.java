@@ -25,6 +25,7 @@ public class NodeFactory{
 		NodeObject new_node = null;
 		String type = input.getType();
 		String value = input.getValue();
+		System.out.println(type + " " + value);
 		switch(type){
 		case "Command":
 			if (myCommandLibrary.getCommand(value) != null) {
