@@ -16,12 +16,10 @@ public class Console extends AbstractElement {
 
 	protected void makePane() {
 		text = new TextArea();
-		text.setPrefWidth(Integer.parseInt(slogoResources
-				.getString("consoleWidth")));
+		text.setPrefWidth(Integer.parseInt(slogoResources.getString("consoleWidth")));
 		text.setPromptText(slogoResources.getString("prompt"));
 		text.setMaxHeight(Double.MAX_VALUE);
-		text.setPrefHeight(Integer.parseInt(slogoResources
-				.getString("consoleHeight")));
+		text.setPrefHeight(Integer.parseInt(slogoResources.getString("consoleHeight")));
 		text.setFont(font);
 		pane.add(text, 0, 0);
 		GridPane.setRowSpan(text, 2);
@@ -36,8 +34,7 @@ public class Console extends AbstractElement {
 	public Button makeButton(String label) {
 		Button button = new Button(label);
 		button.setFont(font);
-		button.setPrefHeight(Integer.parseInt(slogoResources
-				.getString("consoleHeight")) / 2);
+		button.setPrefHeight(Integer.parseInt(slogoResources.getString("consoleHeight")) / 2);
 		button.setMaxHeight(Double.MAX_VALUE);
 		return button;
 	}
@@ -63,8 +60,15 @@ public class Console extends AbstractElement {
 		return output;
 	}
 
-	public void write(String s) {
+	public void overwrite(String s) {
 		text.setText(s);
 	}
 
+	public void write(String s) {
+		String current = text.getText();
+		if (current.length() > 1 && current.charAt(current.length() - 1) != ' ') {
+			current = current + " ";
+		}
+		text.setText(current + s);
+	}
 }

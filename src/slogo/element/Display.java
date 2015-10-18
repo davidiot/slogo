@@ -58,8 +58,8 @@ public class Display extends AbstractElement {
 			mc.changePenColor(input);
 		}
 	}
-	
-	public void changePenWidth(Double input){
+
+	public void changePenWidth(Double input) {
 		for (MainCharacter mc : characters) {
 			mc.changePenWidth(input);
 		}
@@ -77,5 +77,26 @@ public class Display extends AbstractElement {
 
 	public CharacterInterface getCharacter() {
 		return characters.get(0);
+	}
+
+	public void updateCharacters() {
+		for (MainCharacter mc : characters) {
+			mc.update();
+		}
+	}
+
+	public void changeSpeed(Double value) {
+		for (MainCharacter mc : characters) {
+			mc.changeSpeed(value);
+		}
+	}
+
+	public double clear() {
+		double distance = 0;
+		for (MainCharacter mc : characters) {
+			distance += mc.goHome();
+		}
+		makePane();
+		return distance;
 	}
 }
