@@ -9,12 +9,13 @@ import slogo.nodes.NodeObject;
 
 public class Repeat extends Command {
 
-	private final int CHILDREN_REQUIRED = 0;
+	private final int CHILDREN_REQUIRED = 2;
 	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
 		double returnVal = 0; 
 		// TODO add wrong node type checking
+		System.out.println(params);
 		int numRepeats = (int)params.get(0).traverseAndExecute(controller);
 		System.out.println(numRepeats);
 		// body of loop should have start list (open bracket) as parent
