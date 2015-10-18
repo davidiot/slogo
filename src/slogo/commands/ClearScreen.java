@@ -17,6 +17,7 @@ public class ClearScreen extends Command {
 		double distance = Math.sqrt((destinationX - currentX)*(destinationX - currentX)
 				+ (destinationY - currentY)*(destinationY - currentY));
 		System.out.println("Cleared screen. Distance moved: ");
+		//character.clearScreen();
 		return distance;
 	}
 

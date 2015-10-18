@@ -7,12 +7,12 @@ import slogo.interpreter.VariableLibrary;
 
 public class NodeFactory{
 
-	private CommandLibrary myActions;
+	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariables;
 	private TemporaryCommandLibrary tempActions;
 
 	public NodeFactory(CommandLibrary actions, VariableLibrary variables, TemporaryCommandLibrary temps) {
-		myActions = actions;
+		myCommandLibrary = actions;
 		myVariables = variables;
 		tempActions = temps;
 	}
@@ -24,12 +24,12 @@ public class NodeFactory{
 		System.out.println("adding node  " + type + " " + value);
 		switch(type){
 		case "Command":
-			if (myActions.getCommand(value) != null) {
-			new_node = new CommandNode(myActions.getCommand(value), parent);
+			if (myCommandLibrary.getCommand(value) != null) {
+			new_node = new CommandNode(myCommandLibrary.getCommand(value), parent);
 			} else {
 //				System.out.println("making user command node " + value);
 //				System.out.println("params " +  tempActions.getNumParameters(value));
-				new_node = new UserCommandNode(parent, value, tempActions.getNumParameters(value), myActions);
+				new_node = new UserCommandNode(parent, value, tempActions.getNumParameters(value), myCommandLibrary);
 			}
 			break;
 		case "CommandDeclaration":
