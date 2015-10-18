@@ -153,17 +153,18 @@ public class MainCharacter {
 
 				boolean teleport = false;
 
-				if (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
+				if (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
 					//curX = 0;
 					//curY = preY - (WIDTH - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
 					teleport = true;
-				} else if (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
+				} else if (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH)) {
 					//curX = WIDTH;
 					//curY = preY - (0 - preX) * Math.tan(Math.toRadians(ANGLE - adjustedDirection));
 					teleport = true;
 				}
 
 				if (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT)) {
+					System.out.println("hi");
 					//curY = 0;
 					//curX = preX + (HEIGHT - preY) / Math.tan(Math.toRadians(ANGLE - adjustedDirection));
 					teleport = true;
@@ -186,6 +187,15 @@ public class MainCharacter {
 			}
 			refreshImage();
 		}
+	}
+	
+	private void findX(double preX, double curX, boolean positive){
+		double x = 0;
+		
+		
+	}
+	private void findY(double preY, double curY, boolean positive){
+		
 	}
 
 	public ImageView getImageView() {
