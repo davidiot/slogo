@@ -269,4 +269,14 @@ public class MainCharacter {
 	public boolean isHidden() {
 		return hidden;
 	}
+
+	public void setImage(Image image) {
+		this.image = image;
+		imageView.setImage(image);
+		imageView.setFitHeight(XADJUST * 2);
+		imageView.setFitWidth(YADJUST * 2);
+		imageView.setSmooth(true);
+		imageView.setCache(true);
+		refreshImage();
+	}
 }

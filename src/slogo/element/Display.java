@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -93,5 +94,11 @@ public class Display extends AbstractElement {
 		}
 		makePane();
 		return distance;
+	}
+
+	public void setImage(Image image) {
+		for (MainCharacter mc : characters) {
+			mc.setImage(image);
+		}
 	}
 }
