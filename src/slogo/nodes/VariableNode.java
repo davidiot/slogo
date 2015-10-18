@@ -11,10 +11,10 @@ public class VariableNode extends NodeObject {
 	private VariableLibrary myVariables;
 
 	// NOW CAN CHANGE CONSTRUCTOR TO MATCH EVERYTHING ELSE?
-	public VariableNode(VariableLibrary variables, NodeObject parent, String name) {
+	public VariableNode(NodeObject parent, String name) {
 		super(parent);
 		myName = name;
-		myVariables = variables;
+		//myVariables = variables;
 	}
 
 	@Override
@@ -36,6 +36,7 @@ public class VariableNode extends NodeObject {
 
 	@Override
 	public double traverseAndExecute(EngineController controller) {
+		myVariables = controller.getVariableLibrary();
 		if (myVariables.getVariable(myName) != null ) {
 			return myVariables.getVariable(myName);
 		}

@@ -11,11 +11,11 @@ public class UserCommandNode extends NodeObject {
 	private int numChildren;
 	private CommandLibrary commandLibrary;
 
-	public UserCommandNode(NodeObject parent, String name, int numParams, CommandLibrary commands) {
+	public UserCommandNode(NodeObject parent, String name, int numParams) {
 		super(parent);
 		myName = name;
 		numChildren = numParams;
-		commandLibrary = commands;
+		//commandLibrary = commands;
 		}
 
 	@Override
@@ -36,6 +36,7 @@ public class UserCommandNode extends NodeObject {
 
 	@Override
 	public double traverseAndExecute(EngineController controller) {
+		commandLibrary = controller.getCommandLibrary();
 		Command action = commandLibrary.getCommand(myName);
 		System.out.println(action);
 		return action.doCommand(myChildren, controller);
