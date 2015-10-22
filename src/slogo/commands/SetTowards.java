@@ -2,23 +2,24 @@ package slogo.commands;
 
 import java.util.List;
 
-import slogo.character.MainCharacter;
-import slogo.nodes.*;
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 public class SetTowards extends Command {
 	
+	private final int CHILDREN_REQUIRED = 2;
+
 	@Override
-	public double doCommand(List<Node> params) {
-		// needs to return the number of degrees that the turtle has turned.
-		// therefore needs front end to have done that part of their project.
-		System.out.println("Setting towards " + params.get(0) + " " + params.get(1));
-		return 100;
+	public double doCommand(List<NodeObject> params, EngineController controller) {
+		List<Double> parameters = this.recurseToGetParameters(params, controller);
+		double xDestination = parameters.get(0);
+		double yDestination = parameters.get(1);
+		return controller.getMainCharacter().towards(xDestination, yDestination);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
-		return 2;
+		return CHILDREN_REQUIRED;
 	}
 
 }

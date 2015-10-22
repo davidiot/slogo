@@ -2,21 +2,22 @@ package slogo.screen;
 
 import java.util.ResourceBundle;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
-import slogo.element.Display;
 import slogo.element.Commands;
 import slogo.element.Console;
+import slogo.element.Display;
 import slogo.element.History;
 import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
 import slogo.interpreter.EngineController;
+import slogo.interpreter.InterpreterException;
 
-public class SlogoScreen extends AbstractScreen {
+public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface {
 
 	private String language;
 	private Console console;
@@ -49,11 +50,17 @@ public class SlogoScreen extends AbstractScreen {
 	@Override
 	public void run() {
 		if (parameters != null) {
-			if (parameters.getBackgroundColor() != null) {
-				map.changeColor(parameters.getBackgroundColor());
+			String BackgroundColor = parameters.getBackgroundColor();
+			String PenColor = parameters.getPenColor();
+			Image image = parameters.getImage();
+			if (BackgroundColor != null) {
+				map.changeColor(BackgroundColor);
 			}
-			if (parameters.getPenColor() != null) {
-				map.changePenColor(parameters.getPenColor());
+			if (PenColor != null) {
+				map.changePenColor(PenColor);
+			}
+			if (image != null) {
+				map.setImage(image);
 			}
 			if (parameters.getValue("Line Thickness") != 0) {
 				map.changePenWidth(parameters.getValue("Line Thickness"));
@@ -64,7 +71,14 @@ public class SlogoScreen extends AbstractScreen {
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			myEngineController.sendToInterpreter(command);
+			//myEngineController.sendToInterpreter(command);
+			//map.getCharacter(0).goTo(Double.parseDouble(command.split(" ")[0]), Double.parseDouble(command.split(" ")[1]));
+			//showError("ERROR!", command);
+			try {
+			myEngineController.runCommands(command);
+			} catch (InterpreterException e) {
+				showError("ERROR!", e.getMessage());
+			}
 			h.add(command);
 		}
 		map.updateCharacters();
@@ -85,6 +99,7 @@ public class SlogoScreen extends AbstractScreen {
 		root.add(consolePane, 0, 2);
 
 		makeLists();
+		
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		setAlignment(root);
 	}
@@ -121,5 +136,25 @@ public class SlogoScreen extends AbstractScreen {
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 1);
+	}
+	
+	public double clearMap(){
+		return map.clear();
+	}
+	
+	public History getHistoryObject(){
+		return history;
+	}
+	
+	public Variables getVariablesObject(){
+		return variables;
+	}
+	
+	public Commands getCommandsObject(){
+		return commands;
+	}
+	
+	public Display getDisplay(){
+		return map;
 	}
 }

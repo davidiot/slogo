@@ -2,16 +2,16 @@ package slogo.parameters;
 
 import java.util.HashMap;
 
+import javafx.scene.image.Image;
+
 public class Parameters {
 	private HashMap<String, Double> values;
-	private HashMap<String, Boolean> bools;
 	private String backgroundColor;
 	private String penColor;
-	private double penWidth;
+	private Image image;
 
 	public Parameters() {
 		values = new HashMap<String, Double>();
-		bools = new HashMap<String, Boolean>();
 	}
 
 	public Double getValue(String input) {
@@ -20,14 +20,6 @@ public class Parameters {
 
 	public void setValue(String input, Double value) {
 		values.put(input, value);
-	}
-
-	public boolean getBoolean(String input) {
-		return bools.get(input);
-	}
-
-	public void setBoolean(String input, boolean bool) {
-		bools.put(input, bool);
 	}
 
 	public String getBackgroundColor() {
@@ -44,6 +36,16 @@ public class Parameters {
 
 	public void setPenColor(String penColor) {
 		this.penColor = penColor;
+	}
+
+	public Image getImage() {
+		Image output = image;
+		image = null;
+		return output;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 }

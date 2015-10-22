@@ -2,12 +2,24 @@ package slogo.screen;
 
 import javax.print.DocFlavor.URL;
 
+import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 
 public class HelpScreen extends AbstractWindowScreen {
+	
+	public HelpScreen(){
+		WIDTH = Integer.parseInt(myResources.getString("windowWidth"));
+		HEIGHT = Integer.parseInt(myResources.getString("windowHeight"));
+		root = new GridPane();
+		scene = new Scene(root, WIDTH*2, HEIGHT);
+		makeScene();
+		setAlignment(root);
+		root.setVgap(Integer.parseInt(myResources.getString("vgap")));
+		this.title = myResources.getString(this.getClass().getName());
+	}
 
 	@Override
 	public void run() {

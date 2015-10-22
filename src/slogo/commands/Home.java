@@ -1,22 +1,16 @@
 package slogo.commands;
 
 import java.util.List;
-import slogo.character.MainCharacter;
-import slogo.nodes.*;
+
+import slogo.interpreter.EngineController;
+import slogo.nodes.NodeObject;
 
 
 public class Home extends Command {
 	
 	@Override
-	public double doCommand(List<Node> params) {
-		/*double currentX = character.getImageView().getX();
-		double currentY = character.getImageView().getY();
-		double destinationX = 0;
-		double destinationY = 0;
-		double distance = Math.sqrt((destinationX - currentX)*(destinationX - currentX)
-				+ (destinationY - currentY)*(destinationY - currentY));*/
-		System.out.println("Went home. Distance moved: ");
-		return 0;
+	public double doCommand(List<NodeObject> params, EngineController controller) {
+		return controller.getMainCharacter().goHome();
 	}
 
 	@Override

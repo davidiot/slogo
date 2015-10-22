@@ -1,21 +1,20 @@
 package slogo.nodes;
 
-public class ListEndNode extends Node {
+import slogo.interpreter.EngineController;
 
-	public ListEndNode(Node parent) {
-		super(parent);
-		// TODO Auto-generated constructor stub
+public class ListEndNode extends NodeObject {
+
+	public ListEndNode(String value, NodeObject parent) {
+		super(value, parent);
 	}
 
 	@Override
 	public boolean hasCompleteChildren() {
-		// TODO Auto-generated method stub
-		// has no children
 		return true;
 	}
 
 	@Override
-	public void addChild(Node node) {
+	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
 
 	}
@@ -27,7 +26,7 @@ public class ListEndNode extends Node {
 	}
 
 	@Override
-	public double traverseAndExecute() {
+	public double traverseAndExecute(EngineController controller) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

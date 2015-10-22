@@ -3,24 +3,23 @@ package slogo.element;
 import java.util.ArrayList;
 import java.util.List;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import java.awt.color.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-import slogo.character.*;
+import slogo.character.CharacterInterface;
+import slogo.character.MainCharacter;
 
 public class Display extends AbstractElement {
 
 	private Rectangle map;
+	private Rectangle background;
 	private Canvas test;
 	private GraphicsContext gc;
 	private Pane display;
@@ -38,6 +37,12 @@ public class Display extends AbstractElement {
 		MainCharacter mc = new MainCharacter(characterDisplay);
 		characters = new ArrayList<MainCharacter>();
 		characters.add(mc);
+		background = new Rectangle(
+				Double.parseDouble(slogoResources.getString("mapWidth"))
+						+ 2 * Double.parseDouble(slogoResources.getString("characterCenterX")),
+				Double.parseDouble(slogoResources.getString("mapHeight"))
+						+ 2 * Double.parseDouble(slogoResources.getString("characterCenterY")),
+				Color.RED);
 		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")), Color.WHITE);
 		test = new Canvas(Integer.parseInt(slogoResources.getString("mapWidth")),
@@ -45,7 +50,7 @@ public class Display extends AbstractElement {
 		gc = test.getGraphicsContext2D();
 		characterDisplay.getChildren().add(test);
 		characterDisplay.getChildren().add(mc.getImageView());
-		display.getChildren().addAll(map, characterDisplay);
+		display.getChildren().addAll(background, map, characterDisplay);
 		this.pane.getChildren().add(display);
 	}
 
@@ -70,8 +75,8 @@ public class Display extends AbstractElement {
 		display.getChildren().add(mc.getImageView());
 	}
 
-	public MainCharacter getCharacter(int input) {
-		return characters.get(input);
+	public CharacterInterface getCharacter() {
+		return characters.get(0);
 	}
 
 	public void updateCharacters() {
@@ -93,5 +98,11 @@ public class Display extends AbstractElement {
 		}
 		makePane();
 		return distance;
+	}
+
+	public void setImage(Image image) {
+		for (MainCharacter mc : characters) {
+			mc.setImage(image);
+		}
 	}
 }
