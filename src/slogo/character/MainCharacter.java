@@ -37,6 +37,7 @@ public class MainCharacter implements CharacterInterface {
 	private Color penColor;
 	private double penWidth = 1;
 	private double speed = 1;
+	private double dash = 0;
 	private Pane myPane;
 	private LinkedList<Movement> myQueue;
 
@@ -202,6 +203,10 @@ public class MainCharacter implements CharacterInterface {
 
 	public void changeSpeed(Double value) {
 		speed = value;
+	}
+
+	public void changeDashLevel(Double value) {
+		dash = value;
 	}
 
 	public double setVisible(boolean input) {

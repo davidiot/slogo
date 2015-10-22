@@ -25,11 +25,11 @@ import slogo.parameters.Parameters;
 public class SettingsScreen extends AbstractWindowScreen {
 
 	private int i;
+	private Button penToggle;
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -105,6 +105,16 @@ public class SettingsScreen extends AbstractWindowScreen {
 		}
 
 		setAlignment(root);
+	}
+
+	private void makeToggleButton() {
+		penToggle = new Button(myResources.getString("toggle"));
+		penToggle.setFont(font);
+		penToggle.setOnMouseClicked(e -> togglePen());
+	}
+
+	private void togglePen() {
+		
 	}
 
 	private Button makeSelectorButton() {

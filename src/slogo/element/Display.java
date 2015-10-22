@@ -91,6 +91,12 @@ public class Display extends AbstractElement {
 		}
 	}
 
+	public void changeDashLevel(Double value) {
+		for (MainCharacter mc : characters) {
+			mc.changeDashLevel(value);
+		}
+	}
+
 	public double clear() {
 		double distance = 0;
 		for (MainCharacter mc : characters) {

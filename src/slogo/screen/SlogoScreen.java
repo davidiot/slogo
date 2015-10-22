@@ -68,13 +68,12 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 			if (parameters.getValue("Speed") != 0) {
 				map.changeSpeed(parameters.getValue("Speed"));
 			}
+			if (parameters.getValue("Dash Level") != 1) {
+				map.changeDashLevel(parameters.getValue("Dash Level"));
+			}
 		}
 		if (console.hasInput()) {
 			String command = console.getInput();
-			// myEngineController.sendToInterpreter(command);
-			// map.getCharacter(0).goTo(Double.parseDouble(command.split("
-			// ")[0]), Double.parseDouble(command.split(" ")[1]));
-			// showError("ERROR!", command);
 			try {
 				myEngineController.runCommands(command);
 				h.add(command);
