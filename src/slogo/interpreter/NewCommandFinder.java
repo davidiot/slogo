@@ -4,15 +4,15 @@ import java.util.List;
 
 public class NewCommandFinder {
 	private List<InputObject> parsedList;
-	private TemporaryCommandLibrary myUserCommands;
+	private NewUserCommandLibrary myUserCommands;
 	private int currentIndex;
 	
 	public NewCommandFinder(List<InputObject> in) {
 		parsedList = in;
-		myUserCommands = new TemporaryCommandLibrary();
+		myUserCommands = new NewUserCommandLibrary();
 	}
 
-	public TemporaryCommandLibrary findCustomCommands() {
+	public NewUserCommandLibrary findCustomCommands() {
 		System.out.println("finding custom commands");
 		currentIndex = 0;
 		InputObject toNode = new InputObject("Command", "MakeUserInstruction"); 

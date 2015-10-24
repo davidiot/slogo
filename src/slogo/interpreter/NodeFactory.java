@@ -9,38 +9,47 @@ import slogo.nodes.NodeObject;
 import slogo.nodes.UserCommandNode;
 import slogo.nodes.VariableNode;
 
-public class NodeFactory{
+public class NodeFactory {
 
 	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariables;
-	private TemporaryCommandLibrary tempActions;
+	private NewUserCommandLibrary newCommands;
 
-	public NodeFactory(CommandLibrary actions, VariableLibrary variables, TemporaryCommandLibrary temps) {
+	public NodeFactory(CommandLibrary actions, VariableLibrary variables,
+			NewUserCommandLibrary temps) {
 		myCommandLibrary = actions;
 		myVariables = variables;
-		tempActions = temps;
+		newCommands = temps;
 	}
-	
+
 	public NodeObject create(InputObject input, NodeObject parent) {
 		NodeObject new_node = null;
 		String type = input.getType();
 		String value = input.getValue();
-		System.out.println(type + " " + value);
-		switch(type){
+		// System.out.println(type + " " + value);
+		switch (type) {
 		case "Command":
 			if (myCommandLibrary.getCommand(value) != null) {
-			new_node = new CommandNode(value, myCommandLibrary.getCommand(value), parent);
+				new_node = new CommandNode(value,
+						myCommandLibrary.getCommand(value), parent);
 			} else {
-				if (tempActions.getNumParameters(value) == null) {
-					throw new InterpreterException("User command %s does not exist", value);
+				if (newCommands.getNumParameters(value) == null) {
+					throw new InterpreterException(
+							"User command %s does not exist", value);
 				}
-				new_node = new UserCommandNode(parent, value, tempActions.getNumParameters(value));
+				new_node = new UserCommandNode(parent, value,
+						newCommands.getNumParameters(value));
 			}
 			break;
+			
+			
+//		Node c = reflection.getClass(type + "Node").getConstructor(String.class, NodeObject.class, int.class)
+//				.newInstance(value, parent, numParams);
+//			
 		case "CommandDeclaration":
 			new_node = new CommandDeclarationNode(value, parent);
 			break;
-		case "Constant": 
+		case "Constant":
 			new_node = new ConstantNode(value, parent);
 			break;
 		case "ListStart":
@@ -53,7 +62,7 @@ public class NodeFactory{
 			new_node = new VariableNode(value, parent);
 			break;
 		}
-		return new_node;		
+		return new_node;
 	}
 
 }

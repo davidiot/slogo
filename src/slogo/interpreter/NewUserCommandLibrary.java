@@ -11,10 +11,10 @@ import java.util.Map;
  * 
  */
 
-public class TemporaryCommandLibrary {
+public class NewUserCommandLibrary {
 	private Map<String, Integer> commandMap;
 	
-	public TemporaryCommandLibrary() {
+	public NewUserCommandLibrary() {
 		commandMap = new HashMap<>();
 	}
 	

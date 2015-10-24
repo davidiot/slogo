@@ -9,13 +9,13 @@ import slogo.nodes.RootNode;
 public class TreeBuilder {
 	private NodeObject myRootNode;
 	private CommandLibrary myCommands;
-	private TemporaryCommandLibrary tempCommands;
+	private NewUserCommandLibrary tempCommands;
 	private VariableLibrary myVariables;
 	private NodeFactory	myFactory;
 	private List<InputObject> myInput;
 
 
-	public TreeBuilder(CommandLibrary commandLibrary, VariableLibrary variables, TemporaryCommandLibrary temp, List<InputObject> parsedInput) {
+	public TreeBuilder(CommandLibrary commandLibrary, VariableLibrary variables, NewUserCommandLibrary temp, List<InputObject> parsedInput) {
 		myCommands = commandLibrary;
 		myVariables = variables;
 		myInput = parsedInput;
