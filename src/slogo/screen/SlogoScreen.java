@@ -72,19 +72,20 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 			if (parameters.getValue("Speed") != 0) {
 				map.changeSpeed(parameters.getValue("Speed"));
 			}
+			if (parameters.getValue("Dash Level") != 1) {
+				map.changeDashLevel(parameters.getValue("Dash Level"));
+			}
 		}
 		/**
 		if (console.hasInput()) {
 			String command = console.getInput();
-			//myEngineController.sendToInterpreter(command);
-			//map.getCharacter(0).goTo(Double.parseDouble(command.split(" ")[0]), Double.parseDouble(command.split(" ")[1]));
-			//showError("ERROR!", command);
 			try {
-			myEngineController.runCommands(command);
+				myEngineController.runCommands(command);
+				h.add(command);
 			} catch (InterpreterException e) {
 				showError("ERROR!", e.getMessage());
 			}
-			h.add(command);
+
 		}
 		**/
 		manager.getCurrentTab().run();
@@ -154,8 +155,8 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 
 		root.add(listPane, 1, 1);
 	}
-	
-	public double clearMap(){
+
+	public double clearMap() {
 		return map.clear();
 	}
 	
@@ -170,8 +171,8 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 	public Commands getCommandsObject(){
 		return manager.getCurrentTab().getCommands();
 	}
-	
-	public Display getDisplay(){
+
+	public Display getDisplay() {
 		return map;
 	}
 }

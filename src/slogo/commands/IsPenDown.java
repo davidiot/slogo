@@ -5,7 +5,7 @@ import java.util.List;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class isPenDown extends Command {
+public class IsPenDown extends Command {
 	
 	private final int CHILDREN_REQUIRED = 0;
 	

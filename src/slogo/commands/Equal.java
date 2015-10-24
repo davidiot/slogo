@@ -23,6 +23,4 @@ public class Equal extends Command {
 		return CHILDREN_REQUIRED;
 	}
 
-	
-
 }
