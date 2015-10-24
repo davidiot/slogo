@@ -10,6 +10,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
@@ -23,11 +25,13 @@ public class Display extends AbstractElement {
 	private Canvas test;
 	private GraphicsContext gc;
 	private Pane display;
+	private Pane temp;
 	private Pane characterDisplay;
 	private List<MainCharacter> characters;
 
 	public Display(GridPane pane) {
 		super(pane);
+		makePane();
 	}
 
 	@Override

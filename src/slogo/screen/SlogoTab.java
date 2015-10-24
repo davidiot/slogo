@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -17,7 +18,7 @@ import slogo.element.Variables;
 import slogo.interpreter.EngineController;
 import slogo.interpreter.InterpreterException;
 
-public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface {
+public class SlogoTab extends AbstractScreen{
 
 	private String language;
 	private Console console;
@@ -31,8 +32,10 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 	private ObservableArrayList h;
 	private ObservableArrayList c;
 	private ObservableArrayList v;
-
-	public SlogoScreen(String language) {
+	private Tab myTab; 
+	private String tabID; 
+	
+	public SlogoTab(String language, SlogoScreenInterface screen, int id){
 		this.language = language;
 		slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 		WIDTH = Integer.parseInt(slogoResources.getString("width"));
@@ -44,89 +47,28 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		} catch (java.util.MissingResourceException e) {
 			title = "SLogo";
 		}
-		makeScene();
-		myEngineController = new EngineController(this.language, this);
+		tabID = Integer.toString(id);
+		makeTab();
+		myEngineController = new EngineController(this.language, screen);
 	}
-
-	@Override
-	public void run() {
-		myEngineController = manager.getCurrentTab().getEngineController();
-		map = manager.getCurrentTab().getDisplay();
-		
-		if (parameters != null) {
-			String BackgroundColor = parameters.getBackgroundColor();
-			String PenColor = parameters.getPenColor();
-			Image image = parameters.getImage();
-			if (BackgroundColor != null) {
-				map.changeColor(BackgroundColor);
-			}
-			if (PenColor != null) {
-				map.changePenColor(PenColor);
-			}
-			if (image != null) {
-				map.setImage(image);
-			}
-			if (parameters.getValue("Line Thickness") != 0) {
-				map.changePenWidth(parameters.getValue("Line Thickness"));
-			}
-			if (parameters.getValue("Speed") != 0) {
-				map.changeSpeed(parameters.getValue("Speed"));
-			}
-			if (parameters.getValue("Dash Level") != 1) {
-				map.changeDashLevel(parameters.getValue("Dash Level"));
-			}
-		}
-		/**
-		if (console.hasInput()) {
-			String command = console.getInput();
-			try {
-				myEngineController.runCommands(command);
-				h.add(command);
-			} catch (InterpreterException e) {
-				showError("ERROR!", e.getMessage());
-			}
-
-		}
-		**/
-		manager.getCurrentTab().run();
-		map.updateCharacters();
-	}
-
-	private void makeScene() {
-		GridPane title = makeTitle();
-		GridPane.setColumnSpan(title, 2);
-		root.add(title, 0, 0);
-		/**
+	
+	public void makeTab(){
 		GridPane mapPane = new GridPane();
 		map = new Display(mapPane);
-		root.add(mapPane, 0, 1);
-		**/
-		
-		GridPane test = new GridPane();
-		manager = new TabManager(test, language, this);
-		map = manager.getCurrentTab().getDisplay();
-		root.add(test, 0, 1);
-		
-		/**
+		root.add(mapPane, 0, 0);
 		GridPane consolePane = new GridPane();
 		console = new Console(consolePane);
 		GridPane.setColumnSpan(consolePane, 2);
-
 		root.add(consolePane, 0, 2);
-		**/
-	
 		
-		//makeLists();
+		makeLists();
 		
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		setAlignment(root);
-	}
-
-	public GridPane makeTitle() {
-		GridPane title = new GridPane();
-		Text temp = createText("SLogo", Integer.parseInt(myResources.getString("smallTitle")));
-		title.add(temp, 0, 0);
-		return title;
+		//Name the tab. CHANGE TO RESOURCES LATER
+		myTab = new Tab("test");
+		myTab.setContent(root);
+		myTab.setId(tabID);
 	}
 	
 	public void makeLists() {
@@ -153,26 +95,47 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
 		listPane.add(buttonPane, 0, 3);
 
-		root.add(listPane, 1, 1);
-	}
-
-	public double clearMap() {
-		return map.clear();
+		root.add(listPane, 1, 0);
 	}
 	
-	public History getHistoryObject(){
-		return manager.getCurrentTab().getHistory();
-	}
-	
-	public Variables getVariablesObject(){
-		return manager.getCurrentTab().getVariables();
-	}
-	
-	public Commands getCommandsObject(){
-		return manager.getCurrentTab().getCommands();
-	}
-
-	public Display getDisplay() {
+	public Display getDisplay(){
 		return map;
 	}
+	
+	public Tab getTab(){
+		return myTab;
+	}
+	
+	public EngineController getEngineController(){
+		return myEngineController;
+	}
+
+	@Override
+	public void run() {
+		if (console.hasInput()) {
+			String command = console.getInput();
+			//myEngineController.sendToInterpreter(command);
+			//map.getCharacter(0).goTo(Double.parseDouble(command.split(" ")[0]), Double.parseDouble(command.split(" ")[1]));
+			//showError("ERROR!", command);
+			try {
+			myEngineController.runCommands(command);
+			} catch (InterpreterException e) {
+				showError("ERROR!", e.getMessage());
+			}
+			h.add(command);
+		}
+	}	
+	
+	public History getHistory(){
+		return history;
+	}
+	
+	public Variables getVariables(){
+		return variables;
+	}
+	
+	public Commands getCommands(){
+		return commands;
+	}
+	
 }
