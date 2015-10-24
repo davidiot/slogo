@@ -16,7 +16,7 @@ public abstract class AbstractElement {
 
 	public AbstractElement(GridPane pane) {
 		this.pane = pane;
-		makePane();
+		//makePane();
 	}
 
 	protected abstract void makePane();
