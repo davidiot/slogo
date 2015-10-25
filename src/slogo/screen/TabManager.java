@@ -32,27 +32,37 @@ public class TabManager extends AbstractElement {
 		manager = new TabPane();
 		test = new SlogoTab(myLanguage, myScreen, 0);
 		tabList.add(test);
+		test.getTab().setClosable(false);
 		currTab = test;
-		SlogoTab test2 = new SlogoTab(myLanguage, myScreen, 1);
-		tabList.add(test2);
 		Tab addTab = new Tab("+");
-
 		manager.getTabs().add(test.getTab());
-		manager.getTabs().add(test2.getTab());
 		manager.getTabs().add(addTab);
 		SingleSelectionModel<Tab> selectionModel = manager.getSelectionModel();
 		this.pane.getChildren().add(manager);
-		manager.getSelectionModel().selectedItemProperty().addListener((ov, oldTab, newTab) -> {
+		selectionModel.selectedItemProperty().addListener((ov, oldTab, newTab) -> {
 			if(newTab.getText().equals("+")){
 				SlogoTab temp = new SlogoTab(myLanguage, myScreen, tabList.size());
-				manager.getTabs().add(tabList.size(), temp.getTab());
+				newTab = temp.getTab();
+				int tempID = Integer.parseInt(newTab.getId());
+				newTab.setOnClosed(e -> {
+					tabList.remove(tempID);
+					resetID(tempID);
+				});
+				manager.getTabs().add(tabList.size(), newTab);
 				tabList.add(temp);
-				selectionModel.select(Integer.parseInt(temp.getTab().getId()));
+				selectionModel.select(tempID);
 			}
 			currTab = tabList.get(Integer.parseInt(newTab.getId()));
 		});
 	}
-
+	
+	private void resetID(int index){
+		for(int i = index; i < tabList.size(); i++){
+			tabList.get(i).getTab().setId(Integer.toString(i));
+			tabList.get(i).getTab().setText("Tab"+(i+1));
+		}
+	}
+	
 	public SlogoTab getCurrentTab(){
 		return currTab;
 	}
