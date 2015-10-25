@@ -42,7 +42,6 @@ public class NodeFactory {
 			}
 			break;
 			
-			
 //		Node c = reflection.getClass(type + "Node").getConstructor(String.class, NodeObject.class, int.class)
 //				.newInstance(value, parent, numParams);
 //			
@@ -64,5 +63,7 @@ public class NodeFactory {
 		}
 		return new_node;
 	}
+	
+
 
 }
