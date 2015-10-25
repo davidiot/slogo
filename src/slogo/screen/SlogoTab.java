@@ -26,14 +26,13 @@ public class SlogoTab extends AbstractScreen{
 	private Commands commands;
 	private Variables variables;
 	private Display map;
-	private TabManager manager;
 	private EngineController myEngineController;
 	private ResourceBundle slogoResources;
 	private ObservableArrayList h;
 	private ObservableArrayList c;
 	private ObservableArrayList v;
 	private Tab myTab; 
-	private String tabID; 
+	private int tabID;
 	
 	public SlogoTab(String language, SlogoScreenInterface screen, int id){
 		this.language = language;
@@ -47,7 +46,7 @@ public class SlogoTab extends AbstractScreen{
 		} catch (java.util.MissingResourceException e) {
 			title = "SLogo";
 		}
-		tabID = Integer.toString(id);
+		tabID = id;
 		makeTab();
 		myEngineController = new EngineController(this.language, screen);
 	}
@@ -66,9 +65,9 @@ public class SlogoTab extends AbstractScreen{
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		setAlignment(root);
 		//Name the tab. CHANGE TO RESOURCES LATER
-		myTab = new Tab("test");
+		myTab = new Tab("Tab" + (tabID + 1));
 		myTab.setContent(root);
-		myTab.setId(tabID);
+		myTab.setId(Integer.toString(tabID));
 	}
 	
 	public void makeLists() {
