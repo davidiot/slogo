@@ -4,10 +4,13 @@ import slogo.interpreter.EngineController;
 
 public class GroupEndNode extends NodeObject {
 
+	public GroupEndNode(String name, NodeObject parent) {
+		super(name, parent);
+	}
+
 	@Override
 	public boolean hasCompleteChildren() {
-		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
@@ -18,13 +21,11 @@ public class GroupEndNode extends NodeObject {
 
 	@Override
 	public boolean canAdd() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public double traverseAndExecute(EngineController controller) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

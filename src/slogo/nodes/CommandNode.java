@@ -48,5 +48,9 @@ public class CommandNode extends NodeObject{
 	public String getAction() {
 		return myCommand.toString();
 	}
+	
+	public boolean canGroup() {
+		return myCommand.canGroup();
+	}
 
 }

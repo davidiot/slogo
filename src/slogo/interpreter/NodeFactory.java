@@ -3,6 +3,8 @@ package slogo.interpreter;
 import slogo.nodes.CommandDeclarationNode;
 import slogo.nodes.CommandNode;
 import slogo.nodes.ConstantNode;
+import slogo.nodes.GroupEndNode;
+import slogo.nodes.GroupStartNode;
 import slogo.nodes.ListEndNode;
 import slogo.nodes.ListStartNode;
 import slogo.nodes.NodeObject;
@@ -56,6 +58,12 @@ public class NodeFactory {
 			break;
 		case "ListEnd":
 			new_node = new ListEndNode(value, parent);
+			break;
+		case "GroupStart":
+			new_node = new GroupStartNode(value, parent);
+			break;
+		case "GroupEnd":
+			new_node = new GroupEndNode(value, parent);
 			break;
 		case "Variable":
 			new_node = new VariableNode(value, parent);

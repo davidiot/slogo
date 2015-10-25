@@ -12,6 +12,10 @@ public abstract class Command {
 	
 	public abstract int getNumChildrenRequired();
 	
+	public boolean canGroup() {
+		return false;
+	}
+	
 	public List<Double> recurseToGetParameters(List<NodeObject> params, EngineController controller){
 		List<Double> parameters = new ArrayList<Double>();
 		for(NodeObject child: params) {

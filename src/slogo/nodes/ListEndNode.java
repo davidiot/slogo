@@ -16,18 +16,16 @@ public class ListEndNode extends NodeObject {
 	@Override
 	public void addChild(NodeObject node) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
 	public boolean canAdd() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public double traverseAndExecute(EngineController controller) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
