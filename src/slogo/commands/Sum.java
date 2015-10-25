@@ -5,7 +5,7 @@ import java.util.List;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class Sum extends ArithmeticCommand {
+public class Sum extends GroupingCommand {
 
 	private final int CHILDREN_REQUIRED = 2;
 

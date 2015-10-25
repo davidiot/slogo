@@ -53,8 +53,11 @@ public class TreeBuilder {
 	}
 
 	private void isComplete(NodeObject root) {
+		if (root == null) return;
 		if (! root.hasCompleteChildren()) {
 			throw new InterpreterException("Command %s does not have proper number of parameters", root.getName());
 		}
+		root = root.getParent();
+		isComplete(root);
 	}
 }

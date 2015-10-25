@@ -11,7 +11,7 @@ public class GroupStartNode extends NodeObject {
 
 	@Override
 	public boolean hasCompleteChildren() {
-		return false;
+		return ! canAdd() ;
 	}
 
 	@Override

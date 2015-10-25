@@ -1,7 +1,7 @@
 package slogo.commands;
 
 
-public abstract class ArithmeticCommand extends Command {
+public abstract class GroupingCommand extends Command {
 
 	@Override
 	public boolean canGroup() {
