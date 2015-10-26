@@ -19,6 +19,7 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 
 	public AbstractList(GridPane pane, ObservableArrayList list, Console console) {
 		super(pane);
+		makePane();
 		list.addObserver(this);
 		this.console = console;
 	}

@@ -12,6 +12,7 @@ public class Console extends AbstractElement {
 
 	public Console(GridPane pane) {
 		super(pane);
+		makePane();
 	}
 
 	protected void makePane() {
