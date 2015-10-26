@@ -3,6 +3,7 @@ package slogo.interpreter;
 import java.util.HashMap;
 
 import slogo.character.CharacterInterface;
+import slogo.element.History;
 import slogo.nodes.NodeObject;
 import slogo.screen.SlogoScreenInterface;
 
@@ -47,6 +48,10 @@ public class EngineController {
 	
 	public VariableLibrary getVariableLibrary(){
 		return myVariableLibrary;
+	}
+	
+	public History getHistoryObjec(){
+		return myView.getHistoryObject();
 	}
 	
 	public CharacterInterface getMainCharacter(){
