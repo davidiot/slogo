@@ -19,7 +19,7 @@ public class StartScreen extends AbstractScreen {
 	public StartScreen() {
 		WIDTH = Integer.parseInt(myResources.getString("width"));
 		HEIGHT = Integer.parseInt(myResources.getString("height"));
-		makeParameters();
+		makeGlobalParameters();
 		root = new GridPane();
 		scene = new Scene(root, WIDTH, HEIGHT);
 		root.add(makeTitle(), 0, 0);

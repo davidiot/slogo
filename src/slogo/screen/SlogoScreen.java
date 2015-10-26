@@ -52,7 +52,6 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 	public void run() {
 		myEngineController = manager.getCurrentTab().getEngineController();
 		map = manager.getCurrentTab().getDisplay();
-
 		String BackgroundColor = parameters.getBackgroundColor();
 		if (BackgroundColor != null) {
 			map.changeColor(BackgroundColor);

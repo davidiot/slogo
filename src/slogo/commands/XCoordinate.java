@@ -11,7 +11,7 @@ public class XCoordinate extends Command {
 	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		return controller.getMainCharacter().getX();
+		return controller.getMainCharacter().getXLocation();
 	}
 
 	@Override

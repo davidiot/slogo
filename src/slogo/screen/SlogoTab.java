@@ -50,7 +50,7 @@ public class SlogoTab extends AbstractScreen {
 
 	public void makeTab() {
 		GridPane mapPane = new GridPane();
-		map = new Display(mapPane, parameters);
+		map = new Display(mapPane);
 		root.add(mapPane, 0, 0);
 		GridPane consolePane = new GridPane();
 		console = new Console(consolePane);

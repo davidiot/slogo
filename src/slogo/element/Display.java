@@ -3,10 +3,13 @@ package slogo.element;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -30,19 +33,18 @@ public class Display extends AbstractElement {
 	private Pane temp;
 	private Pane characterDisplay;
 	private List<MainCharacter> characters;
-	private GlobalParameters parameters;
-	int counter = 1;
+	int counter = 0;
 
-	public Display(GridPane pane, GlobalParameters parameters) {
+	public Display(GridPane pane) {
 		super(pane);
 		makePane();
-		this.parameters = parameters;
 	}
 
 	@Override
 	protected void makePane() {
 		display = new StackPane();
 		characterDisplay = new Pane();
+		characterDisplay.setMouseTransparent(true);
 		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter);
 		characters = new ArrayList<MainCharacter>();
 		characters.add(mc);
@@ -54,11 +56,19 @@ public class Display extends AbstractElement {
 				Color.TRANSPARENT);
 		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")), Color.WHITE);
+		map.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				Point2D locationInScene = new Point2D(
+						e.getSceneX() - Double.parseDouble(slogoResources.getString("characterCenterX")),
+						e.getSceneY() - Double.parseDouble(slogoResources.getString("characterCenterY")));
+				Point2D locationInParent = characterDisplay.sceneToLocal(locationInScene);
+				addCharacter(locationInParent.getX(), locationInParent.getY());
+			}
+		});
 		test = new Canvas(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")));
 		gc = test.getGraphicsContext2D();
 		characterDisplay.getChildren().add(test);
-		characterDisplay.getChildren().add(mc.getImageView());
 		display.getChildren().addAll(background, map, characterDisplay);
 		this.pane.getChildren().add(display);
 	}
@@ -73,13 +83,14 @@ public class Display extends AbstractElement {
 		}
 	}
 
-	public void addCharacter(MainCharacter mc) {
+	public void addCharacter(double x, double y) {
+		counter++;
+		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter % 10, x, y);
 		characters.add(mc);
-		display.getChildren().add(mc.getImageView());
 	}
 
 	public CharacterInterface getCharacter() {
-		return characters.get(0);
+		return characters.get(counter);
 	}
 
 	public void updateCharacters() {
@@ -113,11 +124,5 @@ public class Display extends AbstractElement {
 		}
 		makePane();
 		return distance;
-	}
-
-	public void setImage(Image image) {
-		for (MainCharacter mc : characters) {
-			mc.setImage(image);
-		}
 	}
 }

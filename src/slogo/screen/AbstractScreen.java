@@ -18,8 +18,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import slogo.parameters.GlobalParameters;
+import slogo.parameters.Parameterized;
 
-public abstract class AbstractScreen implements AbstractScreenInterface {
+public abstract class AbstractScreen extends Parameterized implements AbstractScreenInterface {
 	protected GridPane root;
 	protected Scene scene;
 	protected int WIDTH;
@@ -43,9 +44,6 @@ public abstract class AbstractScreen implements AbstractScreenInterface {
 	private static Stage settingsStage;
 	private static Stage helpStage;
 	private static Stage creditsStage;
-
-	// parameters are available to all
-	public static GlobalParameters parameters;
 
 	abstract public void run();
 
@@ -183,25 +181,8 @@ public abstract class AbstractScreen implements AbstractScreenInterface {
 		return t;
 	}
 
-	protected void makeParameters() {
+	protected void makeGlobalParameters() {
 		parameters = new GlobalParameters();
-		try {
-			Scanner s = new Scanner(new File("src/resources/settings.txt"));
-			while (s.hasNext()) {
-				String next = s.nextLine();
-				if (next.equals("0")) {
-					break;
-				}
-				String[] vals = s.nextLine().split(" ");
-				parameters.setValue(next, Double.parseDouble(vals[0]));
-			}
-		} catch (
-
-		FileNotFoundException e)
-
-		{
-			e.printStackTrace();
-		}
 	}
 
 	protected void showError(String title, String message) {

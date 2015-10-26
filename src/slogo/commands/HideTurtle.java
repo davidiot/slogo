@@ -10,7 +10,7 @@ public class HideTurtle extends Command {
 private final int CHILDREN_REQUIRED = 0;
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		return controller.getMainCharacter().setVisible(false);
+		return controller.getMainCharacter().setHidden(false);
 	}
 
 	@Override

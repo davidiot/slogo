@@ -12,7 +12,7 @@ public class ShowTurtle extends Command {
 	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		return controller.getMainCharacter().setVisible(true);
+		return controller.getMainCharacter().setHidden(true);
 	}
 
 	@Override

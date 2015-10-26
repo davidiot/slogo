@@ -10,7 +10,7 @@ public interface CharacterInterface {
 	
 	public void changeSpeed(Double value);
 
-	public double setVisible(boolean input);
+	public double setHidden(boolean input);
 	
 	public double setPenDown(boolean input);
 
@@ -28,9 +28,9 @@ public interface CharacterInterface {
 	
 	public void changePenWidth(Double input);
 	
-	public double getX();
+	public double getXLocation();
 	
-	public double getY();
+	public double getYLocation();
 
 	public double getDirection();
 

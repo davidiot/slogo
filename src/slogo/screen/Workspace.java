@@ -79,7 +79,7 @@ public class Workspace extends AbstractElement {
 	@Override
 	protected void makePane() {
 		GridPane mapPane = new GridPane();
-		map = new Display(mapPane, parameters);
+		map = new Display(mapPane);
 		desk.add(mapPane, 0, 0);
 
 		GridPane consolePane = new GridPane();

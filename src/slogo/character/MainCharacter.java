@@ -11,7 +11,7 @@ import javafx.scene.shape.Line;
 import slogo.parameters.GlobalParameters;
 import slogo.parameters.LocalParameters;
 
-public class MainCharacter implements CharacterInterface {
+public class MainCharacter extends ImageView implements CharacterInterface {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private final double XADJUST = Double.parseDouble(slogoResources.getString("characterCenterX"));
@@ -31,34 +31,36 @@ public class MainCharacter implements CharacterInterface {
 	private double finalX;
 	private double finalY;
 	private double finalDirection;
-	private ImageView imageView;
 	private Pane myPane;
 	private LinkedList<Movement> myQueue;
 	private GlobalParameters parameters;
 	private LocalParameters options;
-	private Image image;
 
 	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
+		curX = xCenter;
+		curY = yCenter;
+		init(pane, parameters, i);
+	}
+
+	public MainCharacter(Pane pane, GlobalParameters parameters, int i, double x, double y) {
+		this.curX = x;
+		this.curY = y;
+		init(pane, parameters, i);
+	}
+
+	private void init(Pane pane, GlobalParameters parameters, int i) {
 		myPane = pane;
 		this.parameters = parameters;
 		options = new LocalParameters(i);
-		curX = xCenter;
-		preX = xCenter;
-		curY = yCenter;
-		preY = yCenter;
+		preX = curX;
+		preY = curY;
 		direction = 0;
 		finalX = curX;
 		finalY = curY;
 		finalDirection = direction;
-		if (!hidden) {
-			image = options.getImage();
-		} else {
-			image = new Image("Images/blank.png");
-		}
-		imageView = new ImageView();
-		imageView.setImage(image);
-		imageView.setX(curX);
-		imageView.setY(curY);
+		this.loadImage(options.getImage());
+		this.setX(curX);
+		this.setY(curY);
 		myQueue = new LinkedList<Movement>();
 	}
 
@@ -109,9 +111,9 @@ public class MainCharacter implements CharacterInterface {
 	}
 
 	private void refreshImage() {
-		myPane.getChildren().remove(imageView);
+		myPane.getChildren().remove(this);
 		if (!hidden) {
-			myPane.getChildren().add(imageView);
+			myPane.getChildren().add(this);
 		}
 	}
 
@@ -157,8 +159,8 @@ public class MainCharacter implements CharacterInterface {
 				|| (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT) - error)
 				|| (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT) + error);
 
-		imageView.setX(wrap(curX, WIDTH));
-		imageView.setY(wrap(curY, HEIGHT));
+		this.setX(wrap(curX, WIDTH));
+		this.setY(wrap(curY, HEIGHT));
 		if (nextMove.isCurrentPenDown() & !teleport) {
 			Line line;
 			line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST, wrap(curX, WIDTH) + XADJUST,
@@ -176,19 +178,11 @@ public class MainCharacter implements CharacterInterface {
 		} else {
 			direction -= Math.min(parameters.getValue("Speed"), direction - angle);
 		}
-		imageView.setRotate(direction);
+		this.setRotate(direction);
 		if (direction == angle) {
 			direction = wrap(direction, 360);
 			myQueue.poll();
 		}
-	}
-
-	public ImageView getImageView() {
-		return imageView;
-	}
-
-	public Image getImage() {
-		return image;
 	}
 
 	public double move(double distance, boolean forward) {
@@ -216,7 +210,7 @@ public class MainCharacter implements CharacterInterface {
 		parameters.setValue("Dash Level", value);
 	}
 
-	public double setVisible(boolean input) {
+	public double setHidden(boolean input) {
 		double returnVal = 0;
 		hidden = input;
 		if (input)
@@ -280,11 +274,11 @@ public class MainCharacter implements CharacterInterface {
 		parameters.setValue("Line Thickness", input);
 	}
 
-	public double getX() {
+	public double getXLocation() {
 		return finalX - xCenter;
 	}
 
-	public double getY() {
+	public double getYLocation() {
 		return yCenter - finalY;
 	}
 
@@ -300,13 +294,12 @@ public class MainCharacter implements CharacterInterface {
 		return hidden;
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
-		imageView.setImage(image);
-		imageView.setFitHeight(XADJUST * 2);
-		imageView.setFitWidth(YADJUST * 2);
-		imageView.setSmooth(true);
-		imageView.setCache(true);
+	public void loadImage(Image image) {
+		this.setImage(image);
+		this.setFitHeight(XADJUST * 2);
+		this.setFitWidth(YADJUST * 2);
+		this.setSmooth(true);
+		this.setCache(true);
 		refreshImage();
 	}
 }
