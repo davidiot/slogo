@@ -4,13 +4,11 @@ import java.util.HashMap;
 
 import javafx.scene.image.Image;
 
-public class Parameters {
+public class GlobalParameters {
 	private HashMap<String, Double> values;
 	private String backgroundColor;
-	private String penColor;
-	private Image image;
 
-	public Parameters() {
+	public GlobalParameters() {
 		values = new HashMap<String, Double>();
 	}
 
@@ -28,24 +26,6 @@ public class Parameters {
 
 	public void setBackgroundColor(String backgroundColor) {
 		this.backgroundColor = backgroundColor;
-	}
-
-	public String getPenColor() {
-		return penColor;
-	}
-
-	public void setPenColor(String penColor) {
-		this.penColor = penColor;
-	}
-
-	public Image getImage() {
-		Image output = image;
-		image = null;
-		return output;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
 	}
 
 }

@@ -5,10 +5,7 @@ import java.util.ResourceBundle;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
-import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import slogo.element.Commands;
 import slogo.element.Console;
 import slogo.element.Display;
@@ -18,7 +15,7 @@ import slogo.element.Variables;
 import slogo.interpreter.EngineController;
 import slogo.interpreter.InterpreterException;
 
-public class SlogoTab extends AbstractScreen{
+public class SlogoTab extends AbstractScreen {
 
 	private String language;
 	private Console console;
@@ -31,10 +28,10 @@ public class SlogoTab extends AbstractScreen{
 	private ObservableArrayList h;
 	private ObservableArrayList c;
 	private ObservableArrayList v;
-	private Tab myTab; 
+	private Tab myTab;
 	private int tabID;
-	
-	public SlogoTab(String language, SlogoScreenInterface screen, int id){
+
+	public SlogoTab(String language, SlogoScreenInterface screen, int id) {
 		this.language = language;
 		slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 		WIDTH = Integer.parseInt(slogoResources.getString("width"));
@@ -50,26 +47,26 @@ public class SlogoTab extends AbstractScreen{
 		makeTab();
 		myEngineController = new EngineController(this.language, screen);
 	}
-	
-	public void makeTab(){
+
+	public void makeTab() {
 		GridPane mapPane = new GridPane();
-		map = new Display(mapPane);
+		map = new Display(mapPane, parameters);
 		root.add(mapPane, 0, 0);
 		GridPane consolePane = new GridPane();
 		console = new Console(consolePane);
 		GridPane.setColumnSpan(consolePane, 2);
 		root.add(consolePane, 0, 2);
-		
+
 		makeLists();
-		
+
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		setAlignment(root);
-		//Name the tab. CHANGE TO RESOURCES LATER
-		myTab = new Tab("Tab" + (tabID + 1));
+		// Name the tab. CHANGE TO RESOURCES LATER
+		myTab = new Tab("Workspace " + (tabID + 1));
 		myTab.setContent(root);
 		myTab.setId(Integer.toString(tabID));
 	}
-	
+
 	public void makeLists() {
 		h = new ObservableArrayList();
 		c = new ObservableArrayList();
@@ -96,16 +93,16 @@ public class SlogoTab extends AbstractScreen{
 
 		root.add(listPane, 1, 0);
 	}
-	
-	public Display getDisplay(){
+
+	public Display getDisplay() {
 		return map;
 	}
-	
-	public Tab getTab(){
+
+	public Tab getTab() {
 		return myTab;
 	}
-	
-	public EngineController getEngineController(){
+
+	public EngineController getEngineController() {
 		return myEngineController;
 	}
 
@@ -113,28 +110,29 @@ public class SlogoTab extends AbstractScreen{
 	public void run() {
 		if (console.hasInput()) {
 			String command = console.getInput();
-			//myEngineController.sendToInterpreter(command);
-			//map.getCharacter(0).goTo(Double.parseDouble(command.split(" ")[0]), Double.parseDouble(command.split(" ")[1]));
-			//showError("ERROR!", command);
+			// myEngineController.sendToInterpreter(command);
+			// map.getCharacter(0).goTo(Double.parseDouble(command.split("
+			// ")[0]), Double.parseDouble(command.split(" ")[1]));
+			// showError("ERROR!", command);
 			try {
-			myEngineController.runCommands(command);
+				myEngineController.runCommands(command);
 			} catch (InterpreterException e) {
 				showError("ERROR!", e.getMessage());
 			}
 			h.add(command);
 		}
-	}	
-	
-	public History getHistory(){
+	}
+
+	public History getHistory() {
 		return history;
 	}
-	
-	public Variables getVariables(){
+
+	public Variables getVariables() {
 		return variables;
 	}
-	
-	public Commands getCommands(){
+
+	public Commands getCommands() {
 		return commands;
 	}
-	
+
 }

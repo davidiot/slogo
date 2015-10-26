@@ -17,7 +17,9 @@ import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
 import slogo.interpreter.EngineController;
 import slogo.interpreter.InterpreterException;
-public class Workspace extends AbstractElement{
+import slogo.parameters.GlobalParameters;
+
+public class Workspace extends AbstractElement {
 
 	private String language;
 	private Console console;
@@ -33,8 +35,9 @@ public class Workspace extends AbstractElement{
 	private int WIDTH;
 	private int HEIGHT;
 	private GridPane desk;
-	
-	public Workspace(String language, SlogoScreenInterface screen, GridPane pane) {
+	private GlobalParameters parameters;
+
+	public Workspace(String language, SlogoScreenInterface screen, GridPane pane, GlobalParameters parameters) {
 		super(pane);
 		this.language = language;
 		slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
@@ -42,11 +45,10 @@ public class Workspace extends AbstractElement{
 		HEIGHT = Integer.parseInt(slogoResources.getString("height"));
 		desk = new GridPane();
 		myEngineController = new EngineController(this.language, screen);
+		this.parameters = parameters;
 		makePane();
 	}
-	
 
-	
 	public void makeLists() {
 		h = new ObservableArrayList();
 		c = new ObservableArrayList();
@@ -65,10 +67,10 @@ public class Workspace extends AbstractElement{
 		listPane.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		listPane.setAlignment(Pos.BASELINE_LEFT);
 		GridPane buttonPane = new GridPane();
-		//buttonPane.add(makeBackButton(), 0, 0);
-		//buttonPane.add(makeHelpButton(), 1, 0);
-		//buttonPane.add(makeSettingsButton(), 2, 0);
-		//buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
+		// buttonPane.add(makeBackButton(), 0, 0);
+		// buttonPane.add(makeHelpButton(), 1, 0);
+		// buttonPane.add(makeSettingsButton(), 2, 0);
+		// buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
 		listPane.add(buttonPane, 0, 3);
 
 		desk.add(listPane, 1, 1);
@@ -77,7 +79,7 @@ public class Workspace extends AbstractElement{
 	@Override
 	protected void makePane() {
 		GridPane mapPane = new GridPane();
-		map = new Display(mapPane);
+		map = new Display(mapPane, parameters);
 		desk.add(mapPane, 0, 0);
 
 		GridPane consolePane = new GridPane();
@@ -87,7 +89,7 @@ public class Workspace extends AbstractElement{
 		desk.add(consolePane, 0, 1);
 
 		makeLists();
-		
+
 		desk.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
 		pane.getChildren().add(desk);
 	}

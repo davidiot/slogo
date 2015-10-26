@@ -17,6 +17,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.parameters.GlobalParameters;
+import slogo.screen.AbstractScreen;
 
 public class Display extends AbstractElement {
 
@@ -28,17 +30,20 @@ public class Display extends AbstractElement {
 	private Pane temp;
 	private Pane characterDisplay;
 	private List<MainCharacter> characters;
+	private GlobalParameters parameters;
+	int counter = 1;
 
-	public Display(GridPane pane) {
+	public Display(GridPane pane, GlobalParameters parameters) {
 		super(pane);
 		makePane();
+		this.parameters = parameters;
 	}
 
 	@Override
 	protected void makePane() {
 		display = new StackPane();
 		characterDisplay = new Pane();
-		MainCharacter mc = new MainCharacter(characterDisplay);
+		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter);
 		characters = new ArrayList<MainCharacter>();
 		characters.add(mc);
 		background = new Rectangle(
@@ -68,12 +73,6 @@ public class Display extends AbstractElement {
 		}
 	}
 
-	public void changePenWidth(Double input) {
-		for (MainCharacter mc : characters) {
-			mc.changePenWidth(input);
-		}
-	}
-
 	public void addCharacter(MainCharacter mc) {
 		characters.add(mc);
 		display.getChildren().add(mc.getImageView());
@@ -86,6 +85,12 @@ public class Display extends AbstractElement {
 	public void updateCharacters() {
 		for (MainCharacter mc : characters) {
 			mc.update();
+		}
+	}
+
+	public void changePenWidth(Double input) {
+		for (MainCharacter mc : characters) {
+			mc.changePenWidth(input);
 		}
 	}
 

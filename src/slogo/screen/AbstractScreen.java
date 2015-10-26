@@ -17,7 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import slogo.parameters.Parameters;
+import slogo.parameters.GlobalParameters;
 
 public abstract class AbstractScreen implements AbstractScreenInterface {
 	protected GridPane root;
@@ -43,7 +43,9 @@ public abstract class AbstractScreen implements AbstractScreenInterface {
 	private static Stage settingsStage;
 	private static Stage helpStage;
 	private static Stage creditsStage;
-	protected static Parameters parameters;
+
+	// parameters are available to all
+	public static GlobalParameters parameters;
 
 	abstract public void run();
 
@@ -182,7 +184,7 @@ public abstract class AbstractScreen implements AbstractScreenInterface {
 	}
 
 	protected void makeParameters() {
-		parameters = new Parameters();
+		parameters = new GlobalParameters();
 		try {
 			Scanner s = new Scanner(new File("src/resources/settings.txt"));
 			while (s.hasNext()) {
