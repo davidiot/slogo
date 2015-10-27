@@ -21,7 +21,7 @@ public class Variables extends AbstractList {
 		input.setContentText(slogoResources.getString("vprompt") + variable + ":");
 		Optional<String> response = input.showAndWait();
 		if (response.isPresent()) {
-			myEngineController.getVariableLibrary().addVariable(variable, Double.parseDouble(response.get()));
+			myEngineController.getVariableLibrary().addVariable(":" + variable, Double.parseDouble(response.get()));
 			myEngineController.updateVariablesListInGUI();
 		}
 	}
