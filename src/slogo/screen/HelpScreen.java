@@ -38,7 +38,6 @@ public class HelpScreen extends AbstractWindowScreen {
 		WebEngine webEngine = browser.getEngine();
 		java.net.URL resourceURL = Thread.currentThread().getContextClassLoader().getResource("helpPage/SLogoHelp.html");
 		String test = "file:///" + resourceURL.getFile();
-		System.out.println(test);
 		webEngine.load(test);
 		title.getChildren().add(browser);
 		//Text temp = createText(myResources.getString("helpTitle"),
