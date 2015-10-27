@@ -2,10 +2,14 @@ package slogo.screen;
 
 import java.util.ResourceBundle;
 
+import XML.XMLEditor;
+import XML.XMLReader;
+
 import com.sun.javafx.scene.control.skin.ColorPalette;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.GridPane;
 import slogo.element.Commands;
@@ -94,6 +98,8 @@ public class SlogoTab extends AbstractScreen {
 		buttonPane.add(makeBackButton(), 0, 0);
 		buttonPane.add(makeHelpButton(), 1, 0);
 		buttonPane.add(makeSettingsButton(), 2, 0);
+		Button save = makeSaveButton();
+		save.setOnMouseClicked(e->editXML());
 		buttonPane.add(makeSaveButton(), 0, 1);
 		buttonPane.add(makeLoadButton(), 1, 1);
 		buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
@@ -102,6 +108,10 @@ public class SlogoTab extends AbstractScreen {
 		root.add(listPane, 1, 0);
 	}
 
+	public void editXML(){
+		XMLEditor temp = new XMLEditor("XMLFiles/test.xml", parameters);
+		temp.editFile();
+	}
 	public Display getDisplay() {
 		return map;
 	}
