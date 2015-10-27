@@ -2,17 +2,25 @@ package slogo.parameters;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 
-import javafx.scene.image.Image;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
+import slogo.character.MainCharacter;
 
 public class GlobalParameters {
 	private HashMap<String, Double> values;
 	private Color backgroundColor;
 	private String backgroundColorName;
+	private boolean showActive = true;
+	private ObservableList<MainCharacter> characters;
+	private HashSet<Integer> activeIndices;
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 
@@ -28,6 +36,7 @@ public class GlobalParameters {
 				String[] vals = s.nextLine().split(" ");
 				this.setValue(next, Double.parseDouble(vals[0]));
 			}
+			s.close();
 		} catch (
 
 		FileNotFoundException e)
@@ -60,6 +69,11 @@ public class GlobalParameters {
 		backgroundColorName = null;
 	}
 
+	public void setBackgroundColorRGB(int i, int j, int k) {
+		this.backgroundColor = Color.rgb(i, j, k);
+		backgroundColorName = null;
+	}
+
 	public String getBackgroundColorName() {
 		return backgroundColorName;
 	}
@@ -67,4 +81,26 @@ public class GlobalParameters {
 	public HashMap<String, Double> getValueMap() {
 		return values;
 	}
+
+	public boolean isShowActive() {
+		return showActive;
+	}
+
+	public void setShowActive(boolean showActive) {
+		this.showActive = showActive;
+	}
+
+	public void load(ObservableList<MainCharacter> characters, HashSet<Integer> activeIndices) {
+		this.characters = characters;
+		this.activeIndices = activeIndices;
+	}
+
+	public ObservableList<MainCharacter> getCharacters() {
+		return characters;
+	}
+
+	public HashSet<Integer> getActiveIndices() {
+		return activeIndices;
+	}
+
 }
