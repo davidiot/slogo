@@ -3,7 +3,11 @@ package slogo.interpreter;
 import java.util.HashMap;
 
 import slogo.character.CharacterInterface;
+<<<<<<< HEAD
+import slogo.element.History;
+=======
 import slogo.commands.TurtleCommandInterface;
+>>>>>>> 68557e89c69a91af417f6cf4e5fc55adafee1ec1
 import slogo.nodes.NodeObject;
 import slogo.saving.FileParser;
 import slogo.saving.WorkspaceSaver;
@@ -26,8 +30,13 @@ public class EngineController {
 		myVariableLibrary = new VariableLibrary();
 		myCommandLibrary = new CommandLibrary(myVariableLibrary);
 		myInterpreter = new Interpreter(language, myCommandLibrary, myVariableLibrary);
+<<<<<<< HEAD
 		myWorkspaceSaver = new WorkspaceSaver(this);
 		myFileParser = new FileParser();
+=======
+		//myTurtles = view.getDisplay().getCharacters();
+		//activeIndices = view.getDisplay().getActiveIndices();
+>>>>>>> 68557e89c69a91af417f6cf4e5fc55adafee1ec1
 	}
 
 	public void runCommands(String input) {

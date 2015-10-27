@@ -1,12 +1,18 @@
 package slogo.element;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -17,6 +23,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
+import slogo.parameters.GlobalParameters;
+import slogo.screen.AbstractScreen;
 
 public class Display extends AbstractElement {
 
@@ -27,7 +35,9 @@ public class Display extends AbstractElement {
 	private Pane display;
 	private Pane temp;
 	private Pane characterDisplay;
-	private List<MainCharacter> characters;
+	private ObservableList<MainCharacter> characters;
+	private HashSet<Integer> activeIndices;
+	private int counter = 0;
 
 	public Display(GridPane pane) {
 		super(pane);
@@ -38,9 +48,12 @@ public class Display extends AbstractElement {
 	protected void makePane() {
 		display = new StackPane();
 		characterDisplay = new Pane();
-		MainCharacter mc = new MainCharacter(characterDisplay);
-		characters = new ArrayList<MainCharacter>();
+		characterDisplay.setMouseTransparent(true);
+		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter);
+		characters = FXCollections.observableArrayList(new ArrayList<MainCharacter>());
 		characters.add(mc);
+		activeIndices = new HashSet<Integer>();
+		activeIndices.add(0);
 		background = new Rectangle(
 				Double.parseDouble(slogoResources.getString("mapWidth"))
 						+ 2 * Double.parseDouble(slogoResources.getString("characterCenterX")),
@@ -49,38 +62,40 @@ public class Display extends AbstractElement {
 				Color.TRANSPARENT);
 		map = new Rectangle(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")), Color.WHITE);
+		map.addEventHandler(MouseEvent.MOUSE_PRESSED, new EventHandler<MouseEvent>() {
+			public void handle(MouseEvent e) {
+				Point2D locationInScene = new Point2D(
+						e.getSceneX() - Double.parseDouble(slogoResources.getString("characterCenterX")),
+						e.getSceneY() - Double.parseDouble(slogoResources.getString("characterCenterY")));
+				Point2D locationInParent = characterDisplay.sceneToLocal(locationInScene);
+				addCharacter(locationInParent.getX(), locationInParent.getY());
+			}
+		});
 		test = new Canvas(Integer.parseInt(slogoResources.getString("mapWidth")),
 				Integer.parseInt(slogoResources.getString("mapHeight")));
 		gc = test.getGraphicsContext2D();
 		characterDisplay.getChildren().add(test);
-		characterDisplay.getChildren().add(mc.getImageView());
 		display.getChildren().addAll(background, map, characterDisplay);
 		this.pane.getChildren().add(display);
 	}
 
-	public void changeColor(String input) {
-		map.setFill(Paint.valueOf(input));
+	public void changeColor(Color input) {
+		map.setFill(input);
 	}
 
-	public void changePenColor(String input) {
-		for (MainCharacter mc : characters) {
-			mc.changePenColor(input);
-		}
+	public void changeColorHex(String input) {
+		parameters.setBackgroundColorHex(input);
 	}
 
-	public void changePenWidth(Double input) {
-		for (MainCharacter mc : characters) {
-			mc.changePenWidth(input);
-		}
+	public void changeColorRGB(int i, int j, int k) {
+		parameters.setBackgroundColorRGB(i, j, k);
 	}
 
-	public void addCharacter(MainCharacter mc) {
+	public void addCharacter(double x, double y) {
+		counter++;
+		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter, x, y);
+		activeIndices.add(counter);
 		characters.add(mc);
-		display.getChildren().add(mc.getImageView());
-	}
-
-	public CharacterInterface getCharacter() {
-		return characters.get(0);
 	}
 
 	public void updateCharacters() {
@@ -89,16 +104,30 @@ public class Display extends AbstractElement {
 		}
 	}
 
-	public void changeSpeed(Double value) {
-		for (MainCharacter mc : characters) {
-			mc.changeSpeed(value);
-		}
+	// public void changePenWidth(Double input) {
+	// for (MainCharacter mc : characters) {
+	// mc.changePenWidth(input);
+	// }
+	// }
+	//
+	// public void changeSpeed(Double value) {
+	// for (MainCharacter mc : characters) {
+	// mc.changeSpeed(value);
+	// }
+	// }
+	//
+	// public void changeDashLevel(Double value) {
+	// for (MainCharacter mc : characters) {
+	// mc.changeDashLevel(value);
+	// }
+	// }
+
+	public ObservableList<MainCharacter> getCharacters() {
+		return characters;
 	}
 
-	public void changeDashLevel(Double value) {
-		for (MainCharacter mc : characters) {
-			mc.changeDashLevel(value);
-		}
+	public HashSet<Integer> getActiveIndices() {
+		return activeIndices;
 	}
 
 	public double clear() {
@@ -108,11 +137,5 @@ public class Display extends AbstractElement {
 		}
 		makePane();
 		return distance;
-	}
-
-	public void setImage(Image image) {
-		for (MainCharacter mc : characters) {
-			mc.setImage(image);
-		}
 	}
 }

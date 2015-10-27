@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -20,12 +22,15 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
-import slogo.parameters.Parameters;
+import slogo.element.Monitor;
+import slogo.parameters.GlobalParameters;
+import slogo.parameters.LocalParameters;
 
 public class SettingsScreen extends AbstractWindowScreen {
 
 	private int i;
-	private Button penToggle;
+	private Button toggleButton;
+	private Monitor monitor;
 
 	@Override
 	public void run() {
@@ -65,37 +70,13 @@ public class SettingsScreen extends AbstractWindowScreen {
 				list.add(s.next());
 			}
 			s.close();
-			ComboBox<String> box1 = new ComboBox<String>();
-			box1.setPromptText("Choose Color");
-			box1.setVisibleRowCount(5);
-			ComboBox<String> box2 = new ComboBox<String>();
-			box2.setPromptText("Choose Color");
-			box2.setVisibleRowCount(5);
-			box1.getItems().addAll(list);
-			box2.getItems().addAll(list);
-			if (parameters.getBackgroundColor() != null) {
-				box1.setValue(parameters.getBackgroundColor());
-			}
-			if (parameters.getPenColor() != null) {
-				box2.setValue(parameters.getPenColor());
-			}
-			box1.setOnAction(e -> setBackground(box1.getValue()));
-			box2.setOnAction(e -> setPen(box2.getValue()));
-			Text t1 = new Text("Background: ");
-			t1.setFont(font);
-			Text t2 = new Text("Pen: ");
-			t2.setFont(font);
-			GridPane pane1 = new GridPane();
-			pane1.add(t1, 0, 0);
-			pane1.add(box1, 1, 0);
-			GridPane pane2 = new GridPane();
-			pane2.add(t2, 0, 0);
-			pane2.add(box2, 1, 0);
-			GridPane pane3 = new GridPane();
-			pane3.add(makeSelectorButton(), 0, 0);
-			add(pane1);
-			add(pane2);
-			add(pane3);
+			GridPane togglePane = new GridPane();
+			makeToggleButton();
+			togglePane.add(toggleButton, 0, 0);
+			GridPane monitorPane = new GridPane();
+			monitor = new Monitor(monitorPane);
+			add(togglePane);
+			add(monitorPane);
 		} catch (
 
 		FileNotFoundException e)
@@ -108,20 +89,19 @@ public class SettingsScreen extends AbstractWindowScreen {
 	}
 
 	private void makeToggleButton() {
-		penToggle = new Button(myResources.getString("toggle"));
-		penToggle.setFont(font);
-		penToggle.setOnMouseClicked(e -> togglePen());
+		toggleButton = new Button(myResources.getString("toggleOn"));
+		toggleButton.setFont(font);
+		toggleButton.setOnMouseClicked(e -> toggle());
 	}
 
-	private void togglePen() {
-		
-	}
-
-	private Button makeSelectorButton() {
-		Button button = new Button(myResources.getString("selector"));
-		button.setFont(font);
-		button.setOnMouseClicked(e -> showSelector());
-		return button;
+	private void toggle() {
+		boolean active = parameters.isShowActive();
+		parameters.setShowActive(!active);
+		if (active) {
+			toggleButton.setText(myResources.getString("toggleOff"));
+		} else {
+			toggleButton.setText(myResources.getString("toggleOn"));
+		}
 	}
 
 	private void showSelector() {
@@ -131,16 +111,8 @@ public class SettingsScreen extends AbstractWindowScreen {
 				.addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 		File selectedFile = fileChooser.showOpenDialog(new Stage());
 		if (selectedFile != null) {
-			parameters.setImage(new Image(selectedFile.toURI().toString()));
+			// parameters.setImage(new Image(selectedFile.toURI().toString()));
 		}
-	}
-
-	private void setBackground(String input) {
-		parameters.setBackgroundColor(input);
-	}
-
-	private void setPen(String input) {
-		parameters.setPenColor(input);
 	}
 
 	private GridPane makeTitle() {

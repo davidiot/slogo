@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
-import slogo.parameters.Parameters;
+import slogo.parameters.GlobalParameters;
 
 public class StartScreen extends AbstractScreen {
 	private ComboBox<String> loader;
@@ -19,7 +19,7 @@ public class StartScreen extends AbstractScreen {
 	public StartScreen() {
 		WIDTH = Integer.parseInt(myResources.getString("width"));
 		HEIGHT = Integer.parseInt(myResources.getString("height"));
-		makeParameters();
+		makeGlobalParameters();
 		root = new GridPane();
 		scene = new Scene(root, WIDTH, HEIGHT);
 		root.add(makeTitle(), 0, 0);

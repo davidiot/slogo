@@ -5,8 +5,6 @@ import java.util.HashMap;
 import slogo.character.CharacterInterface;
 import slogo.commands.TurtleCommandInterface;
 import slogo.nodes.NodeObject;
-import slogo.saving.FileParser;
-import slogo.saving.WorkspaceSaver;
 import slogo.screen.SlogoScreenInterface;
 
 public class EngineController {
@@ -15,8 +13,6 @@ public class EngineController {
 	private SlogoScreenInterface myView;
 	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariableLibrary;
-	private WorkspaceSaver myWorkspaceSaver;
-	private FileParser myFileParser;
 	
 	private final int DEFAULT_CHARACTER = 0;
 
@@ -26,16 +22,14 @@ public class EngineController {
 		myVariableLibrary = new VariableLibrary();
 		myCommandLibrary = new CommandLibrary(myVariableLibrary);
 		myInterpreter = new Interpreter(language, myCommandLibrary, myVariableLibrary);
-		myWorkspaceSaver = new WorkspaceSaver(this);
-		myFileParser = new FileParser();
+		//myTurtles = view.getDisplay().getCharacters();
+		//activeIndices = view.getDisplay().getActiveIndices();
 	}
 
 	public void runCommands(String input) {
 		NodeObject compiledCommandsTree = myInterpreter.interpret(input);
 		compiledCommandsTree.traverseAndExecute(this);
 		updateVariablesListInGUI();
-		updateCommandsListInGUI();
-		myWorkspaceSaver.saveWorkspaceToFile("newFile");
 	}
 
 	private void updateVariablesListInGUI() {
@@ -44,15 +38,6 @@ public class EngineController {
 		for (String s : variableMap.keySet()) {
 			String variableMapping = s.substring(1) + " = " + variableMap.get(s);
 			myView.getVariablesObject().add(variableMapping);
-		}
-	}
-	
-	private void updateCommandsListInGUI(){
-		HashMap<String, String> commandMap = (HashMap<String, String>) myCommandLibrary.getCustomCommandMap();
-		myView.getCommandsObject().clear();
-		for (String s: commandMap.keySet()){
-			String commandMapping = commandMap.get(s);
-			myView.getCommandsObject().add(commandMapping);
 		}
 	}
 

@@ -5,13 +5,14 @@ import java.util.List;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class XCoordinate extends Command {
-
+public class SetBackgroundColor extends Command {
 	private final int CHILDREN_REQUIRED = 0;
 	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		return controller.getMainCharacter().getXLocation();
+		//controller.getScreen().getDisplay().
+		//return params.get(0).traverseAndExecute(controller);
+		return 0;
 	}
 
 	@Override

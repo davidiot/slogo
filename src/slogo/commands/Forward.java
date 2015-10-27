@@ -2,10 +2,11 @@ package slogo.commands;
 
 import java.util.List;
 
+import slogo.character.MainCharacter;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class Forward extends Command {
+public class Forward extends Command implements TurtleCommandInterface {
 	
 	private final int CHILDREN_REQUIRED = 1;
 
@@ -20,6 +21,12 @@ public class Forward extends Command {
 	@Override
 	public int getNumChildrenRequired() {
 		return CHILDREN_REQUIRED;
+	}
+
+	@Override
+	public void doTurtling(MainCharacter turtle) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

@@ -5,18 +5,20 @@ import java.util.List;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class XCoordinate extends Command {
+public class Tell extends Command {
 
-	private final int CHILDREN_REQUIRED = 0;
-	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		return controller.getMainCharacter().getXLocation();
+		List<Double> parameters = recurseToGetParameters(params, controller);
+		// setActives 
+		//controller.getDisplay().setActives(parameters);
+		return parameters.get(parameters.size()-1);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		return CHILDREN_REQUIRED;
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

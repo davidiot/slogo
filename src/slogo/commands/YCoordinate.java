@@ -11,7 +11,7 @@ public class YCoordinate extends Command {
 	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		return controller.getMainCharacter().getY();
+		return controller.getMainCharacter().getYLocation();
 	}
 
 	@Override

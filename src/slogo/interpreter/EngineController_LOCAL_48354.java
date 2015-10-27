@@ -3,7 +3,7 @@ package slogo.interpreter;
 import java.util.HashMap;
 
 import slogo.character.CharacterInterface;
-import slogo.commands.TurtleCommandInterface;
+import slogo.element.History;
 import slogo.nodes.NodeObject;
 import slogo.saving.FileParser;
 import slogo.saving.WorkspaceSaver;
@@ -19,8 +19,7 @@ public class EngineController {
 	private FileParser myFileParser;
 	
 	private final int DEFAULT_CHARACTER = 0;
-
-
+	
 	public EngineController(String language, SlogoScreenInterface view) {
 		myView = view;
 		myVariableLibrary = new VariableLibrary();
@@ -30,18 +29,18 @@ public class EngineController {
 		myFileParser = new FileParser();
 	}
 
-	public void runCommands(String input) {
+	public void runCommands(String input){
 		NodeObject compiledCommandsTree = myInterpreter.interpret(input);
 		compiledCommandsTree.traverseAndExecute(this);
 		updateVariablesListInGUI();
 		updateCommandsListInGUI();
 		myWorkspaceSaver.saveWorkspaceToFile("newFile");
 	}
-
-	private void updateVariablesListInGUI() {
+	
+	private void updateVariablesListInGUI(){
 		HashMap<String, Double> variableMap = (HashMap<String, Double>) myVariableLibrary.getVariableMap();
 		myView.getVariablesObject().clear();
-		for (String s : variableMap.keySet()) {
+		for (String s: variableMap.keySet()){
 			String variableMapping = s.substring(1) + " = " + variableMap.get(s);
 			myView.getVariablesObject().add(variableMapping);
 		}
@@ -56,31 +55,20 @@ public class EngineController {
 		}
 	}
 
-	public SlogoScreenInterface getScreen() {
+	public SlogoScreenInterface getScreen(){
 		return myView;
 	}
-
-	public CommandLibrary getCommandLibrary() {
+	
+	public CommandLibrary getCommandLibrary(){
 		return myCommandLibrary;
 	}
-
-	public VariableLibrary getVariableLibrary() {
+	
+	public VariableLibrary getVariableLibrary(){
 		return myVariableLibrary;
 	}
-
-	public CharacterInterface getMainCharacter() {
-		return myView.getDisplay().getCharacters().get(0);
-	}
-
-
-	public void commandTurtles(TurtleCommandInterface command) {
-		for (int i = 0; i < myView.getDisplay().getCharacters().size(); i++) {
-			if (myView.getDisplay().getActiveIndices().contains(i)){
-				command.doTurtling(myView.getDisplay().getCharacters().get(i));
-			}
-		}
-		
+	
+	public CharacterInterface getMainCharacter(){
+		return myView.getDisplay().getCharacter();
 	}
 	
-
 }

@@ -1,5 +1,6 @@
 package slogo.character;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
@@ -7,12 +8,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
+import slogo.parameters.GlobalParameters;
+import slogo.parameters.LocalParameters;
 
-import java.util.LinkedList;
-import java.util.ResourceBundle;
-
-public class MainCharacter implements CharacterInterface {
+public class MainCharacter extends ImageView implements CharacterInterface {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private final double XADJUST = Double.parseDouble(slogoResources.getString("characterCenterX"));
@@ -22,8 +23,6 @@ public class MainCharacter implements CharacterInterface {
 	private double xCenter = WIDTH / 2;
 	private double yCenter = HEIGHT / 2;
 	private static final double ANGLE = 90.0;
-	private boolean penDown = true;
-	private boolean hidden = false;
 	private double preX;
 	private double preY;
 	private double curX;
@@ -32,36 +31,39 @@ public class MainCharacter implements CharacterInterface {
 	private double finalX;
 	private double finalY;
 	private double finalDirection;
-	private Image image;
-	private ImageView imageView;
-	private Color penColor;
-	private double penWidth = 1;
-	private double speed = 1;
-	private double dash = 0;
 	private Pane myPane;
 	private LinkedList<Movement> myQueue;
+	private GlobalParameters parameters;
+	private LocalParameters settings;
+	private ArrayList<Line> lineList;
 
-	public MainCharacter(Pane pane) {
-		myPane = pane;
+	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
 		curX = xCenter;
-		preX = xCenter;
 		curY = yCenter;
-		preY = yCenter;
+		init(pane, parameters, i);
+	}
+
+	public MainCharacter(Pane pane, GlobalParameters parameters, int i, double x, double y) {
+		this.curX = x;
+		this.curY = y;
+		init(pane, parameters, i);
+	}
+
+	private void init(Pane pane, GlobalParameters parameters, int i) {
+		myPane = pane;
+		this.parameters = parameters;
+		settings = new LocalParameters(i);
+		preX = curX;
+		preY = curY;
 		direction = 0;
 		finalX = curX;
 		finalY = curY;
 		finalDirection = direction;
-		if (!hidden) {
-			image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle.png"));
-		} else {
-			image = new Image("Images/blank.png");
-		}
-		imageView = new ImageView();
-		imageView.setImage(image);
-		imageView.setX(curX);
-		imageView.setY(curY);
-		penColor = Color.BLACK;
+		this.loadImage(settings.getImage());
+		this.setX(curX);
+		this.setY(curY);
 		myQueue = new LinkedList<Movement>();
+		lineList = new ArrayList<Line>();
 	}
 
 	private class Movement {
@@ -74,9 +76,9 @@ public class MainCharacter implements CharacterInterface {
 		public Movement(String type, double[] value) {
 			this.type = type;
 			this.value = value;
-			currentPenDown = penDown;
-			currentPenColor = penColor;
-			currentPenWidth = penWidth;
+			currentPenDown = settings.isPenDown();
+			currentPenColor = settings.getPenColor();
+			currentPenWidth = parameters.getValue("Line Thickness");
 		}
 
 		public String getType() {
@@ -111,9 +113,9 @@ public class MainCharacter implements CharacterInterface {
 	}
 
 	private void refreshImage() {
-		myPane.getChildren().remove(imageView);
-		if (!hidden) {
-			myPane.getChildren().add(imageView);
+		myPane.getChildren().remove(this);
+		if (!settings.isHidden()) {
+			myPane.getChildren().add(this);
 		}
 	}
 
@@ -121,67 +123,74 @@ public class MainCharacter implements CharacterInterface {
 		if (!myQueue.isEmpty()) {
 			Movement nextMove = myQueue.peek();
 			if (nextMove.getType().equals("angle")) {
-				double angle = nextMove.getValue()[0];
-				if (angle - direction > 0) {
-					direction += Math.min(speed, angle - direction);
-				} else {
-					direction -= Math.min(speed, direction - angle);
-				}
-				imageView.setRotate(direction);
-				if (direction == angle) {
-					direction = wrap(direction, 360);
-					myQueue.poll();
-				}
+				turn(nextMove);
 			} else {
-				preX = curX;
-				preY = curY;
-				double x = nextMove.getValue()[0];
-				double y = nextMove.getValue()[1];
-				double newX = 0;
-				double newY = 0;
-				double adjustedDirection = direction;
-				if (nextMove.getType().equals("bline")) {
-					adjustedDirection = wrap(direction + 180, 360);
-				}
-				newX = curX + speed * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
-				newY = curY - speed * Math.sin(Math.toRadians(ANGLE - adjustedDirection));
-
-				if ((Math.pow((newX - curX), 2) + Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2)
-						+ Math.pow((y - curY), 2))) {
-					curX = wrap(x, WIDTH);
-					curY = wrap(y, HEIGHT);
-					myQueue.poll();
-				} else {
-					curX = newX;
-					curY = newY;
-				}
-				double error = 0.00000001;
-				boolean teleport = (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH) + error)
-						|| (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH) - error)
-						|| (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT) - error)
-						|| (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT) + error);
-
-				imageView.setX(wrap(curX, WIDTH));
-				imageView.setY(wrap(curY, HEIGHT));
-				if (nextMove.isCurrentPenDown() & !teleport) {
-					Line line;
-					line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST,
-							wrap(curX, WIDTH) + XADJUST, wrap(curY, HEIGHT) + YADJUST);
-					line.setStroke(nextMove.getCurrentPenColor());
-					line.setStrokeWidth(nextMove.getCurrentPenWidth());
-					myPane.getChildren().add(line);
-				}
+				line(nextMove);
 			}
 			refreshImage();
 		}
 	}
 
-	public ImageView getImageView() {
-		return imageView;
+	private void line(Movement nextMove) {
+		preX = curX;
+		preY = curY;
+		double x = nextMove.getValue()[0];
+		double y = nextMove.getValue()[1];
+		double newX = 0;
+		double newY = 0;
+		double adjustedDirection = direction;
+		if (nextMove.getType().equals("bline")) {
+			adjustedDirection = wrap(direction + 180, 360);
+		}
+		newX = curX + parameters.getValue("Speed") * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
+		newY = curY - parameters.getValue("Speed") * Math.sin(Math.toRadians(ANGLE - adjustedDirection));
+
+		if ((Math.pow((newX - curX), 2) + Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2)
+				+ Math.pow((y - curY), 2))) {
+			curX = wrap(x, WIDTH);
+			curY = wrap(y, HEIGHT);
+			myQueue.poll();
+		} else {
+			curX = newX;
+			curY = newY;
+		}
+
+		this.setX(wrap(curX, WIDTH));
+		this.setY(wrap(curY, HEIGHT));
+		if (nextMove.isCurrentPenDown() & !checkTeleport()) {
+			Line line;
+			line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST, wrap(curX, WIDTH) + XADJUST,
+					wrap(curY, HEIGHT) + YADJUST);
+			line.setStroke(nextMove.getCurrentPenColor());
+			line.setStrokeWidth(nextMove.getCurrentPenWidth());
+			myPane.getChildren().add(line);
+			// IF INSTANT
+			lineList.add(line);
+		}
 	}
 
-	public Image getImage() {
-		return image;
+	public boolean checkTeleport() {
+		// accounts for double imprecision
+		double error = Double.parseDouble(slogoResources.getString("error"));
+		boolean teleport = (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH) + error)
+				|| (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH) - error)
+				|| (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT) - error)
+				|| (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT) + error);
+		return teleport;
+	}
+
+	public void turn(Movement nextMove) {
+		double angle = nextMove.getValue()[0];
+		if (angle - direction > 0) {
+			direction += Math.min(parameters.getValue("Speed"), angle - direction);
+		} else {
+			direction -= Math.min(parameters.getValue("Speed"), direction - angle);
+		}
+		this.setRotate(direction);
+		if (direction == angle) {
+			direction = wrap(direction, 360);
+			myQueue.poll();
+		}
 	}
 
 	public double move(double distance, boolean forward) {
@@ -202,16 +211,16 @@ public class MainCharacter implements CharacterInterface {
 	}
 
 	public void changeSpeed(Double value) {
-		speed = value;
+		parameters.setValue("Speed", value);
 	}
 
 	public void changeDashLevel(Double value) {
-		dash = value;
+		parameters.setValue("Dash Level", value);
 	}
 
-	public double setVisible(boolean input) {
+	public double setHidden(boolean input) {
 		double returnVal = 0;
-		hidden = input;
+		settings.setHidden(input);
 		if (input)
 			returnVal = 1;
 		refreshImage();
@@ -220,7 +229,7 @@ public class MainCharacter implements CharacterInterface {
 
 	public double setPenDown(boolean input) {
 		double returnVal = 0;
-		penDown = input;
+		settings.setPenDown(input);
 		if (input)
 			returnVal = 1;
 		return returnVal;
@@ -266,18 +275,26 @@ public class MainCharacter implements CharacterInterface {
 	}
 
 	public void changePenColor(String input) {
-		penColor = Color.valueOf(input);
+		settings.setPenColor(Color.valueOf(input));
+	}
+
+	public void changePenColorHex(String input) {
+		settings.setPenColor(Color.web(input));
+	}
+
+	public void changePenColorRGB(int i, int j, int k) {
+		settings.setPenColor(Color.rgb(i, j, k));
 	}
 
 	public void changePenWidth(Double input) {
-		penWidth = input;
+		parameters.setValue("Line Thickness", input);
 	}
 
-	public double getX() {
+	public double getXLocation() {
 		return finalX - xCenter;
 	}
 
-	public double getY() {
+	public double getYLocation() {
 		return yCenter - finalY;
 	}
 
@@ -286,20 +303,23 @@ public class MainCharacter implements CharacterInterface {
 	}
 
 	public boolean isPenDown() {
-		return penDown;
+		return settings.isPenDown();
 	}
 
 	public boolean isHidden() {
-		return hidden;
+		return settings.isHidden();
 	}
 
-	public void setImage(Image image) {
-		this.image = image;
-		imageView.setImage(image);
-		imageView.setFitHeight(XADJUST * 2);
-		imageView.setFitWidth(YADJUST * 2);
-		imageView.setSmooth(true);
-		imageView.setCache(true);
+	public void loadImage(Image image) {
+		this.setImage(image);
+		this.setFitHeight(XADJUST * 2);
+		this.setFitWidth(YADJUST * 2);
+		this.setSmooth(true);
+		this.setCache(true);
 		refreshImage();
+	}
+
+	public LocalParameters getSettings() {
+		return settings;
 	}
 }
