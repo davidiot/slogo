@@ -30,6 +30,9 @@ public class NewCommandFinder {
 		index += 1;
 		int paramCount = 0;
 		String name = parsedList.get(index).getValue();
+		if (parsedList.size() - 1 - index < 4) {
+			throw new InterpreterException("Make User Instruction command does not have proper of parameters");
+		}
 		if (! parsedList.get(index).getType().equals("Command")) {
 			throw new InterpreterException("Expected commmand name in make command declaration, got %s", 
 					parsedList.get(index).getType());
