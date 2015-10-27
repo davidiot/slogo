@@ -1,8 +1,13 @@
 package slogo.interpreter;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
+import javafx.scene.Node;
 import slogo.character.CharacterInterface;
+import slogo.character.MainCharacter;
+import slogo.commands.TurtleCommandInterface;
 import slogo.nodes.NodeObject;
 import slogo.screen.SlogoScreenInterface;
 
@@ -12,6 +17,8 @@ public class EngineController {
 	private SlogoScreenInterface myView;
 	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariableLibrary;
+	private List<MainCharacter> myTurtles;
+	private Set<Integer> activeIndices;
 	
 	private final int DEFAULT_CHARACTER = 0;
 	
@@ -20,6 +27,8 @@ public class EngineController {
 		myVariableLibrary = new VariableLibrary();
 		myCommandLibrary = new CommandLibrary(myVariableLibrary);
 		myInterpreter = new Interpreter(language, myCommandLibrary, myVariableLibrary);
+		//myTurtles = view.getDisplay().getCharacters();
+		//activeIndices = view.getDisplay().getActiveIndices();
 	}
 
 	public void runCommands(String input){
@@ -52,5 +61,14 @@ public class EngineController {
 	public CharacterInterface getMainCharacter(){
 		return myView.getDisplay().getCharacter();
 	}
+
+//	public void commandTurtles(TurtleCommandInterface command) {
+//		for (int i = 0; i < myTurtles.size(); i++) {
+//			if (activeIndices.contains(i)){
+//				command.doTurtling(myTurtles.get(i));
+//			}
+//		}
+//		
+//	}
 	
 }
