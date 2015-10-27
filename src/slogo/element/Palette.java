@@ -53,5 +53,9 @@ public class Palette extends AbstractElement {
 		}
 		else return null;
 	}
+	
+	public void setColor(int i, Color c){
+		colors.set(i, c);
+	}
 
 }

@@ -85,6 +85,14 @@ public class Display extends AbstractElement {
 		this.pane.getChildren().add(display);
 	}
 
+	public String convertIndexToHex(int index){
+		return palette.getColor(index);
+	}
+	
+	public void setPaletteIndex(int index, int r, int g, int b){
+		palette.setColor(index, Color.rgb(r,g,b));
+	}
+	
 	public void changeColor(Color input) {
 		map.setFill(input);
 	}
