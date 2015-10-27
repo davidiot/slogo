@@ -15,6 +15,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import slogo.character.MainCharacter;
+import slogo.parameters.GlobalParameters;
 
 /**
 to set, save, and load workspace preferences (like default background, starting 
@@ -97,6 +98,15 @@ public class XMLReader {
 				colParameters.put(name, val);
 			}
 		}
+	}
+	
+	public GlobalParameters setGlobalParameters(){
+		GlobalParameters globals = new GlobalParameters();
+		globals.setValue("Speed", numParameters.get("Speed"));
+		globals.setValue("Line Thickness", numParameters.get("Line Thickness"));
+		globals.setValue("Dash Level", numParameters.get("Dash Level"));
+		globals.setBackgroundColorHex(colParameters.get("Background"));
+		return globals;
 	}
 
 	public Map<String, Double> getNumParams() {

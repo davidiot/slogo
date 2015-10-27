@@ -2,6 +2,8 @@ package slogo.screen;
 
 import java.util.ResourceBundle;
 
+import com.sun.javafx.scene.control.skin.ColorPalette;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Tab;
@@ -11,6 +13,7 @@ import slogo.element.Console;
 import slogo.element.Display;
 import slogo.element.History;
 import slogo.element.ObservableArrayList;
+import slogo.element.Palette;
 import slogo.element.Variables;
 import slogo.interpreter.EngineController;
 import slogo.interpreter.InterpreterException;
@@ -23,6 +26,7 @@ public class SlogoTab extends AbstractScreen {
 	private Commands commands;
 	private Variables variables;
 	private Display map;
+	private Palette palette;
 	private EngineController myEngineController;
 	private ResourceBundle slogoResources;
 	private ObservableArrayList h;
@@ -56,7 +60,9 @@ public class SlogoTab extends AbstractScreen {
 		console = new Console(consolePane);
 		GridPane.setColumnSpan(consolePane, 2);
 		root.add(consolePane, 0, 2);
-
+		
+		root.add(map.getPalettePane(), 2,2);
+		
 		makeLists();
 
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
@@ -88,6 +94,8 @@ public class SlogoTab extends AbstractScreen {
 		buttonPane.add(makeBackButton(), 0, 0);
 		buttonPane.add(makeHelpButton(), 1, 0);
 		buttonPane.add(makeSettingsButton(), 2, 0);
+		buttonPane.add(makeSaveButton(), 0, 1);
+		buttonPane.add(makeLoadButton(), 1, 1);
 		buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
 		listPane.add(buttonPane, 0, 3);
 
