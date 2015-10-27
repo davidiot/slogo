@@ -55,5 +55,4 @@ public class GlobalParameters {
 	public HashMap<String, Double> getValueMap(){
 		return values;
 	}
-
 }

@@ -22,8 +22,6 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private double xCenter = WIDTH / 2;
 	private double yCenter = HEIGHT / 2;
 	private static final double ANGLE = 90.0;
-	private boolean penDown = true;
-	private boolean hidden = false;
 	private double preX;
 	private double preY;
 	private double curX;
@@ -77,7 +75,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		public Movement(String type, double[] value) {
 			this.type = type;
 			this.value = value;
-			currentPenDown = penDown;
+			currentPenDown = options.isPenDown();
 			currentPenColor = Color.valueOf(options.getPenColor());
 			currentPenWidth = parameters.getValue("Line Thickness");
 		}
@@ -115,7 +113,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	private void refreshImage() {
 		myPane.getChildren().remove(this);
-		if (!hidden) {
+		if (!options.isHidden()) {
 			myPane.getChildren().add(this);
 		}
 	}
@@ -155,16 +153,10 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 			curX = newX;
 			curY = newY;
 		}
-		// accounts for double imprecision
-		double error = Double.parseDouble(slogoResources.getString("error"));
-		boolean teleport = (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH) + error)
-				|| (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH) - error)
-				|| (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT) - error)
-				|| (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT) + error);
 
 		this.setX(wrap(curX, WIDTH));
 		this.setY(wrap(curY, HEIGHT));
-		if (nextMove.isCurrentPenDown() & !teleport) {
+		if (nextMove.isCurrentPenDown() & !checkTeleport()) {
 			Line line;
 			line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST, wrap(curX, WIDTH) + XADJUST,
 					wrap(curY, HEIGHT) + YADJUST);
@@ -174,6 +166,16 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 			//IF INSTANT
 			lineList.add(line);
 		}
+	}
+
+	public boolean checkTeleport() {
+		// accounts for double imprecision
+		double error = Double.parseDouble(slogoResources.getString("error"));
+		boolean teleport = (curX - preX > wrap(curX, WIDTH) - wrap(preX, WIDTH) + error)
+				|| (curX - preX < wrap(curX, WIDTH) - wrap(preX, WIDTH) - error)
+				|| (curY - preY < wrap(curY, HEIGHT) - wrap(preY, HEIGHT) - error)
+				|| (curY - preY > wrap(curY, HEIGHT) - wrap(preY, HEIGHT) + error);
+		return teleport;
 	}
 
 	public void turn(Movement nextMove) {
@@ -217,7 +219,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double setHidden(boolean input) {
 		double returnVal = 0;
-		hidden = input;
+		options.setHidden(input);
 		if (input)
 			returnVal = 1;
 		refreshImage();
@@ -226,7 +228,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double setPenDown(boolean input) {
 		double returnVal = 0;
-		penDown = input;
+		options.setPenDown(input);
 		if (input)
 			returnVal = 1;
 		return returnVal;
@@ -292,11 +294,11 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	}
 
 	public boolean isPenDown() {
-		return penDown;
+		return options.isPenDown();
 	}
 
 	public boolean isHidden() {
-		return hidden;
+		return options.isHidden();
 	}
 
 	public void loadImage(Image image) {
