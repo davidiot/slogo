@@ -27,12 +27,11 @@ public class CommandLibrary {
 	}
 
 	public Command getCommand(String name) {
-		String[] inputArray = name.split(" ");
-		if (inputArray[0] == "to"){
-			System.out.println("WE GOT HERE!!!!!");
-			return myCommandMap.get(inputArray[1]);
-		}
 		return myCommandMap.get(name);
+	}
+	
+	public Map<String, String> getCustomCommandMap(){
+		return myUserCommandMap;
 	}
 
 	private void makeCommandMap(ResourceBundle commandResources) {

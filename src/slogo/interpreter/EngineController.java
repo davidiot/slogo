@@ -27,6 +27,7 @@ public class EngineController {
 		NodeObject compiledCommandsTree = myInterpreter.interpret(input);
 		compiledCommandsTree.traverseAndExecute(this);
 		updateVariablesListInGUI();
+		updateCommandsListInGUI();
 	}
 	
 	private void updateVariablesListInGUI(){
@@ -35,6 +36,15 @@ public class EngineController {
 		for (String s: variableMap.keySet()){
 			String variableMapping = s.substring(1) + " = " + variableMap.get(s);
 			myView.getVariablesObject().add(variableMapping);
+		}
+	}
+	
+	private void updateCommandsListInGUI(){
+		HashMap<String, String> commandMap = (HashMap<String, String>) myCommandLibrary.getCustomCommandMap();
+		myView.getCommandsObject().clear();
+		for (String s: commandMap.keySet()){
+			String commandMapping = commandMap.get(s);
+			myView.getCommandsObject().add(commandMapping);
 		}
 	}
 
