@@ -12,9 +12,9 @@ public class EngineController {
 	private SlogoScreenInterface myView;
 	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariableLibrary;
-	
+
 	private final int DEFAULT_CHARACTER = 0;
-	
+
 	public EngineController(String language, SlogoScreenInterface view) {
 		myView = view;
 		myVariableLibrary = new VariableLibrary();
@@ -22,35 +22,35 @@ public class EngineController {
 		myInterpreter = new Interpreter(language, myCommandLibrary, myVariableLibrary);
 	}
 
-	public void runCommands(String input){
+	public void runCommands(String input) {
 		NodeObject compiledCommandsTree = myInterpreter.interpret(input);
 		compiledCommandsTree.traverseAndExecute(this);
 		updateVariablesListInGUI();
 	}
-	
-	private void updateVariablesListInGUI(){
+
+	private void updateVariablesListInGUI() {
 		HashMap<String, Double> variableMap = (HashMap<String, Double>) myVariableLibrary.getVariableMap();
 		myView.getVariablesObject().clear();
-		for (String s: variableMap.keySet()){
+		for (String s : variableMap.keySet()) {
 			String variableMapping = s.substring(1) + " = " + variableMap.get(s);
 			myView.getVariablesObject().add(variableMapping);
 		}
 	}
 
-	public SlogoScreenInterface getScreen(){
+	public SlogoScreenInterface getScreen() {
 		return myView;
 	}
-	
-	public CommandLibrary getCommandLibrary(){
+
+	public CommandLibrary getCommandLibrary() {
 		return myCommandLibrary;
 	}
-	
-	public VariableLibrary getVariableLibrary(){
+
+	public VariableLibrary getVariableLibrary() {
 		return myVariableLibrary;
 	}
-	
-	public CharacterInterface getMainCharacter(){
-		return myView.getDisplay().getCharacter();
+
+	public CharacterInterface getMainCharacter() {
+		return myView.getDisplay().getCharacters().get(0);
 	}
-	
+
 }

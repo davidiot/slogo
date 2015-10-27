@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -21,13 +22,15 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
+import slogo.element.Monitor;
 import slogo.parameters.GlobalParameters;
 import slogo.parameters.LocalParameters;
 
 public class SettingsScreen extends AbstractWindowScreen {
 
 	private int i;
-	ListView<LocalParameters> turtleMonitor;
+	private Button toggleButton;
+	private Monitor monitor;
 
 	@Override
 	public void run() {
@@ -67,23 +70,13 @@ public class SettingsScreen extends AbstractWindowScreen {
 				list.add(s.next());
 			}
 			s.close();
-			ComboBox<String> box1 = new ComboBox<String>();
-			box1.setPromptText("Choose Color");
-			box1.setVisibleRowCount(5);
-			box1.getItems().addAll(list);
-			if (parameters.getBackgroundColorName() != null) {
-				box1.setValue(parameters.getBackgroundColorName());
-			}
-			box1.setOnAction(e -> setBackground(box1.getValue()));
-			Text t1 = new Text("Background: ");
-			t1.setFont(font);
-			GridPane pane1 = new GridPane();
-			pane1.add(t1, 0, 0);
-			pane1.add(box1, 1, 0);
-			GridPane pane2 = new GridPane();
-			pane2.add(makeSelectorButton(), 0, 0);
-			add(pane1);
-			add(pane2);
+			GridPane togglePane = new GridPane();
+			makeToggleButton();
+			togglePane.add(toggleButton, 0, 0);
+			GridPane monitorPane = new GridPane();
+			monitor = new Monitor(monitorPane);
+			add(togglePane);
+			add(monitorPane);
 		} catch (
 
 		FileNotFoundException e)
@@ -95,11 +88,20 @@ public class SettingsScreen extends AbstractWindowScreen {
 		setAlignment(root);
 	}
 
-	private Button makeSelectorButton() {
-		Button button = new Button(myResources.getString("selector"));
-		button.setFont(font);
-		button.setOnMouseClicked(e -> showSelector());
-		return button;
+	private void makeToggleButton() {
+		toggleButton = new Button(myResources.getString("toggleOn"));
+		toggleButton.setFont(font);
+		toggleButton.setOnMouseClicked(e -> toggle());
+	}
+
+	private void toggle() {
+		boolean active = parameters.isShowActive();
+		parameters.setShowActive(!active);
+		if (active) {
+			toggleButton.setText(myResources.getString("toggleOff"));
+		} else {
+			toggleButton.setText(myResources.getString("toggleOn"));
+		}
 	}
 
 	private void showSelector() {
@@ -111,10 +113,6 @@ public class SettingsScreen extends AbstractWindowScreen {
 		if (selectedFile != null) {
 			// parameters.setImage(new Image(selectedFile.toURI().toString()));
 		}
-	}
-
-	private void setBackground(String input) {
-		parameters.setBackgroundColor(input);
 	}
 
 	private GridPane makeTitle() {
