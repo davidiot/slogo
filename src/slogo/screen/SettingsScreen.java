@@ -11,6 +11,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -21,11 +22,12 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 import slogo.parameters.GlobalParameters;
+import slogo.parameters.LocalParameters;
 
 public class SettingsScreen extends AbstractWindowScreen {
 
 	private int i;
-	private Button penToggle;
+	ListView<LocalParameters> turtleMonitor;
 
 	@Override
 	public void run() {
@@ -98,16 +100,6 @@ public class SettingsScreen extends AbstractWindowScreen {
 		setAlignment(root);
 	}
 
-	private void makeToggleButton() {
-		penToggle = new Button(myResources.getString("toggle"));
-		penToggle.setFont(font);
-		penToggle.setOnMouseClicked(e -> togglePen());
-	}
-
-	private void togglePen() {
-		
-	}
-
 	private Button makeSelectorButton() {
 		Button button = new Button(myResources.getString("selector"));
 		button.setFont(font);
@@ -122,14 +114,13 @@ public class SettingsScreen extends AbstractWindowScreen {
 				.addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
 		File selectedFile = fileChooser.showOpenDialog(new Stage());
 		if (selectedFile != null) {
-			//parameters.setImage(new Image(selectedFile.toURI().toString()));
+			// parameters.setImage(new Image(selectedFile.toURI().toString()));
 		}
 	}
 
 	private void setBackground(String input) {
 		parameters.setBackgroundColor(input);
 	}
-
 
 	private GridPane makeTitle() {
 		GridPane title = new GridPane();

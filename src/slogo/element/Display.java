@@ -1,6 +1,7 @@
 package slogo.element;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import javafx.event.EventHandler;
@@ -33,7 +34,8 @@ public class Display extends AbstractElement {
 	private Pane temp;
 	private Pane characterDisplay;
 	private List<MainCharacter> characters;
-	int counter = 0;
+	private HashSet<Integer> activeIndices;
+	private int counter = 0;
 
 	public Display(GridPane pane) {
 		super(pane);
@@ -48,6 +50,8 @@ public class Display extends AbstractElement {
 		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter);
 		characters = new ArrayList<MainCharacter>();
 		characters.add(mc);
+		activeIndices = new HashSet<Integer>();
+		activeIndices.add(0);
 		background = new Rectangle(
 				Double.parseDouble(slogoResources.getString("mapWidth"))
 						+ 2 * Double.parseDouble(slogoResources.getString("characterCenterX")),
@@ -86,6 +90,7 @@ public class Display extends AbstractElement {
 	public void addCharacter(double x, double y) {
 		counter++;
 		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter, x, y);
+		activeIndices.add(counter);
 		characters.add(mc);
 	}
 
@@ -99,23 +104,23 @@ public class Display extends AbstractElement {
 		}
 	}
 
-	public void changePenWidth(Double input) {
-		for (MainCharacter mc : characters) {
-			mc.changePenWidth(input);
-		}
-	}
-
-	public void changeSpeed(Double value) {
-		for (MainCharacter mc : characters) {
-			mc.changeSpeed(value);
-		}
-	}
-
-	public void changeDashLevel(Double value) {
-		for (MainCharacter mc : characters) {
-			mc.changeDashLevel(value);
-		}
-	}
+	// public void changePenWidth(Double input) {
+	// for (MainCharacter mc : characters) {
+	// mc.changePenWidth(input);
+	// }
+	// }
+	//
+	// public void changeSpeed(Double value) {
+	// for (MainCharacter mc : characters) {
+	// mc.changeSpeed(value);
+	// }
+	// }
+	//
+	// public void changeDashLevel(Double value) {
+	// for (MainCharacter mc : characters) {
+	// mc.changeDashLevel(value);
+	// }
+	// }
 
 	public double clear() {
 		double distance = 0;
