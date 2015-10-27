@@ -29,7 +29,6 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 	private Variables variables;
 	private Display map;
 	private TabManager manager;
-	private EngineController myEngineController;
 	private ResourceBundle slogoResources;
 	private ObservableArrayList h;
 	private ObservableArrayList c;

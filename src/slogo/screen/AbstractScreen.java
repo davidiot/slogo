@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import slogo.interpreter.EngineController;
 import slogo.parameters.GlobalParameters;
 import slogo.parameters.Parameterized;
 
