@@ -3,6 +3,7 @@ package slogo.interpreter;
 import java.util.HashMap;
 
 import slogo.character.CharacterInterface;
+import slogo.element.Display;
 import slogo.nodes.NodeObject;
 import slogo.saving.FileParser;
 import slogo.saving.WorkspaceSaver;
@@ -15,9 +16,9 @@ public class EngineController {
 	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariableLibrary;
 	private TurtleController myTurtleController;
+	private WorkspaceSaver myWorkspaceSaver;
+	private FileParser myFileParser;
 	
-	private final int DEFAULT_CHARACTER = 0;
-
 
 	public EngineController(String language, SlogoScreenInterface view) {
 		myView = view;
@@ -69,6 +70,10 @@ public class EngineController {
 		return myView;
 	}
 
+	public Display getDisplay(){
+		return myView.getDisplay();
+	}
+	
 	public CommandLibrary getCommandLibrary() {
 		return myCommandLibrary;
 	}

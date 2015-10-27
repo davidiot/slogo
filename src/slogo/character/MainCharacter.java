@@ -273,7 +273,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		setHeading(0);
 		return distance;
 	}
-
+	
 	public void changePenColor(String input) {
 		settings.setPenColor(Color.valueOf(input));
 	}

@@ -160,4 +160,5 @@ public class Display extends AbstractElement {
 	public GridPane getPalettePane(){
 		return palettePane;
 	}
+
 }
