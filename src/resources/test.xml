@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<test>
+	<numberparameters>
+		<name>Speed</name>
+		<value>0.5</value>
+	</numberparameters>
+	
+	<numberparameters>
+		<name>Line Thickness</name>
+		<value>0.5</value>
+	</numberparameters>
+	
+	<numberparameters>
+		<name>Dash Level</name>
+		<value>0.1</value>
+	</numberparameters>
+
+	<colorparameters>
+		<name>Background</name>
+		<value>Test</value>
+	</colorparameters>
+	
+</test>
