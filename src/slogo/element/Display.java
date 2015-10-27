@@ -115,6 +115,14 @@ public class Display extends AbstractElement {
 		activeIndices.add(counter);
 		characters.add(mc);
 	}
+	
+	// Puts character at default position
+	public void addCharacter() {
+//		addCharacter( Double.parseDouble(slogoResources.getString("characterCenterX")), 
+//				Double.parseDouble(slogoResources.getString("characterCenterY")));
+		addCharacter(Double.parseDouble(slogoResources.getString("mapWidth"))/2,
+				Double.parseDouble(slogoResources.getString("mapHeight"))/2);
+	}
 
 	public void updateCharacters() {
 		for (MainCharacter mc : characters) {
@@ -160,5 +168,6 @@ public class Display extends AbstractElement {
 	public GridPane getPalettePane(){
 		return palettePane;
 	}
+
 
 }

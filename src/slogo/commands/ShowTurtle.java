@@ -20,7 +20,7 @@ public class ShowTurtle extends TurtleCommand {
 
 	@Override
 	public double doTurtling(MainCharacter turtle, EngineController controller) {
-		return turtle.setHidden(true);
+		return turtle.setHidden(false);
 	}
 
 }

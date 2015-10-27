@@ -9,6 +9,7 @@ import slogo.nodes.NodeObject;
 
 public class Repeat extends Command {
 
+	private static final String VARIABLE_NAME = ":repcount";
 	private final int CHILDREN_REQUIRED = 2;
 	
 	@Override
@@ -23,7 +24,8 @@ public class Repeat extends Command {
 		if (! (body instanceof ListStartNode)) {
 			throw new InterpreterException("Expected [ for repeat loop");
 		}
-		for (int i = 0; i < numRepeats; i ++ ){
+		for (int i = 1; i <= numRepeats; i ++ ){
+			params.get(1).setLocalVariable(VARIABLE_NAME, i);
 			returnVal = body.traverseAndExecute(controller);
 		}
 		

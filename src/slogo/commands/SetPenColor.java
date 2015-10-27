@@ -14,6 +14,7 @@ public class SetPenColor extends TurtleCommand {
 		double index = parameters.get(0);
 		int indexInt = (int) index;
 		String color = controller.getDisplay().convertIndexToHex(indexInt);
+		System.out.println(color);
 		turtle.changePenColor(color);
 		return index;
 	}

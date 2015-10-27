@@ -22,7 +22,7 @@ private final int CHILDREN_REQUIRED = 0;
 
 @Override
 public double doTurtling(MainCharacter turtle, EngineController controller) {
-	return turtle.setHidden(false);
+	return turtle.setHidden(true);
 }
 
 }

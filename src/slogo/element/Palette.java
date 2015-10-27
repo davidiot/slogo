@@ -51,7 +51,8 @@ public class Palette extends AbstractElement {
 		if (i < colors.size()) {
 			return colors.get(i).toString();
 		} else
-			return null;
+			// DEFAULT
+			return colors.get(0).toString();
 	}
 
 	public void setColor(int i, Color c) {

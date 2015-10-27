@@ -42,9 +42,25 @@ public class TurtleController {
 		HashSet<Integer> activeIndicesSet = myView.getDisplay().getActiveIndices();
 		activeIndicesSet.removeAll(activeIndicesSet);
 		activeIndicesSet.addAll(IDs);
+		for (int id: IDs){
+			if (id > myView.getDisplay().getCharacters().size()) {
+				createMoreCharacters(id);
+			}
+		}
+	}
+
+	private void createMoreCharacters(int id) {
+		while (myView.getDisplay().getCharacters().size() < id) {
+			myView.getDisplay().addCharacter();
+		}
+		
 	}
 
 	public Set<Integer> getActiveIndices() {
 		return myView.getDisplay().getActiveIndices();
+	}
+
+	public double numTurtles() {
+		return myView.getDisplay().getCharacters().size();
 	}
 }

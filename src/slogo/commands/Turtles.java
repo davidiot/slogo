@@ -10,9 +10,7 @@ public class Turtles extends Command {
 	
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		// TODO Auto-generated method stub
-		//return controller.getScreen().getDisplay().getCharacters().size();
-		return 0;
+		return controller.getTurtleController().numTurtles();
 	}
 
 	@Override
