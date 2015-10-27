@@ -62,7 +62,7 @@ public class XMLEditor {
 	
 	public void initGlobalParameters(){
 		numParameters = globals.getValueMap();
-		colorParameters.put("BackgroundColor", globals.getBackgroundColor());
+		colorParameters.put("BackgroundColor", globals.getBackgroundColorName());
 	}
 
 	public void editFile() {

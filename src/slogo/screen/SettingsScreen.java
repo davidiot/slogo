@@ -71,24 +71,19 @@ public class SettingsScreen extends AbstractWindowScreen {
 			box1.setPromptText("Choose Color");
 			box1.setVisibleRowCount(5);
 			box1.getItems().addAll(list);
-			if (parameters.getBackgroundColor() != null) {
-				box1.setValue(parameters.getBackgroundColor());
+			if (parameters.getBackgroundColorName() != null) {
+				box1.setValue(parameters.getBackgroundColorName());
 			}
 			box1.setOnAction(e -> setBackground(box1.getValue()));
 			Text t1 = new Text("Background: ");
 			t1.setFont(font);
-			Text t2 = new Text("Pen: ");
-			t2.setFont(font);
 			GridPane pane1 = new GridPane();
 			pane1.add(t1, 0, 0);
 			pane1.add(box1, 1, 0);
 			GridPane pane2 = new GridPane();
-			pane2.add(t2, 0, 0);
-			GridPane pane3 = new GridPane();
-			pane3.add(makeSelectorButton(), 0, 0);
+			pane2.add(makeSelectorButton(), 0, 0);
 			add(pane1);
 			add(pane2);
-			add(pane3);
 		} catch (
 
 		FileNotFoundException e)
