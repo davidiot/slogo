@@ -13,6 +13,7 @@ public class LocalParameters {
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private int index;
 	private int shapeIndex;
+	private int penColorIndex;
 	private boolean penDown;
 	private boolean hidden;
 	private MainCharacter character;

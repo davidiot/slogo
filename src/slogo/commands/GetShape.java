@@ -5,15 +5,11 @@ import java.util.List;
 import slogo.character.MainCharacter;
 import slogo.interpreter.EngineController;
 
-public class SetShape extends TurtleCommand {
-	private final int CHILDREN_REQUIRED = 1;
+public class GetShape extends TurtleCommand {
+	private final int CHILDREN_REQUIRED = 0;
 	
 	public double doTurtling(MainCharacter turtle, EngineController controller) {
-		List<Double> parameters = this.recurseToGetParameters(myParams, controller);
-		double index = parameters.get(0);
-		int indexInt = (int) index;
-		turtle.changeShape(indexInt);
-		return index;
+		return turtle.getShape();
 	}
 
 	@Override

@@ -11,7 +11,7 @@ public class SetPenSize extends TurtleCommand {
 	public double doTurtling(MainCharacter turtle, EngineController controller) {
 		List<Double> parameters = this.recurseToGetParameters(myParams, controller);
 		double pixels = parameters.get(0);
-		controller.getMainCharacter().changePenWidth(pixels);
+		turtle.changePenWidth(pixels);
 		return pixels;
 	}
 
