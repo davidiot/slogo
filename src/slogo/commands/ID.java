@@ -2,26 +2,24 @@ package slogo.commands;
 
 import java.util.List;
 
+import slogo.character.MainCharacter;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class Sum extends GroupingCommand {
+public class ID extends Command {
 
-	private final int CHILDREN_REQUIRED = 2;
+	private final int CHILDREN_REQUIRED = 0;
 
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		List<Double> parameters = recurseToGetParameters(params, controller);
-		double sum = 0;
-		for (double param: parameters) {
-			sum += param;
-		}
-		return sum;
+		System.out.println(controller.getTurtleController().getActiveID());
+		return controller.getTurtleController().getActiveID();
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
 		return CHILDREN_REQUIRED;
 	}
+
 
 }

@@ -4,18 +4,18 @@ import java.util.List;
 
 public class NewCommandFinder {
 	private List<InputObject> parsedList;
-	private TemporaryCommandLibrary myUserCommands;
+	private NewUserCommandLibrary myUserCommands;
 	private int currentIndex;
 	
 	public NewCommandFinder(List<InputObject> in) {
 		parsedList = in;
-		myUserCommands = new TemporaryCommandLibrary();
+		myUserCommands = new NewUserCommandLibrary();
 	}
 
-	public TemporaryCommandLibrary findCustomCommands() {
+	public NewUserCommandLibrary findCustomCommands() {
 		System.out.println("finding custom commands");
 		currentIndex = 0;
-		InputObject toNode = new InputObject("Command", "MakeUserInstruction"); 
+		InputObject toNode = new InputObject("Command", "MakeUserInstruction", "to"); 
 		for (int i = 0; i < parsedList.size(); i ++ ) {
 			if (parsedList.get(i).equals(toNode)) {
 				addCustomCommand(i);
@@ -30,6 +30,9 @@ public class NewCommandFinder {
 		index += 1;
 		int paramCount = 0;
 		String name = parsedList.get(index).getValue();
+		if (parsedList.size() - 1 - index < 4) {
+			throw new InterpreterException("Make User Instruction command does not have proper of parameters");
+		}
 		if (! parsedList.get(index).getType().equals("Command")) {
 			throw new InterpreterException("Expected commmand name in make command declaration, got %s", 
 					parsedList.get(index).getType());

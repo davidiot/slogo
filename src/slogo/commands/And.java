@@ -5,17 +5,19 @@ import java.util.List;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class And extends Command {
+public class And extends GroupingCommand {
 
 	private final int CHILDREN_REQUIRED = 2;
 
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
 		List<Double> parameters = recurseToGetParameters(params, controller);
-		boolean isTrue = !(parameters.get(0).equals(0.0)) && !(parameters.get(1).equals(0.0));
-		if (isTrue)
-			return 1;
-		return 0;
+		for (double param: parameters) {
+			if (param == 0.0) {
+				return 0;
+			}
+		}
+		return 1;
 	}
 
 	@Override

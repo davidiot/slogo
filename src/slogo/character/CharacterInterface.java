@@ -1,7 +1,5 @@
 package slogo.character;
 
-
-
 public interface CharacterInterface {
 
 	public void update();

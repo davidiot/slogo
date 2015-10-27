@@ -32,21 +32,22 @@ public class Parser {
 	
 	private List<String> removeComments(String input) {
 		String[] lines = input.split("\n");
-		List<String> indInputs = new ArrayList<>();
+		List<String> splitInputs = new ArrayList<>();
 		for (String line: lines) {
-			if (! line.startsWith("#")) {
+			if (! line.trim().startsWith("#")) {
 				List<String> split = Arrays.asList(line.split("\\s+"));
 				for (String entry: split) {
 					if (entry.trim().length() > 0) {
-						indInputs.add(entry.trim());
+						splitInputs.add(entry.trim());
 					}
 				}
 				
 			}
 		}
-		System.out.println("removed " + indInputs);
-		return indInputs;
+//		System.out.println("removed " + indInputs);
+		return splitInputs;
 	}
+	
 
 	private List<InputObject> convert (List<String> list)  {
     	List<InputObject> converted = new ArrayList<>();
@@ -74,7 +75,7 @@ public class Parser {
                 	throw new InterpreterException("%s not matched to input type", s);
                 }
             }
-            converted.add(new InputObject(type, name));
+            converted.add(new InputObject(type, name, s.trim()));
         }
 		return converted;
     }

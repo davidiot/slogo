@@ -1,0 +1,44 @@
+<<<<<<< HEAD
+width=850
+height=700
+=======
+width=900
+height=900
+>>>>>>> 68557e89c69a91af417f6cf4e5fc55adafee1ec1
+
+mapHeight=500
+mapWidth=500
+mapColor=WHITE
+
+characterCenterX=19
+characterCenterY=19
+
+penColor=BLACK
+
+VGap=0
+HGap=20
+consoleWidth=750
+
+fontsize=16
+
+Chinese=S\u5FBD\u6807
+German=das SLogo
+Portuguese=SLogotipo
+Russian=S\u043B\u043E\u0433\u043E\u0442\u0438\u043F
+Spanish=SLogotipo
+
+enterButton=ENTER
+clearButton=CLEAR
+consoleHeight=200
+
+prompt=begin coding here...
+
+slogo.element.History=HISTORY
+slogo.element.Commands=COMMANDS
+slogo.element.Variables=VARIABLES
+slogo.element.Monitor=TURTLES
+
+vtitle=Change Variable
+vprompt=set value of 
+
+error=0.00000001

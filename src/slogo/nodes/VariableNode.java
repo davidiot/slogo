@@ -10,8 +10,8 @@ public class VariableNode extends NodeObject {
 	private VariableLibrary myVariables;
 
 	// NOW CAN CHANGE CONSTRUCTOR TO MATCH EVERYTHING ELSE?
-	public VariableNode(String name, NodeObject parent) {
-		super(name, parent);
+	public VariableNode(String name, String rawString, NodeObject parent) {
+		super(name, rawString, parent);
 	}
 
 	@Override
@@ -33,11 +33,16 @@ public class VariableNode extends NodeObject {
 
 	@Override
 	public double traverseAndExecute(EngineController controller) {
-		myVariables = controller.getVariableLibrary();
-		if (myVariables.getVariable(myName) != null ) {
-			return myVariables.getVariable(myName);
+		try {
+			return getLocalVariable();
+		} catch (InterpreterException e) {
+			myVariables = controller.getVariableLibrary();
+			if (myVariables.getVariable(myName) != null ) {
+				return myVariables.getVariable(myName);
+			}
 		}
-		return getLocalVariable();
+//		throw new InterpreterException("Variable %s not found", myName);
+		return 0;
 	}
 	
 	private double getLocalVariable() {
@@ -49,11 +54,7 @@ public class VariableNode extends NodeObject {
 			}
 			currentNode = currentNode.getParent();
 		}
-		throw new InterpreterException("Variable %s not found", myName);
+		throw new InterpreterException("Local variable %s not found", myName);
 	}
-
-//	public String getName() {
-//		return myName;
-//	}
 
 }

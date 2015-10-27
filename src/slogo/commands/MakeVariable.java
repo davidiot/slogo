@@ -26,6 +26,9 @@ public class MakeVariable extends Command {
 		double value = params.get(1).traverseAndExecute(controller);
 		System.out.println("making " + name + " " + value);
 		myVariables.addVariable(name, value);
+		
+//		myFunctionalInterface.method(name, var)
+		
 		return value;
 	}
 
@@ -33,5 +36,7 @@ public class MakeVariable extends Command {
 	public int getNumChildrenRequired() {
 		return CHILDREN_REQUIRED;
 	}
+	
+//	makeVariable(FunctionalInterface (name , var) -> myLibrary.makeVar(name, var));
 
 }

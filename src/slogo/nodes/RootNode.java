@@ -5,7 +5,7 @@ import slogo.interpreter.EngineController;
 public class RootNode extends NodeObject {
 
 	public RootNode(NodeObject parent) {
-		super(null, parent);
+		super(null, "", parent);
 	}
 
 	@Override

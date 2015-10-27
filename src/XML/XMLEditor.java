@@ -62,16 +62,21 @@ public class XMLEditor {
 	
 	public void initGlobalParameters(){
 		numParameters = globals.getValueMap();
-		colorParameters.put("BackgroundColor", globals.getBackgroundColorName());
+		
+		if(globals.getBackgroundColorName() == null){
+			System.out.println("check");
+			colorParameters.put("Background", "White");
+		}
+		else{colorParameters.put("Background", globals.getBackgroundColorName());}
 	}
 
 	public void editFile() {
 		Document doc = readFile();
 		Node first = doc.getFirstChild();
 		initGlobalParameters();
+
 		addNumParameters(doc, first, numParameters);
 		addColorParameters(doc, first, colorParameters);
-		//addCells(doc, first, cells);
 		TransformerFactory transformerFactory = TransformerFactory
 				.newInstance();
 		Transformer transformer;
@@ -89,6 +94,7 @@ public class XMLEditor {
 		}
 
 		System.out.println("Done");
+		
 	}
 
 	public void addNumParameters(Document doc, Node first,

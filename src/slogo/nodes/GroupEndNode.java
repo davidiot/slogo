@@ -2,13 +2,10 @@ package slogo.nodes;
 
 import slogo.interpreter.EngineController;
 
-public class ConstantNode extends NodeObject {
-	private double myValue;
-	
+public class GroupEndNode extends NodeObject {
 
-	public ConstantNode(String value, String rawString, NodeObject parent) {
-		super(value, rawString, parent);
-		myValue = Double.parseDouble(value);
+	public GroupEndNode(String name, String rawString, NodeObject parent) {
+		super(name, rawString, parent);
 	}
 
 	@Override
@@ -29,7 +26,7 @@ public class ConstantNode extends NodeObject {
 
 	@Override
 	public double traverseAndExecute(EngineController controller) {
-		return myValue;
+		return 0;
 	}
 
 }

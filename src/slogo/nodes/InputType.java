@@ -1,0 +1,15 @@
+package slogo.nodes;
+
+public enum InputType {
+	COMMENT,
+	CONSTANT,
+	VARIABLE,
+	COMMAND,
+	LISTSTART,
+	LISTEND,
+	GROUPSTART,
+	GROUPEND,
+	COMMAND_DECLARATION,
+	NEW_USER_COMMAND
+
+}
