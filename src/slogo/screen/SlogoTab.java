@@ -100,8 +100,10 @@ public class SlogoTab extends AbstractScreen {
 		buttonPane.add(makeSettingsButton(), 2, 0);
 		Button save = makeSaveButton();
 		save.setOnMouseClicked(e->editXML());
-		buttonPane.add(makeSaveButton(), 0, 1);
-		buttonPane.add(makeLoadButton(), 1, 1);
+		Button load = makeLoadButton();
+		load.setOnMouseClicked(e->readXML());
+		buttonPane.add(save, 0, 1);
+		buttonPane.add(load, 1, 1);
 		buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
 		listPane.add(buttonPane, 0, 3);
 
@@ -109,8 +111,19 @@ public class SlogoTab extends AbstractScreen {
 	}
 
 	public void editXML(){
-		XMLEditor temp = new XMLEditor("XMLFiles/test.xml", parameters);
+		XMLEditor temp = new XMLEditor("XMLFiles/slogoStart.xml", parameters);
 		temp.editFile();
+		System.out.println("edit");
+	}
+	
+	public void readXML(){
+		XMLReader temp = new XMLReader("XMLFiles/slogoStart.xml");
+		temp.readFile();
+		System.out.println("read");
+		for(String s :temp.getNumParams().keySet()){
+			parameters.setValue(s, temp.getNumParams().get(s));
+		}
+		parameters.setBackgroundColor(temp.getColorParams().get("Background"));
 	}
 	public Display getDisplay() {
 		return map;
