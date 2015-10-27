@@ -8,9 +8,9 @@ import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
 public class UserInstruction extends Command {
-	private String myName; 
 	private NodeObject myRoot;
 	private List<String> myParameters;
+	//private String myRawString;
 	
 	public UserInstruction(String name, List<String> parameters, NodeObject tree) {
 		myName = name;
@@ -38,5 +38,18 @@ public class UserInstruction extends Command {
 	public void setCommands(NodeObject root) {
 		myRoot = root;
 	}
-
+	
+	public NodeObject getCommandTree(){
+		return myRoot;
+	}
+	
+	public String getParameters(){
+		String returnString = "[ ";
+		for (String s: myParameters){
+			returnString += s + " ";
+		}
+		returnString += "]";
+		return returnString;
+	}
+	
 }

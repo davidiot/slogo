@@ -5,16 +5,13 @@ import slogo.interpreter.CommandLibrary;
 import slogo.interpreter.EngineController;
 
 public class UserCommandNode extends NodeObject {
-	private String myName;
 	private int numChildren;
 	private CommandLibrary commandLibrary;
 
-	public UserCommandNode(NodeObject parent, String name, int numParams) {
-		super(name, parent);
-		myName = name;
+	public UserCommandNode(NodeObject parent, String name, String rawString, int numParams) {
+		super(name, rawString, parent);
 		numChildren = numParams;
-		//commandLibrary = commands;
-		}
+	}
 
 	@Override
 	public boolean hasCompleteChildren() {
@@ -31,7 +28,7 @@ public class UserCommandNode extends NodeObject {
 //		System.out.println("can add? " + (myChildren.size() < numChildren));
 		return (myChildren.size() < numChildren);
 	}
-
+	
 	@Override
 	public double traverseAndExecute(EngineController controller) {
 		commandLibrary = controller.getCommandLibrary();

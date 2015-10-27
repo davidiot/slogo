@@ -4,15 +4,18 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import slogo.commands.Command;
 import slogo.commands.MakeUserInstruction;
 import slogo.commands.MakeVariable;
+import slogo.commands.UserInstruction;
 
 public class CommandLibrary {
 
 	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/English3";
 	private Map<String, Command> myCommandMap;
+	private Map<String, String> myUserCommandMap;
 	private ResourceBundle myCommandResources;
 
 	// need to add MainCharacter as a parameter to constructor
@@ -20,9 +23,15 @@ public class CommandLibrary {
 	public CommandLibrary(VariableLibrary variables) {
 		myCommandResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE);
 		makeCommandMap(myCommandResources);
+		myUserCommandMap = new HashMap<String, String>();
 	}
 
 	public Command getCommand(String name) {
+		String[] inputArray = name.split(" ");
+		if (inputArray[0] == "to"){
+			System.out.println("WE GOT HERE!!!!!");
+			return myCommandMap.get(inputArray[1]);
+		}
 		return myCommandMap.get(name);
 	}
 
@@ -34,7 +43,7 @@ public class CommandLibrary {
 			try {
 				Class commandClass = Class.forName("slogo.commands." + commandName);
 				Command command = (Command) commandClass.newInstance();
-				myCommandMap.put(commandName, command);
+				addCommand(commandName, command);
 			} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -44,7 +53,16 @@ public class CommandLibrary {
 	}
 	
 	public void addCommand(String name, Command command) {
+		if (command instanceof slogo.commands.UserInstruction){
+			addCustomCommandToMap(name, (UserInstruction) command);
+		}
 		myCommandMap.put(name, command);
 	}
-
+	
+	private void addCustomCommandToMap(String name, UserInstruction customCommand){
+		String stringCommand = "to" + " " + customCommand.getName() + " "  + customCommand.getParameters() 
+			+ " " + customCommand.getCommandTree().getTreeStringRepresentation();
+		myUserCommandMap.put(name, stringCommand);
+	}
+	
 }

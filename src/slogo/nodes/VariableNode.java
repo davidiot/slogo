@@ -10,8 +10,8 @@ public class VariableNode extends NodeObject {
 	private VariableLibrary myVariables;
 
 	// NOW CAN CHANGE CONSTRUCTOR TO MATCH EVERYTHING ELSE?
-	public VariableNode(String name, NodeObject parent) {
-		super(name, parent);
+	public VariableNode(String name, String rawString, NodeObject parent) {
+		super(name, rawString, parent);
 	}
 
 	@Override

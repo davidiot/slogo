@@ -5,8 +5,8 @@ import slogo.interpreter.EngineController;
 public class CommandDeclarationNode extends NodeObject {
 //	private String commandName; 
 	
-	public CommandDeclarationNode(String value, NodeObject parent) {
-		super(value, parent);
+	public CommandDeclarationNode(String value, String rawString, NodeObject parent) {
+		super(value, rawString, parent);
 	}
 
 	@Override
@@ -16,9 +16,7 @@ public class CommandDeclarationNode extends NodeObject {
 
 	@Override
 	public void addChild(NodeObject node) {
-		// TODO Auto-generated method stub
-		// does not add children
-
+		return;
 	}
 
 	@Override
@@ -30,10 +28,5 @@ public class CommandDeclarationNode extends NodeObject {
 	public double traverseAndExecute(EngineController controller) {
 		return 0;
 	}
-	
-//	public String getName() {
-//		return commandName;
-//		
-//	}
 
 }

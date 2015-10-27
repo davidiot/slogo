@@ -2,8 +2,11 @@ package slogo.saving;
 
 public class FileMaker {
 
-	public FileMaker() {
-		// TODO Auto-generated constructor stub
+	ParsedWorkspace myParsedWorkspace;
+	
+	public FileMaker(ParsedWorkspace workspaceObject) {
+		myParsedWorkspace = workspaceObject;
 	}
 
+	
 }

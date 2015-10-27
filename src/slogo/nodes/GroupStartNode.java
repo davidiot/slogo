@@ -5,8 +5,8 @@ import slogo.interpreter.InterpreterException;
 
 public class GroupStartNode extends NodeObject {
 
-	public GroupStartNode(String name, NodeObject parent) {
-		super(name, parent);
+	public GroupStartNode(String name, String rawString, NodeObject parent) {
+		super(name, rawString, parent);
 	}
 
 	@Override

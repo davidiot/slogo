@@ -50,10 +50,6 @@ public class EngineController {
 		return myVariableLibrary;
 	}
 	
-	public History getHistoryObjec(){
-		return myView.getHistoryObject();
-	}
-	
 	public CharacterInterface getMainCharacter(){
 		return myView.getDisplay().getCharacter();
 	}

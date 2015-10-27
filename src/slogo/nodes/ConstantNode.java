@@ -6,8 +6,8 @@ public class ConstantNode extends NodeObject {
 	private double myValue;
 	
 
-	public ConstantNode(String value, NodeObject parent) {
-		super(value, parent);
+	public ConstantNode(String value, String rawString, NodeObject parent) {
+		super(value, rawString, parent);
 		myValue = Double.parseDouble(value);
 	}
 

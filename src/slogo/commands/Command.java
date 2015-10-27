@@ -7,6 +7,8 @@ import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
 public abstract class Command {
+	
+	protected String myName;
 		
 	public abstract double doCommand(List<NodeObject> params, EngineController controller);
 	
@@ -23,5 +25,11 @@ public abstract class Command {
 		}
 		return parameters;
 	}
+	
+
+	public String getName(){
+		return myName;
+	}
+
 	
 }

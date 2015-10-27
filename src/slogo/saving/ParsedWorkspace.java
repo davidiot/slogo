@@ -15,5 +15,5 @@ public class ParsedWorkspace {
 			myVariablesLibrary = variables;
 			myCommandsLibrary = commands;	
 	}
-
+  
 }

@@ -7,8 +7,8 @@ import slogo.interpreter.EngineController;
 public class CommandNode extends NodeObject{
 	private Command myCommand;
 	
-	public CommandNode(String value, Command command, NodeObject parent) {
-		super(value, parent);
+	public CommandNode(String value, String rawString, Command command, NodeObject parent) {
+		super(value, rawString, parent);
 		myCommand = command;
 	}
 	

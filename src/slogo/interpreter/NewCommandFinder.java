@@ -15,7 +15,7 @@ public class NewCommandFinder {
 	public NewUserCommandLibrary findCustomCommands() {
 		System.out.println("finding custom commands");
 		currentIndex = 0;
-		InputObject toNode = new InputObject("Command", "MakeUserInstruction"); 
+		InputObject toNode = new InputObject("Command", "MakeUserInstruction", "to"); 
 		for (int i = 0; i < parsedList.size(); i ++ ) {
 			if (parsedList.get(i).equals(toNode)) {
 				addCustomCommand(i);

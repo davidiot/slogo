@@ -5,8 +5,8 @@ import slogo.interpreter.InterpreterException;
 
 public class ListStartNode extends NodeObject {
 
-	public ListStartNode(String value, NodeObject parent) {
-		super(value, parent);
+	public ListStartNode(String value, String rawString, NodeObject parent) {
+		super(value, rawString, parent);
 	}
 
 	@Override

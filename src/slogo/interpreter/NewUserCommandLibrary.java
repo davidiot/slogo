@@ -12,6 +12,7 @@ import java.util.Map;
  */
 
 public class NewUserCommandLibrary {
+	
 	private Map<String, Integer> commandMap;
 	
 	public NewUserCommandLibrary() {

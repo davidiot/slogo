@@ -3,10 +3,12 @@ package slogo.interpreter;
 public class InputObject {
 	private String myType;
 	private String myValue;
+	private String myRawRepresentation;
 	
-	public InputObject(String type, String expr) {
+	public InputObject(String type, String expr, String raw) {
 		myType = type;
 		myValue = expr;
+		myRawRepresentation = raw;
 	}
 
 	public String getValue(){
@@ -31,6 +33,10 @@ public class InputObject {
 	@Override
 	public String toString() {
 		return myType + " " + myValue;
+	}
+	
+	public String getRawString(){
+		return myRawRepresentation;
 	}
 
 }

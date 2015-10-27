@@ -75,7 +75,7 @@ public class Parser {
                 	throw new InterpreterException("%s not matched to input type", s);
                 }
             }
-            converted.add(new InputObject(type, name));
+            converted.add(new InputObject(type, name, s.trim()));
         }
 		return converted;
     }

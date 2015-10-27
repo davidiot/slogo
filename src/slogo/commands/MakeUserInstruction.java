@@ -9,6 +9,7 @@ import slogo.interpreter.InterpreterException;
 import slogo.nodes.CommandDeclarationNode;
 import slogo.nodes.ListEndNode;
 import slogo.nodes.NodeObject;
+import slogo.nodes.UserCommandNode;
 import slogo.nodes.VariableNode;
 
 public class MakeUserInstruction extends Command {
@@ -26,11 +27,12 @@ public class MakeUserInstruction extends Command {
 			throw new InterpreterException("Expected command name following declaration not %s", params.get(0).getName());
 		}
 		String name = params.get(0).getName();
+		String rawString = params.get(0).getRawString();
 		List<String> parameters = getParameterList(params.get(1));
 		NodeObject tree = params.get(2);
 		UserInstruction newCommand = new UserInstruction(name, parameters, tree); 
 		System.out.println("made " + name + " with params " + parameters);
-		myCommandLibrary.addCommand(name, newCommand);
+		myCommandLibrary.addCommand(rawString, newCommand);
 		return 1;
 	}
 

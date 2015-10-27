@@ -4,8 +4,8 @@ import slogo.interpreter.EngineController;
 
 public class GroupEndNode extends NodeObject {
 
-	public GroupEndNode(String name, NodeObject parent) {
-		super(name, parent);
+	public GroupEndNode(String name, String rawString, NodeObject parent) {
+		super(name, rawString, parent);
 	}
 
 	@Override

@@ -4,8 +4,8 @@ import slogo.interpreter.EngineController;
 
 public class ListEndNode extends NodeObject {
 
-	public ListEndNode(String value, NodeObject parent) {
-		super(value, parent);
+	public ListEndNode(String value, String rawString, NodeObject parent) {
+		super(value, rawString, parent);
 	}
 
 	@Override
