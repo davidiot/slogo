@@ -116,6 +116,21 @@ public abstract class AbstractScreen extends Parameterized implements AbstractSc
 		button.setOnMouseClicked(e -> showCredits());
 		return button;
 	}
+	
+	protected Button makeSaveButton() {
+		Button button = new Button("SAVE");
+		button.setFont(font);
+		//ADD ON MOUSE CLICKED
+		return button;
+	}
+	
+	protected Button makeLoadButton() {
+		Button button = new Button("LOAD");
+		button.setFont(font);
+		//ADD ON MOUSE CLICKED
+		return button;
+	}
+	
 
 	private void returnToMenu() {
 		StartScreen newScreen = new StartScreen();
