@@ -64,4 +64,7 @@ public class GlobalParameters {
 		return backgroundColorName;
 	}
 
+	public HashMap<String, Double> getValueMap() {
+		return values;
+	}
 }
