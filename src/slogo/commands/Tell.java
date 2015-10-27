@@ -2,32 +2,23 @@ package slogo.commands;
 
 import java.util.List;
 
-import slogo.character.MainCharacter;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class Forward extends Command implements TurtleCommandInterface {
-	
-	private final int CHILDREN_REQUIRED = 1;
-
+public class Tell extends Command {
 
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
 		List<Double> parameters = recurseToGetParameters(params, controller);
-		double distance = parameters.get(0);
-		return controller.getMainCharacter().move(distance, true);
+		// setActives 
+		//controller.getDisplay().setActives(parameters);
+		return parameters.get(parameters.size()-1);
 	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		return CHILDREN_REQUIRED;
-	}
-
-	@Override
-	public void doTurtling(MainCharacter turtle) {
 		// TODO Auto-generated method stub
-		
+		return 0;
 	}
-
 
 }

@@ -29,11 +29,11 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 	private Variables variables;
 	private Display map;
 	private TabManager manager;
-	private EngineController myEngineController;
 	private ResourceBundle slogoResources;
 	private ObservableArrayList h;
 	private ObservableArrayList c;
 	private ObservableArrayList v;
+	private EngineController myEngineController;
 
 	public SlogoScreen(String language) {
 		this.language = language;
@@ -127,7 +127,7 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		commands = new Commands(commandPane, c, console);
 		listPane.add(commandPane, 0, 1);
 		GridPane varPane = new GridPane();
-		variables = new Variables(varPane, v, console);
+		variables = new Variables(varPane, v, console, myEngineController);
 		listPane.add(varPane, 0, 2);
 		listPane.setMaxHeight(Integer.parseInt(slogoResources.getString("mapHeight")));
 		listPane.setVgap(Integer.parseInt(slogoResources.getString("VGap")));

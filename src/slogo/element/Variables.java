@@ -4,12 +4,15 @@ import java.util.Optional;
 
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
+import slogo.interpreter.EngineController;
 
 public class Variables extends AbstractList {
 
-	public Variables(GridPane pane, ObservableArrayList list, Console console) {
+	private EngineController myEngineController;
+
+	public Variables(GridPane pane, ObservableArrayList list, Console console, EngineController EngineController) {
 		super(pane, list, console);
-		// TODO Auto-generated constructor stub
+		myEngineController = EngineController;
 	}
 
 	@Override
