@@ -29,7 +29,7 @@ public class EngineController {
 		//myTurtles = view.getDisplay().getCharacters();
 		//activeIndices = view.getDisplay().getActiveIndices();
 		myWorkspaceSaver = new WorkspaceSaver(this);
-		myFileParser = new FileParser();
+		myFileParser = new FileParser(this);
 	}
 
 	public void runCommands(String input) {
