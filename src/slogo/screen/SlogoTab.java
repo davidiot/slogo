@@ -151,6 +151,7 @@ public class SlogoTab extends AbstractScreen {
 			// showError("ERROR!", command);
 			try {
 				myEngineController.runCommands(command);
+				settings.refresh();
 			} catch (InterpreterException e) {
 				showError("ERROR!", e.getMessage());
 			}

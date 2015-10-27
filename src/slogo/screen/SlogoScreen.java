@@ -69,9 +69,6 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 				characters.get(i).setOpacity(1);
 			}
 		}
-		if (settings != null) {
-			settings.refresh();
-		}
 		/**
 		 * if (console.hasInput()) { String command = console.getInput(); try {
 		 * myEngineController.runCommands(command); h.add(command); } catch
