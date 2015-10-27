@@ -11,6 +11,7 @@ public class LocalParameters {
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private int index;
+	private int shapeIndex;
 	private boolean penDown;
 	private boolean hidden;
 
@@ -20,6 +21,7 @@ public class LocalParameters {
 		index = i;
 		penDown = true;
 		hidden = false;
+		shapeIndex = i % 10;
 	}
 
 	public Color getPenColor() {
@@ -61,5 +63,11 @@ public class LocalParameters {
 
 	public void changeShape(int index) {
 		image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle" + index % 10 + ".png"));
+		shapeIndex = index;
 	}
+
+	public int getShapeIndex() {
+		return shapeIndex;
+	}
+
 }

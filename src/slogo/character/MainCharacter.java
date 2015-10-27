@@ -291,6 +291,10 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		this.loadImage(settings.getImage());
 	}
 
+	public int getShape() {
+		return settings.getShapeIndex();
+	}
+
 	public void changePenWidth(Double input) {
 		parameters.setValue("Line Thickness", input);
 	}
