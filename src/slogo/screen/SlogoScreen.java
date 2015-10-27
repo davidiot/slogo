@@ -1,5 +1,7 @@
 package slogo.screen;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.geometry.Pos;
@@ -8,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+import slogo.character.MainCharacter;
 import slogo.element.Commands;
 import slogo.element.Console;
 import slogo.element.Display;
@@ -52,9 +55,19 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 	public void run() {
 		myEngineController = manager.getCurrentTab().getEngineController();
 		map = manager.getCurrentTab().getDisplay();
-		String BackgroundColor = parameters.getBackgroundColor();
+		parameters.load(map.getCharacters(), map.getActiveIndices());
+		Color BackgroundColor = parameters.getBackgroundColor();
 		if (BackgroundColor != null) {
 			map.changeColor(BackgroundColor);
+		}
+		List<MainCharacter> characters = map.getCharacters();
+		HashSet<Integer> activeIndices = map.getActiveIndices();
+		for (int i = 0; i < characters.size(); i++) {
+			if (parameters.isShowActive() && !activeIndices.contains(i)) {
+				characters.get(i).setOpacity(0.5);
+			} else {
+				characters.get(i).setOpacity(1);
+			}
 		}
 		/**
 		 * if (console.hasInput()) { String command = console.getInput(); try {

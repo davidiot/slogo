@@ -18,6 +18,8 @@ public class LocalParameters {
 		image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle" + i % 10 + ".png"));
 		penColor = Color.valueOf(slogoResources.getString("penColor"));
 		index = i;
+		penDown = true;
+		hidden = false;
 	}
 
 	public Color getPenColor() {

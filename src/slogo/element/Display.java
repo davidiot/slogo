@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.Canvas;
@@ -33,7 +35,7 @@ public class Display extends AbstractElement {
 	private Pane display;
 	private Pane temp;
 	private Pane characterDisplay;
-	private List<MainCharacter> characters;
+	private ObservableList<MainCharacter> characters;
 	private HashSet<Integer> activeIndices;
 	private int counter = 0;
 
@@ -48,7 +50,7 @@ public class Display extends AbstractElement {
 		characterDisplay = new Pane();
 		characterDisplay.setMouseTransparent(true);
 		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter);
-		characters = new ArrayList<MainCharacter>();
+		characters = FXCollections.observableArrayList(new ArrayList<MainCharacter>());
 		characters.add(mc);
 		activeIndices = new HashSet<Integer>();
 		activeIndices.add(0);
@@ -77,12 +79,16 @@ public class Display extends AbstractElement {
 		this.pane.getChildren().add(display);
 	}
 
-	public void changeColor(String input) {
-		map.setFill(Paint.valueOf(input));
+	public void changeColor(Color input) {
+		map.setFill(input);
 	}
 
 	public void changeColorHex(String input) {
-		map.setFill(Color.web(input));
+		parameters.setBackgroundColorHex(input);
+	}
+
+	public void changeColorRGB(int i, int j, int k) {
+		parameters.setBackgroundColorRGB(i, j, k);
 	}
 
 	public void addCharacter(double x, double y) {
@@ -90,10 +96,6 @@ public class Display extends AbstractElement {
 		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter, x, y);
 		activeIndices.add(counter);
 		characters.add(mc);
-	}
-
-	public CharacterInterface getCharacter() {
-		return characters.get(counter);
 	}
 
 	public void updateCharacters() {
@@ -119,6 +121,14 @@ public class Display extends AbstractElement {
 	// mc.changeDashLevel(value);
 	// }
 	// }
+
+	public ObservableList<MainCharacter> getCharacters() {
+		return characters;
+	}
+
+	public HashSet<Integer> getActiveIndices() {
+		return activeIndices;
+	}
 
 	public double clear() {
 		double distance = 0;
