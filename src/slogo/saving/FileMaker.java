@@ -12,13 +12,14 @@ import java.util.Map;
 public class FileMaker {
 
 	private ParsedWorkspace myParsedWorkspace;
+	private final String FILE_SIGNATURE = "#MADEBYSLOGO ";
 
 	public FileMaker(ParsedWorkspace workspaceObject) {
 		myParsedWorkspace = workspaceObject;
 	}
 
 	public String makeStrings(ParsedWorkspace workspaceObject) {
-		String fileContent = "";
+		String fileContent = FILE_SIGNATURE;
 		Map<String, String> commandMap = workspaceObject.getCustomCommands();
 		for (String s : commandMap.keySet()) {
 			fileContent += " " + commandMap.get(s) + " ";
@@ -27,7 +28,7 @@ public class FileMaker {
 		for (String s : variableMap.keySet()) {
 			fileContent += "make " + s + " " + variableMap.get(s);
 		}
-		System.out.println(fileContent);
+		//System.out.println(fileContent);
 		return fileContent;
 	}
 
@@ -36,7 +37,6 @@ public class FileMaker {
 				new OutputStreamWriter(new FileOutputStream(name), "utf-8"))) {
 			writer.write(makeStrings(myParsedWorkspace));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
