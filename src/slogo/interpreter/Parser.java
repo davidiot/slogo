@@ -34,7 +34,7 @@ public class Parser {
 		String[] lines = input.split("\n");
 		List<String> splitInputs = new ArrayList<>();
 		for (String line: lines) {
-			if (! line.startsWith("#")) {
+			if (! line.trim().startsWith("#")) {
 				List<String> split = Arrays.asList(line.split("\\s+"));
 				for (String entry: split) {
 					if (entry.trim().length() > 0) {
