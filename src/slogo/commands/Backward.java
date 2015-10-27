@@ -16,7 +16,7 @@ public class Backward extends Command implements TurtleCommandInterface {
 		List<Double> parameters = recurseToGetParameters(params, controller);
 		distance = parameters.get(0);
 		//controller.getMainCharacter().move(distance, false);
-		//controller.commandTurtles(this);
+		controller.commandTurtles(this);
 		return distance;
 	}
 
