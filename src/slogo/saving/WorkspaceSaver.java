@@ -4,17 +4,24 @@ import slogo.interpreter.EngineController;
 
 public class WorkspaceSaver {
 	
-	EngineController myController;
-	ParsedWorkspace myParsedWorkspace;
+	private EngineController myController;
+	private ParsedWorkspace myParsedWorkspace;
+	private FileMaker myFileMaker;
 
 	public WorkspaceSaver(EngineController controller) {
 		myController = controller;
+		createParsedWorkspace();
+		myFileMaker = new FileMaker(myParsedWorkspace);
+		
 	}
 	
-	public ParsedWorkspace createParsedWorkspace(){
+	private void createParsedWorkspace(){
 		myParsedWorkspace = new ParsedWorkspace(myController.getCommandLibrary(), 
 				myController.getVariableLibrary());
-		return myParsedWorkspace;
+	}
+	
+	public void saveWorkspaceToFile(String name){
+		myFileMaker.writeFile(name + ".txt");
 	}
 
 }

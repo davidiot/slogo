@@ -5,6 +5,8 @@ import java.util.HashMap;
 import slogo.character.CharacterInterface;
 import slogo.element.History;
 import slogo.nodes.NodeObject;
+import slogo.saving.FileParser;
+import slogo.saving.WorkspaceSaver;
 import slogo.screen.SlogoScreenInterface;
 
 public class EngineController {
@@ -13,6 +15,8 @@ public class EngineController {
 	private SlogoScreenInterface myView;
 	private CommandLibrary myCommandLibrary;
 	private VariableLibrary myVariableLibrary;
+	private WorkspaceSaver myWorkspaceSaver;
+	private FileParser myFileParser;
 	
 	private final int DEFAULT_CHARACTER = 0;
 	
@@ -21,6 +25,8 @@ public class EngineController {
 		myVariableLibrary = new VariableLibrary();
 		myCommandLibrary = new CommandLibrary(myVariableLibrary);
 		myInterpreter = new Interpreter(language, myCommandLibrary, myVariableLibrary);
+		myWorkspaceSaver = new WorkspaceSaver(this);
+		myFileParser = new FileParser();
 	}
 
 	public void runCommands(String input){
@@ -28,6 +34,7 @@ public class EngineController {
 		compiledCommandsTree.traverseAndExecute(this);
 		updateVariablesListInGUI();
 		updateCommandsListInGUI();
+		myWorkspaceSaver.saveWorkspaceToFile("newFile");
 	}
 	
 	private void updateVariablesListInGUI(){
