@@ -6,8 +6,6 @@ public class History extends AbstractList {
 
 	public History(GridPane pane, ObservableArrayList list, Console console) {
 		super(pane, list, console);
-		makePane();
-		// TODO Auto-generated constructor stub
 	}
 
 	protected void click() {
