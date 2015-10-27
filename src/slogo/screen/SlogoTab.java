@@ -58,11 +58,10 @@ public class SlogoTab extends AbstractScreen {
 		root.add(mapPane, 0, 0);
 		GridPane consolePane = new GridPane();
 		console = new Console(consolePane);
-		GridPane.setColumnSpan(consolePane, 2);
 		root.add(consolePane, 0, 2);
-		
-		root.add(map.getPalettePane(), 2,2);
-		
+
+		root.add(map.getPalettePane(), 1, 2);
+
 		makeLists();
 
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));

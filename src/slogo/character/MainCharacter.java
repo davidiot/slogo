@@ -286,6 +286,11 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		settings.setPenColor(Color.rgb(i, j, k));
 	}
 
+	public void changeShape(int index) {
+		settings.changeShape(index);
+		this.loadImage(settings.getImage());
+	}
+
 	public void changePenWidth(Double input) {
 		parameters.setValue("Line Thickness", input);
 	}

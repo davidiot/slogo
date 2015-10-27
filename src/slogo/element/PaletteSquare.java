@@ -17,7 +17,7 @@ public class PaletteSquare extends StackPane {
 	private Rectangle rect;
 	
 	public PaletteSquare(Color c, int i){
-		rect = new Rectangle(30, 30, c);
+		rect = new Rectangle(60, 60, c);
 		Text text = new Text(Integer.toString(i));
 		this.getChildren().addAll(rect, text);
 		this.setOnMouseClicked(e-> selectNewColor());
