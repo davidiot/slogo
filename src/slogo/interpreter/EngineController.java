@@ -1,6 +1,8 @@
 package slogo.interpreter;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 
 import slogo.character.CharacterInterface;
 import slogo.commands.TurtleCommandInterface;
@@ -32,7 +34,7 @@ public class EngineController {
 		updateVariablesListInGUI();
 	}
 
-	private void updateVariablesListInGUI() {
+	public void updateVariablesListInGUI() {
 		HashMap<String, Double> variableMap = (HashMap<String, Double>) myVariableLibrary.getVariableMap();
 		myView.getVariablesObject().clear();
 		for (String s : variableMap.keySet()) {
@@ -58,13 +60,25 @@ public class EngineController {
 	}
 
 
-	public void commandTurtles(TurtleCommandInterface command) {
+	public double commandTurtles(TurtleCommandInterface command) {
+		double returnVal = 0;
+		HashSet<Integer> activeIndicesSet = myView.getDisplay().getActiveIndices();
 		for (int i = 0; i < myView.getDisplay().getCharacters().size(); i++) {
-			if (myView.getDisplay().getActiveIndices().contains(i)){
-				command.doTurtling(myView.getDisplay().getCharacters().get(i));
+			if (activeIndicesSet.contains(i)){
+				HashSet<Integer> storedSet = new HashSet<Integer>(activeIndicesSet);
+				activeIndicesSet= new HashSet<Integer>();
+				activeIndicesSet.add(i);
+				System.out.println("iiiii " + i);
+				returnVal = command.doTurtling(myView.getDisplay().getCharacters().get(i), this);
+				activeIndicesSet = storedSet;
 			}
 		}
-		
+		return returnVal;
+	}
+
+	public double getActiveID() {
+		HashSet<Integer> activeSet = myView.getDisplay().getActiveIndices();
+		return new ArrayList<Integer>(activeSet).get(0) + 1;
 	}
 	
 
