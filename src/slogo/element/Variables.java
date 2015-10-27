@@ -26,6 +26,8 @@ public class Variables extends AbstractList {
 		if (response.isPresent()) {
 			// response.get() gives you the inputed string. Make sure its a
 			// proper input and change the variable
+			myEngineController.getVariableLibrary().addVariable(variable, Double.parseDouble(response.get()));
+			myEngineController.updateVariablesListInGUI();
 		}
 	}
 }

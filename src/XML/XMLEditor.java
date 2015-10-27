@@ -34,7 +34,7 @@ public class XMLEditor {
 	private final static String COLPARAM = "colorparameters";
 
 	public XMLEditor(String s, GlobalParameters gParams) {
-		fileName = s;
+		fileName = "resources/slogoStart.xml";
 		globals = gParams;
 		numParameters = new HashMap<String,Double>();
 		colorParameters = new HashMap<String,String>();
