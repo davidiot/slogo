@@ -52,5 +52,7 @@ public class GlobalParameters {
 		this.backgroundColor = backgroundColor;
 	}
 	
-	
+	public HashMap<String, Double> getValueMap(){
+		return values;
+	}
 }
