@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import slogo.parameters.GlobalParameters;
 import slogo.parameters.LocalParameters;
@@ -73,7 +74,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 			this.type = type;
 			this.value = value;
 			currentPenDown = options.isPenDown();
-			currentPenColor = Color.valueOf(options.getPenColor());
+			currentPenColor = options.getPenColor();
 			currentPenWidth = parameters.getValue("Line Thickness");
 		}
 
@@ -269,7 +270,11 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	}
 
 	public void changePenColor(String input) {
-		options.setPenColor(input);
+		options.setPenColor(Color.valueOf(input));
+	}
+
+	public void changePenColorHex(String input) {
+		options.setPenColor(Color.web(input));
 	}
 
 	public void changePenWidth(Double input) {
