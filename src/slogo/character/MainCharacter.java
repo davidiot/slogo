@@ -52,7 +52,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private void init(Pane pane, GlobalParameters parameters, int i) {
 		myPane = pane;
 		this.parameters = parameters;
-		settings = new LocalParameters(i);
+		settings = new LocalParameters(i, this);
 		preX = curX;
 		preY = curY;
 		direction = 0;
@@ -112,7 +112,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		return input;
 	}
 
-	private void refreshImage() {
+	public void refreshImage() {
 		myPane.getChildren().remove(this);
 		if (!settings.isHidden()) {
 			myPane.getChildren().add(this);
@@ -223,7 +223,6 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		settings.setHidden(input);
 		if (input)
 			returnVal = 1;
-		refreshImage();
 		return returnVal;
 	}
 
@@ -273,7 +272,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		setHeading(0);
 		return distance;
 	}
-	
+
 	public void changePenColor(String input) {
 		settings.setPenColor(Color.valueOf(input));
 	}
@@ -330,5 +329,13 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public LocalParameters getSettings() {
 		return settings;
+	}
+
+	public double getXADJUST() {
+		return XADJUST;
+	}
+
+	public double getYADJUST() {
+		return YADJUST;
 	}
 }

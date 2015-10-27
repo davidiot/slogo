@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import slogo.element.Commands;
 import slogo.element.Console;
 import slogo.element.Display;
@@ -98,32 +99,36 @@ public class SlogoTab extends AbstractScreen {
 		buttonPane.add(makeHelpButton(), 1, 0);
 		buttonPane.add(makeSettingsButton(), 2, 0);
 		Button save = makeSaveButton();
-		save.setOnMouseClicked(e->editXML());
+		save.setOnMouseClicked(e -> editXML());
 		Button load = makeLoadButton();
-		load.setOnMouseClicked(e->readXML());
-		buttonPane.add(save, 0, 1);
-		buttonPane.add(load, 1, 1);
+		load.setOnMouseClicked(e -> readXML());
+		GridPane buttonPane2 = new GridPane();
+		buttonPane2.add(save, 0, 0);
+		buttonPane2.add(load, 1, 0);
 		buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
+		buttonPane2.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
 		listPane.add(buttonPane, 0, 3);
+		listPane.add(buttonPane2, 0, 4);
 
 		root.add(listPane, 1, 0);
 	}
 
-	public void editXML(){
+	public void editXML() {
 		XMLEditor temp = new XMLEditor("XMLFiles/slogoStart.xml", parameters);
 		temp.editFile();
 		System.out.println("edit");
 	}
-	
-	public void readXML(){
+
+	public void readXML() {
 		XMLReader temp = new XMLReader("XMLFiles/slogoStart.xml");
 		temp.readFile();
 		System.out.println("read");
-		for(String s :temp.getNumParams().keySet()){
+		for (String s : temp.getNumParams().keySet()) {
 			parameters.setValue(s, temp.getNumParams().get(s));
 		}
 		parameters.setBackgroundColor(temp.getColorParams().get("Background"));
 	}
+
 	public Display getDisplay() {
 		return map;
 	}

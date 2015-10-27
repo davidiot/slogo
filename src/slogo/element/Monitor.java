@@ -1,5 +1,6 @@
 package slogo.element;
 
+import java.io.File;
 import java.util.List;
 
 import javafx.collections.FXCollections;
@@ -13,6 +14,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Callback;
 import slogo.character.MainCharacter;
 import slogo.parameters.LocalParameters;
@@ -61,9 +65,11 @@ public class Monitor extends AbstractElement {
 			} else if (item != null) {
 				LocalParameters settings = item.getSettings();
 				box.getChildren().add(makeLabel(settings));
-				box.getChildren().add(makeCoordinates(item));
-				box.getChildren().add(makeImage(settings));
+				box.getChildren().add(makeImage(item));
 				box.getChildren().add(makePen(settings));
+				box.getChildren().add(makeEye(settings));
+				box.getChildren().add(makeArrow(settings));
+				box.getChildren().add(makeCoordinates(item));
 				box.setAlignment(Pos.CENTER_LEFT);
 				setGraphic(box);
 			}
@@ -85,12 +91,16 @@ public class Monitor extends AbstractElement {
 			return output;
 		}
 
-		private ImageView makeImage(LocalParameters settings) {
-			ImageView output = new ImageView(settings.getImage());
-			if (!parameters.getActiveIndices().contains(settings.getIndex())) {
+		private ImageView makeImage(MainCharacter item) {
+			ImageView output = new ImageView(item.getSettings().getImage());
+			if (!parameters.getActiveIndices().contains(item.getSettings().getIndex())) {
 				output.setOpacity(0.5);
 			}
-			output.setOnMouseClicked(e -> toggleActive(settings.getIndex()));
+			output.setFitHeight(item.getXADJUST() * 2);
+			output.setFitWidth(item.getYADJUST() * 2);
+			output.setSmooth(true);
+			output.setCache(true);
+			output.setOnMouseClicked(e -> toggleActive(item.getSettings().getIndex()));
 			return output;
 		}
 
@@ -115,8 +125,44 @@ public class Monitor extends AbstractElement {
 			return output;
 		}
 
+		private ImageView makeEye(LocalParameters settings) {
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream("Images/eye.png"));
+			ImageView output = new ImageView(image);
+			if (settings.isHidden()) {
+				output.setOpacity(0.5);
+			} else {
+				output.setOpacity(1);
+			}
+			output.setOnMouseClicked(e -> toggleHidden(settings));
+			return output;
+		}
+
+		private ImageView makeArrow(LocalParameters settings) {
+			Image image = new Image(getClass().getClassLoader().getResourceAsStream("Images/upload.png"));
+			ImageView output = new ImageView(image);
+			output.setOnMouseClicked(e -> showSelector(settings));
+			return output;
+		}
+
+		private void showSelector(LocalParameters settings) {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle(slogoResources.getString("selectorTitle"));
+			fileChooser.getExtensionFilters()
+					.addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+			File selectedFile = fileChooser.showOpenDialog(new Stage());
+			if (selectedFile != null) {
+				settings.setImage(new Image(selectedFile.toURI().toString()));
+				list.refresh();
+			}
+		}
+
 		private void togglePen(LocalParameters settings) {
 			settings.setPenDown(!settings.isPenDown());
+			list.refresh();
+		}
+
+		private void toggleHidden(LocalParameters settings) {
+			settings.setHidden(!settings.isHidden());
 			list.refresh();
 		}
 	}

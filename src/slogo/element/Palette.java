@@ -19,16 +19,16 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class Palette extends AbstractElement {
-	
-	private List<Color> colors; 
-	private GridPane display; 
+
+	private List<Color> colors;
+	private GridPane display;
 	private int limit = 3;
 
 	public Palette(GridPane pane) {
 		super(pane);
 		colors = new ArrayList<Color>();
-		colors.addAll(Arrays.asList(Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE,
-				Color.PURPLE, Color.BLACK, Color.WHITE, Color.FIREBRICK));
+		colors.addAll(Arrays.asList(Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.VIOLET,
+				Color.BLACK, Color.WHITE, Color.FIREBRICK));
 		makePane();
 	}
 
@@ -36,25 +36,25 @@ public class Palette extends AbstractElement {
 		display = new GridPane();
 		int j = 0;
 		int k = 0;
-		while(j < colors.size()){
-			for(int i = 0; i<limit; i++){
+		while (j < colors.size()) {
+			for (int i = 0; i < limit; i++) {
 				PaletteSquare temp = new PaletteSquare(colors.get(j), j);
-				display.add(temp, j%limit, k);
+				display.add(temp, j % limit, k);
 				j++;
-			}	
+			}
 			k++;
 		}
 		this.pane.getChildren().add(display);
 	}
-	
-	public String getColor(int i){
-		if(i < colors.size()){
+
+	public String getColor(int i) {
+		if (i < colors.size()) {
 			return colors.get(i).toString();
-		}
-		else return null;
+		} else
+			return null;
 	}
-	
-	public void setColor(int i, Color c){
+
+	public void setColor(int i, Color c) {
 		colors.set(i, c);
 	}
 

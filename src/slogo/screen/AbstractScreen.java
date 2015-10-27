@@ -32,13 +32,12 @@ public abstract class AbstractScreen extends Parameterized implements AbstractSc
 	protected ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
 	protected Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"),
 			Integer.parseInt(myResources.getString("buttons")));
-	protected HelpScreen help;
-	protected SettingsScreen settings;
-	protected CreditsScreen credits;
 
 	// the window scenes and parameters are static because we want them to be
 	// preserved across all screens
-
+	protected static HelpScreen help;
+	protected static SettingsScreen settings;
+	protected static CreditsScreen credits;
 	private static boolean showingHelp = false;
 	private static boolean showingSettings = false;
 	private static boolean showingCredits = false;
@@ -117,21 +116,20 @@ public abstract class AbstractScreen extends Parameterized implements AbstractSc
 		button.setOnMouseClicked(e -> showCredits());
 		return button;
 	}
-	
+
 	protected Button makeSaveButton() {
 		Button button = new Button("SAVE");
 		button.setFont(font);
-		//ADD ON MOUSE CLICKED
+		// ADD ON MOUSE CLICKED
 		return button;
 	}
-	
+
 	protected Button makeLoadButton() {
 		Button button = new Button("LOAD");
 		button.setFont(font);
-		//ADD ON MOUSE CLICKED
+		// ADD ON MOUSE CLICKED
 		return button;
 	}
-	
 
 	private void returnToMenu() {
 		StartScreen newScreen = new StartScreen();

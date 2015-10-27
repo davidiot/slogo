@@ -104,17 +104,6 @@ public class SettingsScreen extends AbstractWindowScreen {
 		}
 	}
 
-	private void showSelector() {
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle(myResources.getString("selectorTitle"));
-		fileChooser.getExtensionFilters()
-				.addAll(new ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg", "*.gif"));
-		File selectedFile = fileChooser.showOpenDialog(new Stage());
-		if (selectedFile != null) {
-			// parameters.setImage(new Image(selectedFile.toURI().toString()));
-		}
-	}
-
 	private GridPane makeTitle() {
 		GridPane title = new GridPane();
 		Text temp = createText(myResources.getString("settingsTitle"),

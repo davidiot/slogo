@@ -4,6 +4,7 @@ import java.util.ResourceBundle;
 
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import slogo.character.MainCharacter;
 
 public class LocalParameters {
 	private Image image;
@@ -14,9 +15,11 @@ public class LocalParameters {
 	private int shapeIndex;
 	private boolean penDown;
 	private boolean hidden;
+	private MainCharacter character;
 
-	public LocalParameters(int i) {
+	public LocalParameters(int i, MainCharacter character) {
 		image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle" + i % 10 + ".png"));
+		this.character = character;
 		penColor = Color.valueOf(slogoResources.getString("penColor"));
 		index = i;
 		penDown = true;
@@ -39,6 +42,7 @@ public class LocalParameters {
 
 	public void setImage(Image image) {
 		this.image = image;
+		character.loadImage(image);
 	}
 
 	public int getIndex() {
@@ -59,6 +63,7 @@ public class LocalParameters {
 
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
+		character.refreshImage();
 	}
 
 	public void changeShape(int index) {
