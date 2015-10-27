@@ -51,5 +51,9 @@ public class GlobalParameters {
 	public void setBackgroundColor(String backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
+	
+	public HashMap<String, Double> getValueMap(){
+		return values;
+	}
 
 }
