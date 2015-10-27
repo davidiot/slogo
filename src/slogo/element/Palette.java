@@ -32,33 +32,26 @@ public class Palette extends AbstractElement {
 		makePane();
 	}
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	@Override
 	protected void makePane() {
 		display = new GridPane();
-		 final ColorPicker colorPicker = new ColorPicker();
-		 colorPicker.setOnAction(new EventHandler() {
-		     public void handle(Event t) {
-		         Color c = colorPicker.getValue();
-		         System.out.println("New Color's RGB = "+c.getRed()+" "+c.getGreen()+" "+c.getBlue());
-		     }
-		 });
 		int j = 0;
 		int k = 0;
 		while(j < colors.size()){
 			for(int i = 0; i<limit; i++){
-				StackPane stack = new StackPane();
-				Text text = new Text(Integer.toString(j));
-				Rectangle image = new Rectangle(20, 20, colors.get(j));
-				stack.getChildren().addAll(image, text);
-				stack.setOnMouseClicked(e->System.out.println("blah"));
-				display.add(stack, k, j%limit);
+				PaletteSquare temp = new PaletteSquare(colors.get(j), j);
+				display.add(temp, j%limit, k);
 				j++;
 			}	
 			k++;
 		}
-		display.setOnMouseClicked(e -> System.out.println("check"));
 		this.pane.getChildren().add(display);
+	}
+	
+	public String getColor(int i){
+		if(i < colors.size()){
+			return colors.get(i).toString();
+		}
+		else return null;
 	}
 
 }

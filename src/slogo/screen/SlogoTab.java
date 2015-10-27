@@ -60,9 +60,8 @@ public class SlogoTab extends AbstractScreen {
 		console = new Console(consolePane);
 		GridPane.setColumnSpan(consolePane, 2);
 		root.add(consolePane, 0, 2);
-		GridPane palettePane = new GridPane();
-		palette = new Palette(palettePane);
-		root.add(palettePane, 1,1);
+		
+		root.add(map.getPalettePane(), 2,2);
 		
 		makeLists();
 

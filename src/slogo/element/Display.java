@@ -38,9 +38,15 @@ public class Display extends AbstractElement {
 	private ObservableList<MainCharacter> characters;
 	private HashSet<Integer> activeIndices;
 	private int counter = 0;
+	private Palette palette;
+	private GridPane palettePane;
 
 	public Display(GridPane pane) {
 		super(pane);
+		
+		palettePane = new GridPane();
+		palette = new Palette(palettePane);
+		
 		makePane();
 	}
 
@@ -81,6 +87,10 @@ public class Display extends AbstractElement {
 
 	public void changeColor(Color input) {
 		map.setFill(input);
+	}
+	
+	public void changeColorIndex(int index){
+		this.changeColorHex(palette.getColor(index));
 	}
 
 	public void changeColorHex(String input) {
@@ -137,5 +147,9 @@ public class Display extends AbstractElement {
 		}
 		makePane();
 		return distance;
+	}
+	
+	public GridPane getPalettePane(){
+		return palettePane;
 	}
 }
