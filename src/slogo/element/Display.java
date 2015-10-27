@@ -81,10 +81,8 @@ public class Display extends AbstractElement {
 		map.setFill(Paint.valueOf(input));
 	}
 
-	public void changePenColor(String input) {
-		for (MainCharacter mc : characters) {
-			mc.changePenColor(input);
-		}
+	public void changeColorHex(String input) {
+		map.setFill(Color.web(input));
 	}
 
 	public void addCharacter(double x, double y) {

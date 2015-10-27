@@ -3,10 +3,11 @@ package slogo.parameters;
 import java.util.ResourceBundle;
 
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
 
 public class LocalParameters {
 	private Image image;
-	private String penColor;
+	private Color penColor;
 	protected final String DEFAULT_RESOURCE_PACKAGE = "resources/";
 	protected ResourceBundle slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 	private int index;
@@ -15,15 +16,15 @@ public class LocalParameters {
 
 	public LocalParameters(int i) {
 		image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle" + i % 10 + ".png"));
-		penColor = slogoResources.getString("penColor");
+		penColor = Color.valueOf(slogoResources.getString("penColor"));
 		index = i;
 	}
 
-	public String getPenColor() {
+	public Color getPenColor() {
 		return penColor;
 	}
 
-	public void setPenColor(String penColor) {
+	public void setPenColor(Color penColor) {
 		this.penColor = penColor;
 	}
 
