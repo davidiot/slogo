@@ -6,18 +6,18 @@ import slogo.character.MainCharacter;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
-public class Backward extends Command implements TurtleCommandInterface {
-	private List<NodeObject> myParams;
+public class Backward extends TurtleCommand {
+	//private List<NodeObject> myParams;
 	private final int CHILDREN_REQUIRED = 1;
 	
-	@Override
-	public double doCommand(List<NodeObject> params, EngineController controller) {
+//	@Override
+//	public double doCommand(List<NodeObject> params, EngineController controller) {
 //		myParams = params;
-//		List<Double> parameters = recurseToGetParameters(params, controller);
-//		distance = parameters.get(0);
-		//controller.getMainCharacter().move(distance, false);
-		return controller.commandTurtles(this);
-	}
+////		List<Double> parameters = recurseToGetParameters(params, controller);
+////		distance = parameters.get(0);
+//		//controller.getMainCharacter().move(distance, false);
+//		return controller.getTurtleController().commandTurtles(this);
+//	}
 
 	
 	@Override

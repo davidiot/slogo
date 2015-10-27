@@ -12,8 +12,8 @@ public class ID extends Command {
 
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		System.out.println(controller.getActiveID());
-		return controller.getActiveID();
+		System.out.println(controller.getTurtleController().getActiveID());
+		return controller.getTurtleController().getActiveID();
 	}
 
 	@Override
