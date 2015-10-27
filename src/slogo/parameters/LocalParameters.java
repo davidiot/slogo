@@ -58,4 +58,8 @@ public class LocalParameters {
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
 	}
+
+	public void changeShape(int index) {
+		image = new Image(getClass().getClassLoader().getResourceAsStream("Images/SlogoTurtle" + index % 10 + ".png"));
+	}
 }
