@@ -85,7 +85,7 @@ public class Display extends AbstractElement {
 
 	public void addCharacter(double x, double y) {
 		counter++;
-		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter % 10, x, y);
+		MainCharacter mc = new MainCharacter(characterDisplay, parameters, counter, x, y);
 		characters.add(mc);
 	}
 

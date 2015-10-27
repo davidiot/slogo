@@ -51,5 +51,6 @@ public class GlobalParameters {
 	public void setBackgroundColor(String backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
-
+	
+	
 }
