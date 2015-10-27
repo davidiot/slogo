@@ -67,7 +67,7 @@ public class XMLEditor {
 			System.out.println("check");
 			colorParameters.put("Background", "White");
 		}
-		colorParameters.put("Background", globals.getBackgroundColorName());
+		else{colorParameters.put("Background", globals.getBackgroundColorName());}
 	}
 
 	public void editFile() {

@@ -120,6 +120,10 @@ public class SlogoTab extends AbstractScreen {
 		XMLReader temp = new XMLReader("XMLFiles/slogoStart.xml");
 		temp.readFile();
 		System.out.println("read");
+		for(String s :temp.getNumParams().keySet()){
+			parameters.setValue(s, temp.getNumParams().get(s));
+		}
+		parameters.setBackgroundColor(temp.getColorParams().get("Background"));
 	}
 	public Display getDisplay() {
 		return map;
