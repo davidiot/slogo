@@ -53,8 +53,8 @@ public class SlogoTab extends AbstractScreen {
 			title = "SLogo";
 		}
 		tabID = id;
-		makeTab();
 		myEngineController = new EngineController(this.language, screen);
+		makeTab();
 	}
 
 	public void makeTab() {
@@ -83,10 +83,10 @@ public class SlogoTab extends AbstractScreen {
 		v = new ObservableArrayList();
 		GridPane listPane = new GridPane();
 		GridPane historyPane = new GridPane();
-		history = new History(historyPane, h, console);
+		history = new History(historyPane, h, console, myEngineController);
 		listPane.add(historyPane, 0, 0);
 		GridPane commandPane = new GridPane();
-		commands = new Commands(commandPane, c, console);
+		commands = new Commands(commandPane, c, console, myEngineController);
 		listPane.add(commandPane, 0, 1);
 		GridPane varPane = new GridPane();
 		variables = new Variables(varPane, v, console, myEngineController);
@@ -151,7 +151,9 @@ public class SlogoTab extends AbstractScreen {
 			// showError("ERROR!", command);
 			try {
 				myEngineController.runCommands(command);
-				settings.refresh();
+				if (settings != null) {
+					settings.refresh();
+				}
 			} catch (InterpreterException e) {
 				showError("ERROR!", e.getMessage());
 			}

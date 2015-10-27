@@ -8,11 +8,8 @@ import slogo.interpreter.EngineController;
 
 public class Variables extends AbstractList {
 
-	private EngineController myEngineController;
-
 	public Variables(GridPane pane, ObservableArrayList list, Console console, EngineController EngineController) {
-		super(pane, list, console);
-		myEngineController = EngineController;
+		super(pane, list, console, EngineController);
 	}
 
 	@Override
@@ -24,8 +21,6 @@ public class Variables extends AbstractList {
 		input.setContentText(slogoResources.getString("vprompt") + variable + ":");
 		Optional<String> response = input.showAndWait();
 		if (response.isPresent()) {
-			// response.get() gives you the inputed string. Make sure its a
-			// proper input and change the variable
 			myEngineController.getVariableLibrary().addVariable(variable, Double.parseDouble(response.get()));
 			myEngineController.updateVariablesListInGUI();
 		}

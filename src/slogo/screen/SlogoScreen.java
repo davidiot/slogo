@@ -121,10 +121,10 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		v = new ObservableArrayList();
 		GridPane listPane = new GridPane();
 		GridPane historyPane = new GridPane();
-		history = new History(historyPane, h, console);
+		history = new History(historyPane, h, console, myEngineController);
 		listPane.add(historyPane, 0, 0);
 		GridPane commandPane = new GridPane();
-		commands = new Commands(commandPane, c, console);
+		commands = new Commands(commandPane, c, console, myEngineController);
 		listPane.add(commandPane, 0, 1);
 		GridPane varPane = new GridPane();
 		variables = new Variables(varPane, v, console, myEngineController);

@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import slogo.interpreter.EngineController;
 
 public abstract class AbstractList extends AbstractElement implements Observer {
 	protected String title;
@@ -16,12 +17,14 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 	protected ListView<String> list;
 	protected ObservableList<String> data;
 	protected Console console;
+	protected EngineController myEngineController;
 
-	public AbstractList(GridPane pane, ObservableArrayList list, Console console) {
+	public AbstractList(GridPane pane, ObservableArrayList list, Console console, EngineController myEngineController) {
 		super(pane);
 		makePane();
 		list.addObserver(this);
 		this.console = console;
+		this.myEngineController = myEngineController;
 	}
 
 	@Override
@@ -68,8 +71,8 @@ public abstract class AbstractList extends AbstractElement implements Observer {
 			toggle();
 		}
 	}
-	
-	public void clear(){
+
+	public void clear() {
 		data.clear();
 		super.pane = null;
 		super.pane = new GridPane();
