@@ -17,6 +17,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import slogo.interpreter.EngineController;
 import slogo.parameters.GlobalParameters;
 import slogo.parameters.Parameterized;
 
@@ -31,9 +32,9 @@ public abstract class AbstractScreen extends Parameterized implements AbstractSc
 	protected ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
 	protected Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"),
 			Integer.parseInt(myResources.getString("buttons")));
-	private HelpScreen help;
-	private SettingsScreen settings;
-	private CreditsScreen credits;
+	protected HelpScreen help;
+	protected SettingsScreen settings;
+	protected CreditsScreen credits;
 
 	// the window scenes and parameters are static because we want them to be
 	// preserved across all screens
@@ -116,6 +117,21 @@ public abstract class AbstractScreen extends Parameterized implements AbstractSc
 		button.setOnMouseClicked(e -> showCredits());
 		return button;
 	}
+	
+	protected Button makeSaveButton() {
+		Button button = new Button("SAVE");
+		button.setFont(font);
+		//ADD ON MOUSE CLICKED
+		return button;
+	}
+	
+	protected Button makeLoadButton() {
+		Button button = new Button("LOAD");
+		button.setFont(font);
+		//ADD ON MOUSE CLICKED
+		return button;
+	}
+	
 
 	private void returnToMenu() {
 		StartScreen newScreen = new StartScreen();

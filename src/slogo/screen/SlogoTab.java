@@ -2,8 +2,14 @@ package slogo.screen;
 
 import java.util.ResourceBundle;
 
+import XML.XMLEditor;
+import XML.XMLReader;
+
+import com.sun.javafx.scene.control.skin.ColorPalette;
+
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.layout.GridPane;
 import slogo.element.Commands;
@@ -11,6 +17,7 @@ import slogo.element.Console;
 import slogo.element.Display;
 import slogo.element.History;
 import slogo.element.ObservableArrayList;
+import slogo.element.Palette;
 import slogo.element.Variables;
 import slogo.interpreter.EngineController;
 import slogo.interpreter.InterpreterException;
@@ -23,6 +30,7 @@ public class SlogoTab extends AbstractScreen {
 	private Commands commands;
 	private Variables variables;
 	private Display map;
+	private Palette palette;
 	private EngineController myEngineController;
 	private ResourceBundle slogoResources;
 	private ObservableArrayList h;
@@ -56,7 +64,9 @@ public class SlogoTab extends AbstractScreen {
 		console = new Console(consolePane);
 		GridPane.setColumnSpan(consolePane, 2);
 		root.add(consolePane, 0, 2);
-
+		
+		root.add(map.getPalettePane(), 2,2);
+		
 		makeLists();
 
 		root.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
@@ -79,7 +89,7 @@ public class SlogoTab extends AbstractScreen {
 		commands = new Commands(commandPane, c, console);
 		listPane.add(commandPane, 0, 1);
 		GridPane varPane = new GridPane();
-		variables = new Variables(varPane, v, console);
+		variables = new Variables(varPane, v, console, myEngineController);
 		listPane.add(varPane, 0, 2);
 		listPane.setMaxHeight(Integer.parseInt(slogoResources.getString("mapHeight")));
 		listPane.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
@@ -88,12 +98,33 @@ public class SlogoTab extends AbstractScreen {
 		buttonPane.add(makeBackButton(), 0, 0);
 		buttonPane.add(makeHelpButton(), 1, 0);
 		buttonPane.add(makeSettingsButton(), 2, 0);
+		Button save = makeSaveButton();
+		save.setOnMouseClicked(e->editXML());
+		Button load = makeLoadButton();
+		load.setOnMouseClicked(e->readXML());
+		buttonPane.add(save, 0, 1);
+		buttonPane.add(load, 1, 1);
 		buttonPane.setHgap(Integer.parseInt(slogoResources.getString("HGap")));
 		listPane.add(buttonPane, 0, 3);
 
 		root.add(listPane, 1, 0);
 	}
 
+	public void editXML(){
+		XMLEditor temp = new XMLEditor("XMLFiles/slogoStart.xml", parameters);
+		temp.editFile();
+		System.out.println("edit");
+	}
+	
+	public void readXML(){
+		XMLReader temp = new XMLReader("XMLFiles/slogoStart.xml");
+		temp.readFile();
+		System.out.println("read");
+		for(String s :temp.getNumParams().keySet()){
+			parameters.setValue(s, temp.getNumParams().get(s));
+		}
+		parameters.setBackgroundColor(temp.getColorParams().get("Background"));
+	}
 	public Display getDisplay() {
 		return map;
 	}

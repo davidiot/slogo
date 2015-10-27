@@ -1,22 +1,24 @@
 package slogo.commands;
 
-import java.util.List;
-
+import slogo.character.MainCharacter;
 import slogo.interpreter.EngineController;
-import slogo.nodes.NodeObject;
 
 
-public class Home extends Command {
+public class Home extends TurtleCommand {
 	
-	@Override
-	public double doCommand(List<NodeObject> params, EngineController controller) {
-		return controller.getMainCharacter().goHome();
-	}
+//	@Override
+//	public double doCommand(List<NodeObject> params, EngineController controller) {
+//		return controller.getMainCharacter().goHome();
+//	}
 
 	@Override
 	public int getNumChildrenRequired() {
-		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public double doTurtling(MainCharacter turtle, EngineController controller) {
+		return turtle.goHome();
 	}
 
 }
