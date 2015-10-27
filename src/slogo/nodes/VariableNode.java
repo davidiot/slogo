@@ -33,7 +33,6 @@ public class VariableNode extends NodeObject {
 
 	@Override
 	public double traverseAndExecute(EngineController controller) {
-		double value = 0;
 		try {
 			return getLocalVariable();
 		} catch (InterpreterException e) {
@@ -42,8 +41,8 @@ public class VariableNode extends NodeObject {
 				return myVariables.getVariable(myName);
 			}
 		}
-		throw new InterpreterException("Variable %s not found", myName);
-//		return getLocalVariable();
+//		throw new InterpreterException("Variable %s not found", myName);
+		return 0;
 	}
 	
 	private double getLocalVariable() {

@@ -40,6 +40,10 @@ public abstract class NodeObject {
 		localVariables.putAll(variables);
 	}
 	
+	public void setLocalVariable(String variable, double value) {
+		localVariables.put(variable, value);
+	}
+	
 	public Double getLocalVariable(String name) {
 		return localVariables.get(name);
 	}
