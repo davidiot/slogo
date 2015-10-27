@@ -34,7 +34,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private Pane myPane;
 	private LinkedList<Movement> myQueue;
 	private GlobalParameters parameters;
-	private LocalParameters options;
+	private LocalParameters settings;
 	private ArrayList<Line> lineList;
 
 	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
@@ -52,14 +52,14 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private void init(Pane pane, GlobalParameters parameters, int i) {
 		myPane = pane;
 		this.parameters = parameters;
-		options = new LocalParameters(i);
+		settings = new LocalParameters(i);
 		preX = curX;
 		preY = curY;
 		direction = 0;
 		finalX = curX;
 		finalY = curY;
 		finalDirection = direction;
-		this.loadImage(options.getImage());
+		this.loadImage(settings.getImage());
 		this.setX(curX);
 		this.setY(curY);
 		myQueue = new LinkedList<Movement>();
@@ -76,8 +76,8 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		public Movement(String type, double[] value) {
 			this.type = type;
 			this.value = value;
-			currentPenDown = options.isPenDown();
-			currentPenColor = options.getPenColor();
+			currentPenDown = settings.isPenDown();
+			currentPenColor = settings.getPenColor();
 			currentPenWidth = parameters.getValue("Line Thickness");
 		}
 
@@ -114,7 +114,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	private void refreshImage() {
 		myPane.getChildren().remove(this);
-		if (!options.isHidden()) {
+		if (!settings.isHidden()) {
 			myPane.getChildren().add(this);
 		}
 	}
@@ -164,7 +164,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 			line.setStroke(nextMove.getCurrentPenColor());
 			line.setStrokeWidth(nextMove.getCurrentPenWidth());
 			myPane.getChildren().add(line);
-			//IF INSTANT
+			// IF INSTANT
 			lineList.add(line);
 		}
 	}
@@ -220,7 +220,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double setHidden(boolean input) {
 		double returnVal = 0;
-		options.setHidden(input);
+		settings.setHidden(input);
 		if (input)
 			returnVal = 1;
 		refreshImage();
@@ -229,7 +229,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double setPenDown(boolean input) {
 		double returnVal = 0;
-		options.setPenDown(input);
+		settings.setPenDown(input);
 		if (input)
 			returnVal = 1;
 		return returnVal;
@@ -275,11 +275,15 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	}
 
 	public void changePenColor(String input) {
-		options.setPenColor(Color.valueOf(input));
+		settings.setPenColor(Color.valueOf(input));
 	}
 
 	public void changePenColorHex(String input) {
-		options.setPenColor(Color.web(input));
+		settings.setPenColor(Color.web(input));
+	}
+
+	public void changePenColorRGB(int i, int j, int k) {
+		settings.setPenColor(Color.rgb(i, j, k));
 	}
 
 	public void changePenWidth(Double input) {
@@ -299,11 +303,11 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	}
 
 	public boolean isPenDown() {
-		return options.isPenDown();
+		return settings.isPenDown();
 	}
 
 	public boolean isHidden() {
-		return options.isHidden();
+		return settings.isHidden();
 	}
 
 	public void loadImage(Image image) {
@@ -313,5 +317,9 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		this.setSmooth(true);
 		this.setCache(true);
 		refreshImage();
+	}
+
+	public LocalParameters getSettings() {
+		return settings;
 	}
 }
