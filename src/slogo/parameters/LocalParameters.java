@@ -32,7 +32,6 @@ public class LocalParameters {
 
 	public Image getImage() {
 		Image output = image;
-		image = null;
 		return output;
 	}
 
