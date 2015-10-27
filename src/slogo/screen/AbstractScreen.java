@@ -32,9 +32,9 @@ public abstract class AbstractScreen extends Parameterized implements AbstractSc
 	protected ResourceBundle myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "screen");
 	protected Font font = Font.loadFont(getClass().getClassLoader().getResourceAsStream("unispace.ttf"),
 			Integer.parseInt(myResources.getString("buttons")));
-	private HelpScreen help;
-	private SettingsScreen settings;
-	private CreditsScreen credits;
+	protected HelpScreen help;
+	protected SettingsScreen settings;
+	protected CreditsScreen credits;
 
 	// the window scenes and parameters are static because we want them to be
 	// preserved across all screens

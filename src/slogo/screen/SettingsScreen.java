@@ -178,4 +178,8 @@ public class SettingsScreen extends AbstractWindowScreen {
 		}
 	}
 
+	public void refresh() {
+		monitor.refresh();
+	}
+
 }
