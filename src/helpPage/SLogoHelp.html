@@ -18,7 +18,7 @@ p  {
 
 <h1>Help Page</h1>
 
-<h3><a href="index.php">SLogo</a> Basic Commands</h3>
+<h3>SLogo Basic Commands</h3>
 <p>While the command names below are given in all capital letters, SLogo is not case sensitive and should accept any correct spelling of the command names.  Note that any values used as parameters to a command may be the result of calling any of the  commands below or a value stored in a variable. Thus all commands return a double value as described below. Also, commands can be formatted over any number of lines, including multiple commands on the same line, but they must be separated by one or more spaces.</p>
 
 
@@ -553,6 +553,8 @@ TO house [ ] [
 
 <p>In <code>square</code>, <code>:size</code> is inherited from its calling function (so its value is 100), <code>house</code> but, in <code>triangle</code>, <code>:size</code>, is defined by the parameter which overrides the more remote declaration in <code>house</code> (so its value is 80). Then in the last command <code>:size</code> is its original value again (100). In both cases, <code>:size</code> goes out of scope after the procedures are done executing (which is different than your current implementation in which all variables are global). You can write some really bad code using dynamic scoping, with lots of magic side effects and unforeseen runtime errors, but Logo is not meant for writing large programs so it usually does not come up.</p>
 
+<h2> Hexcode Color Website </h2>
+<p> Use this <a href=http://www.color-hex.com/>link</a> to find the appropriate code for certain colors. </p>
 
 </body>
 </html>
