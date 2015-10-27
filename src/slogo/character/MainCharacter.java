@@ -36,6 +36,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private GlobalParameters parameters;
 	private LocalParameters settings;
 	private ArrayList<Line> lineList;
+	private double dashCounter;
 
 	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
 		curX = xCenter;
@@ -64,6 +65,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		this.setY(curY);
 		myQueue = new LinkedList<Movement>();
 		lineList = new ArrayList<Line>();
+		dashCounter = 0;
 	}
 
 	private class Movement {
@@ -157,7 +159,9 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 		this.setX(wrap(curX, WIDTH));
 		this.setY(wrap(curY, HEIGHT));
-		if (nextMove.isCurrentPenDown() & !checkTeleport()) {
+		if (nextMove.isCurrentPenDown()
+				&& dashCounter < (1 - parameters.getValue("Dash Level")) * 10 * parameters.getValue("Speed")
+				&& !checkTeleport()) {
 			Line line;
 			line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST, wrap(curX, WIDTH) + XADJUST,
 					wrap(curY, HEIGHT) + YADJUST);
@@ -166,6 +170,10 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 			myPane.getChildren().add(line);
 			// IF INSTANT
 			lineList.add(line);
+		}
+		dashCounter += parameters.getValue("Speed");
+		if (dashCounter >= 10 * parameters.getValue("Speed")) {
+			dashCounter = 0;
 		}
 	}
 
