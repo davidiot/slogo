@@ -1,5 +1,6 @@
 package slogo.character;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 
@@ -34,6 +35,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private LinkedList<Movement> myQueue;
 	private GlobalParameters parameters;
 	private LocalParameters options;
+	private ArrayList<Line> lineList;
 
 	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
 		curX = xCenter;
@@ -61,6 +63,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		this.setX(curX);
 		this.setY(curY);
 		myQueue = new LinkedList<Movement>();
+		lineList = new ArrayList<Line>();
 	}
 
 	private class Movement {
@@ -161,6 +164,8 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 			line.setStroke(nextMove.getCurrentPenColor());
 			line.setStrokeWidth(nextMove.getCurrentPenWidth());
 			myPane.getChildren().add(line);
+			//IF INSTANT
+			lineList.add(line);
 		}
 	}
 
