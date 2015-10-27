@@ -77,12 +77,12 @@ public class Display extends AbstractElement {
 		this.pane.getChildren().add(display);
 	}
 
-	public void changeColor(String input) {
-		map.setFill(Paint.valueOf(input));
+	public void changeColor(Color input) {
+		map.setFill(input);
 	}
 
 	public void changeColorHex(String input) {
-		map.setFill(Color.web(input));
+		parameters.setBackgroundColorHex(input);
 	}
 
 	public void addCharacter(double x, double y) {
