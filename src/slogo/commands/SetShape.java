@@ -12,6 +12,7 @@ public class SetShape extends TurtleCommand {
 		List<Double> parameters = this.recurseToGetParameters(myParams, controller);
 		double index = parameters.get(0);
 		int indexInt = (int) index;
+		turtle.changeShape(indexInt);
 		return index;
 	}
 

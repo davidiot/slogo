@@ -6,16 +6,11 @@ import slogo.character.MainCharacter;
 import slogo.element.Display;
 import slogo.interpreter.EngineController;
 
-public class SetPenColor extends TurtleCommand {
+public class GetPenColor extends TurtleCommand {
 	private final int CHILDREN_REQUIRED = 1;
 	
 	public double doTurtling(MainCharacter turtle, EngineController controller) {
-		List<Double> parameters = this.recurseToGetParameters(myParams, controller);
-		double index = parameters.get(0);
-		int indexInt = (int) index;
-		String color = controller.getDisplay().convertIndexToHex(indexInt);
-		turtle.changePenColor(color);
-		return index;
+		return 0;
 	}
 
 	@Override
