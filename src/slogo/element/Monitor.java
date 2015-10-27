@@ -43,10 +43,10 @@ public class Monitor extends AbstractElement {
 		pane.add(list, 0, 1);
 	}
 
-	private void clear(){
+	private void clear() {
 		list.getSelectionModel().clearSelection();
 	}
-	
+
 	private class SettingsCell extends ListCell<MainCharacter> {
 		@Override
 		public void updateItem(MainCharacter item, boolean empty) {
@@ -64,7 +64,7 @@ public class Monitor extends AbstractElement {
 		}
 
 		public Text makeLabel(LocalParameters settings) {
-			Text label = new Text(Integer.toString(settings.getIndex()));
+			Text label = new Text(Integer.toString(settings.getIndex() + 1));
 			label.setFont(font);
 			return label;
 		}

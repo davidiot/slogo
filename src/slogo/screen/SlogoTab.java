@@ -79,7 +79,7 @@ public class SlogoTab extends AbstractScreen {
 		commands = new Commands(commandPane, c, console);
 		listPane.add(commandPane, 0, 1);
 		GridPane varPane = new GridPane();
-		variables = new Variables(varPane, v, console);
+		variables = new Variables(varPane, v, console, myEngineController);
 		listPane.add(varPane, 0, 2);
 		listPane.setMaxHeight(Integer.parseInt(slogoResources.getString("mapHeight")));
 		listPane.setVgap(Integer.parseInt(slogoResources.getString("VGap")));
