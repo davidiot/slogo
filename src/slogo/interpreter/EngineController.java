@@ -35,7 +35,15 @@ public class EngineController {
 		compiledCommandsTree.traverseAndExecute(this);
 		updateVariablesListInGUI();
 		updateCommandsListInGUI();
-		myWorkspaceSaver.saveWorkspaceToFile("newFile");
+		//myWorkspaceSaver.saveWorkspaceToFile("newFile");
+	}
+	
+	public void saveDatabaseToFile(String fileName){
+		myWorkspaceSaver.saveWorkspaceToFile(fileName);
+	}
+	
+	public void loadDatabaseFromFile(String fileName){
+		
 	}
 
 	private void updateVariablesListInGUI() {
