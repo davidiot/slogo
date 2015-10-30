@@ -37,8 +37,6 @@ public class TreeBuilder {
 			return;
 		}
 		if(current.canAdd()) {
-			//System.out.println(current.getName());
-			// TODO throw exception if action doesn't exist
 			NodeObject node = myFactory.create(myInput.get(index), current);
 			current.addChild(node);
 			buildTreeNodes(index+1, node);

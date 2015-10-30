@@ -9,7 +9,7 @@ import slogo.interpreter.EngineController;
 public class GetPenColor extends TurtleCommand {
 	private final int CHILDREN_REQUIRED = 1;
 	
-	public double doTurtling(MainCharacter turtle, EngineController controller) {
+	public double doTurtling(MainCharacter turtle) {
 		return 0;
 	}
 
