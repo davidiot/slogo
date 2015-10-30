@@ -8,12 +8,11 @@ import slogo.nodes.NodeObject;
 
 public abstract class TurtleCommand extends Command implements TurtleCommandInterface{
 
-	protected List<Double> myParams;
+	protected List<NodeObject> myParams;
 
 	@Override
 	public double doCommand(List<NodeObject> params, EngineController controller) {
-		myParams = recurseToGetParameters(params, controller);
-		//myParams = params;
+		myParams = params;
 		return controller.getTurtleController().commandTurtles(this);
 	}
 
@@ -21,6 +20,6 @@ public abstract class TurtleCommand extends Command implements TurtleCommandInte
 	public abstract int getNumChildrenRequired();
 
 	@Override
-	public abstract double doTurtling(MainCharacter turtle);
+	public abstract double doTurtling(MainCharacter turtle, EngineController controller);
 
 }
