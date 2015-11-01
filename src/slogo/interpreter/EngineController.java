@@ -2,14 +2,12 @@ package slogo.interpreter;
 
 import java.util.HashMap;
 
-import slogo.character.CharacterInterface;
-import slogo.element.Display;
 import slogo.nodes.NodeObject;
 import slogo.saving.FileParser;
 import slogo.saving.WorkspaceSaver;
 import slogo.screen.SlogoScreenInterface;
 
-public class EngineController {
+public class EngineController implements ControlInterface{
 
 	private Interpreter myInterpreter;
 	private SlogoScreenInterface myView;
@@ -25,7 +23,7 @@ public class EngineController {
 		myVariableLibrary = new VariableLibrary();
 		myCommandLibrary = new CommandLibrary(myVariableLibrary);
 		myInterpreter = new Interpreter(language, myCommandLibrary, myVariableLibrary);
-		myTurtleController = new TurtleController(this, view);
+		myTurtleController = new TurtleController(view);
 		//myTurtles = view.getDisplay().getCharacters();
 		//activeIndices = view.getDisplay().getActiveIndices();
 		myWorkspaceSaver = new WorkspaceSaver(this);
@@ -66,13 +64,13 @@ public class EngineController {
 		}
 	}
 
-	public SlogoScreenInterface getScreen() {
-		return myView;
-	}
+//	public SlogoScreenInterface getScreen() {
+//		return myView;
+//	}
 
-	public Display getDisplay(){
-		return myView.getDisplay();
-	}
+//	public Display getDisplay(){
+//		return myView.getDisplay();
+//	}
 	
 	public CommandLibrary getCommandLibrary() {
 		return myCommandLibrary;
@@ -82,9 +80,9 @@ public class EngineController {
 		return myVariableLibrary;
 	}
 
-	public CharacterInterface getMainCharacter() {
-		return myView.getDisplay().getCharacters().get(0);
-	}
+//	public CharacterInterface getMainCharacter() {
+//		return myView.getDisplay().getCharacters().get(0);
+//	}
 
 	public TurtleController getTurtleController() {
 		return myTurtleController;

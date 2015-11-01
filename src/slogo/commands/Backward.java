@@ -3,6 +3,7 @@ package slogo.commands;
 import java.util.List;
 
 import slogo.character.MainCharacter;
+import slogo.interpreter.ControlInterface;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
@@ -26,8 +27,8 @@ public class Backward extends TurtleCommand {
 	}
 
 	@Override
-	public double doTurtling(MainCharacter turtle, EngineController controller) {
-		List<Double> parameters = recurseToGetParameters(myParams, controller);
+	public double doTurtling(MainCharacter turtle) {
+		List<Double> parameters = recurseToGetParameters(myParams, myController);
 		double distance = parameters.get(0);
 		turtle.move(distance, false);
 		return distance;

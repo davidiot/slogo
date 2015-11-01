@@ -5,7 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import slogo.interpreter.EngineController;
+import slogo.interpreter.ControlInterface;
 
 public abstract class NodeObject {
 	protected NodeObject myParent;
@@ -33,7 +33,7 @@ public abstract class NodeObject {
 
 	public abstract boolean canAdd();
 
-	public abstract double traverseAndExecute(EngineController controller);
+	public abstract double traverseAndExecute(ControlInterface controller);
 
 	public NodeObject getParent() {
 		return myParent;

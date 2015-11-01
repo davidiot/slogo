@@ -10,7 +10,7 @@ public class Heading extends Command {
 	private final int CHILDREN_REQUIRED = 0;
 	
 	@Override
-	public double doCommand(List<NodeObject> params, EngineController controller) {
+	public double doCommand(List<NodeObject> params, ControlInterface controller) {
 		return controller.getMainCharacter().getDirection();
 	}
 

@@ -2,7 +2,7 @@ package slogo.nodes;
 
 import slogo.commands.Command;
 import slogo.interpreter.CommandLibrary;
-import slogo.interpreter.EngineController;
+import slogo.interpreter.ControlInterface;
 
 public class UserCommandNode extends NodeObject {
 	private int numChildren;
@@ -30,7 +30,7 @@ public class UserCommandNode extends NodeObject {
 	}
 	
 	@Override
-	public double traverseAndExecute(EngineController controller) {
+	public double traverseAndExecute(ControlInterface controller) {
 		commandLibrary = controller.getCommandLibrary();
 		Command action = commandLibrary.getCommand(myName);
 		System.out.println(action);

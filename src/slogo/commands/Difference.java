@@ -10,7 +10,7 @@ public class Difference extends Command {
 	private final int CHILDREN_REQUIRED = 2;
 
 	@Override
-	public double doCommand(List<NodeObject> params, EngineController controller) {
+	public double doCommand(List<NodeObject> params, ControlInterface controller) {
 		List<Double> parameters = recurseToGetParameters(params, controller);
 		return parameters.get(0) - parameters.get(1);
 	}

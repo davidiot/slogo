@@ -2,7 +2,7 @@
 package slogo.nodes;
 
 import slogo.commands.Command;
-import slogo.interpreter.EngineController;
+import slogo.interpreter.ControlInterface;
 
 public class CommandNode extends NodeObject{
 	private Command myCommand;
@@ -16,7 +16,7 @@ public class CommandNode extends NodeObject{
 		myChildren.add(child);
 	}
 
-	public double traverseAndExecute(EngineController controller) {
+	public double traverseAndExecute(ControlInterface controller) {
 		return myCommand.doCommand(myChildren, controller);
 		
 	}

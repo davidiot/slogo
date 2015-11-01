@@ -11,7 +11,7 @@ public class DoTimes extends Command {
 	private final int CHILDREN_REQUIRED = 2;
 
 	@Override
-	public double doCommand(List<NodeObject> params, EngineController controller) {
+	public double doCommand(List<NodeObject> params, ControlInterface controller) {
 		checkFormat(params.get(0));
 		double limit = getLimit(params.get(0));
 		String variable = getVariable(params.get(0));

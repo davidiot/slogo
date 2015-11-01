@@ -3,6 +3,7 @@ package slogo.commands;
 import java.util.ArrayList;
 import java.util.List;
 
+import slogo.interpreter.ControlInterface;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
@@ -10,7 +11,7 @@ public abstract class Command {
 	
 	protected String myName;
 		
-	public abstract double doCommand(List<NodeObject> params, EngineController controller);
+	public abstract double doCommand(List<NodeObject> params, ControlInterface controller);
 	
 	public abstract int getNumChildrenRequired();
 	
@@ -18,7 +19,7 @@ public abstract class Command {
 		return false;
 	}
 	
-	public List<Double> recurseToGetParameters(List<NodeObject> params, EngineController controller){
+	public List<Double> recurseToGetParameters(List<NodeObject> params, ControlInterface controller){
 		List<Double> parameters = new ArrayList<Double>();
 		for(NodeObject child: params) {
 			parameters.add(child.traverseAndExecute(controller));

@@ -1,6 +1,7 @@
 package slogo.element;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
@@ -26,7 +27,7 @@ import slogo.character.MainCharacter;
 import slogo.parameters.GlobalParameters;
 import slogo.screen.AbstractScreen;
 
-public class Display extends AbstractElement {
+public class Display extends AbstractElement implements DisplayInterface{
 
 	private Rectangle map;
 	private Rectangle background;
@@ -167,6 +168,12 @@ public class Display extends AbstractElement {
 	
 	public GridPane getPalettePane(){
 		return palettePane;
+	}
+
+	@Override
+	public void setActiveIDs(Collection<Integer> IDs) {
+		activeIndices.clear();
+		activeIndices.addAll(IDs);
 	}
 
 

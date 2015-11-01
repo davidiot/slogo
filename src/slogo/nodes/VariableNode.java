@@ -1,6 +1,6 @@
 package slogo.nodes;
 
-import slogo.interpreter.EngineController;
+import slogo.interpreter.ControlInterface;
 import slogo.interpreter.InterpreterException;
 import slogo.interpreter.VariableLibrary;
 
@@ -32,7 +32,7 @@ public class VariableNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(EngineController controller) {
+	public double traverseAndExecute(ControlInterface controller) {
 		try {
 			return getLocalVariable();
 		} catch (InterpreterException e) {

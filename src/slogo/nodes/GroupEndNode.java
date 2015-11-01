@@ -1,6 +1,6 @@
 package slogo.nodes;
 
-import slogo.interpreter.EngineController;
+import slogo.interpreter.ControlInterface;
 
 public class GroupEndNode extends NodeObject {
 
@@ -25,7 +25,7 @@ public class GroupEndNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(EngineController controller) {
+	public double traverseAndExecute(ControlInterface controller) {
 		return 0;
 	}
 

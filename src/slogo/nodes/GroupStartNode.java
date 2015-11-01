@@ -1,6 +1,6 @@
 package slogo.nodes;
 
-import slogo.interpreter.EngineController;
+import slogo.interpreter.ControlInterface;
 import slogo.interpreter.InterpreterException;
 
 public class GroupStartNode extends NodeObject {
@@ -26,7 +26,7 @@ public class GroupStartNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(EngineController controller) {
+	public double traverseAndExecute(ControlInterface controller) {
 		if (myChildren.size() < 1) {
 			throw new InterpreterException("Missing ) to close group");
 		}

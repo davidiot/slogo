@@ -2,6 +2,7 @@ package slogo.commands;
 
 import java.util.List;
 
+import slogo.interpreter.ControlInterface;
 import slogo.interpreter.EngineController;
 import slogo.nodes.NodeObject;
 
@@ -10,7 +11,7 @@ public class And extends GroupingCommand {
 	private final int CHILDREN_REQUIRED = 2;
 
 	@Override
-	public double doCommand(List<NodeObject> params, EngineController controller) {
+	public double doCommand(List<NodeObject> params, ControlInterface controller) {
 		List<Double> parameters = recurseToGetParameters(params, controller);
 		for (double param: parameters) {
 			if (param == 0.0) {

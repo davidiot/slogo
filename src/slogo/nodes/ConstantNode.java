@@ -1,6 +1,6 @@
 package slogo.nodes;
 
-import slogo.interpreter.EngineController;
+import slogo.interpreter.ControlInterface;
 
 public class ConstantNode extends NodeObject {
 	private double myValue;
@@ -28,7 +28,7 @@ public class ConstantNode extends NodeObject {
 	}
 
 	@Override
-	public double traverseAndExecute(EngineController controller) {
+	public double traverseAndExecute(ControlInterface controller) {
 		return myValue;
 	}
 

@@ -9,7 +9,7 @@ public class ClearStamps extends Command {
 	private final int CHILDREN_REQUIRED = 0;
 	
 	@Override
-	public double doCommand(List<NodeObject> params, EngineController controller) {
+	public double doCommand(List<NodeObject> params, ControlInterface controller) {
 		return 0;
 	}
 
