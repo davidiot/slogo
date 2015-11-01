@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Daniel Pak
+
 package slogo.element;
 
 import javafx.event.Event;

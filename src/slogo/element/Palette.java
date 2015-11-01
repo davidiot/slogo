@@ -1,8 +1,12 @@
+// This entire file is part of my masterpiece.
+// Daniel Pak
+
 package slogo.element;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.JButton;
 
@@ -20,15 +24,19 @@ import javafx.scene.text.Text;
 
 public class Palette extends AbstractElement {
 
+	private final String DEFAULT_RESOURCE_PACKAGE = "resources/";
+	private ResourceBundle myColors = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "color");
 	private List<Color> colors;
 	private GridPane display;
 	private int limit = 3;
 
 	public Palette(GridPane pane) {
 		super(pane);
+		String[] colorArray = myColors.getString("Colors").split(",");
 		colors = new ArrayList<Color>();
-		colors.addAll(Arrays.asList(Color.BLUE, Color.RED, Color.GREEN, Color.YELLOW, Color.ORANGE, Color.VIOLET,
-				Color.BLACK, Color.WHITE, Color.FIREBRICK));
+		for(String s: colorArray){
+			colors.add(Color.valueOf(s));
+		}
 		makePane();
 	}
 
