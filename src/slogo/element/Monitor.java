@@ -1,10 +1,8 @@
+// this entire file is part of my masterpiece
+
 package slogo.element;
 
 import java.io.File;
-import java.util.List;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -24,7 +22,6 @@ import slogo.parameters.LocalParameters;
 public class Monitor extends AbstractElement {
 	private String title;
 	private Text text;
-	private boolean open;
 	private ListView<MainCharacter> list;
 
 	public Monitor(GridPane pane) {
@@ -35,7 +32,6 @@ public class Monitor extends AbstractElement {
 	@Override
 	protected void makePane() {
 		title = slogoResources.getString(this.getClass().getName());
-		open = true;
 		text = new Text(title);
 		text.setFont(font);
 		pane.add(text, 0, 0);

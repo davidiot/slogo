@@ -1,3 +1,5 @@
+// This entire file is part of my masterpiece.
+
 package slogo.element;
 
 import java.util.Observable;
