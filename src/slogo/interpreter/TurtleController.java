@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// Daniel McKee
+
 package slogo.interpreter;
 
 import java.util.ArrayList;
@@ -7,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import slogo.character.MainCharacter;
+import slogo.character.CharacterInterface;
 import slogo.commands.TurtleCommandInterface;
 import slogo.element.DisplayInterface;
 import slogo.screen.SlogoScreenInterface;
@@ -24,13 +27,13 @@ public class TurtleController {
 	public double commandTurtles(TurtleCommandInterface command) {
 		myDisplay = myScreen.getDisplay();
 		Set<Integer> activeIndicesSet = myDisplay.getActiveIndices();
-		List<MainCharacter> characters = myDisplay.getCharacters();
+		List<CharacterInterface> characters = myDisplay.getCharacters();
 		
 		List<Double> returnVals = characters
 			.stream()
 			.filter(c -> activeIndicesSet.contains(characters.indexOf(c)) )
 			.map(c -> {
-				HashSet<Integer> storedSet = new HashSet<Integer>(activeIndicesSet);
+				Set<Integer> storedSet = new HashSet<Integer>(activeIndicesSet);
 				setOneActive(c);
 				double val = command.doTurtling(c);
 				setActiveIDs(storedSet);
@@ -42,7 +45,7 @@ public class TurtleController {
 		
 	}
 
-	private void setOneActive(MainCharacter c) {
+	private void setOneActive(CharacterInterface c) {
 		int index = myDisplay.getCharacters().indexOf(c);
 		List<Integer> list = new ArrayList<>();
 		list.add(index);
@@ -51,7 +54,7 @@ public class TurtleController {
 	}
 
 	public double getActiveID() {
-		ArrayList<Integer> activeSet = new ArrayList<>(myDisplay.getActiveIndices());
+		List<Integer> activeSet = new ArrayList<>(myDisplay.getActiveIndices());
 		return activeSet.get(0) + 1;
 	}
 

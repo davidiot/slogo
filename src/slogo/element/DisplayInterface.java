@@ -5,11 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 
 public interface DisplayInterface {
 
-	List<MainCharacter> getCharacters();
+	List<CharacterInterface> getCharacters();
 
 	Set<Integer> getActiveIndices();
 

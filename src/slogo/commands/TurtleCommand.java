@@ -1,7 +1,11 @@
+// This entire file is part of my masterpiece.
+// Daniel McKee
+
 package slogo.commands;
 
 import java.util.List;
 
+import slogo.character.CharacterInterface;
 import slogo.character.MainCharacter;
 import slogo.interpreter.ControlInterface;
 import slogo.nodes.NodeObject;
@@ -22,6 +26,6 @@ public abstract class TurtleCommand extends Command implements TurtleCommandInte
 	public abstract int getNumChildrenRequired();
 
 	@Override
-	public abstract double doTurtling(MainCharacter turtle);
+	public abstract double doTurtling(CharacterInterface turtle);
 
 }
