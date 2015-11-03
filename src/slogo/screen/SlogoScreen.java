@@ -14,6 +14,7 @@ import slogo.character.MainCharacter;
 import slogo.element.Commands;
 import slogo.element.Console;
 import slogo.element.Display;
+import slogo.element.DisplayInterface;
 import slogo.element.History;
 import slogo.element.ObservableArrayList;
 import slogo.element.Variables;
@@ -158,7 +159,7 @@ public class SlogoScreen extends AbstractScreen implements SlogoScreenInterface 
 		return manager.getCurrentTab().getCommands();
 	}
 
-	public Display getDisplay() {
+	public DisplayInterface getDisplay() {
 		return map;
 	}
 }

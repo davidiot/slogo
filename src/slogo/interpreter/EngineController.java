@@ -1,9 +1,13 @@
+// This entire file is part of my masterpiece.
+// MICHAEL DAOU
+
 package slogo.interpreter;
 
 import java.util.HashMap;
 
 import slogo.character.CharacterInterface;
 import slogo.element.Display;
+import slogo.element.DisplayInterface;
 import slogo.nodes.NodeObject;
 import slogo.saving.FileParser;
 import slogo.saving.WorkspaceSaver;
@@ -37,15 +41,11 @@ public class EngineController {
 		compiledCommandsTree.traverseAndExecute(this);
 		updateVariablesListInGUI();
 		updateCommandsListInGUI();
-		//myWorkspaceSaver.saveWorkspaceToFile("newFile");
+		myWorkspaceSaver.saveWorkspaceToFile("newFile");
 	}
 	
 	public void saveDatabaseToFile(String fileName){
 		myWorkspaceSaver.saveWorkspaceToFile(fileName);
-	}
-	
-	public void loadDatabaseFromFile(String fileName){
-		
 	}
 
 	public void updateVariablesListInGUI() {
@@ -70,7 +70,7 @@ public class EngineController {
 		return myView;
 	}
 
-	public Display getDisplay(){
+	public DisplayInterface getDisplay(){
 		return myView.getDisplay();
 	}
 	

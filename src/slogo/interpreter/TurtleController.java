@@ -20,7 +20,7 @@ public class TurtleController {
 
 	public double commandTurtles(TurtleCommandInterface command) {
 		double returnVal = 0;
-		HashSet<Integer> activeIndicesSet = myView.getDisplay().getActiveIndices();
+		HashSet<Integer> activeIndicesSet = (HashSet<Integer>) myView.getDisplay().getActiveIndices();
 		for (int i = 0; i < myView.getDisplay().getCharacters().size(); i++) {
 			if (activeIndicesSet.contains(i)){
 				HashSet<Integer> storedSet = new HashSet<Integer>(activeIndicesSet);
@@ -34,12 +34,12 @@ public class TurtleController {
 	}
 
 	public double getActiveID() {
-		HashSet<Integer> activeSet = myView.getDisplay().getActiveIndices();
+		HashSet<Integer> activeSet = (HashSet<Integer>) myView.getDisplay().getActiveIndices();
 		return new ArrayList<Integer>(activeSet).get(0) + 1;
 	}
 
 	public void setActiveIDs(Collection<Integer> IDs) {
-		HashSet<Integer> activeIndicesSet = myView.getDisplay().getActiveIndices();
+		HashSet<Integer> activeIndicesSet = (HashSet<Integer>) myView.getDisplay().getActiveIndices();
 		activeIndicesSet.removeAll(activeIndicesSet);
 		activeIndicesSet.addAll(IDs);
 		for (int id: IDs){

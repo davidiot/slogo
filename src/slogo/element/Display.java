@@ -26,7 +26,7 @@ import slogo.character.MainCharacter;
 import slogo.parameters.GlobalParameters;
 import slogo.screen.AbstractScreen;
 
-public class Display extends AbstractElement {
+public class Display extends AbstractElement implements DisplayInterface {
 
 	private Rectangle map;
 	private Rectangle background;

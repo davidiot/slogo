@@ -1,3 +1,6 @@
+// This entire file is part of my masterpiece.
+// MICHAEL DAOU
+
 package slogo.character;
 
 public interface CharacterInterface {

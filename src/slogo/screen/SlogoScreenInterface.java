@@ -3,6 +3,7 @@ package slogo.screen;
 import javafx.scene.layout.GridPane;
 import slogo.element.Commands;
 import slogo.element.Display;
+import slogo.element.DisplayInterface;
 import slogo.element.History;
 import slogo.element.Variables;
 
@@ -20,7 +21,7 @@ public interface SlogoScreenInterface extends AbstractScreenInterface {
 	
 	public Commands getCommandsObject();
 	
-	public Display getDisplay();
+	public DisplayInterface getDisplay();
 	
 	public double clearMap();
 	
