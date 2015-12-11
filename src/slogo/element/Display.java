@@ -168,6 +168,12 @@ public class Display extends AbstractElement {
 	public GridPane getPalettePane(){
 		return palettePane;
 	}
+	
+	public void setWrap(boolean bool) {
+		for (MainCharacter character: characters) {
+			character.setWrap(bool);
+		}	
+	}
 
 
 }

@@ -13,7 +13,7 @@ import slogo.commands.UserInstruction;
 
 public class CommandLibrary {
 
-	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/English3";
+	private final String DEFAULT_RESOURCE_PACKAGE = "resources/languages/ImplementedCommands";
 	private Map<String, Command> myCommandMap;
 	private Map<String, String> myUserCommandMap;
 	private ResourceBundle myCommandResources;

@@ -37,6 +37,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private LocalParameters settings;
 	private ArrayList<Line> lineList;
 	private double dashCounter;
+	private boolean isWrapping = true;
 
 	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
 		curX = xCenter;
@@ -147,24 +148,28 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		newX = curX + parameters.getValue("Speed") * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
 		newY = curY - parameters.getValue("Speed") * Math.sin(Math.toRadians(ANGLE - adjustedDirection));
 
-		if ((Math.pow((newX - curX), 2) + Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2)
+		if ( (Math.pow((newX - curX), 2) + Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2)
 				+ Math.pow((y - curY), 2))) {
-			curX = wrap(x, WIDTH);
-			curY = wrap(y, HEIGHT);
+			curX = isWrapping ? wrap(x, WIDTH) : x;
+			curY = isWrapping ? wrap(y, HEIGHT) : y;
 			myQueue.poll();
 		} else {
 			curX = newX;
 			curY = newY;
 		}
 
-		this.setX(wrap(curX, WIDTH));
-		this.setY(wrap(curY, HEIGHT));
+		this.setX(isWrapping ? wrap(curX, WIDTH) : curX);
+		this.setY(isWrapping ? wrap(curY, HEIGHT) : curY);
+
 		if (nextMove.isCurrentPenDown()
 				&& dashCounter < (1 - parameters.getValue("Dash Level")) * 10 * parameters.getValue("Speed")
 				&& !checkTeleport()) {
 			Line line;
-			line = new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST, wrap(curX, WIDTH) + XADJUST,
-					wrap(curY, HEIGHT) + YADJUST);
+			line = isWrapping ? 
+					new Line(wrap(preX, WIDTH) + XADJUST, wrap(preY, HEIGHT) + YADJUST, wrap(curX, WIDTH) + XADJUST,
+					wrap(curY, HEIGHT) + YADJUST) 
+					: new Line(preX + XADJUST, preY + YADJUST, curX + XADJUST,
+					curY + YADJUST);
 			line.setStroke(nextMove.getCurrentPenColor());
 			line.setStrokeWidth(nextMove.getCurrentPenWidth());
 			myPane.getChildren().add(line);
@@ -213,8 +218,11 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		} else {
 			myQueue.add(new Movement("bline", new double[] { finalX, finalY }));
 		}
-		finalX = wrap(finalX, WIDTH);
-		finalY = wrap(finalY, HEIGHT);
+		if (isWrapping) {
+			finalX = wrap(finalX, WIDTH);
+			finalY = wrap(finalY, HEIGHT);	
+		}
+		
 		return distance;
 	}
 
@@ -349,5 +357,9 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double getYADJUST() {
 		return YADJUST;
+	}
+	
+	public void setWrap(boolean bool) {
+		isWrapping = bool;
 	}
 }
