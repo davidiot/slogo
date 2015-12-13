@@ -41,12 +41,11 @@ public class Display extends AbstractElement {
 	private Palette palette;
 	private GridPane palettePane;
 
-	public Display(GridPane pane) {
+	public Display(GridPane pane, AbstractScreen screen) {
 		super(pane);
-		
 		palettePane = new GridPane();
-		palette = new Palette(palettePane);
-		
+		palette = new Palette(palettePane, screen);
+
 		makePane();
 	}
 
@@ -85,19 +84,19 @@ public class Display extends AbstractElement {
 		this.pane.getChildren().add(display);
 	}
 
-	public String convertIndexToHex(int index){
+	public String convertIndexToHex(int index) {
 		return palette.getColor(index);
 	}
-	
-	public void setPaletteIndex(int index, int r, int g, int b){
-		palette.setColor(index, Color.rgb(r,g,b));
+
+	public void setPaletteIndex(int index, int r, int g, int b) {
+		palette.setColor(index, Color.rgb(r, g, b));
 	}
-	
+
 	public void changeColor(Color input) {
 		map.setFill(input);
 	}
-	
-	public void changeColorIndex(int index){
+
+	public void changeColorIndex(int index) {
 		this.changeColorHex(palette.getColor(index));
 	}
 
@@ -115,13 +114,14 @@ public class Display extends AbstractElement {
 		activeIndices.add(counter);
 		characters.add(mc);
 	}
-	
+
 	// Puts character at default position
 	public void addCharacter() {
-//		addCharacter( Double.parseDouble(slogoResources.getString("characterCenterX")), 
-//				Double.parseDouble(slogoResources.getString("characterCenterY")));
-		addCharacter(Double.parseDouble(slogoResources.getString("mapWidth"))/2,
-				Double.parseDouble(slogoResources.getString("mapHeight"))/2);
+		// addCharacter(
+		// Double.parseDouble(slogoResources.getString("characterCenterX")),
+		// Double.parseDouble(slogoResources.getString("characterCenterY")));
+		addCharacter(Double.parseDouble(slogoResources.getString("mapWidth")) / 2,
+				Double.parseDouble(slogoResources.getString("mapHeight")) / 2);
 	}
 
 	public void updateCharacters() {
@@ -164,10 +164,9 @@ public class Display extends AbstractElement {
 		makePane();
 		return distance;
 	}
-	
-	public GridPane getPalettePane(){
+
+	public GridPane getPalettePane() {
 		return palettePane;
 	}
-
 
 }

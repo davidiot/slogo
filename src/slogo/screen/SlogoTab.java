@@ -39,9 +39,11 @@ public class SlogoTab extends AbstractScreen {
 	private ObservableArrayList v;
 	private Tab myTab;
 	private int tabID;
+	private SlogoScreenInterface screen;
 
 	public SlogoTab(String language, SlogoScreenInterface screen, int id) {
 		this.language = language;
+		this.screen = screen;
 		slogoResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + "slogo");
 		WIDTH = Integer.parseInt(slogoResources.getString("width"));
 		HEIGHT = Integer.parseInt(slogoResources.getString("height"));
@@ -59,10 +61,10 @@ public class SlogoTab extends AbstractScreen {
 
 	public void makeTab() {
 		GridPane mapPane = new GridPane();
-		map = new Display(mapPane);
+		map = new Display(mapPane, (AbstractScreen) screen);
 		root.add(mapPane, 0, 0);
 		GridPane consolePane = new GridPane();
-		console = new Console(consolePane);
+		console = new Console(consolePane, (AbstractScreen) screen);
 		root.add(consolePane, 0, 2);
 
 		root.add(map.getPalettePane(), 1, 2);
