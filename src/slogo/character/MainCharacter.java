@@ -37,6 +37,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private LocalParameters settings;
 	private ArrayList<Line> lineList;
 	private double dashCounter;
+	private ArrayList<Movement> debugList;
 
 	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
 		curX = xCenter;
@@ -66,42 +67,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		myQueue = new LinkedList<Movement>();
 		lineList = new ArrayList<Line>();
 		dashCounter = 0;
-	}
-
-	private class Movement {
-		private String type;
-		private double[] value;
-		private boolean currentPenDown;
-		private double currentPenWidth;
-		private Color currentPenColor;
-
-		public Movement(String type, double[] value) {
-			this.type = type;
-			this.value = value;
-			currentPenDown = settings.isPenDown();
-			currentPenColor = settings.getPenColor();
-			currentPenWidth = parameters.getValue("Line Thickness");
-		}
-
-		public String getType() {
-			return type;
-		}
-
-		public double[] getValue() {
-			return value;
-		}
-
-		public boolean isCurrentPenDown() {
-			return currentPenDown;
-		}
-
-		public Double getCurrentPenWidth() {
-			return currentPenWidth;
-		}
-
-		public Color getCurrentPenColor() {
-			return currentPenColor;
-		}
+		debugList = new ArrayList<Movement>();
 	}
 
 	private double wrap(double input, double value) {
@@ -124,7 +90,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	public void update() {
 		if (!myQueue.isEmpty()) {
 			Movement nextMove = myQueue.peek();
-			if (nextMove.getType().equals("angle")) {
+			if (nextMove.getType().equals("turn")) {
 				turn(nextMove);
 			} else {
 				line(nextMove);
@@ -141,7 +107,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		double newX = 0;
 		double newY = 0;
 		double adjustedDirection = direction;
-		if (nextMove.getType().equals("bline")) {
+		if (nextMove.getType().equals("backward")) {
 			adjustedDirection = wrap(direction + 180, 360);
 		}
 		newX = curX + parameters.getValue("Speed") * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
@@ -151,7 +117,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 				+ Math.pow((y - curY), 2))) {
 			curX = wrap(x, WIDTH);
 			curY = wrap(y, HEIGHT);
-			myQueue.poll();
+			debugList.add(myQueue.poll());
 		} else {
 			curX = newX;
 			curY = newY;
@@ -188,7 +154,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	}
 
 	public void turn(Movement nextMove) {
-		double angle = nextMove.getValue()[0];
+		double angle = nextMove.getValue()[2];
 		if (angle - direction > 0) {
 			direction += Math.min(parameters.getValue("Speed"), angle - direction);
 		} else {
@@ -197,7 +163,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		this.setRotate(direction);
 		if (direction == angle) {
 			direction = wrap(direction, 360);
-			myQueue.poll();
+			debugList.add(myQueue.poll());
 		}
 	}
 
@@ -209,9 +175,9 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		finalX += distance * Math.cos(Math.toRadians(ANGLE - correctedDirection));
 		finalY -= distance * Math.sin(Math.toRadians(ANGLE - correctedDirection));
 		if (forward) {
-			myQueue.add(new Movement("fline", new double[] { finalX, finalY }));
+			myQueue.add(new Movement("forward", new double[] { finalX, finalY, direction }, settings, parameters));
 		} else {
-			myQueue.add(new Movement("bline", new double[] { finalX, finalY }));
+			myQueue.add(new Movement("backward", new double[] { finalX, finalY, direction }, settings, parameters));
 		}
 		finalX = wrap(finalX, WIDTH);
 		finalY = wrap(finalY, HEIGHT);
@@ -244,7 +210,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double rotateCharacter(double degree) {
 		finalDirection += degree;
-		myQueue.add(new Movement("angle", new double[] { finalDirection }));
+		myQueue.add(new Movement("turn", new double[] { curX, curY, finalDirection }, settings, parameters));
 		finalDirection = wrap(finalDirection, 360);
 		return degree;
 	}
@@ -252,7 +218,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	public double setHeading(double degree) {
 		double output = degree - finalDirection;
 		finalDirection = wrap(degree, 360);
-		myQueue.add(new Movement("angle", new double[] { degree }));
+		myQueue.add(new Movement("turn", new double[] { curX, curY, degree }, settings, parameters));
 		return output;
 	}
 
@@ -349,5 +315,30 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double getYADJUST() {
 		return YADJUST;
+	}
+
+	public ArrayList<Movement> getDebugList() {
+		return debugList;
+	}
+
+	public void revert(Movement m) {
+		curX = m.getValue()[0];
+		curY = m.getValue()[1];
+		preX = curX;
+		preY = curY;
+		direction = 0;
+		finalX = curX;
+		finalY = curY;
+		finalDirection = direction;
+		this.setX(curX);
+		this.setY(curY);
+		LinkedList<Movement> newQueue = new LinkedList<Movement>();
+		int s = debugList.size();
+		int x = debugList.indexOf(m);
+		for (int i = x; i < s; i++) {
+			newQueue.add(debugList.remove(x));
+		}
+		newQueue.addAll(myQueue);
+		myQueue = newQueue;
 	}
 }

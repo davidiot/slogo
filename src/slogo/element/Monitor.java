@@ -20,12 +20,16 @@ import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.util.Callback;
 import slogo.character.MainCharacter;
 import slogo.parameters.LocalParameters;
+import slogo.screen.AbstractWindowScreen;
+import slogo.screen.DebugScreen;
+import slogo.screen.HelpScreen;
 
 public class Monitor extends AbstractElement {
 	private String title;
 	private Text text;
-	private boolean open;
 	private ListView<MainCharacter> list;
+	boolean showDebug = false;
+	DebugScreen debug;
 
 	public Monitor(GridPane pane) {
 		super(pane);
@@ -35,7 +39,6 @@ public class Monitor extends AbstractElement {
 	@Override
 	protected void makePane() {
 		title = slogoResources.getString(this.getClass().getName());
-		open = true;
 		text = new Text(title);
 		text.setFont(font);
 		pane.add(text, 0, 0);
@@ -72,7 +75,32 @@ public class Monitor extends AbstractElement {
 				box.getChildren().add(makeCoordinates(item));
 				box.setAlignment(Pos.CENTER_LEFT);
 				setGraphic(box);
+				box.setOnContextMenuRequested(e -> debug(item));
 			}
+		}
+
+		private void debug(MainCharacter item) {
+			if (!showDebug) {
+				Stage s = new Stage();
+				debug = new DebugScreen(item);
+				makeWindow(s, debug);
+				showDebug = true;
+				s.setOnCloseRequest(e -> closeHelp());
+				s.toFront();
+			} else {
+				debug.load();
+			}
+		}
+
+		private void makeWindow(Stage stage, AbstractWindowScreen screen) {
+			stage.setScene(screen.getScene());
+			stage.setTitle(screen.getTitle());
+			stage.show();
+			stage.setResizable(false);
+		}
+
+		private void closeHelp() {
+			showDebug = false;
 		}
 
 		private Text makeLabel(LocalParameters settings) {
@@ -165,6 +193,7 @@ public class Monitor extends AbstractElement {
 			settings.setHidden(!settings.isHidden());
 			list.refresh();
 		}
+
 	}
 
 	public void refresh() {
