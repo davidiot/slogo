@@ -1,9 +1,7 @@
 package XML;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -22,9 +20,16 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import Data.Model;
 import slogo.parameters.GlobalParameters;
-import slogo.screen.SettingsScreen;
 
+
+/**
+ *Added serialization saver/loader to this file to use.  
+ *
+ * @author danielpak
+ *
+ */
 public class XMLEditor {
 	private String fileName;
 	private Map<String, Double> numParameters;
@@ -32,14 +37,51 @@ public class XMLEditor {
 	private GlobalParameters globals;
 	private final static String NUMPARAM = "numberparameters";
 	private final static String COLPARAM = "colorparameters";
+	private Model myModel;
 
-	public XMLEditor(String s, GlobalParameters gParams) {
+	public XMLEditor(String s, Model model) {
 		fileName = s;
-		globals = gParams;
-		numParameters = new HashMap<String,Double>();
-		colorParameters = new HashMap<String,String>();
+		myModel = model;
 	}
-
+	
+	public void write(String filename){
+		try{
+		 FileOutputStream fileOut =
+		         new FileOutputStream(filename);
+		         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+		         out.writeObject(myModel);
+		         System.out.println(myModel.getHistory().size());
+		         System.out.println(out);
+		         out.close();
+		         fileOut.close();
+		}catch(IOException i)
+		{
+			System.out.println(i.getMessage());
+		}
+	}
+	
+	public Model load(String filename){
+		 try
+	      {
+	         FileInputStream fileIn = new FileInputStream(filename);
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         Model m = (Model) in.readObject();
+	         System.out.println(m.getHistory().size());
+	         in.close();
+	         fileIn.close();
+	      }catch(IOException i)
+	      {
+	         i.printStackTrace();
+	         return null;
+	      }catch(ClassNotFoundException c)
+	      {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	         return null;
+	      }
+		 return null;
+	}
+	
 	public Document readFile() {
 		try {
 			String filepath = fileName;

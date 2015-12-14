@@ -2,6 +2,7 @@ package slogo.parameters;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,7 +15,7 @@ import javafx.collections.ObservableList;
 import javafx.scene.paint.Color;
 import slogo.character.MainCharacter;
 
-public class GlobalParameters {
+public class GlobalParameters{
 	private HashMap<String, Double> values;
 	private Color backgroundColor;
 	private String backgroundColorName;

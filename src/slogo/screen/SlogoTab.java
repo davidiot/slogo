@@ -7,6 +7,7 @@ import XML.XMLReader;
 
 import com.sun.javafx.scene.control.skin.ColorPalette;
 
+import Data.Model;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -114,19 +115,22 @@ public class SlogoTab extends AbstractScreen {
 	}
 
 	public void editXML() {
-		XMLEditor temp = new XMLEditor("XMLFiles/slogoStart.xml", parameters);
-		temp.editFile();
-		System.out.println("edit");
+		Model myModel = new Model();
+		myModel.setHistory(h.getList());
+		myModel.setCommands(c.getList());
+		myModel.setVariables(v.getList());
+		XMLEditor temp = new XMLEditor("XMLFiles/slogoStart.ser", myModel);
+		temp.write("XMLFiles/slogoStart.ser");
+		System.out.println("saved");
 	}
 
 	public void readXML() {
-		XMLReader temp = new XMLReader("XMLFiles/slogoStart.xml");
-		temp.readFile();
-		System.out.println("read");
-		for (String s : temp.getNumParams().keySet()) {
-			parameters.setValue(s, temp.getNumParams().get(s));
-		}
-		parameters.setBackgroundColor(temp.getColorParams().get("Background"));
+		XMLEditor temp = new XMLEditor("XMLFiles/slogoStart.ser", null);
+		Model test = temp.load("XMLFiles/slogoStart.ser");
+		h = (ObservableArrayList) test.getHistory();
+		c = (ObservableArrayList) test.getCommands();
+		v = (ObservableArrayList) test.getVariables();
+		//parameters = test.getParameters();
 	}
 
 	public Display getDisplay() {
