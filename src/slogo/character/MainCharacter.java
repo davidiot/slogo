@@ -210,7 +210,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double rotateCharacter(double degree) {
 		finalDirection += degree;
-		myQueue.add(new Movement("turn", new double[] { curX, curY, finalDirection }, settings, parameters));
+		myQueue.add(new Movement("turn", new double[] { finalX, finalY, finalDirection }, settings, parameters));
 		finalDirection = wrap(finalDirection, 360);
 		return degree;
 	}
@@ -218,7 +218,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	public double setHeading(double degree) {
 		double output = degree - finalDirection;
 		finalDirection = wrap(degree, 360);
-		myQueue.add(new Movement("turn", new double[] { curX, curY, degree }, settings, parameters));
+		myQueue.add(new Movement("turn", new double[] { finalX, finalY, degree }, settings, parameters));
 		return output;
 	}
 
@@ -326,7 +326,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		curY = m.getValue()[1];
 		preX = curX;
 		preY = curY;
-		direction = 0;
+		direction = m.getValue()[2];
 		finalX = curX;
 		finalY = curY;
 		finalDirection = direction;

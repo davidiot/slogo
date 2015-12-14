@@ -23,7 +23,6 @@ import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import slogo.parameters.GlobalParameters;
-import slogo.screen.SettingsScreen;
 
 public class XMLEditor {
 	private String fileName;
