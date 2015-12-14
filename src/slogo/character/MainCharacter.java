@@ -2,6 +2,8 @@ package slogo.character;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
 import javafx.scene.image.Image;
@@ -37,6 +39,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private LocalParameters settings;
 	private ArrayList<Line> lineList;
 	private double dashCounter;
+	private boolean myWrappingBoolean;
 
 	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
 		curX = xCenter;
@@ -66,6 +69,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		myQueue = new LinkedList<Movement>();
 		lineList = new ArrayList<Line>();
 		dashCounter = 0;
+		myWrappingBoolean = true;
 	}
 
 	private class Movement {
@@ -134,6 +138,59 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	}
 
 	private void line(Movement nextMove) {
+		if (myWrappingBoolean == true) {
+			moveWithWrapping(nextMove);
+		}
+		else moveWithoutWrapping(nextMove);
+	
+	}
+	
+	private void moveWithoutWrapping(Movement nextMove) {
+		preX = curX;
+		preY = curY;
+		double x = nextMove.getValue()[0];
+		double y = nextMove.getValue()[1];
+		double newX = 0;
+		double newY = 0;
+		double adjustedDirection = direction;
+		if (nextMove.getType().equals("bline")) {
+			adjustedDirection = wrap(direction + 180, 360);
+		}
+		newX = curX + parameters.getValue("Speed") * Math.cos(Math.toRadians(ANGLE - adjustedDirection));
+		newY = curY - parameters.getValue("Speed") * Math.sin(Math.toRadians(ANGLE - adjustedDirection));
+
+		if ((Math.pow((newX - curX), 2) + Math.pow((newY - curY), 2)) > (Math.pow((x - curX), 2)
+				+ Math.pow((y - curY), 2))) {
+			curX = x;
+			curY = y;
+			myQueue.poll();
+		} else {
+			curX = newX;
+			curY = newY;
+		}
+
+		this.setX(curX);
+		this.setY(curY);
+		if (nextMove.isCurrentPenDown()
+				&& dashCounter < (1 - parameters.getValue("Dash Level")) * 10 * parameters.getValue("Speed")
+				&& !checkTeleport()) {
+			Line line;
+			line = new Line(preX + XADJUST, preY + YADJUST, curX + XADJUST,
+					curY + YADJUST);
+
+			line.setStroke(nextMove.getCurrentPenColor());
+			line.setStrokeWidth(nextMove.getCurrentPenWidth());
+			myPane.getChildren().add(line);
+			// IF INSTANT
+			lineList.add(line);
+		}
+		dashCounter += parameters.getValue("Speed");
+		if (dashCounter >= 10 * parameters.getValue("Speed")) {
+			dashCounter = 0;
+		}
+	}
+	
+	private void moveWithWrapping(Movement nextMove) {
 		preX = curX;
 		preY = curY;
 		double x = nextMove.getValue()[0];
@@ -349,5 +406,9 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 
 	public double getYADJUST() {
 		return YADJUST;
+	}
+	
+	public void setWrappingProperty(boolean wraps) {
+		myWrappingBoolean = wraps;
 	}
 }

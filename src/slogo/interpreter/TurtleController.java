@@ -3,8 +3,10 @@ package slogo.interpreter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import slogo.character.MainCharacter;
 import slogo.commands.TurtleCommandInterface;
 import slogo.screen.SlogoScreenInterface;
 
@@ -33,6 +35,10 @@ public class TurtleController {
 		return returnVal;
 	}
 
+	public List<MainCharacter> getTurtles() {
+		return myView.getDisplay().getCharacters();
+	}
+	
 	public double getActiveID() {
 		HashSet<Integer> activeSet = myView.getDisplay().getActiveIndices();
 		return new ArrayList<Integer>(activeSet).get(0) + 1;

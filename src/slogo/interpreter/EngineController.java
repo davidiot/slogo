@@ -1,8 +1,10 @@
 package slogo.interpreter;
 
 import java.util.HashMap;
+import java.util.List;
 
 import slogo.character.CharacterInterface;
+import slogo.character.MainCharacter;
 import slogo.element.Display;
 import slogo.nodes.NodeObject;
 import slogo.saving.FileParser;
@@ -85,9 +87,19 @@ public class EngineController {
 	public CharacterInterface getMainCharacter() {
 		return myView.getDisplay().getCharacters().get(0);
 	}
+	
+	private List<MainCharacter> getAllTurtles() {
+		return myView.getDisplay().getCharacters();
+	}
 
 	public TurtleController getTurtleController() {
 		return myTurtleController;
+	}
+	
+	public void setWrappingProperty(boolean wraps) {
+		for (MainCharacter turtle : getAllTurtles()){
+			turtle.setWrappingProperty(wraps);
+		}
 	}
 	
 
