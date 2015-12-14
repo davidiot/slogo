@@ -39,7 +39,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	private LocalParameters settings;
 	private ArrayList<Line> lineList;
 	private double dashCounter;
-	private boolean myWrappingBoolean;
+	private IMovement myMovementInterface;
 
 	public MainCharacter(Pane pane, GlobalParameters parameters, int i) {
 		curX = xCenter;
@@ -69,10 +69,15 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 		myQueue = new LinkedList<Movement>();
 		lineList = new ArrayList<Line>();
 		dashCounter = 0;
-		myWrappingBoolean = true;
+		myMovementInterface = new IMovement(){
+			@Override
+			public void line(Movement nextMove) {
+				moveWithoutWrapping(nextMove);
+			}
+		};
 	}
 
-	private class Movement {
+	public class Movement {
 		private String type;
 		private double[] value;
 		private boolean currentPenDown;
@@ -138,11 +143,7 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	}
 
 	private void line(Movement nextMove) {
-		if (myWrappingBoolean == true) {
-			moveWithWrapping(nextMove);
-		}
-		else moveWithoutWrapping(nextMove);
-	
+		myMovementInterface.line(nextMove);
 	}
 	
 	private void moveWithoutWrapping(Movement nextMove) {
@@ -409,6 +410,19 @@ public class MainCharacter extends ImageView implements CharacterInterface {
 	}
 	
 	public void setWrappingProperty(boolean wraps) {
-		myWrappingBoolean = wraps;
+		if (wraps)
+			myMovementInterface = new IMovement() {
+				@Override
+				public void line(Movement nextMove) {
+					moveWithWrapping(nextMove);
+				}
+			};
+		else
+			myMovementInterface = new IMovement() {
+				@Override
+				public void line(Movement nextMove) {
+					moveWithoutWrapping(nextMove);
+				}
+			};
 	}
 }
